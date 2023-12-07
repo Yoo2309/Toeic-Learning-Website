@@ -21,8 +21,9 @@ function Header() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        "https://localhost:7712/api/TestType/GetAllTestTypes"
+        "https://localhost:7112/api/TestType/GetAllTestTypes"
       );
+      console.log(response);
       if (!response.ok) {
         const errorData = await response.json();
         toast.error(`${errorData.message}`, {

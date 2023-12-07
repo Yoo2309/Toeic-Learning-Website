@@ -20,7 +20,7 @@ function AddVocabularyTopic({ toggleModal, modal_on }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7712/api/VocTopic/AddVocTopic?userId=${user.idUser}`,
+        `https://localhost:7112/api/VocTopic/AddVocTopic?userId=${user.idUser}`,
         {
           method: "POST",
           headers: {

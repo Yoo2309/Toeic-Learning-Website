@@ -26,7 +26,7 @@ function LessonManage() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7712/api/Course/GetCourseById/${id}`
+        `https://localhost:7112/api/Course/GetCourseById/${id}`
       );
       if (!response.ok) {
         toast.error("Fetch Data failed", {
@@ -55,7 +55,7 @@ function LessonManage() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7712/api/Course/UpdateCourse/${id}`,
+        `https://localhost:7112/api/Course/UpdateCourse/${id}`,
         {
           method: "PUT",
           headers: {
@@ -101,7 +101,7 @@ function LessonManage() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7712/api/Lesson/GetAllLessonByCourse/${id}`
+        `https://localhost:7112/api/Lesson/GetAllLessonByCourse/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -132,7 +132,7 @@ function LessonManage() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7712/api/Lesson/DeleteLesson/${id}`,
+        `https://localhost:7112/api/Lesson/DeleteLesson/${id}`,
         {
           method: "DELETE",
           headers: {

@@ -29,7 +29,7 @@ function Lesson() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7712/api/Lesson/GetLessonById/${id}`
+        `https://localhost:7112/api/Lesson/GetLessonById/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -61,7 +61,7 @@ function Lesson() {
       const courseid = current_lesson.idCourse;
       if (courseid) {
         const response = await fetch(
-          `https://localhost:7712/api/Lesson/GetAllLessonByCourse/${courseid}`
+          `https://localhost:7112/api/Lesson/GetAllLessonByCourse/${courseid}`
         );
         if (!response.ok) {
           const errorData = await response.json();
@@ -92,7 +92,7 @@ function Lesson() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7712/api/Quiz/GetAllQuizByLesson/${id}`
+        `https://localhost:7112/api/Quiz/GetAllQuizByLesson/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -122,7 +122,7 @@ function Lesson() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7712/api/Question/GetAllQuestionByQuiz/${current_quizID}`
+        `https://localhost:7112/api/Question/GetAllQuestionByQuiz/${current_quizID}`
       );
       setIsLoading(false);
       if (!response.ok) {

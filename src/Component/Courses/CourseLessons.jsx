@@ -18,7 +18,7 @@ function CourseLessons() {
     async function fetchLessons() {
       try {
         const response = await fetch(
-          `https://localhost:7712/api/Lesson/GetAllLessonByCourse/${id}`
+          `https://localhost:7112/api/Lesson/GetAllLessonByCourse/${id}`
         );
         if (!response.ok) {
           const errorData = await response.json();
@@ -45,7 +45,7 @@ function CourseLessons() {
     async function fetchOtherLessons() {
       try {
         const response = await fetch(
-          "https://localhost:7712/api/Course/GetAllCourses"
+          "https://localhost:7112/api/Course/GetAllCourses"
         );
         if (!response.ok) {
           const errorData = await response.json();

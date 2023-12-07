@@ -1,4 +1,4 @@
-.add-lesson-form-wrapper{
+.add-lesson-form-wrapper {
   margin-top: 1.5rem;
 }
 .add-lesson-wrapper form {
@@ -9,17 +9,17 @@
   padding: 1rem;
 }
 .add-lesson-wrapper input {
-  font-size: 1.5rem;
+  font-size: 1rem;
   height: 2.5rem;
   width: 100%;
   text-align: center;
-  font-weight: 700;
+  font-weight: 600;
 }
-.professor-add-lesson-btn{
+.professor-add-lesson-btn {
   background-color: #41a86c;
   border-radius: 2rem;
 }
-.professor-add-lesson-btn:hover{
+.professor-add-lesson-btn:hover {
   cursor: pointer;
 }
 /* ----------------Quiz Session----------- */

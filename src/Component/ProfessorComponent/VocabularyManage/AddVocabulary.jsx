@@ -42,7 +42,7 @@ function AddVocabulary({
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7712/api/Vocabulary/AddVocabulary?userId=${user.idUser}`,
+        `https://localhost:7112/api/Vocabulary/AddVocabulary?userId=${user.idUser}`,
         {
           method: "POST",
           headers: {
@@ -100,7 +100,7 @@ function AddVocabulary({
       setIsLoading(true);
       try {
         const response = await fetch(
-          `https://localhost:7712/api/Vocabulary/UpdateVocabulary/${current_word.idVoc}&&${user.idUser}`,
+          `https://localhost:7112/api/Vocabulary/UpdateVocabulary/${current_word.idVoc}&&${user.idUser}`,
           {
             method: "PUT",
             headers: {

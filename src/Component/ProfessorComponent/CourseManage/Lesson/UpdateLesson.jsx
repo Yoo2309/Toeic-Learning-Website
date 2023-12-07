@@ -29,7 +29,7 @@ function UpdateLesson() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7712/api/Lesson/GetLessonById/${id}`
+        `https://localhost:7112/api/Lesson/GetLessonById/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -62,7 +62,7 @@ function UpdateLesson() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7712/api/Lesson/UpdateLesson/${id}`,
+        `https://localhost:7112/api/Lesson/UpdateLesson/${id}`,
         {
           method: "PUT",
           headers: {

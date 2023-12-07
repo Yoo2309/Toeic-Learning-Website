@@ -13,7 +13,7 @@ function TestList({ testType }) {
   async function fetchTests(id) {
     try {
       const response = await fetch(
-        `https://localhost:7712/api/Test/GetAllTestByType/${id}`
+        `https://localhost:7112/api/Test/GetAllTestByType/${id}`
       );
       console.log(response);
       if (!response.ok) {

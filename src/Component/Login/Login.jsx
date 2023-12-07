@@ -86,7 +86,7 @@ function Login() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        "https://localhost:7712/api/Authen/Register",
+        "https://localhost:7112/api/Authen/Register",
         {
           method: "POST",
           headers: {
@@ -136,7 +136,7 @@ function Login() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        "https://localhost:7712/api/Authen/Login-2FA",
+        "https://localhost:7112/api/Authen/Login-2FA",
         {
           method: "POST",
           headers: {

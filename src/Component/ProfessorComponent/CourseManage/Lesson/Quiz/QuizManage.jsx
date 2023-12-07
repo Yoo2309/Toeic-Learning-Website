@@ -25,7 +25,7 @@ function QuizManage({ idLesson }) {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7712/api/Quiz/GetAllQuizByLesson/${idLesson}`
+        `https://localhost:7112/api/Quiz/GetAllQuizByLesson/${idLesson}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -59,7 +59,7 @@ function QuizManage({ idLesson }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7712/api/Quiz/DeleteQuiz/${id}`,
+        `https://localhost:7112/api/Quiz/DeleteQuiz/${id}`,
         {
           method: "DELETE",
           headers: {

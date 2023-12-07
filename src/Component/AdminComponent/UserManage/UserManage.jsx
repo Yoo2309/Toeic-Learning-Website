@@ -18,7 +18,7 @@ function UserManage() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7712/api/Admin/ResetPassword/${email}`,
+        `https://localhost:7112/api/Admin/ResetPassword/${email}`,
         {
           method: "PUT",
           headers: {
@@ -62,7 +62,7 @@ function UserManage() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7712/api/Admin/GetAllUsers`,
+        `https://localhost:7112/api/Admin/GetAllUsers`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -99,7 +99,7 @@ function UserManage() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7712/api/Admin/DeleteUser/${id}`,
+        `https://localhost:7112/api/Admin/DeleteUser/${id}`,
         {
           method: "DELETE",
           headers: {

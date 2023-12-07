@@ -39,7 +39,7 @@ function AddQuestion({
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7712/api/Question/AddQuestion/${user.idUser}`,
+        `https://localhost:7112/api/Question/AddQuestion/${user.idUser}`,
         {
           method: "POST",
           headers: {
@@ -95,7 +95,7 @@ function AddQuestion({
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7712/api/Question/UpdateCourse/${current_question.idQuestion}&&${user.idUser}`,
+        `https://localhost:7112/api/Question/UpdateCourse/${current_question.idQuestion}&&${user.idUser}`,
         {
           method: "PUT",
           headers: {

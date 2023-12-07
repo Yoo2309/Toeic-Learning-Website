@@ -17,7 +17,7 @@ function AddQuiz({ toggleModal, modal_on, idLesson }) {
   async function handleAddQuiz(data) {
     setIsLoading(true);
     try {
-      const response = await fetch(`https://localhost:7712/api/Quiz/AddQuiz`, {
+      const response = await fetch(`https://localhost:7112/api/Quiz/AddQuiz`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

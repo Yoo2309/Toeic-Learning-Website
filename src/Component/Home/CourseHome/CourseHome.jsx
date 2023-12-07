@@ -15,7 +15,7 @@ function CourseHome({ subtitle, title }) {
       try {
         setIsLoading(true);
         const response = await fetch(
-          "https://localhost:7712/api/Course/GetAllCourses"
+          "https://localhost:7112/api/Course/GetAllCourses"
         );
         setIsLoading(false);
         if (!response.ok) {

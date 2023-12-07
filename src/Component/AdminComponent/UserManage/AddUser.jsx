@@ -21,7 +21,7 @@ function AddUser() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `https://localhost:7712/api/Admin/Register-Professor-Admin?role=${data?.role}`,
+        `https://localhost:7112/api/Admin/Register-Professor-Admin?role=${data?.role}`,
         {
           method: "POST",
           headers: {

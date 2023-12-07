@@ -26,7 +26,7 @@ function UserProfile() {
   const getUser = async () => {
     try {
       const response = await fetch(
-        `https://localhost:7712/api/Authen/GetProfile${user.idUser}`,
+        `https://localhost:7112/api/Authen/GetProfile/${user.idUser}`,
         {
           method: "GET",
           headers: {
@@ -68,7 +68,7 @@ function UserProfile() {
       formData.append("ImageURL", data.imageURL[0]);
       formData.append("Enable2FA", false);
       const response = await fetch(
-        `https://localhost:7712/api/Authen/Update-Profile`,
+        `https://localhost:7112/api/Authen/Update-Profile`,
         {
           method: "PUT",
           headers: {

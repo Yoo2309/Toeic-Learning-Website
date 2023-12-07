@@ -15,7 +15,7 @@ function Courses() {
     async function fetchCourses() {
       try {
         const response = await fetch(
-          "https://localhost:7712/api/Course/GetAllCourses"
+          "https://localhost:7112/api/Course/GetAllCourses"
         );
         if (!response.ok) {
           const errorData = await response.json();
