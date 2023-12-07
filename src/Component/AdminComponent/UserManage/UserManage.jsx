@@ -173,7 +173,7 @@ function UserManage() {
             src="https://img.icons8.com/doodle/48/add.png"
             alt="add"
           />
-          <h3>THÊM NGƯỜI DÙNG MỚI MỚI</h3>
+          <h3>THÊM NGƯỜI DÙNG MỚI</h3>
         </div>
       </div>
       <div className="wordList-wrapper">

@@ -50,7 +50,7 @@ function AdminSidebar({ openSidebarToggle, OpenSidebar }) {
         <li className="sidebar-list-item">
           <Link
             style={{ display: "flex", gap: 5, alignItems: "center" }}
-            to="/"
+            to="admin/vip-package"
           >
             <img
               width="34"

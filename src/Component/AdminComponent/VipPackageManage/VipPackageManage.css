@@ -1,0 +1,21 @@
+.vipPackageList-wrapper {
+  margin: 2rem 0;
+}
+.vipPackageList-item {
+  font-size: 18px;
+  color: #535353;
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #e8eaf1;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+}
+.vipPackageList-item h2{
+  font-size: 18px;
+  text-align: center;
+}
+
+.vipPackageList-item:hover {
+  transform: translateZ(1px);
+  box-shadow: 0 6px 6px #e8eaf1;
+}

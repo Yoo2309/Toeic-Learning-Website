@@ -33,6 +33,12 @@ import UserManage from "./Component/AdminComponent/UserManage/UserManage";
 import AddUser from "./Component/AdminComponent/UserManage/AddUser";
 import UserProfile from "./Component/Profile/UserProfile";
 import UpdateUnit from "./Component/ProfessorComponent/TestManage/UpdateUnit";
+import VipPackage from "./Component/Payment/VipPackage";
+import VipPackageDetail from "./Component/Payment/VipPackageDetail";
+import VipPackageCheckout from "./Component/Payment/VipPackageCheckout";
+import VipPackageManage from "./Component/AdminComponent/VipPackageManage/VipPackageManage";
+import AddVipPackage from "./Component/AdminComponent/VipPackageManage/AddVipPackage";
+import UpdateVipPackage from "./Component/AdminComponent/VipPackageManage/UpdateVipPackage";
 
 function App() {
   return (
@@ -62,10 +68,14 @@ function App() {
               path="/course-lessons/:id"
               element={<CourseLessons />}
             />
-            <Route exact path="/lesson/:id" element={<Lesson />} />
-            <Route exact path="/test" element={<TestIndex />} />
-            <Route exact path="/test/type/:id" element={<TestList />} />
-            <Route exact path="/test/:id" element={<TestMain />} />
+            <Route exact path='/lesson/:id' element={<Lesson />} />
+            <Route exact path='/test' element={<TestIndex />} />
+            <Route exact path='/test/type/:id' element={<TestList />} />
+            <Route exact path='/test/:id' element={<TestMain />} />
+            <Route exact path="/vippackage" element={<VipPackage/>} />
+            <Route exact path="/vippackage-detail/:id" element={<VipPackageDetail/>} />
+            <Route exact path="/vippackage-checkout/:state" element={<VipPackageCheckout/>} />
+            <Route exact path="/payment-history" element={<VipPackageCheckout/>} />
           </Routes>
           <Footer />
         </UserLayout>
@@ -124,9 +134,12 @@ function App() {
         </ProfessorLayout>
         <AdminLayout>
           <Routes>
-            <Route exact path="/" element={<AdminHome />}>
-              <Route exact path="admin/user" element={<UserManage />} />
-              <Route exact path="admin/user/add" element={<AddUser />} />
+            <Route exact path='/' element={<AdminHome />}>
+              <Route exact path='admin/user' element={<UserManage />} />
+              <Route exact path='admin/user/add' element={<AddUser />} />
+              <Route exact path='admin/vip-package' element={<VipPackageManage />} />
+              <Route exact path='admin/vip-package/add' element={<AddVipPackage />} />
+              <Route exact path='admin/vip-package/update/:idPackage' element={<UpdateVipPackage />} />
             </Route>
           </Routes>
         </AdminLayout>
