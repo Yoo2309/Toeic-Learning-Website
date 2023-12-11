@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import brand_logo from "../../../assets/logo.png"
 
 function ProfessorSidebar({ openSidebarToggle, OpenSidebar }) {
+
   return (
     <aside
       id="sidebar"
@@ -9,7 +11,7 @@ function ProfessorSidebar({ openSidebarToggle, OpenSidebar }) {
     >
       <div className="sidebar-title">
         <div className="sidebar-brand">
-          <img src="https://img.icons8.com/papercut/100/user-female-circle.png" />
+          <img src={brand_logo} alt="brand-logo"/>
         </div>
         <svg
         className="close-icon"

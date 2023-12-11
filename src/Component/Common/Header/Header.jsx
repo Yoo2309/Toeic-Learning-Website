@@ -8,12 +8,13 @@ import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
 
 function Header() {
-
   const [click, setClick] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [testType, setTestType] = useState([]);
   const { user, logout } = useContext(UserContext);
-  const [ava, setAva] = useState("https://img.icons8.com/papercut/100/user-female-circle.png");
+  const [ava, setAva] = useState(
+    "https://img.icons8.com/papercut/100/user-female-circle.png"
+  );
   const navigate = useNavigate();
   function handleLogout() {
     logout();
@@ -73,8 +74,9 @@ function Header() {
         });
       } else {
         const data = await response.json();
-        setAva(data.imageURL);
-        console.log(data.imageURL);
+        if (data.imageURL) {
+          setAva(data.imageURL);
+        }
       }
     } catch (error) {
       toast.error(`${error}`, {
@@ -90,7 +92,6 @@ function Header() {
     fetchTestType();
   }, []);
   useEffect(() => {
-    console.log("getava")
     if (user.idUser) {
       getAvatar();
     }
@@ -146,10 +147,7 @@ function Header() {
             <div className="navbar-user">
               <div className="navbar-user-infor">
                 <div className="navbar-user-avatar">
-                  <img
-                    src={ava}
-                    alt=""
-                  />
+                  <img src={ava} alt="" />
                 </div>
                 <div className="navbar-user-name">{user.username}</div>
                 <i className="fas fa-caret-down"></i>

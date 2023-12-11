@@ -67,20 +67,33 @@ function App() {
               path="/course-lessons/:id"
               element={<CourseLessons />}
             />
-            <Route exact path='/lesson/:id' element={<Lesson />} />
-            <Route exact path='/test' element={<TestIndex />} />
-            <Route exact path='/test/type/:id' element={<TestList />} />
-            <Route exact path='/test/:id' element={<TestMain />} />
-            <Route exact path="/vippackage" element={<VipPackage/>} />
-            <Route exact path="/vippackage-detail/:id" element={<VipPackageDetail/>} />
-            <Route exact path="/vippackage-checkout/:state" element={<VipPackageCheckout/>} />
-            <Route exact path="/payment-history" element={<VipPackageCheckout/>} />
+            <Route exact path="/lesson/:id" element={<Lesson />} />
+            <Route exact path="/test" element={<TestIndex />} />
+            <Route exact path="/test/type/:id" element={<TestList />} />
+            <Route exact path="/test/:id" element={<TestMain />} />
+            <Route exact path="/vippackage" element={<VipPackage />} />
+            <Route
+              exact
+              path="/vippackage-detail/:id"
+              element={<VipPackageDetail />}
+            />
+            <Route
+              exact
+              path="/vippackage-checkout/:state"
+              element={<VipPackageCheckout />}
+            />
+            <Route
+              exact
+              path="/payment-history"
+              element={<VipPackageCheckout />}
+            />
           </Routes>
           <Footer />
         </UserLayout>
         <ProfessorLayout>
           <Routes>
             <Route exact path="/" element={<ProfessorHome />}>
+              <Route exact path="/user/profile/:id" element={<UserProfile />} />
               <Route
                 exact
                 path="professor/test"
@@ -133,12 +146,25 @@ function App() {
         </ProfessorLayout>
         <AdminLayout>
           <Routes>
-            <Route exact path='/' element={<AdminHome />}>
-              <Route exact path='admin/user' element={<UserManage />} />
-              <Route exact path='admin/user/add' element={<AddUser />} />
-              <Route exact path='admin/vip-package' element={<VipPackageManage />} />
-              <Route exact path='admin/vip-package/add' element={<AddVipPackage />} />
-              <Route exact path='admin/vip-package/update/:idPackage' element={<UpdateVipPackage />} />
+            <Route exact path="/" element={<AdminHome />}>
+              <Route exact path="/user/profile/:id" element={<UserProfile />} />
+              <Route exact path="admin/user" element={<UserManage />} />
+              <Route exact path="admin/user/add" element={<AddUser />} />
+              <Route
+                exact
+                path="admin/vip-package"
+                element={<VipPackageManage />}
+              />
+              <Route
+                exact
+                path="admin/vip-package/add"
+                element={<AddVipPackage />}
+              />
+              <Route
+                exact
+                path="admin/vip-package/update/:idPackage"
+                element={<UpdateVipPackage />}
+              />
             </Route>
           </Routes>
         </AdminLayout>

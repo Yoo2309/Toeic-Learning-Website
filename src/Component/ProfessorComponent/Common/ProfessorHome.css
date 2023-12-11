@@ -47,8 +47,6 @@ body.active-modal {
   display: flex;
   justify-content: center;
   padding: 15px;
-  border-radius: 50%;
-  overflow: hidden;
 }
 .professor-layout .sidebar-title img {
   height: 10rem;

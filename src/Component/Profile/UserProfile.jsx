@@ -230,7 +230,7 @@
                 </span>
               )}
             </error>
-            {avaPreview && <img src={avaPreview} alt="" class="w-64 h-64" />}
+            {avaPreview && <img src={avaPreview} alt="" className="w-64 h-64" />}
           </div>
           <button
             type="submit"

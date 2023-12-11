@@ -1,13 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import logo from "../../../assets/logo.png";
 
 export default function Head() {
   return (
     <div className="head">
       <div className="flexSB">
         <div className="logo">
-          <h1><Link to="/">VictoryU</Link></h1>
+          <Link to="/">
+            <img style={{ height: "90px", width: "90px" }} src={logo} />
+          </Link>
           <span>ONLINE EDUCATION & LEARNING</span>
         </div>
 
