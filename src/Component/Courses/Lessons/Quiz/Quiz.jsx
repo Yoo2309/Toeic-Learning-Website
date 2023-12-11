@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import QuizResult from "./QuizResult";
 import "./Quiz.css";
 import Loader from "../../../Common/Loader/Loader";
+import { UserContext } from "../../../../Context/UserContext";
 
 function Quiz({ quizData, quizTitle }) {
+  const { user } = useContext(UserContext);
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [clickedOption, setClickedOption] = useState(0);
@@ -26,8 +29,7 @@ function Quiz({ quizData, quizTitle }) {
           currentQuestion === index ? clickedOption : clickedItem
         )
       );
-      console.log(clickedList)
-      console.log(clickedOption)
+      console.log(clickedList);
     }
   }, [clickedOption]);
 
@@ -38,7 +40,7 @@ function Quiz({ quizData, quizTitle }) {
         score: score,
       };
       localStorage.setItem(
-        `quizResult${quizData[0].idQuiz}`,
+        `quizResult/userID=${user.idUser}/${quizData[0].idQuiz}`,
         JSON.stringify(result)
       );
     }
@@ -76,15 +78,23 @@ function Quiz({ quizData, quizTitle }) {
     setClickedOption(0);
     setScore(0);
     setclickedList(Array.from({ length: quizData.length }, () => 0));
-    localStorage.removeItem(`quizResult${quizData[0].idQuiz}`);
+    localStorage.removeItem(
+      `quizResult/userID=${user.idUser}/${quizData[0].idQuiz}`
+    );
   };
 
   if (quizData.length <= 0) {
     return <Loader />;
   }
-  if (localStorage.getItem(`quizResult${quizData[0].idQuiz}`)) {
+  if (
+    localStorage.getItem(
+      `quizResult/userID=${user.idUser}/${quizData[0].idQuiz}`
+    )
+  ) {
     const quizResult = JSON.parse(
-      localStorage.getItem(`quizResult${quizData[0].idQuiz}`)
+      localStorage.getItem(
+        `quizResult/userID=${user.idUser}/${quizData[0].idQuiz}`
+      )
     );
 
     return (
@@ -116,13 +126,17 @@ function Quiz({ quizData, quizTitle }) {
             <div className="option-container">
               <button
                 className={`option-btn ${
-                  clickedList[currentQuestion] === 1 &&
-                  quizData[currentQuestion].answer != 1
+                  (clickedOption === 1 &&
+                    quizData[currentQuestion].answer !== 1) ||
+                  (clickedList[currentQuestion] === 1 &&
+                    quizData[currentQuestion].answer !== 1)
                     ? "wrong-option"
                     : null
                 } ${
-                  clickedOption !=0 &&
-                  quizData[currentQuestion].answer == 1
+                  (clickedOption !== 0 &&
+                    quizData[currentQuestion].answer === 1) ||
+                  (clickedList[currentQuestion] !== 0 &&
+                    quizData[currentQuestion].answer == 1)
                     ? "correct-option"
                     : null
                 }`}
@@ -136,13 +150,17 @@ function Quiz({ quizData, quizTitle }) {
               </button>
               <button
                 className={`option-btn ${
-                  clickedList[currentQuestion] === 2 &&
-                  quizData[currentQuestion].answer != 2
+                  (clickedOption === 2 &&
+                    quizData[currentQuestion].answer !== 2) ||
+                  (clickedList[currentQuestion] === 2 &&
+                    quizData[currentQuestion].answer !== 2)
                     ? "wrong-option"
                     : null
                 } ${
-                  (clickedOption !=0 &&
-                  quizData[currentQuestion].answer == 2)
+                  (clickedOption != 0 &&
+                    quizData[currentQuestion].answer == 2) ||
+                  (clickedList[currentQuestion] !== 0 &&
+                    quizData[currentQuestion].answer == 2)
                     ? "correct-option"
                     : null
                 }`}
@@ -156,13 +174,17 @@ function Quiz({ quizData, quizTitle }) {
               </button>
               <button
                 className={`option-btn ${
-                  clickedList[currentQuestion] === 3 &&
-                  quizData[currentQuestion].answer != 3
+                  (clickedOption === 3 &&
+                    quizData[currentQuestion].answer !== 3) ||
+                  (clickedList[currentQuestion] === 3 &&
+                    quizData[currentQuestion].answer !== 3)
                     ? "wrong-option"
                     : null
                 } ${
-                  clickedOption !=0 &&
-                  quizData[currentQuestion].answer == 3
+                  (clickedOption != 0 &&
+                    quizData[currentQuestion].answer == 3) ||
+                  (clickedList[currentQuestion] !== 0 &&
+                    quizData[currentQuestion].answer == 3)
                     ? "correct-option"
                     : null
                 }`}
@@ -176,13 +198,17 @@ function Quiz({ quizData, quizTitle }) {
               </button>
               <button
                 className={`option-btn ${
-                  clickedList[currentQuestion] === 4 &&
-                  quizData[currentQuestion].answer != 4
+                  (clickedOption === 4 &&
+                    quizData[currentQuestion].answer !== 4) ||
+                  (clickedList[currentQuestion] === 4 &&
+                    quizData[currentQuestion].answer !== 4)
                     ? "wrong-option"
                     : null
                 } ${
-                  clickedOption !=0 &&
-                  quizData[currentQuestion].answer == 4
+                  (clickedOption != 0 &&
+                    quizData[currentQuestion].answer == 4) ||
+                  (clickedList[currentQuestion] !== 0 &&
+                    quizData[currentQuestion].answer == 4)
                     ? "correct-option"
                     : null
                 }`}
@@ -205,12 +231,12 @@ function Quiz({ quizData, quizTitle }) {
               {quizData[currentQuestion].explaination}
             </div>
             <div className="quiz-button">
-              {/* <input
+              <input
                 type="button"
                 value="Previous"
                 className="previous-button"
                 onClick={previousQuestion}
-              /> */}
+              />
               <input
                 type="button"
                 value={currentQuestion == quizData.length - 1 ? "Done" : "Next"}

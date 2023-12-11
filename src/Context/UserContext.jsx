@@ -88,7 +88,9 @@ const UserProvider = ({ children }) => {
       username: "",
       role: "",
       auth: false,
+      token: ""
     }));
+    window.location.reload();
   };
 
   return (
