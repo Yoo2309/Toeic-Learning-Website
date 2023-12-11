@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./AddQuiz.css";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Loader from "../../../../Common/Loader/Loader";
 import { toast } from "react-toastify";
+import {UserContext} from "../../../.././../Context/UserContext"
 
 function AddQuiz({ toggleModal, modal_on, idLesson }) {
-  const token = localStorage.getItem("token");
+  
+  const { user } = useContext(UserContext);
   const [isloading, setIsLoading] = useState(false);
   const {
     register: new_quiz,
@@ -21,7 +23,7 @@ function AddQuiz({ toggleModal, modal_on, idLesson }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify({
           idLesson: idLesson,

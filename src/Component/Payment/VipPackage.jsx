@@ -25,8 +25,7 @@ function VipPackage() {
         "https://localhost:7112/api/VipPackage/GetAllVipPackages"
       );
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Fetch API Failed`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -61,8 +60,7 @@ function VipPackage() {
         }
       );
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Fetch Failed`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -89,7 +87,6 @@ function VipPackage() {
   useEffect(() => {
     if (user && user.idUser) {
       fetchVipExpireTime();
-      console.log(user.idUser);
     }
   }, [user]);
 

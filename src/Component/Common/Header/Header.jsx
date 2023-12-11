@@ -8,10 +8,12 @@ import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
 
 function Header() {
+
   const [click, setClick] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [testType, setTestType] = useState([]);
   const { user, logout } = useContext(UserContext);
+  const [ava, setAva] = useState("https://img.icons8.com/papercut/100/user-female-circle.png");
   const navigate = useNavigate();
   function handleLogout() {
     logout();
@@ -23,7 +25,6 @@ function Header() {
       const response = await fetch(
         "https://localhost:7112/api/TestType/GetAllTestTypes"
       );
-      console.log(response);
       if (!response.ok) {
         const errorData = await response.json();
         toast.error(`${errorData.message}`, {
@@ -48,9 +49,52 @@ function Header() {
       });
     }
   }
+  const getAvatar = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        `https://localhost:7112/api/Authen/GetProfile?id=${user.idUser}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setIsLoading(false);
+      if (!response.ok) {
+        toast.error(`Get User Profile failed`, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 5000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else {
+        const data = await response.json();
+        setAva(data.imageURL);
+        console.log(data.imageURL);
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 5000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  };
   useEffect(() => {
     fetchTestType();
   }, []);
+  useEffect(() => {
+    console.log("getava")
+    if (user.idUser) {
+      getAvatar();
+    }
+  }, [user]);
   if (isLoading) {
     return <Loader />;
   }
@@ -103,7 +147,7 @@ function Header() {
               <div className="navbar-user-infor">
                 <div className="navbar-user-avatar">
                   <img
-                    src="https://img.icons8.com/papercut/100/user-female-circle.png"
+                    src={ava}
                     alt=""
                   />
                 </div>
@@ -113,7 +157,9 @@ function Header() {
               <div className="dropdown-menu">
                 <ul>
                   <div className="dropdown-item">
-                    <Link to="/user/profile">Trang cá nhân</Link>
+                    <Link to={`/user/profile/${user.idUser}`}>
+                      Trang cá nhân
+                    </Link>
                   </div>
                   <div className="dropdown-item">
                     <Link to="/vippackage">Mua gói Vip</Link>

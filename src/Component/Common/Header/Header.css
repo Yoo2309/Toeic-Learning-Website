@@ -97,7 +97,6 @@ a:-webkit-any-link {
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.5);
   color: #000;
 }
-
 .user-layout header ul li:hover .dropdown-menu {
   display: block;
   width: 150%;
@@ -134,10 +133,18 @@ a:-webkit-any-link {
 .navbar-user-infor {
   display: flex;
   align-items: center;
+  gap: .5rem;
+}
+.navbar-user-avatar{
+  height: 54px;
+  width: 54px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 5px;
 }
 .navbar-user-infor img {
-  height: 64px;
-  width: 64px;
+  height: 54px;
+  width: 54px;
 }
 .navbar-user i {
   margin-left: 5px;

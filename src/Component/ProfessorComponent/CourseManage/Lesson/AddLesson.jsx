@@ -4,10 +4,12 @@ import "./AddLesson.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../../Common/Loader/Loader";
+import { UserContext } from "../../../../Context/UserContext";
 import HTMLReactParser from "html-react-parser";
 
 function AddLesson() {
   const { id } = useParams();
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const editor = useRef(null);
   const config = useMemo(
@@ -24,7 +26,6 @@ function AddLesson() {
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleAddLesson(data) {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -33,7 +34,7 @@ function AddLesson() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             idCourse: id,
@@ -61,7 +62,6 @@ function AddLesson() {
         });
       }
     } catch (error) {
-      console.log(error);
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,

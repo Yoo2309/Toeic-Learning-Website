@@ -15,7 +15,6 @@ function TestList({ testType }) {
       const response = await fetch(
         `https://localhost:7112/api/Test/GetAllTestByType/${id}`
       );
-      console.log(response);
       if (!response.ok) {
         const errorData = await response.json();
         toast.error(`${errorData.message}`, {

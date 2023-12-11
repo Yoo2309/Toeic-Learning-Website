@@ -149,16 +149,15 @@ function UpdateTest() {
     }
   }
   const handleUpdate = async () => {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Test/UpdaTetest/${id}&&${user.idUser}`,
+        `https://localhost:7112/api/Test/UpdateTest/${id}&&${user.idUser}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             idType: test.idType,
@@ -196,7 +195,6 @@ function UpdateTest() {
     }
   };
   const handleDeleteUnit = async (id) => {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -205,7 +203,7 @@ function UpdateTest() {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({}),
         }
@@ -382,7 +380,7 @@ function UpdateTest() {
                   {testUnit.audio && (
                     <audio src={testUnit.audio} controls></audio>
                   )}
-                  {testUnits.paragraph && (
+                  {testUnit.paragraph && (
                     <div>{HTMLReactParser(String(testUnit.paragraph))}</div>
                   )}
 

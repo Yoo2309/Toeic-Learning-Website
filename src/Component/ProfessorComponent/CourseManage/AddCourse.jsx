@@ -16,7 +16,6 @@ function AddCourse({ toggleModal, modal_on }) {
   } = useForm();
 
   async function handleAddCourse(data) {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -25,7 +24,7 @@ function AddCourse({ toggleModal, modal_on }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             idUser: user.idUser,
@@ -55,7 +54,6 @@ function AddCourse({ toggleModal, modal_on }) {
         reset();
       }
     } catch (error) {
-      console.log(error);
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,

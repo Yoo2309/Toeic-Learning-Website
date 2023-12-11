@@ -34,7 +34,6 @@ function UpdateVipPackage() {
       );
       setIsLoading(false);
       const dataVipPack = await response;
-      console.log(dataVipPack);
       setVipPackage(dataVipPack);
       if (!response.ok) {
         const errorData = await response.json();
@@ -92,7 +91,6 @@ function UpdateVipPackage() {
           draggable: true,
         });
     } catch (error) {
-      console.log(error);
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,

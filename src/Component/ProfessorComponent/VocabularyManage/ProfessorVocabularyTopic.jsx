@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Loader from "../../Common/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import "./ProfessorVocabularyTopic.css";
 import AddVocabularyTopic from "./AddVocabularyTopic";
+import { UserContext } from "../../../Context/UserContext";
 
 function ProfessorVocabularyTopic() {
+  const { user } = useContext(UserContext);
   const [topics, setTopic] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -50,7 +52,6 @@ function ProfessorVocabularyTopic() {
     }
   }
   async function DeleteVocabularyTopic(voc_topic_id) {
-    const token = localStorage.getItem("token");
     try {
       const response = await fetch(
         `https://localhost:7112/api/VocTopic/DeleteVocTopic/${voc_topic_id}`,
@@ -58,7 +59,7 @@ function ProfessorVocabularyTopic() {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
         }
       );

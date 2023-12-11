@@ -5,16 +5,18 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../.././Common/Loader/Loader";
 import HTMLReactParser from "html-react-parser";
+import { UserContext } from "../../../Context/UserContext";
 
 function AddUnit({ idTestPart }) {
   const { id } = useParams();
+  const { user } = useContext(UserContext);
   const editor = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const [audio, setAudio] = useState("");
   const [image, setImage] = useState("");
   const [paragraph, setParagraph] = useState("");
-  const [transcript, setTranscript] = useState("");
+  const [script, setScript] = useState("");
   const [translation, setTranslation] = useState("");
 
   const [imagePreview, setImagePreview] = useState("");
@@ -54,10 +56,9 @@ function AddUnit({ idTestPart }) {
     formData.append("paragraph", paragraph);
     formData.append("audio", audio);
     formData.append("image", image);
-    formData.append("script", transcript);
+    formData.append("script", script);
     formData.append("translation", translation);
 
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -66,7 +67,7 @@ function AddUnit({ idTestPart }) {
         {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: formData,
         }
@@ -144,7 +145,7 @@ function AddUnit({ idTestPart }) {
             <h3>Script</h3>
             <textarea
               placeholder="Nhập Transcript"
-              onChange={(e) => setTranscript(e.target.value)}
+              onChange={(e) => setScript(e.target.value)}
             ></textarea>
           </div>
           <div>

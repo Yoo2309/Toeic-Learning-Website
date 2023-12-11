@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./QuizManage.css";
 import Loader from "../../../../Common/Loader/Loader";
 import { toast } from "react-toastify";
 import AddQuiz from "./AddQuiz";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../../../Context/UserContext";
 
 function QuizManage({ idLesson }) {
   const [isLoading, setIsLoading] = useState(true);
+  const { user } = useContext(UserContext);
   const [modal, setModal] = useState(false);
   const [quizes, setQuizes] = useState([]);
   const navigate = useNavigate();
@@ -55,7 +57,6 @@ function QuizManage({ idLesson }) {
   }
 
   const handleDeleteQuiz = async (id) => {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -64,7 +65,7 @@ function QuizManage({ idLesson }) {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user}`,
           },
           body: JSON.stringify({}),
         }

@@ -5,9 +5,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../../../Common/Loader/Loader";
 import AddQuestion from "./AddQuestion";
+import { UserContext } from "../../../../../Context/UserContext";
 
 function UpdateQuiz() {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   const [current_quiz, setCurrentQuiz] = useState({});
   const [questions, setQuestions] = useState([]);
@@ -43,7 +45,6 @@ function UpdateQuiz() {
     formState: { errors },
   } = useForm();
   const handleUpdateQuiz = async (register) => {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -52,7 +53,7 @@ function UpdateQuiz() {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             idLesson: current_quiz.idLesson,
@@ -148,7 +149,6 @@ function UpdateQuiz() {
     }
   }
   const handleDeleteQuestion = async (id) => {
-    console.log(id);
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -157,6 +157,7 @@ function UpdateQuiz() {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({}),
         }
@@ -173,7 +174,7 @@ function UpdateQuiz() {
           draggable: true,
         });
       } else {
-        toast.success("Delete Topic Successfully", {
+        toast.success("Delete Question Successfully", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

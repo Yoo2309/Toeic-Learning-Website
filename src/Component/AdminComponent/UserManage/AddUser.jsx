@@ -1,12 +1,14 @@
 import _ from "lodash";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../Common/Loader/Loader";
 import "./AddUser.css";
+import { UserContext } from "../../../Context/UserContext";
 
 function AddUser() {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   const [data, setData] = useState(() => ({
     email: "",
     username: "",
@@ -19,14 +21,13 @@ function AddUser() {
   async function handleAddUser(data) {
     setIsLoading(true);
     try {
-      const token = localStorage.getItem("token");
       const response = await fetch(
         `https://localhost:7112/api/Admin/Register-Professor-Admin?role=${data?.role}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify(data),
         }
@@ -49,7 +50,6 @@ function AddUser() {
           draggable: true,
         });
     } catch (error) {
-      console.log(error);
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,

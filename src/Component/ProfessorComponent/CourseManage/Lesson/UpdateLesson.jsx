@@ -6,9 +6,11 @@ import { toast } from "react-toastify";
 import Loader from "../../../Common/Loader/Loader";
 import HTMLReactParser from "html-react-parser";
 import QuizManage from "./Quiz/QuizManage";
+import { UserContext } from "../../../../Context/UserContext";
 
 function UpdateLesson() {
   const { id } = useParams();
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const editor = useRef(null);
   const config = useMemo(
@@ -58,7 +60,6 @@ function UpdateLesson() {
   }
 
   async function handleUpdateLesson(data) {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -67,7 +68,7 @@ function UpdateLesson() {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             idCourse: idCourse,
@@ -86,7 +87,7 @@ function UpdateLesson() {
           draggable: true,
         });
       } else {
-        toast.success("Update course successfully", {
+        toast.success("Update lesson successfully", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -95,7 +96,6 @@ function UpdateLesson() {
         });
       }
     } catch (error) {
-      console.log(error);
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,

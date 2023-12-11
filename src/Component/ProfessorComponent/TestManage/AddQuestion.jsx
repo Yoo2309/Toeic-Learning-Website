@@ -37,7 +37,6 @@ function AddQuestion({
     reset();
   }, [modal_on]);
   async function handleAddQuestion() {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -46,7 +45,7 @@ function AddQuestion({
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             idUnit: idUnit,
@@ -102,7 +101,7 @@ function AddQuestion({
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             idUnit: idUnit,

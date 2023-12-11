@@ -55,7 +55,6 @@ function VipPackageDetail() {
   if (isLoading) {
     return <Loader />;
   }
-  console.log(user)
   const handlePayMoMo = async () => {
     try {
       const token = localStorage.getItem("token")

@@ -13,8 +13,6 @@ function UserManage() {
   const [users, setUsers] = useState([]);
 
   async function resetPassword(email) {
-    const token = localStorage.getItem("token");
-    console.log(email);
     try {
       setIsLoading(true);
       const response = await fetch(
@@ -23,7 +21,7 @@ function UserManage() {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({}),
         }
@@ -58,7 +56,6 @@ function UserManage() {
   }
 
   async function fetchUsers() {
-    const token = localStorage.getItem("token");
     try {
       setIsLoading(true);
       const response = await fetch(
@@ -66,7 +63,7 @@ function UserManage() {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
         }
       );
@@ -95,7 +92,6 @@ function UserManage() {
   }
 
   async function deleteUserById(id) {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -104,7 +100,7 @@ function UserManage() {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({}),
         }
@@ -112,7 +108,6 @@ function UserManage() {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        console.log(response);
         toast.error(`${errorData.message}`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,

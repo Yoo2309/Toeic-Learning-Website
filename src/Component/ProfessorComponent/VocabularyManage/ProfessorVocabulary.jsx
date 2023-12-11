@@ -117,7 +117,6 @@ function ProfessorVocabulary() {
   }, [modal]);
 
   const handleUpdateVocabularyTopic = async (register) => {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -126,7 +125,7 @@ function ProfessorVocabulary() {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             name: register.name,
@@ -163,8 +162,6 @@ function ProfessorVocabulary() {
     }
   };
   const handleDeleteVocabulary = async (id) => {
-    const token = localStorage.getItem("token");
-    console.log(id);
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -173,7 +170,7 @@ function ProfessorVocabulary() {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({}),
         }
@@ -181,7 +178,6 @@ function ProfessorVocabulary() {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        console.log(response);
         toast.error(`${errorData.message}`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,

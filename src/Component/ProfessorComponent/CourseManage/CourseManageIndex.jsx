@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Loader from "../../Common/Loader/Loader";
 import "./CourseManageIndex.css";
 import AddCourse from "./AddCourse";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../Context/UserContext";
 
 function CourseManageIndex() {
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [modal, setModal] = useState(false);
+  const { user } = useContext(UserContext);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -50,7 +52,6 @@ function CourseManageIndex() {
   }
 
   async function DeleteCourse(courseId) {
-    const token = localStorage.getItem("token");
     try {
       const response = await fetch(
         `https://localhost:7112/api/Course/DeleteCourse/${courseId}`,
@@ -58,12 +59,12 @@ function CourseManageIndex() {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
         }
       );
       if (!response.ok) {
-        toast.error("Delete topic failed", {
+        toast.error("Delete course failed", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -73,7 +74,7 @@ function CourseManageIndex() {
       } else {
         setIsLoading(false);
         fetchCourses();
-        toast.success("Delete topic successfully", {
+        toast.success("Delete course successfully", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

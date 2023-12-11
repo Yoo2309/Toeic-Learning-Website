@@ -64,7 +64,6 @@ function ForgotPassword() {
     }
   };
   const ResetPassword = async () => {
-    console.log(email, getValues("otp"), getValues("password"));
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -82,7 +81,6 @@ function ForgotPassword() {
         }
       );
       setIsLoading(false);
-      console.log(response);
       if (!response.ok) {
         const errorData = await response.json();
         toast.error(`${errorData.message}`, {

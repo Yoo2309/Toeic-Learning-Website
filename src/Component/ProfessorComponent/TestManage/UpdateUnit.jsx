@@ -1,5 +1,5 @@
 import HTMLReactParser from "html-react-parser";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import JoditEditor from "jodit-react";
@@ -7,9 +7,12 @@ import ".././CourseManage/Lesson/Quiz/UpdateQuiz.css";
 
 import Loader from "../../Common/Loader/Loader";
 import AddQuestion from "./AddQuestion";
+import { UserContext } from "../../../Context/UserContext";
+import { useForm } from "react-hook-form";
 
 function UpdateUnit() {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   const { id } = useParams();
   const editor = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +28,16 @@ function UpdateUnit() {
   const [transcript, setTranscript] = useState("");
   const [translation, setTranslation] = useState("");
 
+  const [unitData, setUnitData] = useState({
+    username: "",
+    email: "",
+    fullname: "",
+    gender: "",
+    phone: "",
+    dateOfBirth: "",
+    imageURL: "",
+  });
+
   const [imagePreview, setImagePreview] = useState("");
   const [audioPreview, setAudioPreview] = useState("");
   const config = useMemo(
@@ -34,6 +47,12 @@ function UpdateUnit() {
     }),
     []
   );
+  const {
+    register: userData,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
     setModal(!modal);
@@ -44,7 +63,6 @@ function UpdateUnit() {
   };
 
   const updateToggle = (question) => {
-    console.log(question);
     setCurrentQuestion(question);
     setIsUpdate(true);
     toggleModal();
@@ -96,15 +114,14 @@ function UpdateUnit() {
         });
       }
       const data = await response.json();
-      console.log(data);
 
-      setImage(data.image || "");
-      setAudio(data.audio || "");
-      setParagraph(data.paragraph || "");
-      setTranscript(data.script || "");
-      setTranslation(data.translation || "");
-      setidTestPart(data.idTestPart || "");
-      setIdTest(data.idTest || "");
+      setImage(data.image);
+      setAudio(data.audio);
+      setParagraph(data.paragraph);
+      setTranscript(data.script);
+      setTranslation(data.translation);
+      setidTestPart(data.idTestPart);
+      setIdTest(data.idTest);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -133,7 +150,6 @@ function UpdateUnit() {
     formData.append("script", transcript);
     formData.append("translation", translation);
 
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -141,7 +157,7 @@ function UpdateUnit() {
         {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: formData,
         }
@@ -206,6 +222,53 @@ function UpdateUnit() {
       });
     }
   }
+  const handleDeleteQuestion = async (id) => {
+    const token = localStorage.getItem("token");
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `https://localhost:7112/api/Question/DeleteCourse/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({}),
+        }
+      );
+      setIsLoading(false);
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log(response);
+        toast.error(`${errorData.message}`, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 5000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else {
+        toast.success("Delete Question Successfully", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 10000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        fetchQuestionByUnit();
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  };
   if (isLoading) {
     return <Loader />;
   }
@@ -213,7 +276,7 @@ function UpdateUnit() {
     <div className="add-lesson-wrapper">
       <div className="professor-board-header">
         <div className="professor-managment-title">
-          <h3 style={{ marginLeft: "1rem" }}>QUẢN LÝ QUIZ</h3>
+          <h3 style={{ marginLeft: "1rem" }}>QUẢN LÝ UNIT</h3>
         </div>
         <div onClick={toggleModal}>
           <img
@@ -336,7 +399,7 @@ function UpdateUnit() {
                     <div>{question.explaination}</div>
                   </div>
                   <div className="btn-wrapper">
-                    <button className="delete-btn">Xóa</button>
+                    <button className="delete-btn" onClick={()=>handleDeleteQuestion(question.idQuestion)}>Xóa</button>
                     <button
                       className="update-btn"
                       onClick={() => updateToggle(question)}

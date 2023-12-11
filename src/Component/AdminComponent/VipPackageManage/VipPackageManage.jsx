@@ -26,8 +26,7 @@ function VipPackageManage() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Fetch API Failed`, {
           position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
           autoClose: 5000, // Tự động đóng sau 3 giây
           closeOnClick: true, // Đóng khi click
@@ -65,9 +64,8 @@ function VipPackageManage() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        const errorData = await response.json();
         console.log(response);
-        toast.error(`${errorData.message}`, {
+        toast.error("Delete Vip Package Failed", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,

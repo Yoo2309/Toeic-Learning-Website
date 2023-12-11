@@ -46,12 +46,11 @@ function App() {
       <BrowserRouter>
         <ToastContainer />
         <UserLayout>
-          <Header />
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/forgot-password" element={<ForgotPassword />} />
-            <Route exact path="/user/profile" element={<UserProfile />} />
+            <Route exact path="/user/profile/:id" element={<UserProfile />} />
             <Route
               exact
               path="/practice-vocabulary"

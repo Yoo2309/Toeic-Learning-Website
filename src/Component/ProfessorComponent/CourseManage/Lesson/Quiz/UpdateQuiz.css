@@ -59,6 +59,7 @@
   border-bottom: 1px solid #e8eaf1;
   display: grid;
   grid-template-columns: auto 180px;
+  position: relative;
 }
 .professor-update-quiz .lesson-list-item:hover {
   transform: translateZ(1px);

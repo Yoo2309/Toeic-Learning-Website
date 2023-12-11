@@ -7,6 +7,7 @@ const UserContext = createContext({
   idUser: "",
   auth: false,
   role: "",
+  token: ""
 });
 
 const UserProvider = ({ children }) => {
@@ -15,6 +16,7 @@ const UserProvider = ({ children }) => {
     idUser: "",
     auth: false,
     role: "",
+    token: ""
   });
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -31,6 +33,7 @@ const UserProvider = ({ children }) => {
         role: role,
         auth: true,
         idUser: idUser,
+        token: token
       }));
     }
   }, []);
@@ -50,6 +53,7 @@ const UserProvider = ({ children }) => {
       role: role,
       auth: true,
       idUser: idUser,
+      token: token
     }));
     localStorage.setItem("token", token);
   };

@@ -50,8 +50,7 @@ function LessonManage() {
       });
     }
   }
-  async function UpdateCurrentLesson(course) {
-    const token = localStorage.getItem("token");
+  async function UpdateCurrentCourse(course) {
     try {
       setIsLoading(true);
       const response = await fetch(
@@ -60,7 +59,7 @@ function LessonManage() {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             idUser: user.idUser,
@@ -71,7 +70,7 @@ function LessonManage() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Update Lesson Failed", {
+        toast.error("Update Course Failed", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -79,7 +78,7 @@ function LessonManage() {
           draggable: true,
         });
       } else {
-        toast.success("Update Lesson Successfully", {
+        toast.success("Update Course Successfully", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -127,7 +126,6 @@ function LessonManage() {
     }
   }
   const handleDeleteLesson = async (id) => {
-    const token = localStorage.getItem("token");
     console.log(id);
     setIsLoading(true);
     try {
@@ -137,7 +135,7 @@ function LessonManage() {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({}),
         }
@@ -145,7 +143,6 @@ function LessonManage() {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        console.log(response);
         toast.error(`${errorData.message}`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
@@ -154,7 +151,7 @@ function LessonManage() {
           draggable: true,
         });
       } else {
-        toast.success("Delete Topic Successfully", {
+        toast.success("Delete Lesson Successfully", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -191,7 +188,7 @@ function LessonManage() {
 
       <form
         className="update-lesson"
-        onSubmit={handleSubmit(UpdateCurrentLesson)}
+        onSubmit={handleSubmit(UpdateCurrentCourse)}
       >
         <div style={{ width: "50%", textAlign: "center" }}>
           <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>

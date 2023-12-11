@@ -16,7 +16,6 @@ function AddVocabularyTopic({ toggleModal, modal_on }) {
   } = useForm();
 
   async function handleAddVocabularyTopic(data) {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -26,7 +25,7 @@ function AddVocabularyTopic({ toggleModal, modal_on }) {
           headers: {
             "Content-Type": "application/json",
 
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             name: data.name,

@@ -132,7 +132,6 @@ function Login() {
   }
   const handleSubmitOTP = async (e) => {
     e.preventDefault();
-    console.log(otp, getValues("username"));
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -151,7 +150,6 @@ function Login() {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        console.log(response);
         toast.error(`${errorData.message}`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
