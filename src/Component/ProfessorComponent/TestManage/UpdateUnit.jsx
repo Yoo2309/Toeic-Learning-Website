@@ -130,8 +130,20 @@ function UpdateUnit() {
     formData.append("idTest", idTest);
     formData.append("idTestPart", idTestPart);
     formData.append("paragraph", paragraph);
-    formData.append("audio", audio);
-    formData.append("image", image);
+    if (audio instanceof File || audio instanceof Blob) {
+      formData.append("newAudio", audio);
+      formData.append("oldAudio", "");
+    } else {
+      formData.append("newAudio", "");
+      formData.append("oldAudio", audio);
+    }
+    if (image instanceof File || image instanceof Blob) {
+      formData.append("newImage", image);
+      formData.append("oldImage", "");
+    } else {
+      formData.append("newImage", "");
+      formData.append("oldImage", image);
+    }
     formData.append("script", transcript);
     formData.append("translation", translation);
 

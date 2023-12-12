@@ -74,9 +74,11 @@ function UserProfile() {
         data.imageURL[0] instanceof File ||
         data.imageURL[0] instanceof Blob
       ) {
-        formData.append("ImageURL", data.imageURL[0]);
+        formData.append("NewImage", data.imageURL[0]);
+        formData.append("OldImage", "");
       } else {
-        formData.append("ImageURL", data.imageURL);
+        formData.append("NewImage", "");
+        formData.append("OldImage", data.imageURL);
       }
       formData.append("Enable2FA", false);
       setIsLoading(true);
