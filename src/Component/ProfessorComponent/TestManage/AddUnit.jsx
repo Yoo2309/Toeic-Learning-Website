@@ -7,7 +7,7 @@ import Loader from "../.././Common/Loader/Loader";
 import HTMLReactParser from "html-react-parser";
 import { UserContext } from "../../../Context/UserContext";
 
-function AddUnit({ idTestPart }) {
+function AddUnit({ idTestPart, toggle_modal, fetchUnit }) {
   const { id } = useParams();
   const { user } = useContext(UserContext);
   const editor = useRef(null);
@@ -62,7 +62,7 @@ function AddUnit({ idTestPart }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/TestQuestionUnit/AddTestQuestionUnit`,
+        `${process.env.REACT_APP_API_BASE_URL}/TestQuestionUnit/AddTestQuestionUnit`,
 
         {
           method: "POST",
@@ -89,6 +89,8 @@ function AddUnit({ idTestPart }) {
           pauseOnHover: true,
           draggable: true,
         });
+        toggle_modal();
+        fetchUnit();
       }
     } catch (error) {
       console.log(error);

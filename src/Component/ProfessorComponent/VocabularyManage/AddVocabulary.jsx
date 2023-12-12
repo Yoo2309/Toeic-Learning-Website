@@ -41,7 +41,7 @@ function AddVocabulary({
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Vocabulary/AddVocabulary?userId=${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Vocabulary/AddVocabulary?userId=${user.idUser}`,
         {
           method: "POST",
           headers: {
@@ -98,7 +98,7 @@ function AddVocabulary({
       setIsLoading(true);
       try {
         const response = await fetch(
-          `https://localhost:7112/api/Vocabulary/UpdateVocabulary/${current_word.idVoc}&&${user.idUser}`,
+          `${process.env.REACT_APP_API_BASE_URL}/Vocabulary/UpdateVocabulary/${current_word.idVoc}&&${user.idUser}`,
           {
             method: "PUT",
             headers: {

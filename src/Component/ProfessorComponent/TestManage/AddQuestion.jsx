@@ -12,7 +12,7 @@ function AddQuestion({
   isUpdate,
   initial_question,
 }) {
-  console.log(initial_question)
+  console.log(initial_question);
   const { user } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [current_question, setQuestion] = useState({
@@ -40,7 +40,7 @@ function AddQuestion({
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Question/AddQuestion/${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Question/AddQuestion/${user.idUser}`,
         {
           method: "POST",
           headers: {
@@ -96,7 +96,7 @@ function AddQuestion({
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Question/UpdateCourse/${current_question.idQuestion}&&${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Question/UpdateQuestion/${current_question.idQuestion}&&${user.idUser}`,
         {
           method: "PUT",
           headers: {
@@ -191,7 +191,7 @@ function AddQuestion({
                     <textarea
                       style={{ height: "2rem" }}
                       type="text"
-                      placeholder="Nhập từ Tesi Unit"
+                      placeholder="Nhập câu hỏi"
                       {...question("content", { required: true })}
                     />
                   </div>
@@ -280,13 +280,9 @@ function AddQuestion({
                     <textarea
                       type="text"
                       placeholder="Nhập giải thích"
-                      {...question("explaination", { required: true })}
+                      {...question("explaination")}
                     />
                   </div>
-                  <error>
-                    {error_add.choice_4?.type === "required" &&
-                      "Không được để trống lựa chọn"}
-                  </error>
                   <input
                     type="submit"
                     className="question-submit"
@@ -435,11 +431,11 @@ function AddQuestion({
                       }
                     />
                   </div>
-                  {current_question.explaination === "" ? (
+                  {/* {current_question.explaination === "" ? (
                     <error>Không được để trống giải thích</error>
                   ) : (
                     <></>
-                  )}
+                  )} */}
                   <input
                     type="submit"
                     className="question-submit"

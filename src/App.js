@@ -39,6 +39,7 @@ import VipPackageCheckout from "./Component/Payment/VipPackageCheckout";
 import VipPackageManage from "./Component/AdminComponent/VipPackageManage/VipPackageManage";
 import AddVipPackage from "./Component/AdminComponent/VipPackageManage/AddVipPackage";
 import UpdateVipPackage from "./Component/AdminComponent/VipPackageManage/UpdateVipPackage";
+import ChangePassword from "./Component/Profile/ChangePassword";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/forgot-password" element={<ForgotPassword />} />
             <Route exact path="/user/profile/:id" element={<UserProfile />} />
+            <Route exact path="/user/changePassword" element={<ChangePassword />} />
             <Route
               exact
               path="/practice-vocabulary"

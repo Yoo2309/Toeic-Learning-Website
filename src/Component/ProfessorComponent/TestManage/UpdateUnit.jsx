@@ -28,16 +28,6 @@ function UpdateUnit() {
   const [transcript, setTranscript] = useState("");
   const [translation, setTranslation] = useState("");
 
-  const [unitData, setUnitData] = useState({
-    username: "",
-    email: "",
-    fullname: "",
-    gender: "",
-    phone: "",
-    dateOfBirth: "",
-    imageURL: "",
-  });
-
   const [imagePreview, setImagePreview] = useState("");
   const [audioPreview, setAudioPreview] = useState("");
   const config = useMemo(
@@ -47,12 +37,7 @@ function UpdateUnit() {
     }),
     []
   );
-  const {
-    register: userData,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm();
+
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
     setModal(!modal);
@@ -100,7 +85,7 @@ function UpdateUnit() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/TestQuestionUnit/GetTestQuestionUnitById/${id}`
+        `${process.env.REACT_APP_API_BASE_URL}/TestQuestionUnit/GetTestQuestionUnitById/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -153,7 +138,7 @@ function UpdateUnit() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/TestQuestionUnit/UpdateTestQuestionUnit/${id}`,
+        `${process.env.REACT_APP_API_BASE_URL}/TestQuestionUnit/UpdateTestQuestionUnit/${id}`,
         {
           method: "PUT",
           headers: {
@@ -197,7 +182,7 @@ function UpdateUnit() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Question/GetAllQuestionByUnit/${id}`
+        `${process.env.REACT_APP_API_BASE_URL}/Question/GetAllQuestionByUnit/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -227,12 +212,12 @@ function UpdateUnit() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Question/DeleteCourse/${id}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Question/DeleteQuestion/${id}`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({}),
         }
@@ -280,7 +265,7 @@ function UpdateUnit() {
         </div>
         <div onClick={toggleModal}>
           <img
-            onClick={() => navigate("/professor/test")}
+            onClick={() => navigate(`/professor/test/${idTest}`)}
             width="50"
             height="50"
             src="https://img.icons8.com/ios-filled/50/2d9358/reply-arrow.png"
@@ -369,10 +354,7 @@ function UpdateUnit() {
           {questions &&
             questions.map((question, index) => {
               return (
-                <div
-                  key={index}
-                  className="quiz-question-list-wrapper"
-                >
+                <div key={index} className="quiz-question-list-wrapper">
                   <div className="qquestion-list-item">
                     <div>{question.content}</div>
                     <div className="question-choice">
@@ -389,17 +371,22 @@ function UpdateUnit() {
                     </div>
                     <div>{`=> ${
                       question.answer === "1"
-                        ? question.choice_1
+                        ? `A. ${question.choice_1}`
                         : question.answer === "2"
-                        ? question.choice_2
+                        ? `B. ${question.choice_2}`
                         : question.answer === "3"
-                        ? question.choice_3
-                        : question.choice_4
+                        ? `C. ${question.choice_3}`
+                        : `D. ${question.choice_4}`
                     }`}</div>
                     <div>{question.explaination}</div>
                   </div>
                   <div className="btn-wrapper">
-                    <button className="delete-btn" onClick={()=>handleDeleteQuestion(question.idQuestion)}>Xóa</button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDeleteQuestion(question.idQuestion)}
+                    >
+                      Xóa
+                    </button>
                     <button
                       className="update-btn"
                       onClick={() => updateToggle(question)}

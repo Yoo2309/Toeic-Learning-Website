@@ -14,8 +14,9 @@
   background-color: #fff;
   border-radius: 60px;
   border: #70a2ab solid;
-  padding-bottom: 20px;
+  padding: 20px;
   text-align: center;
+  margin: 0 5rem;
 }
 .payment-wrapper-container {
   margin: 30px;

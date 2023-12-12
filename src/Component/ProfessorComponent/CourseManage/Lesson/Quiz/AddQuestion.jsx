@@ -38,7 +38,7 @@ function AddQuestion({
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Question/AddQuestion/${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Question/AddQuestion/${user.idUser}`,
         {
           method: "POST",
           headers: {
@@ -93,7 +93,7 @@ function AddQuestion({
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Question/UpdateCourse/${current_question.idQuestion}&&${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Question/UpdateCourse/${current_question.idQuestion}&&${user.idUser}`,
         {
           method: "PUT",
           headers: {

@@ -13,7 +13,7 @@ function TestList({ testType }) {
   async function fetchTests(id) {
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Test/GetAllTestByType/${id}`
+        `${process.env.REACT_APP_API_BASE_URL}/Test/GetAllTestByType/${id}`
       );
       if (!response.ok) {
         const errorData = await response.json();

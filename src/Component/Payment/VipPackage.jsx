@@ -7,22 +7,21 @@ import Heading from "../Common/Header/Heading";
 import { UserContext } from "../../Context/UserContext";
 
 function VipPackage() {
-
   const [vipPackages, setVipPackages] = useState([]);
   const [vipExpire, setVipExpire] = useState();
   const { user } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
 
-  const formatter = new Intl.NumberFormat('vi', {
-    style: 'currency',
-    currency: 'VND',
+  const formatter = new Intl.NumberFormat("vi", {
+    style: "currency",
+    currency: "VND",
   });
 
   async function fetchVipPackage() {
     try {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token");
       const response = await fetch(
-        "https://localhost:7112/api/VipPackage/GetAllVipPackages"
+        `${process.env.REACT_APP_API_BASE_URL}/VipPackage/GetAllVipPackages`
       );
       if (!response.ok) {
         toast.error(`Fetch API Failed`, {
@@ -48,14 +47,13 @@ function VipPackage() {
   }
   async function fetchVipExpireTime() {
     try {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token");
       const response = await fetch(
-        
-        `https://localhost:7112/api/Payment/GetExpireTimeVipStudent/${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Payment/GetExpireTimeVipStudent/${user.idUser}`,
         {
           method: "GET",
           headers: {
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -94,14 +92,15 @@ function VipPackage() {
     return <Loader />;
   }
   return (
-    <div className="lr-card-wrapper">
-      {vipExpire && 
-      <div className="info-payment-callback">
-        <h1>Vip hết hạn vào ngày {vipExpire}</h1>     
-      </div>}
+    <div className="vip-package-index">
       <section>
         <div className="lr-card">
-          <Heading subtitle="Mua gói vip"/>
+          <Heading title="NÂNG CẤP TÀI KHOẢN VIP" />
+          {vipExpire && (
+            <div className="info-payment-callback">
+              <h1>Vip hết hạn vào ngày {vipExpire}</h1>
+            </div>
+          )}
           <div className="card-wrapper-container">
             <div className="card-wrapper">
               {vipPackages && vipPackages.length > 0 ? (
@@ -112,8 +111,10 @@ function VipPackage() {
                         <div className="card-content">
                           <div className="image">
                             <img
-                              src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-online-course-university-flaticons-flat-flat-icons-3.png"
-                              alt=""
+                              width="100"
+                              height="100"
+                              src="https://img.icons8.com/fluency/100/vip.png"
+                              alt="vip"
                             />
                           </div>
                           <h2>{vipPackage.name}</h2>

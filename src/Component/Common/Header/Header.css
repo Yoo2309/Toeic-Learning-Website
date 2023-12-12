@@ -150,7 +150,7 @@ a:-webkit-any-link {
 }
 .navbar-user:hover .dropdown-menu {
   display: block;
-  width: 12rem;
+  width: 13rem;
   top: 90%;
   right: 0;
 }

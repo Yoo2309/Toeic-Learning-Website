@@ -29,7 +29,7 @@ function AddLesson() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Lesson/AddLesson`,
+        `${process.env.REACT_APP_API_BASE_URL}/Lesson/AddLesson`,
         {
           method: "POST",
           headers: {

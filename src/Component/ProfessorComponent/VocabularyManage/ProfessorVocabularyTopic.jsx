@@ -25,7 +25,7 @@ function ProfessorVocabularyTopic() {
   async function fetchVocabularyTopic() {
     try {
       const response = await fetch(
-        "https://localhost:7112/api/VocTopic/GetAllVocTopic"
+        `${process.env.REACT_APP_API_BASE_URL}/VocTopic/GetAllVocTopic`
       );
       if (!response.ok) {
         const errorData = await response.json();
@@ -54,7 +54,7 @@ function ProfessorVocabularyTopic() {
   async function DeleteVocabularyTopic(voc_topic_id) {
     try {
       const response = await fetch(
-        `https://localhost:7112/api/VocTopic/DeleteVocTopic/${voc_topic_id}`,
+        `${process.env.REACT_APP_API_BASE_URL}/VocTopic/DeleteVocTopic/${voc_topic_id}`,
         {
           method: "DELETE",
           headers: {

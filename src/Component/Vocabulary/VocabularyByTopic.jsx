@@ -17,7 +17,7 @@ function VocabularyByTopic() {
     async function fetchVocabulary() {
       try {
         const response = await fetch(
-          `https://localhost:7112/api/Vocabulary/GetVocabularyByTopic/${id}`
+          `${process.env.REACT_APP_API_BASE_URL}/Vocabulary/GetVocabularyByTopic/${id}`
         );
         if (!response.ok) {
           const errorData = await response.json();
@@ -45,7 +45,7 @@ function VocabularyByTopic() {
     async function fetchVocabularyTopic() {
       try {
         const response = await fetch(
-          `https://localhost:7112/api/VocTopic/GetVocTopicById/${id}`
+          `${process.env.REACT_APP_API_BASE_URL}/VocTopic/GetVocTopicById/${id}`
         );
         if (!response.ok) {
           const errorData = await response.json();

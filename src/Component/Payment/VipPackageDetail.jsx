@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import Heading from "../Common/Header/Heading";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import Loader from "../Common/Loader/Loader";
 import { toast } from "react-toastify";
 import "./VipPackageIndex.css";
@@ -24,7 +23,7 @@ function VipPackageDetail() {
     async function fetchVipPackage() {
       try {
         const response = await fetch(
-          `https://localhost:7112/api/VipPackage/GetVipPackageById/${id}`
+          `${process.env.REACT_APP_API_BASE_URL}/VipPackage/GetVipPackageById/${id}`
         );
         if (!response.ok) {
           const errorData = await response.json();
@@ -38,7 +37,7 @@ function VipPackageDetail() {
         }
         const data = await response.json();
         setVipPackage(data);
-        console.log(data)
+        console.log(data);
         setIsLoading(false);
       } catch (error) {
         toast.error(`${error}`, {
@@ -57,18 +56,18 @@ function VipPackageDetail() {
   }
   const handlePayMoMo = async () => {
     try {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token");
       const response = await fetch(
-        "https://localhost:7112/api/Payment/CreateMoMoPayment",
+        `${process.env.REACT_APP_API_BASE_URL}/Payment/CreateMoMoPayment`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            "userId": user.idUser,
-            "idPackage": id
+            userId: user.idUser,
+            idPackage: id,
           }),
         }
       );
@@ -93,21 +92,21 @@ function VipPackageDetail() {
         draggable: true,
       });
     }
-  }
+  };
   const handlePayVnPay = async () => {
     try {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token");
       const response = await fetch(
-        "https://localhost:7112/api/Payment/CreateVNPayPayment",
+        `${process.env.REACT_APP_API_BASE_URL}/Payment/CreateVNPayPayment`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            "userId": user.idUser,
-            "idPackage": id
+            userId: user.idUser,
+            idPackage: id,
           }),
         }
       );
@@ -132,38 +131,35 @@ function VipPackageDetail() {
         draggable: true,
       });
     }
-  }
+  };
   return (
     <div>
-      <div className="lr-card-wrapper">
+      <div className="vip-package-index">
         <div className="lr-card">
-          <Heading
-            subtitle={"Gói " + vipPackage.name}
-            title="Chi tiết gói vip"
-          />
+          <Heading subtitle={vipPackage.name} title="Chi tiết gói vip" />
           <div className="card-wrapper-container">
             <div className="card-wrapper">
               <div className="detail">
                 <div className="detail-content">
                   <div className="image">
                     <img
-                      src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-online-course-university-flaticons-flat-flat-icons-3.png"
-                      alt=""
+                      width="100"
+                      height="100"
+                      src="https://img.icons8.com/fluency/100/vip.png"
+                      alt="vip"
                     />
                   </div>
                   <h2>{vipPackage.name}</h2>
-                  <h2>Mô tả: {vipPackage.description}</h2>
+                  <p>Mô tả: {vipPackage.description}</p>
                   <h2>Thời hạn: {vipPackage.duration} tháng</h2>
                   <p>Giá: {formatter.format(vipPackage.price)}</p>
                 </div>
-                
               </div>
               <div className="pay">
                 <div className="detail-content">
-                    <h1>Mua gói</h1>
-                    <h2>Phương thức thanh toán</h2>
+                  <h1>Mua gói</h1>
+                  <h2>Phương thức thanh toán</h2>
                   <div className="radio-container">
-                    
                     <input
                       type="radio"
                       id="MOMO"
@@ -181,17 +177,31 @@ function VipPackageDetail() {
                       checked={payMethod === "VNPAY"}
                       onChange={() => setPayMethod("VNPAY")}
                     />
-                    
+
                     <h2 htmlFor="VNPAY">VN Pay</h2>
                   </div>
-                  {payMethod === "MOMO" && 
-                  <button className="pay-btn" onClick={()=>{handlePayMoMo(); console.log("pay")}}>
-                  Thanh Toán MoMo
-                  </button>}
-                  {payMethod === "VNPAY" && 
-                  <button className="pay-btn" onClick={()=>{handlePayVnPay(); console.log("pay")}}>
-                  Thanh Toán VNPay
-                  </button>}
+                  {payMethod === "MOMO" && (
+                    <button
+                      className="pay-btn"
+                      onClick={() => {
+                        handlePayMoMo();
+                        console.log("pay");
+                      }}
+                    >
+                      Thanh Toán MoMo
+                    </button>
+                  )}
+                  {payMethod === "VNPAY" && (
+                    <button
+                      className="pay-btn"
+                      onClick={() => {
+                        handlePayVnPay();
+                        console.log("pay");
+                      }}
+                    >
+                      Thanh Toán VNPay
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

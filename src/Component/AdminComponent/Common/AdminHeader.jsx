@@ -13,12 +13,13 @@ function AdminHeader({ OpenSidebar }) {
   function handleLogout() {
     logout();
     navigate("/");
+    window.location.reload();
   }
   const getAvatar = async () => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7112/api/Authen/GetProfile?id=${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Authen/GetProfile?id=${user.idUser}`,
         {
           method: "GET",
           headers: {

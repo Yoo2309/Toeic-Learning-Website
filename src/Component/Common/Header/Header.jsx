@@ -19,12 +19,13 @@ function Header() {
   function handleLogout() {
     logout();
     navigate("/");
+    window.location.reload();
   }
   async function fetchTestType() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        "https://localhost:7112/api/TestType/GetAllTestTypes"
+        `${process.env.REACT_APP_API_BASE_URL}/TestType/GetAllTestTypes`
       );
       if (!response.ok) {
         const errorData = await response.json();
@@ -54,7 +55,7 @@ function Header() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7112/api/Authen/GetProfile?id=${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Authen/GetProfile?id=${user.idUser}`,
         {
           method: "GET",
           headers: {
@@ -157,6 +158,11 @@ function Header() {
                   <div className="dropdown-item">
                     <Link to={`/user/profile/${user.idUser}`}>
                       Trang cá nhân
+                    </Link>
+                  </div>
+                  <div className="dropdown-item">
+                    <Link to={`/user/changePassword`}>
+                      Đổi mật khẩu
                     </Link>
                   </div>
                   <div className="dropdown-item">

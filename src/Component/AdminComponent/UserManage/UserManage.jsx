@@ -16,7 +16,7 @@ function UserManage() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7112/api/Admin/ResetPassword/${email}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Admin/ResetPassword/${email}`,
         {
           method: "PUT",
           headers: {
@@ -59,7 +59,7 @@ function UserManage() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7112/api/Admin/GetAllUsers`,
+        `${process.env.REACT_APP_API_BASE_URL}/Admin/GetAllUsers`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -95,7 +95,7 @@ function UserManage() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Admin/DeleteUser/${id}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Admin/DeleteUser/${id}`,
         {
           method: "DELETE",
           headers: {

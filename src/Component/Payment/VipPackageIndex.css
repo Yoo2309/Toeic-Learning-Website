@@ -1,19 +1,19 @@
 /* Import Google font - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
-.lr-card-wrapper {
-  padding-top: 30px;
+.vip-package-index {
+  margin: 30px;
 }
-.lr-card {
+.vip-package-index .lr-card {
   background-color: #fff;
   border-radius: 60px;
   padding-bottom: 20px;
 }
-.card-wrapper-container {
+.vip-package-index .card-wrapper-container {
   margin: 30px;
 }
 
-.card-wrapper {
+.vip-package-index .card-wrapper {
   display: flex;
   gap: 12px;
   background: #f4f4f4;
@@ -24,22 +24,22 @@
   scroll-padding: 30px;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
 }
-.card-wrapper::-webkit-scrollbar {
+.vip-package-index .card-wrapper::-webkit-scrollbar {
   height: 8px;
 }
-.card-wrapper::-webkit-scrollbar-track {
+.vip-package-index .card-wrapper::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 25px;
 }
-.card-wrapper::-webkit-scrollbar-thumb {
+.vip-package-index .card-wrapper::-webkit-scrollbar-thumb {
   background: #70a2ab;
   border-radius: 25px;
 }
-.card-wrapper::-webkit-scrollbar-thumb:hover {
+.vip-package-index .card-wrapper::-webkit-scrollbar-thumb:hover {
   background: #003150;
 }
 
-.lr-card .card {
+.vip-package-index .card {
   flex: 0 0 30%;
   font-family: "Poppins", sans-serif;
   padding: 10px 20px;
@@ -48,40 +48,40 @@
   scroll-snap-align: start;
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
 }
-.lr-card .card:hover {
+.vip-package-index .card:hover {
   cursor: pointer;
   background-color: #aae3ed;
 }
-.lr-card .card-content {
+.vip-package-index .card-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.lr-card .card .image {
+.vip-package-index .card .image {
   height: 96px;
   width: 96px;
   padding: 4px;
 }
-.lr-card .image img {
+.vip-package-index .image img {
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
-.lr-card h2 {
+.vip-package-index h2 {
   margin: 10px;
   color: #333;
   font-size: 22px;
   font-weight: 600;
   text-align: center;
 }
-.lr-card p {
+.vip-package-index p {
   font-weight: 400;
   color: #333;
   text-align: justify;
 }
 
-.lr-card .detail {
-  flex: 70%;
+.vip-package-index .detail {
+  flex: 60%;
   font-family: "Poppins", sans-serif;
   padding: 10px 20px;
   border-radius: 1.5rem;
@@ -89,17 +89,17 @@
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
 }
 
-.lr-card .detail-content {
+.vip-package-index .detail-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.lr-card .image {
+.vip-package-index .image {
   height: 96px;
   width: 96px;
   padding: 4px;
 }
-.lr-card .payment {
+.vip-package-index .payment {
   flex: 0 0 80%;
   font-family: "Poppins", sans-serif;
   padding: 10px 20px;
@@ -108,22 +108,22 @@
   scroll-snap-align: start;
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
 }
-.lr-card .payment:hover {
+.vip-package-index .payment:hover {
   cursor: pointer;
   background-color: #aae3ed;
 }
-.lr-card .payment-content {
+.vip-package-index .payment-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.lr-card .payment .image {
+.vip-package-index .payment .image {
   height: 96px;
   width: 96px;
   padding: 4px;
 }
-.lr-card .pay {
-  flex: 20%;
+.vip-package-index .pay {
+  flex: 35%;
   font-family: "Poppins", sans-serif;
   padding: 10px 20px;
   border-radius: 1.5rem;
@@ -131,7 +131,7 @@
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
 }
 
-.lr-card .pay .pay-btn{
+.vip-package-index .pay .pay-btn{
   margin-top: 10px;
   background-color: #70a2ab;
   font-size: 20px;

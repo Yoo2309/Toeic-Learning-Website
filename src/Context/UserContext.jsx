@@ -7,7 +7,7 @@ const UserContext = createContext({
   idUser: "",
   auth: false,
   role: "",
-  token: ""
+  token: "",
 });
 
 const UserProvider = ({ children }) => {
@@ -16,7 +16,7 @@ const UserProvider = ({ children }) => {
     idUser: "",
     auth: false,
     role: "",
-    token: ""
+    token: "",
   });
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -33,7 +33,7 @@ const UserProvider = ({ children }) => {
         role: role,
         auth: true,
         idUser: idUser,
-        token: token
+        token: token,
       }));
     }
   }, []);
@@ -53,22 +53,25 @@ const UserProvider = ({ children }) => {
       role: role,
       auth: true,
       idUser: idUser,
-      token: token
+      token: token,
     }));
     localStorage.setItem("token", token);
   };
   const userAuthen = async (username, pwd) => {
     try {
-      const response = await fetch("https://localhost:7112/api/Authen/Login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: pwd,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/Authen/Login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            password: pwd,
+          }),
+        }
+      );
       return response;
     } catch (error) {
       toast.error(`${error}`, {
@@ -88,9 +91,8 @@ const UserProvider = ({ children }) => {
       username: "",
       role: "",
       auth: false,
-      token: ""
+      token: "",
     }));
-    window.location.reload();
   };
 
   return (

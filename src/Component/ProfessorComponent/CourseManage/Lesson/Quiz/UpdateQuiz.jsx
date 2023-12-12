@@ -48,7 +48,7 @@ function UpdateQuiz() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Quiz/UpdateQuiz/${id}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Quiz/UpdateQuiz/${id}`,
         {
           method: "PUT",
           headers: {
@@ -94,7 +94,7 @@ function UpdateQuiz() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Quiz/GetQuizById/${id}`
+        `${process.env.REACT_APP_API_BASE_URL}/Quiz/GetQuizById/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -123,7 +123,7 @@ function UpdateQuiz() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Question/GetAllQuestionByQuiz/${id}`
+        `${process.env.REACT_APP_API_BASE_URL}/Question/GetAllQuestionByQuiz/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -152,7 +152,7 @@ function UpdateQuiz() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Question/DeleteCourse/${id}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Question/DeleteCourse/${id}`,
         {
           method: "DELETE",
           headers: {

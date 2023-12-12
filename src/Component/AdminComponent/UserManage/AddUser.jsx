@@ -22,7 +22,7 @@ function AddUser() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Admin/Register-Professor-Admin?role=${data?.role}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Admin/Register-Professor-Admin?role=${data?.role}`,
         {
           method: "POST",
           headers: {

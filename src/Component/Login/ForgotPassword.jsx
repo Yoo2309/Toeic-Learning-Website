@@ -22,7 +22,7 @@ function ForgotPassword() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Authen/SendForgotPasswordCode?email=${email}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Authen/SendForgotPasswordCode?email=${email}`,
         {
           method: "POST",
           headers: {
@@ -67,7 +67,7 @@ function ForgotPassword() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        "https://localhost:7112/api/Authen/ForgotPassword",
+        `${process.env.REACT_APP_API_BASE_URL}/Authen/ForgotPassword`,
         {
           method: "POST",
           headers: {

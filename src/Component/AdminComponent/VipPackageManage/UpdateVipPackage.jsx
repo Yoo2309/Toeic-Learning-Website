@@ -23,7 +23,7 @@ function UpdateVipPackage() {
     try {
       const token = localStorage.getItem("token")
       const response = await fetch(
-        `https://localhost:7112/api/Admin/GetVipPackageById/${idPackage}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Admin/GetVipPackageById/${idPackage}`,
         {
           method: "GET",
           headers: {
@@ -63,7 +63,7 @@ function UpdateVipPackage() {
     try {
       const token = localStorage.getItem("token")
       const response = await fetch(
-        `https://localhost:7112/api/Admin/UpdateVipPackage/${idPackage}&&${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Admin/UpdateVipPackage/${idPackage}&&${user.idUser}`,
         {
           method: "PUT",
           headers: {

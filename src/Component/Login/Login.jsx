@@ -86,7 +86,7 @@ function Login() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        "https://localhost:7112/api/Authen/Register",
+        `${process.env.REACT_APP_API_BASE_URL}/Authen/Register`,
         {
           method: "POST",
           headers: {
@@ -135,7 +135,7 @@ function Login() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        "https://localhost:7112/api/Authen/Login-2FA",
+        `${process.env.REACT_APP_API_BASE_URL}/Authen/Login-2FA`,
         {
           method: "POST",
           headers: {

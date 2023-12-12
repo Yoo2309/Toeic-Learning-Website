@@ -4,10 +4,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Loader from "../../../../Common/Loader/Loader";
 import { toast } from "react-toastify";
-import {UserContext} from "../../../.././../Context/UserContext"
+import { UserContext } from "../../../.././../Context/UserContext";
 
 function AddQuiz({ toggleModal, modal_on, idLesson }) {
-  
   const { user } = useContext(UserContext);
   const [isloading, setIsLoading] = useState(false);
   const {
@@ -19,17 +18,20 @@ function AddQuiz({ toggleModal, modal_on, idLesson }) {
   async function handleAddQuiz(data) {
     setIsLoading(true);
     try {
-      const response = await fetch(`https://localhost:7112/api/Quiz/AddQuiz`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-        body: JSON.stringify({
-          idLesson: idLesson,
-          title: data.title,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/Quiz/AddQuiz`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({
+            idLesson: idLesson,
+            title: data.title,
+          }),
+        }
+      );
       setIsLoading(false);
       toggleModal();
       if (!response.ok) {

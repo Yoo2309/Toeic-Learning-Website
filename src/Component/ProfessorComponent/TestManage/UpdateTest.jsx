@@ -29,7 +29,7 @@ function UpdateTest() {
   async function fetchTestType() {
     try {
       const response = await fetch(
-        "https://localhost:7112/api/TestType/GetAllTestTypes"
+        `${process.env.REACT_APP_API_BASE_URL}/TestType/GetAllTestTypes`
       );
       if (!response.ok) {
         const errorData = await response.json();
@@ -60,7 +60,7 @@ function UpdateTest() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Test/GetTestById/${id}`
+        `${process.env.REACT_APP_API_BASE_URL}/Test/GetTestById/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -92,7 +92,7 @@ function UpdateTest() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/TestPart/GetAllTestParts`
+        `${process.env.REACT_APP_API_BASE_URL}/TestPart/GetAllTestParts`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -123,7 +123,7 @@ function UpdateTest() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/TestQuestionUnit/GetAllTestQuestionUnitByPart/${current_part}&&${id}`
+        `${process.env.REACT_APP_API_BASE_URL}/TestQuestionUnit/GetAllTestQuestionUnitByPart/${current_part}&&${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -152,7 +152,7 @@ function UpdateTest() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Test/UpdateTest/${id}&&${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Test/UpdateTest/${id}&&${user.idUser}`,
         {
           method: "PUT",
           headers: {
@@ -198,7 +198,7 @@ function UpdateTest() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/TestQuestionUnit/DeleteTestQuestionUnit/${id}`,
+        `${process.env.REACT_APP_API_BASE_URL}/TestQuestionUnit/DeleteTestQuestionUnit/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -350,7 +350,13 @@ function UpdateTest() {
             />
           )}
         </div>
-        {showForm && <AddUnit idTestPart={current_part} />}
+        {showForm && (
+          <AddUnit
+            idTestPart={current_part}
+            toggle_modal={setShowForm}
+            fetchUnit={fetchTestUnitByPartTest}
+          />
+        )}
       </div>
       <div className="professor-test-unit-wrapper">
         {testUnits &&

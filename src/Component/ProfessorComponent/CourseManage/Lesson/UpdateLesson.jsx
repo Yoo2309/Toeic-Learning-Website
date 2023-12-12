@@ -31,7 +31,7 @@ function UpdateLesson() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7112/api/Lesson/GetLessonById/${id}`
+        `${process.env.REACT_APP_API_BASE_URL}/Lesson/GetLessonById/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -63,7 +63,7 @@ function UpdateLesson() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Lesson/UpdateLesson/${id}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Lesson/UpdateLesson/${id}`,
         {
           method: "PUT",
           headers: {
@@ -79,7 +79,7 @@ function UpdateLesson() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Update course failded", {
+        toast.error("Update lesson failded", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,

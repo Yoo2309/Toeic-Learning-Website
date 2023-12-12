@@ -22,7 +22,7 @@ function AddVipPackage() {
     try {
       const token = localStorage.getItem("token")
       const response = await fetch(
-        `https://localhost:7112/api/Admin/AddVipPackage?userId=${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Admin/AddVipPackage?userId=${user.idUser}`,
         {
           method: "POST",
           headers: {

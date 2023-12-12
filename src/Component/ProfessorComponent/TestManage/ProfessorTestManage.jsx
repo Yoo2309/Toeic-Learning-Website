@@ -27,7 +27,7 @@ function ProfessorTestManage() {
   async function fetchTests() {
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Test/GetAllTestByProfessor/${user.idUser}`
+        `${process.env.REACT_APP_API_BASE_URL}/Test/GetAllTestByProfessor/${user.idUser}`
       );
       if (!response.ok) {
         const errorData = await response.json();
@@ -64,7 +64,7 @@ function ProfessorTestManage() {
   async function DeleteTest(testId) {
     try {
       const response = await fetch(
-        `https://localhost:7112/api/Test/DeleteTest/${testId}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Test/DeleteTest/${testId}`,
         {
           method: "DELETE",
           headers: {

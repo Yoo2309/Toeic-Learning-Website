@@ -31,7 +31,7 @@ function UserProfile() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7112/api/Authen/GetProfile?id=${id}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Authen/GetProfile?id=${id}`,
         {
           method: "GET",
           headers: {
@@ -69,12 +69,19 @@ function UserProfile() {
       formData.append("FullName", data.fullname);
       formData.append("dateOfBirth", data.dateOfBirth);
       formData.append("Gender", Boolean(data.gender));
-      formData.append("PhoneNumber", data.phone);
-      formData.append("ImageURL", data.imageURL[0]);
+      formData.append("PhoneNumber", data.phonenumber);
+      if (
+        data.imageURL[0] instanceof File ||
+        data.imageURL[0] instanceof Blob
+      ) {
+        formData.append("ImageURL", data.imageURL[0]);
+      } else {
+        formData.append("ImageURL", data.imageURL);
+      }
       formData.append("Enable2FA", false);
       setIsLoading(true);
       const response = await fetch(
-        `https://localhost:7112/api/Authen/Update-Profile`,
+        `${process.env.REACT_APP_API_BASE_URL}/Authen/Update-Profile`,
         {
           method: "PUT",
           headers: {
@@ -118,7 +125,7 @@ function UserProfile() {
     getUser();
   }, []);
   const OnchangeAva = (e) => {
-    console.log("onchange")
+    console.log("onchange");
     let objectURL;
     if (
       e.target.files[0] instanceof File ||
@@ -203,10 +210,10 @@ function UserProfile() {
           <input
             type="text"
             className="p-1 border rounded-md w-full"
-            {...userData("phone", { required: true })}
+            {...userData("phonenumber", { required: true })}
           />
           <error>
-            {errors.phone?.type === "required" && (
+            {errors.phonenumber?.type === "required" && (
               <span className="text-red-600">
                 Không được để trống số điện thoại
               </span>
@@ -235,7 +242,7 @@ function UserProfile() {
             accept=".jpg, .png"
             className="p-1 border rounded-md w-full"
             {...userData("imageURL")}
-            onChange={(e)=>OnchangeAva(e)}
+            onChange={(e) => OnchangeAva(e)}
           />
           {/* <error>
               {errors.imageURL?.type === "required" && (
