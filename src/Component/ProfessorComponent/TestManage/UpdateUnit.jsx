@@ -237,7 +237,6 @@ function UpdateUnit() {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        console.log(response);
         toast.error(`${errorData.message}`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,

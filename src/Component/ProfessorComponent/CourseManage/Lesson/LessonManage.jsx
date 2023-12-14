@@ -126,7 +126,6 @@ function LessonManage() {
     }
   }
   const handleDeleteLesson = async (id) => {
-    console.log(id);
     setIsLoading(true);
     try {
       const response = await fetch(

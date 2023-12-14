@@ -37,7 +37,6 @@ function TestResult() {
       }
       const data = await response.json();
       setRecord(data);
-      console.log(data)
     } catch (error) {
       console.log(error);
     }

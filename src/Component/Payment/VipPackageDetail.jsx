@@ -37,7 +37,6 @@ function VipPackageDetail() {
         }
         const data = await response.json();
         setVipPackage(data);
-        console.log(data);
         setIsLoading(false);
       } catch (error) {
         toast.error(`${error}`, {
@@ -185,7 +184,6 @@ function VipPackageDetail() {
                       className="pay-btn"
                       onClick={() => {
                         handlePayMoMo();
-                        console.log("pay");
                       }}
                     >
                       Thanh Toán MoMo
@@ -196,7 +194,6 @@ function VipPackageDetail() {
                       className="pay-btn"
                       onClick={() => {
                         handlePayVnPay();
-                        console.log("pay");
                       }}
                     >
                       Thanh Toán VNPay

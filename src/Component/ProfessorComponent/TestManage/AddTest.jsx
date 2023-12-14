@@ -51,7 +51,6 @@ function AddTest({ toggleModal, modal_on }) {
     fetchTestType();
   }, []);
   async function handleAddTest(data) {
-    console.log(data.idType, data.name, data.description, user.idUser);
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -71,7 +70,6 @@ function AddTest({ toggleModal, modal_on }) {
       setIsLoading(false);
       toggleModal();
       if (!response.ok) {
-        console.log("lỗi");
         toast.error(`${"Add test failed"}`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,

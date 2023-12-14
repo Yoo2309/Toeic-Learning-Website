@@ -29,7 +29,6 @@ function Quiz({ quizData, quizTitle }) {
           currentQuestion === index ? clickedOption : clickedItem
         )
       );
-      console.log(clickedList);
     }
   }, [clickedOption]);
 

@@ -107,7 +107,6 @@ function UpdateTest() {
       }
       const data = await response.json();
       setParts(data);
-      console.log(data[0].partId);
       setCurrentPart(data[0].partId);
     } catch (error) {
       toast.error(`${error}`, {

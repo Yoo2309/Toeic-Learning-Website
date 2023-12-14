@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Loader from "../Common/Loader/Loader";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getValue } from "@testing-library/user-event/dist/utils";
 
 function UserProfile() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [isloading, setIsLoading] = useState(false);
   const [userResponse, setUserResponse] = useState({
@@ -124,10 +125,13 @@ function UserProfile() {
   }
 
   useEffect(() => {
-    getUser();
+    if (token) {
+      getUser();
+    } else {
+      navigate("/login")
+    }
   }, []);
   const OnchangeAva = (e) => {
-    console.log("onchange");
     let objectURL;
     if (
       e.target.files[0] instanceof File ||

@@ -52,6 +52,11 @@ function TestRecord() {
       fetchRecordByUser();
     }
   }, [user.idUser]);
+  useEffect(() => {
+    if (!user.auth) {
+      navigate("/login");
+    }
+  }, []);
   if (isLoading) {
     return <Loader />;
   }

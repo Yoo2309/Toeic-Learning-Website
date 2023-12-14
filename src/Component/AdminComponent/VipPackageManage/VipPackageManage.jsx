@@ -64,7 +64,6 @@ function VipPackageManage() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        console.log(response);
         toast.error("Delete Vip Package Failed", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,

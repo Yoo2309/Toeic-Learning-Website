@@ -103,20 +103,22 @@ function Header() {
                 </div>
               </Link>
             </li>
-            <li
-              style={{
-                padding: "0 20px 0 20px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <img
-                onClick={() => navigate("/vippackage")}
-                style={{ height: "26px" }}
-                src="https://estudyme.com/images/get-pro/btn-get-pro.png"
-                alt=""
-              ></img>
-            </li>
+            {user.auth && (
+              <li
+                style={{
+                  padding: "0 20px 0 20px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  onClick={() => navigate("/vippackage")}
+                  style={{ height: "26px" }}
+                  src="https://estudyme.com/images/get-pro/btn-get-pro.png"
+                  alt=""
+                ></img>
+              </li>
+            )}
           </ul>
           {!user.auth ? (
             <div className="start">

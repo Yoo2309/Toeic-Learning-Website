@@ -58,7 +58,6 @@ export default function VipPackageCheckout() {
   useEffect(() => {
     if (user && user.idUser) {
       fetchPayment();
-      console.log(user.idUser);
     }
   }, [user]);
 

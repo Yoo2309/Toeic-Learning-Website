@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./TestMain.css";
 import Loader from "../../Common/Loader/Loader.jsx";
 import HTMLReactParser from "html-react-parser";
-import TestResult from "./TestResult.jsx";
 import { UserContext } from "../../../Context/UserContext.jsx";
 import { toast } from "react-toastify";
 
@@ -21,9 +20,11 @@ function TestMain() {
 
   let question_num = 0;
 
-  if (!user.auth) {
-    navigate("/login");
-  }
+  useEffect(() => {
+    if (!user.auth) {
+      navigate("/login");
+    }
+  }, []);
   async function fetchTestData() {
     try {
       const response = await fetch(
@@ -105,7 +106,6 @@ function TestMain() {
       };
       setAnswers((prevAnswers) => [...prevAnswers, newAnswer]);
     }
-    console.log(answers);
   };
   async function SubmitTest() {
     try {
@@ -132,7 +132,7 @@ function TestMain() {
         });
       } else {
         const data = await response.json();
-        navigate(`/test-result/${data.idRecord}`)
+        navigate(`/test/result/${data.idRecord}`);
       }
     } catch (error) {
       toast.error(`${error}`, {

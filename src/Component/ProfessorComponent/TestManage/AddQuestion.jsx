@@ -12,7 +12,6 @@ function AddQuestion({
   isUpdate,
   initial_question,
 }) {
-  console.log(initial_question);
   const { user } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [current_question, setQuestion] = useState({
