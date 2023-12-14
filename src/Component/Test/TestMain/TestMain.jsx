@@ -19,6 +19,7 @@ function TestMain() {
   const [current_part, setCurrentPart] = useState(0);
   const [testdata, setTestdata] = useState([]);
   const [answers, setAnswers] = useState([]);
+  const [testResult, setTestResult] = useState([]);
 
   let question_num = 0;
 
@@ -90,32 +91,37 @@ function TestMain() {
 
   const handleOptionChange = (questionId, selectedOption) => {
     const existingAnswerIndex = answers.findIndex(
-      (answer) => answer.questionId === questionId
+      (answer) => answer.idQuestion === questionId
     );
 
     if (existingAnswerIndex !== -1) {
       setAnswers((prevAnswers) => {
         const updatedAnswers = [...prevAnswers];
-        updatedAnswers[existingAnswerIndex].answer = selectedOption;
+        updatedAnswers[existingAnswerIndex].userChoice = String(selectedOption);
         return updatedAnswers;
       });
     } else {
       const newAnswer = {
-        questionId: questionId,
-        answer: selectedOption,
+        idQuestion: questionId,
+        userChoice: String(selectedOption),
       };
       setAnswers((prevAnswers) => [...prevAnswers, newAnswer]);
     }
+    console.log(answers);
   };
   async function SubmitTest() {
     try {
-      const response = await fetch("http://localhost:3000/user-answers", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(answers),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/UserAnswer/AddListUserAnswers/${user.idUser}&&${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify(answers),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -126,6 +132,10 @@ function TestMain() {
           pauseOnHover: true,
           draggable: true,
         });
+      } else {
+        const data = await response.json()
+        setTestResult(data)
+        console.log(data)
       }
     } catch (error) {
       toast.error(`${error}`, {
@@ -138,15 +148,15 @@ function TestMain() {
     }
   }
   function nextPart() {
-    if (current_part < 7) {
+    if (current_part < 6) {
       setCurrentPart(current_part + 1);
-    } else if (current_part === 7) {
+    } else if (current_part === 6) {
       SubmitTest();
       setIsSubmit(true);
     }
   }
   function previousPart() {
-    if (current_part > 1) {
+    if (current_part > 0) {
       setCurrentPart(current_part - 1);
     }
   }
@@ -156,13 +166,11 @@ function TestMain() {
   }
 
   return (
-    <div className="test-container">
+    <>
       {isSubmit ? (
-        <div className="test-result">
-          <TestResult />
-        </div>
+        <TestResult props={testResult}/>
       ) : (
-        <>
+        <div className="test-container">
           <div className="tab-header">
             {parts &&
               parts.map((part, index) => {
@@ -229,58 +237,49 @@ function TestMain() {
                                           <div className="test-choice-option">
                                             <input
                                               type="radio"
-                                              name={`question_${question_item.id}`}
+                                              name={`question_${question_item.idQuestion}`}
                                               onChange={() =>
                                                 handleOptionChange(
-                                                  question_item.id,
+                                                  question_item.idQuestion,
                                                   1
                                                 )
                                               }
                                             />
                                             A. {question_item.choice_1}
                                           </div>
-                                          <div
-                                            key={index}
-                                            className="test-choice-option"
-                                          >
+                                          <div className="test-choice-option">
                                             <input
                                               type="radio"
-                                              name={`question_${question_item.id}`}
+                                              name={`question_${question_item.idQuestion}`}
                                               onChange={() =>
                                                 handleOptionChange(
-                                                  question_item.id,
+                                                  question_item.idQuestion,
                                                   2
                                                 )
                                               }
                                             />
                                             B. {question_item.choice_2}
                                           </div>
-                                          <div
-                                            key={index}
-                                            className="test-choice-option"
-                                          >
+                                          <div className="test-choice-option">
                                             <input
                                               type="radio"
-                                              name={`question_${question_item.id}`}
+                                              name={`question_${question_item.idQuestion}`}
                                               onChange={() =>
                                                 handleOptionChange(
-                                                  question_item.id,
+                                                  question_item.idQuestion,
                                                   3
                                                 )
                                               }
                                             />
                                             C. {question_item.choice_3}
                                           </div>
-                                          <div
-                                            key={index}
-                                            className="test-choice-option"
-                                          >
+                                          <div className="test-choice-option">
                                             <input
                                               type="radio"
-                                              name={`question_${question_item.id}`}
+                                              name={`question_${question_item.idQuestion}`}
                                               onChange={() =>
                                                 handleOptionChange(
-                                                  question_item.id,
+                                                  question_item.idQuestion,
                                                   4
                                                 )
                                               }
@@ -308,15 +307,15 @@ function TestMain() {
               />
               <input
                 type="button"
-                value={current_part === 7 ? "Done" : "Next"}
+                value={current_part === 6 ? "Submit" : "Next"}
                 className="next-button"
                 onClick={nextPart}
               />
             </div>
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 }
 

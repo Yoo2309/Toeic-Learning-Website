@@ -104,9 +104,10 @@ function Lesson() {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.json();
+        setQuizes(data);
       }
-      const data = await response.json();
-      setQuizes(data);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -155,6 +156,7 @@ function Lesson() {
   useEffect(() => {
     fetchOtherLessons();
     fetchQuizes();
+    setCurrentQuizID("3fa85f64-5717-4562-b3fc-2c963f66afa6");
   }, [current_lesson]);
 
   useEffect(() => {

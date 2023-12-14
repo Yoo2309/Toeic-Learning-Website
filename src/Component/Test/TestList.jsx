@@ -64,8 +64,8 @@ function TestList({ testType }) {
             {tests &&
               tests.map((test, index) => {
                 return (
-                  <Link to={`/test/${test.idTest}`}>
-                    <div key={index} className="test-item">
+                  <Link key={index} to={`/test/${test.idTest}`}>
+                    <div className="test-item">
                       <img
                         src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/100/external-online-test-online-education-flaticons-lineal-color-flat-icons-2.png"
                         alt=""

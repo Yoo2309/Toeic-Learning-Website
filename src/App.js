@@ -1,7 +1,6 @@
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Header from "./Component/Common/Header/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Component/Home/Home";
 import Footer from "./Component/Common/Footer/Footer";
@@ -40,6 +39,7 @@ import VipPackageManage from "./Component/AdminComponent/VipPackageManage/VipPac
 import AddVipPackage from "./Component/AdminComponent/VipPackageManage/AddVipPackage";
 import UpdateVipPackage from "./Component/AdminComponent/VipPackageManage/UpdateVipPackage";
 import ChangePassword from "./Component/Profile/ChangePassword";
+import TestRecord from "./Component/Test/TestRecord";
 
 function App() {
   return (
@@ -52,7 +52,11 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/forgot-password" element={<ForgotPassword />} />
             <Route exact path="/user/profile/:id" element={<UserProfile />} />
-            <Route exact path="/user/changePassword" element={<ChangePassword />} />
+            <Route
+              exact
+              path="/user/changePassword"
+              element={<ChangePassword />}
+            />
             <Route
               exact
               path="/practice-vocabulary"
@@ -73,6 +77,7 @@ function App() {
             <Route exact path="/test" element={<TestIndex />} />
             <Route exact path="/test/type/:id" element={<TestList />} />
             <Route exact path="/test/:id" element={<TestMain />} />
+            <Route exact path="/test/record" element={<TestRecord />} />
             <Route exact path="/vippackage" element={<VipPackage />} />
             <Route
               exact
@@ -96,6 +101,11 @@ function App() {
           <Routes>
             <Route exact path="/" element={<ProfessorHome />}>
               <Route exact path="/user/profile/:id" element={<UserProfile />} />
+              <Route
+                exact
+                path="/user/changePassword"
+                element={<ChangePassword />}
+              />
               <Route
                 exact
                 path="professor/test"
@@ -150,6 +160,11 @@ function App() {
           <Routes>
             <Route exact path="/" element={<AdminHome />}>
               <Route exact path="/user/profile/:id" element={<UserProfile />} />
+              <Route
+                exact
+                path="/user/changePassword"
+                element={<ChangePassword />}
+              />
               <Route exact path="admin/user" element={<UserManage />} />
               <Route exact path="admin/user/add" element={<AddUser />} />
               <Route

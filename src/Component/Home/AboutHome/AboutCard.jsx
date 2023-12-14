@@ -17,7 +17,7 @@ function AboutCard() {
             />
           </div>
           <div className="right row">
-            <div className="item" onClick={()=>navigate("/test/type/FullTest")}>
+            <div className="item" onClick={()=>navigate("/test")}>
               <div className="icon-img">
                 <img
                   src="https://img.icons8.com/external-nawicon-outline-color-nawicon/64/external-exam-back-to-school-nawicon-outline-color-nawicon.png"

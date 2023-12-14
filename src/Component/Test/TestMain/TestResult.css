@@ -1,44 +1,69 @@
+.test-result-wrapper {
+  margin: 40px;
+  display: flex;
+  gap: 2rem;
+}
 .test-result {
-    height: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .test-result .congratulation {
-    color: rgb(44, 225, 193, 1);
-    font-size: 3rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .test-result .show-score {
-    width: 100%;
-    font-size: 2rem;
-    font-weight: 700;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-around;
-    gap: 2rem;
-    color: #003150;
-  }
-  .test-result .test-result-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .test-backtohome {
-    width: 170px;
-    height: 45px;
-    margin: 1rem;
-    border-radius: 50px;
-    box-shadow: rgb(197, 200, 205) 0px 3px 6px 0px;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #fff;
-    background: linear-gradient(
-      rgb(44, 225, 193) 0%,
-      rgb(35, 202, 239) 100%
-    ) !important;
-  }
+  background-color: #fff;
+  height: fit-content;
+  width: 100%;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.test-result-ava {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.test-result .show-score {
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  color: #003150;
+}
+.test-result .test-result-info {
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  border: 1px solid #d7d7d7;
+  border-radius: 1rem;
+}
+.test-backtohome {
+  width: 16rem;
+  height: 3rem;
+  margin: 1rem;
+  border-radius: 50px;
+  box-shadow: rgb(197, 200, 205) 0px 6px 9px 0px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(
+    rgb(44, 225, 193) 0%,
+    rgb(35, 202, 239) 100%
+  ) !important;
+}
+.test-history {
+  width: 13rem;
+  height: 3rem;
+  margin: 1rem;
+  border-radius: 50px;
+  box-shadow: rgb(197, 200, 205) 0px 6px 9px 0px;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: #e8f2ff;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
