@@ -47,11 +47,12 @@ function ProfessorVocabulary() {
     navigate("/professor/vocabulary");
   };
   async function fetchVocabulary() {
-    setIsLoading(true);
     try {
+      setIsLoading(true);
       const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/Vocabulary/GetVocabularyByTopic/${id}`
       );
+      setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
         toast.error(`${errorData.message}`, {
@@ -64,7 +65,6 @@ function ProfessorVocabulary() {
       }
       const data = await response.json();
       setWords(data);
-      setIsLoading(false);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,

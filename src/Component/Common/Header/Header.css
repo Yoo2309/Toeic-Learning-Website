@@ -170,6 +170,9 @@ a:-webkit-any-link {
 }
 
 @media screen and (max-width: 830px) {
+  .header{
+    margin: 0 !important;
+  }
   .start {
     clip-path: none;
   }

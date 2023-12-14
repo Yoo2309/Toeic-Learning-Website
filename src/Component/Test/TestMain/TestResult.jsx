@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import "./TestResult.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../Context/UserContext";
 
 function TestResult({ props }) {
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   return (
     <div className="test-result-wrapper">
       <div style={{ width: "30%" }} className="test-result">
@@ -19,7 +20,12 @@ function TestResult({ props }) {
           ></img>
         </div>
         <div style={{ fontSize: "18px" }}>{user.username}</div>
-        <button className="test-history">
+        <button
+          onClick={() => {
+            navigate("/test/record");
+          }}
+          className="test-history"
+        >
           Lịch sử làm bài <i class="fa-solid fa-clock-rotate-left"></i>
         </button>
       </div>

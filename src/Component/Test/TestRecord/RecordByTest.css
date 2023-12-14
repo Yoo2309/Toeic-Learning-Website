@@ -1,0 +1,22 @@
+.record-by-test-wrapper .test-result-wrapper {
+  margin: 0 40px;
+}
+.record-by-test-wrapper .test-record-list {
+  padding: 1rem;
+  background-color: #fff;
+}
+.record-by-test-wrapper .test-record-item {
+  grid-template-columns: 2fr 2fr 1fr;
+}
+.do-test {
+  width: 30%;
+  height: 50px;
+  border: none;
+  border-radius: 50px;
+  background: #003150;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
