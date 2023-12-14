@@ -41,6 +41,7 @@ import UpdateVipPackage from "./Component/AdminComponent/VipPackageManage/Update
 import ChangePassword from "./Component/Profile/ChangePassword";
 import TestRecord from "./Component/Test/TestRecord/TestRecord";
 import RecordByTest from "./Component/Test/TestRecord/RecordByTest";
+import TestResult from "./Component/Test/TestMain/TestResult";
 
 function App() {
   return (
@@ -78,6 +79,7 @@ function App() {
             <Route exact path="/test" element={<TestIndex />} />
             <Route exact path="/test/type/:id" element={<TestList />} />
             <Route exact path="/test/record" element={<TestRecord />} />
+            <Route exact path="/test/result/:id" element={<TestResult />} />
             <Route exact path="/test/:id" element={<RecordByTest />} />
             <Route exact path="/do-test/:id" element={<TestMain />} />
             <Route exact path="/vippackage" element={<VipPackage />} />

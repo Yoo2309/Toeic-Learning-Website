@@ -4,11 +4,13 @@ import { UserContext } from "../../../Context/UserContext";
 import { toast } from "react-toastify";
 import Loader from "../../Common/Loader/Loader";
 import Heading from "../../Common/Header/Heading";
+import { useNavigate } from "react-router-dom";
 
 function TestRecord() {
   const { user } = useContext(UserContext);
   const [records, setRecords] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
   async function fetchRecordByUser() {
     try {
       setIsLoading(true);
@@ -55,7 +57,7 @@ function TestRecord() {
   }
   return (
     <div className="test-record-wrapper">
-      <Heading subtitle={"VictoryU"} title={"Lịch sử làm bài"}/>
+      <Heading subtitle={"VictoryU"} title={"Lịch sử làm bài"} />
       <div style={{ width: "30%" }} className="test-result">
         <div className="test-result-ava">
           <img
@@ -79,10 +81,16 @@ function TestRecord() {
           records.map((record, index) => {
             return (
               <div key={index} className="test-record-item">
-                <div>{record.idTest}</div>
+                <div>{record.testName}</div>
                 <div>{record.totalScore}</div>
                 <div>{record.createDate}</div>
-                <div>Xem chi tiết</div>
+                <div
+                  onClick={() => {
+                    navigate(`/test/result/${record.idRecord}`);
+                  }}
+                >
+                  Xem chi tiết
+                </div>
               </div>
             );
           })}

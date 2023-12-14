@@ -14,11 +14,6 @@ body {
   background-color: #fff;
   border-radius: 2rem;
 }
-.flexSB {
-  display: flex;
-  align-items: center;
-}
-
 button {
   border: none;
 }

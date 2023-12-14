@@ -58,7 +58,7 @@ function RecordByTest() {
   }
   return (
     <div className="record-by-test-wrapper">
-      <Heading title={id}></Heading>
+      <Heading title={records[0] && records[0].testName}></Heading>
       <div className="test-result-wrapper">
         <div className="test-record-list">
           <div
@@ -88,7 +88,13 @@ function RecordByTest() {
                 <div key={index} className="test-record-item">
                   <div>{record.createDate}</div>
                   <div>{record.totalScore}</div>
-                  <div>Xem chi tiết</div>
+                  <div
+                    onClick={() => {
+                      navigate(`/test/result/${record.idRecord}`);
+                    }}
+                  >
+                    Xem chi tiết
+                  </div>
                 </div>
               );
             })}

@@ -19,8 +19,7 @@
   border-radius: 1.5rem;
 }
 .testHome .test-item-panel {
-  width: 60%;
-} 
+}
 .testHome .test-item-panel h1 {
   font-size: 30px;
   font-weight: 700;
@@ -45,5 +44,16 @@
 @media screen and (max-width: 768px) {
   .test-item-panel {
     width: 100%;
-  } 
+  }
+  .testHome .test-item-wrapper {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  .testHome .test-item {
+    flex-direction: column;
+  }
+  .testHome .test-item-button button {
+    font-size: 12px;
+  }
 }

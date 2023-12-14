@@ -15,11 +15,9 @@ function TestMain() {
   const [parts, setParts] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isSubmit, setIsSubmit] = useState(false);
   const [current_part, setCurrentPart] = useState(0);
   const [testdata, setTestdata] = useState([]);
   const [answers, setAnswers] = useState([]);
-  const [testResult, setTestResult] = useState([]);
 
   let question_num = 0;
 
@@ -133,9 +131,8 @@ function TestMain() {
           draggable: true,
         });
       } else {
-        const data = await response.json()
-        setTestResult(data)
-        console.log(data)
+        const data = await response.json();
+        navigate(`/test-result/${data.idRecord}`)
       }
     } catch (error) {
       toast.error(`${error}`, {
@@ -152,7 +149,6 @@ function TestMain() {
       setCurrentPart(current_part + 1);
     } else if (current_part === 6) {
       SubmitTest();
-      setIsSubmit(true);
     }
   }
   function previousPart() {
@@ -166,156 +162,150 @@ function TestMain() {
   }
 
   return (
-    <>
-      {isSubmit ? (
-        <TestResult props={testResult}/>
-      ) : (
-        <div className="test-container">
-          <div className="tab-header">
-            {parts &&
-              parts.map((part, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={`tab-item ${
-                      current_part === index ? "tab-index-active" : null
-                    }`}
-                    onClick={() => setCurrentPart(index)}
-                  >
-                    {part.partName}
-                  </div>
-                );
-              })}
-          </div>
-          <div className="tab-content">
-            {testdata &&
-              testdata.map((testpart, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={
-                      current_part === index ? "tab-pane-active" : "tab-pane"
-                    }
-                  >
-                    {testpart &&
-                      testpart.units.map((unit, index) => {
-                        return (
-                          <div key={index} className="test-unit-wrapper">
-                            {unit.paragraph || unit.image ? (
-                              <div className="test-unit-left">
-                                <div className="test-img">
-                                  {unit.image && (
-                                    <img src={unit.image} alt={unit.image} />
-                                  )}
-                                </div>
-                                <div className="test-paragraph">
-                                  {unit.paragraph &&
-                                    HTMLReactParser(String(unit.paragraph))}
-                                </div>
-                              </div>
-                            ) : (
-                              ""
-                            )}
-                            <div className="test-unit-right">
-                              <div className="test-unit-audio">
-                                {unit.audio && (
-                                  <audio src={unit.audio} controls></audio>
-                                )}
-                              </div>
-                              {unit &&
-                                unit.questions.map((question_item, index) => {
-                                  question_num++;
-                                  return (
-                                    <div key={index} className="test-question">
-                                      <div className="test-question-number">
-                                        {question_num}
-                                      </div>
-                                      <div className="test-question-content">
-                                        {question_item.content}
-
-                                        <div className="test-choice-wrapper">
-                                          <div className="test-choice-option">
-                                            <input
-                                              type="radio"
-                                              name={`question_${question_item.idQuestion}`}
-                                              onChange={() =>
-                                                handleOptionChange(
-                                                  question_item.idQuestion,
-                                                  1
-                                                )
-                                              }
-                                            />
-                                            A. {question_item.choice_1}
-                                          </div>
-                                          <div className="test-choice-option">
-                                            <input
-                                              type="radio"
-                                              name={`question_${question_item.idQuestion}`}
-                                              onChange={() =>
-                                                handleOptionChange(
-                                                  question_item.idQuestion,
-                                                  2
-                                                )
-                                              }
-                                            />
-                                            B. {question_item.choice_2}
-                                          </div>
-                                          <div className="test-choice-option">
-                                            <input
-                                              type="radio"
-                                              name={`question_${question_item.idQuestion}`}
-                                              onChange={() =>
-                                                handleOptionChange(
-                                                  question_item.idQuestion,
-                                                  3
-                                                )
-                                              }
-                                            />
-                                            C. {question_item.choice_3}
-                                          </div>
-                                          <div className="test-choice-option">
-                                            <input
-                                              type="radio"
-                                              name={`question_${question_item.idQuestion}`}
-                                              onChange={() =>
-                                                handleOptionChange(
-                                                  question_item.idQuestion,
-                                                  4
-                                                )
-                                              }
-                                            />
-                                            D. {question_item.choice_4}
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  );
-                                })}
+    <div className="test-container">
+      <div className="tab-header">
+        {parts &&
+          parts.map((part, index) => {
+            return (
+              <div
+                key={index}
+                className={`tab-item ${
+                  current_part === index ? "tab-index-active" : null
+                }`}
+                onClick={() => setCurrentPart(index)}
+              >
+                {part.partName}
+              </div>
+            );
+          })}
+      </div>
+      <div className="tab-content">
+        {testdata &&
+          testdata.map((testpart, index) => {
+            return (
+              <div
+                key={index}
+                className={
+                  current_part === index ? "tab-pane-active" : "tab-pane"
+                }
+              >
+                {testpart &&
+                  testpart.units.map((unit, index) => {
+                    return (
+                      <div key={index} className="test-unit-wrapper">
+                        {unit.paragraph || unit.image ? (
+                          <div className="test-unit-left">
+                            <div className="test-img">
+                              {unit.image && (
+                                <img src={unit.image} alt={unit.image} />
+                              )}
+                            </div>
+                            <div className="test-paragraph">
+                              {unit.paragraph &&
+                                HTMLReactParser(String(unit.paragraph))}
                             </div>
                           </div>
-                        );
-                      })}
-                  </div>
-                );
-              })}
-            <div className="question-button">
-              <input
-                type="button"
-                value="Previous"
-                className="previous-button"
-                onClick={previousPart}
-              />
-              <input
-                type="button"
-                value={current_part === 6 ? "Submit" : "Next"}
-                className="next-button"
-                onClick={nextPart}
-              />
-            </div>
-          </div>
+                        ) : (
+                          ""
+                        )}
+                        <div className="test-unit-right">
+                          <div className="test-unit-audio">
+                            {unit.audio && (
+                              <audio src={unit.audio} controls></audio>
+                            )}
+                          </div>
+                          {unit &&
+                            unit.questions.map((question_item, index) => {
+                              question_num++;
+                              return (
+                                <div key={index} className="test-question">
+                                  <div className="test-question-number">
+                                    {question_num}
+                                  </div>
+                                  <div className="test-question-content">
+                                    {question_item.content}
+
+                                    <div className="test-choice-wrapper">
+                                      <div className="test-choice-option">
+                                        <input
+                                          type="radio"
+                                          name={`question_${question_item.idQuestion}`}
+                                          onChange={() =>
+                                            handleOptionChange(
+                                              question_item.idQuestion,
+                                              1
+                                            )
+                                          }
+                                        />
+                                        A. {question_item.choice_1}
+                                      </div>
+                                      <div className="test-choice-option">
+                                        <input
+                                          type="radio"
+                                          name={`question_${question_item.idQuestion}`}
+                                          onChange={() =>
+                                            handleOptionChange(
+                                              question_item.idQuestion,
+                                              2
+                                            )
+                                          }
+                                        />
+                                        B. {question_item.choice_2}
+                                      </div>
+                                      <div className="test-choice-option">
+                                        <input
+                                          type="radio"
+                                          name={`question_${question_item.idQuestion}`}
+                                          onChange={() =>
+                                            handleOptionChange(
+                                              question_item.idQuestion,
+                                              3
+                                            )
+                                          }
+                                        />
+                                        C. {question_item.choice_3}
+                                      </div>
+                                      <div className="test-choice-option">
+                                        <input
+                                          type="radio"
+                                          name={`question_${question_item.idQuestion}`}
+                                          onChange={() =>
+                                            handleOptionChange(
+                                              question_item.idQuestion,
+                                              4
+                                            )
+                                          }
+                                        />
+                                        D. {question_item.choice_4}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            );
+          })}
+        <div className="question-button">
+          <input
+            type="button"
+            value="Previous"
+            className="previous-button"
+            onClick={previousPart}
+          />
+          <input
+            type="button"
+            value={current_part === 6 ? "Submit" : "Next"}
+            className="next-button"
+            onClick={nextPart}
+          />
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 }
 

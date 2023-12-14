@@ -84,12 +84,22 @@
     margin: 15px;
   }
   .card-wrapper {
-    display: block;
-    padding: 5px;
-    box-shadow: none;
-    overflow-x: unset;
+    padding: 0;
+    gap: 0;
   }
   .card {
+    flex: 0 0 70% !important;
     margin: 10px;
+  }
+  .lr-card .card .image {
+    height: 64px;
+    width: 64px;
+    padding: 4px;
+  }
+  .lr-card .card h2 {
+    font-size: 1rem;
+  }
+  .lr-card .card p {
+    font-size: 14px;
   }
 }

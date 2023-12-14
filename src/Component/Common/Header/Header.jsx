@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import Head from "./Head";
 import "./Header.css";
+import logo from "../../../assets/logo-header.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { UserContext } from "../../../Context/UserContext";
@@ -63,8 +64,19 @@ function Header() {
             className={click ? "mobile-nav" : "flexSB "}
             onClick={() => setClick(false)}
           >
-            <li>
-              <Link to="/">HOME</Link>
+            <li
+              style={{
+                padding: "0 20px 0 20px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <img
+                onClick={() => navigate("/")}
+                style={{ width: "78px" }}
+                src={logo}
+                alt=""
+              ></img>
             </li>
             <li>
               <Link to="/courses">KHÓA HỌC</Link>
@@ -90,6 +102,20 @@ function Header() {
                   </ul>
                 </div>
               </Link>
+            </li>
+            <li
+              style={{
+                padding: "0 20px 0 20px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <img
+                onClick={() => navigate("/vippackage")}
+                style={{ height: "26px" }}
+                src="https://estudyme.com/images/get-pro/btn-get-pro.png"
+                alt=""
+              ></img>
             </li>
           </ul>
           {!user.auth ? (
@@ -124,13 +150,13 @@ function Header() {
                     <Link to={`/user/changePassword`}>Đổi mật khẩu</Link>
                   </div>
                   <div className="dropdown-item">
-                    <Link to="/vippackage">Mua gói Vip</Link>
-                  </div>
-                  <div className="dropdown-item">
                     <Link to="/payment-history">Lịch sử thanh toán</Link>
                   </div>
+                  <div className="dropdown-item">
+                    <Link to="/test/record">Lịch sử làm bài</Link>
+                  </div>
                   <div className="dropdown-item" onClick={handleLogout}>
-                    Logout
+                    Đăng xuất
                   </div>
                 </ul>
               </div>

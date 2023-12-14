@@ -1,11 +1,55 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./TestResult.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../../Context/UserContext";
+import { toast } from "react-toastify";
+import Loader from "../../Common/Loader/Loader";
 
-function TestResult({ props }) {
+function TestResult() {
   const { user } = useContext(UserContext);
+  const { id } = useParams();
   const navigate = useNavigate();
+  const [record, setRecord] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  async function fetchRecordById() {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/Record/GetRecordByID/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setIsLoading(false);
+      if (!response.ok) {
+        const errorData = await response.json();
+        toast.error(`${errorData.message}`, {
+          position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
+          autoClose: 5000, // Tự động đóng sau 3 giây
+          closeOnClick: true, // Đóng khi click
+          pauseOnHover: true, // Tạm dừng khi di chuột qua
+          draggable: true, // Có thể kéo thông báo
+        });
+      }
+      const data = await response.json();
+      setRecord(data);
+      console.log(data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    if (user.idUser) {
+      fetchRecordById();
+    }
+  }, [user.idUser]);
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div className="test-result-wrapper">
       <div style={{ width: "30%" }} className="test-result">
@@ -39,8 +83,8 @@ function TestResult({ props }) {
               alt="external-Listening-overclocking-smashingstocks-detailed-outline-smashing-stocks"
             />
             <h3>Listening</h3>
-            <h2>{props.listenScore}</h2>
-            <p>Trả lời đúng {props.listenCorrect}/100</p>
+            <h2>{record.listenScore}</h2>
+            <p>Trả lời đúng {record.listenCorrect}/100</p>
           </div>
           <div className="test-result-info">
             <img
@@ -50,8 +94,8 @@ function TestResult({ props }) {
               alt="external-reading-activity-and-hobbies-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto"
             />
             <h3>Reading</h3>
-            <h2>{props.readScore}</h2>
-            <p>Trả lời đúng {props.readingCorrect}/100</p>
+            <h2>{record.readScore}</h2>
+            <p>Trả lời đúng {record.readingCorrect}/100</p>
           </div>
         </div>
         <div className="show-score">
@@ -77,7 +121,7 @@ function TestResult({ props }) {
               Trả lời đúng
             </div>
             <hr />
-            <h2>{props.correctAns}</h2>
+            <h2>{record.correctAns}</h2>
             <p>Câu hỏi</p>
           </div>
           <div className="test-result-info">
@@ -104,7 +148,7 @@ function TestResult({ props }) {
             </svg>
             <div style={{ color: "red", fontWeight: "700" }}>Trả lời sai</div>
             <hr />
-            <h2>{props.wrongAns}</h2>
+            <h2>{record.wrongAns}</h2>
             <p>Câu hỏi</p>
           </div>
           <div className="test-result-info">
@@ -119,10 +163,10 @@ function TestResult({ props }) {
             </div>
             <hr />
             <h2>
-              {props.correctAns === 0
+              {record.correctAns === 0
                 ? 0
                 : (
-                    (props.correctAns / (props.correctAns + props.wrongAns)) *
+                    (record.correctAns / (record.correctAns + record.wrongAns)) *
                     100
                   ).toFixed(0)}
               %
@@ -139,10 +183,10 @@ function TestResult({ props }) {
               Tổng điểm
             </div>
             <hr />
-            <h2>{props.totalScore}</h2>
+            <h2>{record.totalScore}</h2>
           </div>
         </div>
-        <button className="test-backtohome" onClick={props.tryAgain}>
+        <button className="test-backtohome" onClick={record.tryAgain}>
           <Link to="/test">Quay về trang đề thi</Link>
         </button>
       </div>
