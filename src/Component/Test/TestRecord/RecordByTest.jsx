@@ -11,7 +11,7 @@ function RecordByTest() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [records, setRecords] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   async function fetchRecordByUserTest() {
     try {
       setIsLoading(true);
@@ -53,11 +53,7 @@ function RecordByTest() {
       fetchRecordByUserTest();
     }
   }, [user.idUser]);
-  useEffect(() => {
-    if (!user.auth) {
-      navigate("/login");
-    }
-  },[]);
+
   if (isLoading) {
     return <Loader />;
   }
@@ -93,13 +89,11 @@ function RecordByTest() {
                 <div key={index} className="test-record-item">
                   <div>{record.createDate}</div>
                   <div>{record.totalScore}</div>
-                  <div
-                    onClick={() => {
-                      navigate(`/test/result/${record.idRecord}`);
-                    }}
+                  <a
+                    href={`/test/result/${record.idRecord}`}
                   >
                     Xem chi tiết
-                  </div>
+                  </a>
                 </div>
               );
             })}

@@ -122,8 +122,10 @@ function UpdateUnit() {
     fetchQuestionByUnit();
   }, []);
   useEffect(() => {
-    fetchTestUnit();
-    fetchQuestionByUnit();
+    if (!modal) {
+      fetchTestUnit();
+      fetchQuestionByUnit();
+    }
   }, [modal]);
   async function handleUpdateUnit() {
     const formData = new FormData();

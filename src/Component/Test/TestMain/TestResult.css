@@ -72,3 +72,20 @@
   background-color: #003150;
   color: #fff;
 }
+.user-answer-list-wrapper{
+  margin: 40px;
+  padding: 20px;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.user-answer-item{
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.user-answer-list-wrapper a:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}

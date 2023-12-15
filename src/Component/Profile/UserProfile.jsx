@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Loader from "../Common/Loader/Loader";
 import { useNavigate, useParams } from "react-router-dom";
-import { getValue } from "@testing-library/user-event/dist/utils";
+import { UserContext } from "../../Context/UserContext";
 
 function UserProfile() {
   const { id } = useParams();
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [isloading, setIsLoading] = useState(false);
@@ -25,7 +26,6 @@ function UserProfile() {
     handleSubmit,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm();
 
   const getUser = async () => {
@@ -127,8 +127,6 @@ function UserProfile() {
   useEffect(() => {
     if (token) {
       getUser();
-    } else {
-      navigate("/login")
     }
   }, []);
   const OnchangeAva = (e) => {
@@ -154,7 +152,9 @@ function UserProfile() {
   useEffect(() => {
     setAvaPreview(userResponse.imageURL);
   }, [userResponse]);
-
+  if (!user.auth) {
+    navigate("/login");
+  }
   if (isloading) {
     return <Loader />;
   }

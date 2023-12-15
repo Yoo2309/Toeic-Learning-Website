@@ -4,13 +4,11 @@ import { UserContext } from "../../../Context/UserContext";
 import { toast } from "react-toastify";
 import Loader from "../../Common/Loader/Loader";
 import Heading from "../../Common/Header/Heading";
-import { useNavigate } from "react-router-dom";
 
 function TestRecord() {
   const { user } = useContext(UserContext);
   const [records, setRecords] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   async function fetchRecordByUser() {
     try {
       setIsLoading(true);
@@ -52,11 +50,7 @@ function TestRecord() {
       fetchRecordByUser();
     }
   }, [user.idUser]);
-  useEffect(() => {
-    if (!user.auth) {
-      navigate("/login");
-    }
-  }, []);
+
   if (isLoading) {
     return <Loader />;
   }
@@ -89,13 +83,7 @@ function TestRecord() {
                 <div>{record.testName}</div>
                 <div>{record.totalScore}</div>
                 <div>{record.createDate}</div>
-                <div
-                  onClick={() => {
-                    navigate(`/test/result/${record.idRecord}`);
-                  }}
-                >
-                  Xem chi tiết
-                </div>
+                <a href={`/test/result/${record.idRecord}`}>Xem chi tiết</a>
               </div>
             );
           })}

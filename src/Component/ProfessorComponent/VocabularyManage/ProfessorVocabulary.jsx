@@ -112,10 +112,12 @@ function ProfessorVocabulary() {
   }, []);
 
   useEffect(() => {
-    fetchVocabulary();
+    if (!modal) {
+      fetchVocabulary();
+    }
     window.scrollTo(0, 0);
   }, [modal]);
-
+  
   const handleUpdateVocabularyTopic = async (register) => {
     setIsLoading(true);
     try {

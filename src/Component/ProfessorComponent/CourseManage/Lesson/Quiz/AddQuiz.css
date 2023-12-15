@@ -1,5 +1,4 @@
-.add-quiz-modal,
-.overlay {
+.add-quiz-modal {
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -10,9 +9,6 @@
 }
 .add-quiz-modal {
   z-index: 5;
-}
-.overlay {
-  background: rgba(49, 49, 49, 0.8);
 }
 .add-quiz-content {
   position: absolute;

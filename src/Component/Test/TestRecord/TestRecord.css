@@ -12,16 +12,20 @@
   padding: 2rem 1rem;
 }
 .test-record-item {
-    font-size: 18px;
-    color: #535353;
-    padding: 1rem;
-    background-color: #fff;
-    border-bottom: 1px solid #e8eaf1;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 1rem;
+  font-size: 18px;
+  color: #535353;
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #e8eaf1;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 1rem;
 }
 .test-record-item:hover {
-    transform: translateZ(1px);
-    box-shadow: 0 6px 6px #e8eaf1;
-  }
+  transform: translateZ(1px);
+  box-shadow: 0 6px 6px #e8eaf1;
+}
+.test-record-wrapper a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

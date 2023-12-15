@@ -20,11 +20,6 @@ function TestMain() {
 
   let question_num = 0;
 
-  useEffect(() => {
-    if (!user.auth) {
-      navigate("/login");
-    }
-  }, []);
   async function fetchTestData() {
     try {
       const response = await fetch(
@@ -156,7 +151,9 @@ function TestMain() {
       setCurrentPart(current_part - 1);
     }
   }
-
+  if (!user.auth) {
+    navigate("/login");
+  }
   if (isLoading) {
     return <Loader />;
   }

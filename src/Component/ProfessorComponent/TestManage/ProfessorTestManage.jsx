@@ -57,8 +57,9 @@ function ProfessorTestManage() {
     window.scrollTo(0, 0);
   }, []);
   useEffect(() => {
-    fetchTests();
-    window.scrollTo(0, 0);
+    if (!modal) {
+      fetchTests();
+    }
   }, [modal]);
 
   async function DeleteTest(testId) {

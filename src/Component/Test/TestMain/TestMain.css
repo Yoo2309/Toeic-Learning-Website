@@ -90,6 +90,7 @@
 /* -------- Right-side Content include question and answer choice -----------*/
 .test-question {
   display: flex;
+  margin: 1rem 0;
 }
 .test-question-number {
   margin-right: 0.5rem;
@@ -101,13 +102,21 @@
   border-radius: 50%;
   line-height: 35px;
   text-align: center;
+  font-weight: 500;
 }
 .test-choice-wrapper {
-  padding: 0.5rem;
+  padding-top: .5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 .question-button {
   display: flex;
   justify-content: space-around;
+}
+.test-choice-option {
+  display: flex;
+  align-items: center;
 }
 .test-choice-option input {
   margin-right: 2px;

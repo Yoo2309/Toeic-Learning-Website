@@ -1,5 +1,4 @@
-.add-test-modal,
-.overlay {
+.add-test-modal{
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -10,9 +9,6 @@
 }
 .add-test-modal {
   z-index: 5;
-}
-.overlay {
-  background: rgba(49, 49, 49, 0.8);
 }
 .add-test-content {
   position: absolute;

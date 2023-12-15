@@ -10,7 +10,7 @@ function VipPackage() {
   const [vipPackages, setVipPackages] = useState([]);
   const [vipExpire, setVipExpire] = useState();
   const { user } = useContext(UserContext);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const formatter = new Intl.NumberFormat("vi", {
     style: "currency",
@@ -20,9 +20,11 @@ function VipPackage() {
   async function fetchVipPackage() {
     try {
       const token = localStorage.getItem("token");
+      setIsLoading(true);
       const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/VipPackage/GetAllVipPackages`
       );
+      setIsLoading(false);
       if (!response.ok) {
         toast.error(`Fetch API Failed`, {
           position: toast.POSITION.BOTTOM_RIGHT,
@@ -31,11 +33,12 @@ function VipPackage() {
           pauseOnHover: true,
           draggable: true,
         });
+      } else {
+        const data = await response.json();
+        setVipPackages(data);
       }
-      const data = await response.json();
-      setVipPackages(data);
-      setIsLoading(false);
     } catch (error) {
+      console.log(error);
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 5000,
@@ -57,6 +60,7 @@ function VipPackage() {
           },
         }
       );
+      setIsLoading(false);
       if (!response.ok) {
         toast.error(`Fetch Failed`, {
           position: toast.POSITION.BOTTOM_RIGHT,
@@ -65,18 +69,13 @@ function VipPackage() {
           pauseOnHover: true,
           draggable: true,
         });
+      } else {
+        console.log(response);
+        const data = await response.json();
+        setVipExpire(data.vipExpire);
       }
-      const data = await response.json();
-      setVipExpire(data.vipExpire);
-      setIsLoading(false);
     } catch (error) {
-      toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      console.log(error);
     }
   }
   useEffect(() => {
