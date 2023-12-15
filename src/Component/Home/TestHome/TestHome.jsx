@@ -21,7 +21,7 @@ function TestHome({ subtitle, title }) {
                 </div>
               </div>
             </div>
-            <Link to={`/test/miniTest`}>
+            <Link to={`/test/type/miniTest`}>
               <div className="test-item-button">
                 <button>Làm bài thi thử ngay</button>
               </div>
@@ -39,7 +39,7 @@ function TestHome({ subtitle, title }) {
                 </div>
               </div>
             </div>
-            <Link to={`/test/fullTest`}>
+            <Link to={`/test/type/fullTest`}>
               <div className="test-item-button">
                 <button>Làm bài thi thử ngay</button>
               </div>
