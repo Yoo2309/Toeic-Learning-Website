@@ -129,6 +129,16 @@ function Header() {
           ) : (
             <div className="navbar-user">
               <div className="navbar-user-infor">
+                {user.role[1] === "VipStudent" ? (
+                  <img
+                    width="64"
+                    height="64"
+                    src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-vip-music-festival-flaticons-flat-flat-icons.png"
+                    alt=""
+                  />
+                ) : (
+                  <></>
+                )}
                 <div className="navbar-user-avatar">
                   <img
                     src={

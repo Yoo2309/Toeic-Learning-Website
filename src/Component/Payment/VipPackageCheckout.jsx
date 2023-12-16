@@ -86,7 +86,6 @@ export default function VipPackageCheckout() {
         <div className="payment-card">
           <Heading subtitle="Lịch sử thanh toán" />
           <div className="payment-wrapper-container">
-            <div className="payment-wrapper">
               {payments && payments.length > 0 ? (
                 payments.map((payment, index) => {
                   return (
@@ -114,7 +113,6 @@ export default function VipPackageCheckout() {
                 <h1>Không có lịch sử thanh toán</h1>
               )}
             </div>
-          </div>
         </div>
       </section>
     </div>

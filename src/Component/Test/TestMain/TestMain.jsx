@@ -152,7 +152,11 @@ function TestMain() {
     }
   }
   if (!user.auth) {
-    navigate("/login");
+    navigate("/login"); 
+  } else {
+    if (user.role[1] !== "VipStudent") {
+      navigate("/vippackage");
+    }
   }
   if (isLoading) {
     return <Loader />;

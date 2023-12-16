@@ -4,9 +4,11 @@ import { UserContext } from "../../../Context/UserContext";
 import { toast } from "react-toastify";
 import Loader from "../../Common/Loader/Loader";
 import Heading from "../../Common/Header/Heading";
+import { useNavigate } from "react-router-dom";
 
 function TestRecord() {
   const { user } = useContext(UserContext);
+  const navigate = useNavigate()
   const [records, setRecords] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   async function fetchRecordByUser() {
@@ -50,6 +52,11 @@ function TestRecord() {
       fetchRecordByUser();
     }
   }, [user.idUser]);
+
+  
+  // if(!user.auth){
+  //   navigate("/login")
+  // }
 
   if (isLoading) {
     return <Loader />;
