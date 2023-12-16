@@ -6,10 +6,12 @@ function Footer() {
   return (
     <div className="footer">
       <div className="footer-above">
-          <div className="logo">
-            <h1><Link to="/">VictoryU</Link></h1>
-            <span>ONLINE EDUCATION & LEARNING</span>
-          </div>
+        <div className="logo">
+          <h1>
+            <Link to="/">VictoryU</Link>
+          </h1>
+          <span>ONLINE EDUCATION & LEARNING</span>
+        </div>
         <div className="footer-content">
           <h2>Về chúng tôi</h2>
           <ul className="footer-items">
@@ -33,14 +35,18 @@ function Footer() {
               <Link to="/test">Đề thi thử</Link>
             </li>
             <li>
-              <Link to="/forum">Diễn đàn</Link>
+              <a href="https://www.facebook.com/victoryu.toeic" target="blank">Diễn đàn</a>
             </li>
           </ul>
         </div>
         <div className="footer-content">
           <h2>Kết nối với chúng tôi</h2>
           <div className="social">
-            <i className="fab fa-facebook-f icon"></i>
+            <a
+              href="https://www.facebook.com/victoryu.toeic"
+              target="_blank"
+              className="fab fa-facebook-f icon"
+            ></a>
             <i className="fab fa-instagram icon"></i>
             <i className="fab fa-twitter icon"></i>
             <i className="fab fa-youtube icon"></i>

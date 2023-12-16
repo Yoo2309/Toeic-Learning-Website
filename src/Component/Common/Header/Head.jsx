@@ -15,7 +15,11 @@ export default function Head() {
         </div>
 
         <div className="social">
-          <i className="fab fa-facebook-f icon"></i>
+          <a
+            href="https://www.facebook.com/victoryu.toeic"
+            target="_blank"
+            className="fab fa-facebook-f icon"
+          ></a>
           <i className="fab fa-instagram icon"></i>
           <i className="fab fa-twitter icon"></i>
           <i className="fab fa-youtube icon"></i>
