@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 function TestMain() {
   const { id } = useParams();
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [parts, setParts] = useState([]);
@@ -127,6 +127,10 @@ function TestMain() {
         });
       } else {
         const data = await response.json();
+        setUser((prevState) => ({
+          ...prevState,
+          freeTest: false,
+        }));
         navigate(`/test/result/${data.idRecord}`);
       }
     } catch (error) {

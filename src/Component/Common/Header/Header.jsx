@@ -11,6 +11,7 @@ import Loader from "../Loader/Loader";
 function Header() {
   const [click, setClick] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isVip, setIsVIP] = useState(false);
   const [testType, setTestType] = useState([]);
   const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
@@ -52,6 +53,11 @@ function Header() {
   useEffect(() => {
     fetchTestType();
   }, []);
+  useEffect(() => {
+    if (user.role[1] === "VipStudent") {
+      setIsVIP(true);
+    }
+  }, [user]);
   if (isLoading) {
     return <Loader />;
   }
@@ -129,7 +135,7 @@ function Header() {
           ) : (
             <div className="navbar-user">
               <div className="navbar-user-infor">
-                {user.role[1] === "VipStudent" ? (
+                {isVip ? (
                   <img
                     width="64"
                     height="64"

@@ -8,7 +8,7 @@ const UserContext = createContext({
   auth: false,
   role: "",
   token: "",
-  freeTest: false
+  freeTest: true
 });
 
 const UserProvider = ({ children }) => {
@@ -19,7 +19,7 @@ const UserProvider = ({ children }) => {
     role: "",
     token: "",
     ava: "https://img.icons8.com/papercut/100/user-female-circle.png",
-    freeTest: false
+    freeTest: true
   });
   function isTokenExpired(exp) {
     const currentTime = Math.floor(Date.now() / 1000); // Lấy thời gian hiện tại dưới dạng Unix timestamp (số giây)
@@ -160,7 +160,7 @@ const UserProvider = ({ children }) => {
       token: "",
       idUser: "",
       ava: "https://img.icons8.com/papercut/100/user-female-circle.png",
-      freeTest: false
+      freeTest: true
     }));
   };
 
