@@ -154,7 +154,7 @@ function TestMain() {
   if (!user.auth) {
     navigate("/login"); 
   } else {
-    if (user.role[1] !== "VipStudent") {
+    if (user.role[1] !== "VipStudent" && user.freeTest===false) {
       navigate("/vippackage");
     }
   }

@@ -67,7 +67,7 @@ function Login() {
     } else {
       const data = await response.json();
       if (data.token !== undefined) {
-        loginContext(data.token);
+        loginContext(data.token, data.freeTest);
         navigate("/");
       } else {
         toast.success(`${data.message}`, {
@@ -77,7 +77,7 @@ function Login() {
           pauseOnHover: true,
           draggable: true,
         });
-        setIs2FA(true);
+        // setIs2FA(true);
       }
     }
   }
