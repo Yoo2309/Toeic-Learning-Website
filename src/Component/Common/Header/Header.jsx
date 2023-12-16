@@ -57,7 +57,7 @@ function Header() {
     if (user.role[1] === "VipStudent") {
       setIsVIP(true);
     }
-  }, [user]);
+  }, [user.role]);
   if (isLoading) {
     return <Loader />;
   }
