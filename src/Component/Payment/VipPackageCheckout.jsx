@@ -10,7 +10,7 @@ import { UserContext } from "../../Context/UserContext";
 
 export default function VipPackageCheckout() {
   const { state } = useParams();
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [payments, setPayments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [payMethod, setPayMethod] = useState("MOMO");
@@ -61,6 +61,15 @@ export default function VipPackageCheckout() {
     }
   }, [user]);
 
+  useEffect(() => {
+    if (state) {
+      setUser((prevState) => ({
+        ...prevState,
+        role: ["Student", "VipStudent"],
+      }));
+    }
+  }, [state]);
+
   return (
     <div className="payment-card-wrapper">
       {state === "fail" && payments[0] && (
@@ -86,33 +95,33 @@ export default function VipPackageCheckout() {
         <div className="payment-card">
           <Heading subtitle="Lịch sử thanh toán" />
           <div className="payment-wrapper-container">
-              {payments && payments.length > 0 ? (
-                payments.map((payment, index) => {
-                  return (
-                    <div key={index} className="card">
-                      <div className="card-content">
-                        <div className="image">
-                          <img
-                            src="https://as1.ftcdn.net/v2/jpg/06/22/00/06/1000_F_622000668_5w6IBcBLiXklwFi7ClnhBJJjnWb1LJu8.jpg"
-                            alt=""
-                          />
-                        </div>
-                        <div className="detail-payment">
-                          <h2>Gói {payment.package}</h2>
-                          <p>
-                            Số tiền: {formatter.format(payment.paymentAmount)}
-                          </p>
-                          <p>Phương thức thanh toán: {payment.method}</p>
-                          <p>Thời gian mua: {payment.paymentDate}</p>
-                        </div>
+            {payments && payments.length > 0 ? (
+              payments.map((payment, index) => {
+                return (
+                  <div key={index} className="card">
+                    <div className="card-content">
+                      <div className="image">
+                        <img
+                          src="https://as1.ftcdn.net/v2/jpg/06/22/00/06/1000_F_622000668_5w6IBcBLiXklwFi7ClnhBJJjnWb1LJu8.jpg"
+                          alt=""
+                        />
+                      </div>
+                      <div className="detail-payment">
+                        <h2>Gói {payment.package}</h2>
+                        <p>
+                          Số tiền: {formatter.format(payment.paymentAmount)}
+                        </p>
+                        <p>Phương thức thanh toán: {payment.method}</p>
+                        <p>Thời gian mua: {payment.paymentDate}</p>
                       </div>
                     </div>
-                  );
-                })
-              ) : (
-                <h1>Không có lịch sử thanh toán</h1>
-              )}
-            </div>
+                  </div>
+                );
+              })
+            ) : (
+              <h1>Không có lịch sử thanh toán</h1>
+            )}
+          </div>
         </div>
       </section>
     </div>
