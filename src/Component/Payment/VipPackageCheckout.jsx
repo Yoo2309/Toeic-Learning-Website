@@ -12,7 +12,7 @@ export default function VipPackageCheckout() {
   const { state } = useParams();
   const { user, setUser } = useContext(UserContext);
   const [payments, setPayments] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [payMethod, setPayMethod] = useState("MOMO");
   const formatter = new Intl.NumberFormat("vi", {
     style: "currency",
@@ -21,6 +21,7 @@ export default function VipPackageCheckout() {
   async function fetchPayment() {
     try {
       const token = localStorage.getItem("token");
+      setIsLoading(true);
       const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/Payment/GetAllPaymentsByUserIdOrderByDate/${user.idUser}`,
         {
@@ -31,6 +32,7 @@ export default function VipPackageCheckout() {
           },
         }
       );
+      setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
         toast.error(`${errorData.message}`, {
@@ -40,10 +42,10 @@ export default function VipPackageCheckout() {
           pauseOnHover: true,
           draggable: true,
         });
+      } else {
+        const data = await response.json();
+        setPayments(data);
       }
-      const data = await response.json();
-      setPayments(data);
-      setIsLoading(false);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -69,7 +71,9 @@ export default function VipPackageCheckout() {
       }));
     }
   }, [state]);
-
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div className="payment-card-wrapper">
       {state === "fail" && payments[0] && (

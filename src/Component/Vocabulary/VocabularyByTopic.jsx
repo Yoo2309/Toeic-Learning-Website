@@ -11,14 +11,16 @@ function VocabularyByTopic() {
   const [words, setWords] = useState([]);
   const [topicName, setTopicName] = useState("");
   const { id } = useParams();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchVocabulary() {
       try {
+        setIsLoading(true);
         const response = await fetch(
           `${process.env.REACT_APP_API_BASE_URL}/Vocabulary/GetVocabularyByTopic/${id}`
         );
+        setIsLoading(false);
         if (!response.ok) {
           const errorData = await response.json();
           toast.error(`${errorData.message}`, {
@@ -28,10 +30,10 @@ function VocabularyByTopic() {
             pauseOnHover: true, // Tạm dừng khi di chuột qua
             draggable: true, // Có thể kéo thông báo
           });
+        } else {
+          const data = await response.json();
+          setWords(data);
         }
-        const data = await response.json();
-        setWords(data);
-        setIsLoading(false);
       } catch (error) {
         toast.error(`${error}`, {
           position: toast.POSITION.BOTTOM_RIGHT,
@@ -44,9 +46,11 @@ function VocabularyByTopic() {
     }
     async function fetchVocabularyTopic() {
       try {
+        setIsLoading(true)
         const response = await fetch(
           `${process.env.REACT_APP_API_BASE_URL}/VocTopic/GetVocTopicById/${id}`
         );
+        setIsLoading(false);
         if (!response.ok) {
           const errorData = await response.json();
           toast.error(`${errorData.message}`, {
@@ -59,7 +63,6 @@ function VocabularyByTopic() {
         }
         const data = await response.json();
         setTopicName(data.name);
-        setIsLoading(false);
       } catch (error) {
         toast.error(`${error}`, {
           position: toast.POSITION.BOTTOM_RIGHT,

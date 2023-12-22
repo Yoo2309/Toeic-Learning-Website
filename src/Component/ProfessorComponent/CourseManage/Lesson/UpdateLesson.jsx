@@ -43,11 +43,12 @@ function UpdateLesson() {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.json();
+        setTitle(data.title);
+        setContent(data.content);
+        setIdCourse(data.idCourse);
       }
-      const data = await response.json();
-      setTitle(data.title);
-      setContent(data.content);
-      setIdCourse(data.idCourse);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -79,7 +80,7 @@ function UpdateLesson() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Update lesson failded", {
+        toast.error("Chỉnh sửa bài học thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -87,7 +88,7 @@ function UpdateLesson() {
           draggable: true,
         });
       } else {
-        toast.success("Update lesson successfully", {
+        toast.success("Chỉnh sửa bài học thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

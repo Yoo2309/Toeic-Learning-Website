@@ -23,7 +23,7 @@ function Lesson() {
     "3fa85f64-5717-4562-b3fc-2c963f66afa6"
   );
   const [quizData, setQuizData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function fetchLessons() {
     try {
@@ -41,9 +41,10 @@ function Lesson() {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.json();
+        setCurrentLesson(data);
       }
-      const data = await response.json();
-      setCurrentLesson(data);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -57,12 +58,13 @@ function Lesson() {
 
   async function fetchOtherLessons() {
     try {
-      setIsLoading(true);
       const courseid = current_lesson.idCourse;
       if (courseid) {
+        setIsLoading(true);
         const response = await fetch(
           `${process.env.REACT_APP_API_BASE_URL}/Lesson/GetAllLessonByCourse/${courseid}`
         );
+        setIsLoading(false);
         if (!response.ok) {
           const errorData = await response.json();
           toast.error(`${errorData.message}`, {
@@ -72,10 +74,10 @@ function Lesson() {
             pauseOnHover: true, // Tạm dừng khi di chuột qua
             draggable: true, // Có thể kéo thông báo
           });
+        } else {
+          const data = await response.json();
+          setOtherLesson(data.filter((lesson) => lesson.idLesson !== id));
         }
-        const data = await response.json();
-        setOtherLesson(data.filter((lesson) => lesson.idLesson !== id));
-        setIsLoading(false);
       }
     } catch (error) {
       toast.error(`${error}`, {
@@ -123,8 +125,8 @@ function Lesson() {
   }
 
   async function fetchQuestionByQuiz() {
-    setIsLoading(true);
     try {
+      setIsLoading(true);
       const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/Question/GetAllQuestionByQuiz/${current_quizID}`
       );
@@ -138,9 +140,10 @@ function Lesson() {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.json();
+        setQuizData(data);
       }
-      const data = await response.json();
-      setQuizData(data);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -202,7 +205,11 @@ function Lesson() {
               quizes.map((quiz, index) => {
                 return (
                   <input
-                    className={`lesson-quiz-item ${quiz.idQuiz===current_quizID? "lesson-quiz-current":""}`}
+                    className={`lesson-quiz-item ${
+                      quiz.idQuiz === current_quizID
+                        ? "lesson-quiz-current"
+                        : ""
+                    }`}
                     key={index}
                     type="button"
                     value={quiz.title}

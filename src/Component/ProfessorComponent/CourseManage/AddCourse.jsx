@@ -36,7 +36,7 @@ function AddCourse({ toggleModal, modal_on }) {
       setIsLoading(false);
       toggleModal();
       if (!response.ok) {
-        toast.error("Add course failded", {
+        toast.error("Thêm khóa học mới thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -44,7 +44,7 @@ function AddCourse({ toggleModal, modal_on }) {
           draggable: true,
         });
       } else {
-        toast.success("Add course successfully", {
+        toast.success("Thêm khóa học mới thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

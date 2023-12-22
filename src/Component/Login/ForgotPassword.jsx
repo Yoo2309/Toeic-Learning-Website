@@ -9,7 +9,7 @@ function ForgotPassword() {
   const [isloading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
-  const [is_email_click, seteEmailClick] = useState(false);
+  const [is_email_click, setEmailClick] = useState(false);
 
   const {
     register: resetPassworData,
@@ -33,8 +33,7 @@ function ForgotPassword() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Gửi OTP không thành công`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -50,7 +49,7 @@ function ForgotPassword() {
           pauseOnHover: true,
           draggable: true,
         });
-        seteEmailClick(true);
+        setEmailClick(true);
       }
     } catch (error) {
       toast.error(`${error}`, {
@@ -82,8 +81,7 @@ function ForgotPassword() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Đặt lại password không thành công`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -91,15 +89,14 @@ function ForgotPassword() {
           draggable: true,
         });
       } else {
-        const data = await response.json();
-        toast.success(`${data.message}`, {
+        toast.success(`Đặt lại password thành công`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
         });
-        seteEmailClick(true);
+        setEmailClick(true);
       }
     } catch (error) {
       toast.error(`${error}`, {

@@ -35,7 +35,7 @@ function AddQuiz({ toggleModal, modal_on, idLesson }) {
       setIsLoading(false);
       toggleModal();
       if (!response.ok) {
-        toast.error("Add quiz failded", {
+        toast.error("Thêm Quiz mới thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -43,7 +43,7 @@ function AddQuiz({ toggleModal, modal_on, idLesson }) {
           draggable: true,
         });
       } else {
-        toast.success("Add quiz successfully", {
+        toast.success("Thêm Quiz mới thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

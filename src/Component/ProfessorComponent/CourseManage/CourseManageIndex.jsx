@@ -64,7 +64,7 @@ function CourseManageIndex() {
         }
       );
       if (!response.ok) {
-        toast.error("Delete course failed", {
+        toast.error("Xóa khóa học thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -74,7 +74,7 @@ function CourseManageIndex() {
       } else {
         setIsLoading(false);
         fetchCourses();
-        toast.success("Delete course successfully", {
+        toast.success("Xóa khóa học thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

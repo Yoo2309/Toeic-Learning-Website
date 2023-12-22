@@ -16,6 +16,7 @@ function VocabularyTopic() {
         const response = await fetch(
           `${process.env.REACT_APP_API_BASE_URL}/VocTopic/GetAllVocTopic`
         );
+        setIsLoading(false);
         if (!response.ok) {
           const errorData = await response.json();
           toast.error(`${errorData.message}`, {
@@ -28,7 +29,6 @@ function VocabularyTopic() {
         }
         const data = await response.json();
         setTopic(data);
-        setIsLoading(false);
       } catch (error) {
         toast.error(`${error}`, {
           position: toast.POSITION.BOTTOM_RIGHT,

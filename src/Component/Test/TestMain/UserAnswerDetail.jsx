@@ -28,9 +28,10 @@ function UserAnswerDetail({ toggleModal, userAnswer, index }) {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.json();
+        setUnit(data);
       }
-      const data = await response.json();
-      setUnit(data);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -57,9 +58,10 @@ function UserAnswerDetail({ toggleModal, userAnswer, index }) {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.json();
+        setQuestion(data);
       }
-      const data = await response.json();
-      setQuestion(data);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -202,9 +204,7 @@ function UserAnswerDetail({ toggleModal, userAnswer, index }) {
                 </div>
               </div>
             </div>
-            <div>
-              {question.explaination && `=> ${question.explaination}`}
-            </div>
+            <div>{question.explaination && `=> ${question.explaination}`}</div>
           </div>
         </div>
       </div>

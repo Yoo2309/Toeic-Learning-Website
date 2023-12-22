@@ -34,21 +34,22 @@ function AddUser() {
       );
       setIsLoading(false);
       if (response.ok)
-        toast.success("Add user successfully", {
+        toast.success("Thêm người dùng thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
         });
-      else
-        toast.error("Add user failded", {
+      else {
+        toast.error("Thêm người dùng thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
         });
+      }
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,

@@ -35,9 +35,10 @@ function RecordByTest() {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.json();
+        setRecords(data);
       }
-      const data = await response.json();
-      setRecords(data);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -89,11 +90,7 @@ function RecordByTest() {
                 <div key={index} className="test-record-item">
                   <div>{record.createDate}</div>
                   <div>{record.totalScore}</div>
-                  <a
-                    href={`/test/result/${record.idRecord}`}
-                  >
-                    Xem chi tiết
-                  </a>
+                  <a href={`/test/result/${record.idRecord}`}>Xem chi tiết</a>
                 </div>
               );
             })}

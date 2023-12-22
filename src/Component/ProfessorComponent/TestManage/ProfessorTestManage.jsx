@@ -75,7 +75,7 @@ function ProfessorTestManage() {
         }
       );
       if (!response.ok) {
-        toast.error(`${"Delete test failed"}`, {
+        toast.error(`${"Xóa đề thi thất bại"}`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -84,7 +84,7 @@ function ProfessorTestManage() {
         });
       }
       setIsLoading(false);
-      toast.success("Delete test successfully", {
+      toast.success("Xóa đề thi thành công", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 10000,
         closeOnClick: true,

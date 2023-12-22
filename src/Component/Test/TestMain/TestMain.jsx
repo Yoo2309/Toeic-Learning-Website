@@ -13,7 +13,7 @@ function TestMain() {
 
   const [parts, setParts] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [current_part, setCurrentPart] = useState(0);
   const [testdata, setTestdata] = useState([]);
   const [testType, setTestType] = useState("");
@@ -30,7 +30,7 @@ function TestMain() {
   var current_time = null;
   useEffect(() => {
     if (time.hour === 0 && time.min === 0 && time.sec === 0) {
-      SubmitTest()
+      SubmitTest();
     } else {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       current_time = setInterval(() => {
@@ -61,7 +61,7 @@ function TestMain() {
     }
   }, [time]);
   useEffect(() => {
-    console.log(testType)
+    console.log(testType);
     if (testType === "FullTest") {
       setTime({
         hour: 2,
@@ -86,9 +86,11 @@ function TestMain() {
 
   async function fetchTestData() {
     try {
+      setIsLoading(true);
       const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/Question/GetDoTest/${id}`
       );
+      setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
         toast.error(`${errorData.message}`, {
@@ -98,10 +100,10 @@ function TestMain() {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.json();
+        setTestdata(data.parts);
       }
-      const data = await response.json();
-      setTestdata(data.parts);
-      setIsLoading(false);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -128,9 +130,10 @@ function TestMain() {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.json();
+        setParts(data);
       }
-      const data = await response.json();
-      setParts(data);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -157,9 +160,10 @@ function TestMain() {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.text();
+        setTestType(data);
       }
-      const data = await response.text();
-      setTestType(data);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,

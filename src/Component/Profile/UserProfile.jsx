@@ -43,7 +43,8 @@ function UserProfile() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error(`Get User Profile failed`, {
+        const errorData = await response.json();
+        toast.error(`${errorData}`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -96,7 +97,7 @@ function UserProfile() {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Cập nhật thông tin thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,

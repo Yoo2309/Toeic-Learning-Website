@@ -12,14 +12,16 @@ function CourseLessons() {
   const { id } = useParams();
   const [current_course, setCurrentCourse] = useState({});
   const [other_courses, setOtherCourses] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchLessons() {
       try {
+        setIsLoading(true);
         const response = await fetch(
           `${process.env.REACT_APP_API_BASE_URL}/Lesson/GetAllLessonByCourse/${id}`
         );
+        setIsLoading(false);
         if (!response.ok) {
           const errorData = await response.json();
           toast.error(`${errorData.message}`, {
@@ -29,9 +31,10 @@ function CourseLessons() {
             pauseOnHover: true,
             draggable: true,
           });
+        } else {
+          const data = await response.json();
+          setLessons(data);
         }
-        const data = await response.json();
-        setLessons(data);
       } catch (error) {
         toast.error(`${error}`, {
           position: toast.POSITION.BOTTOM_RIGHT,
@@ -44,9 +47,11 @@ function CourseLessons() {
     }
     async function fetchOtherLessons() {
       try {
+        setIsLoading(true);
         const response = await fetch(
           `${process.env.REACT_APP_API_BASE_URL}/Course/GetAllCourses`
         );
+        setIsLoading(false);
         if (!response.ok) {
           const errorData = await response.json();
           toast.error(`${errorData.message}`, {
@@ -56,11 +61,11 @@ function CourseLessons() {
             pauseOnHover: true, // Tạm dừng khi di chuột qua
             draggable: true, // Có thể kéo thông báo
           });
+        } else {
+          const data = await response.json();
+          setCurrentCourse(data.find((course) => course.idCourse === id));
+          setOtherCourses(data.filter((course) => course.idCourse !== id));
         }
-        const data = await response.json();
-        setCurrentCourse(data.find((course) => course.idCourse === id));
-        setOtherCourses(data.filter((course) => course.idCourse !== id));
-        setIsLoading(false);
       } catch (error) {
         toast.error(`${error}`, {
           position: toast.POSITION.BOTTOM_RIGHT,

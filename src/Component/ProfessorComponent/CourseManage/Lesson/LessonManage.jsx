@@ -29,7 +29,8 @@ function LessonManage() {
         `${process.env.REACT_APP_API_BASE_URL}/Course/GetCourseById/${id}`
       );
       if (!response.ok) {
-        toast.error("Fetch Data failed", {
+        const errorData = await response.json();
+        toast.error(`${errorData}`, {
           position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
           autoClose: 5000, // Tự động đóng sau 3 giây
           closeOnClick: true, // Đóng khi click
@@ -70,7 +71,7 @@ function LessonManage() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Update Course Failed", {
+        toast.error("Chỉnh sửa khóa học thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -78,7 +79,7 @@ function LessonManage() {
           draggable: true,
         });
       } else {
-        toast.success("Update Course Successfully", {
+        toast.success("Chỉnh sửa khóa học thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -113,8 +114,10 @@ function LessonManage() {
           draggable: true, // Có thể kéo thông báo
         });
       }
-      const data = await response.json();
+      else{
+        const data = await response.json();
       setLessons(data);
+      }
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -141,8 +144,7 @@ function LessonManage() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Xóa bài học thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -150,7 +152,7 @@ function LessonManage() {
           draggable: true,
         });
       } else {
-        toast.success("Delete Lesson Successfully", {
+        toast.success("Xóa khóa học thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

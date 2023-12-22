@@ -60,8 +60,7 @@ function AddQuestion({
       setIsLoading(false);
       toggleModal();
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Thêm câu hỏi mới thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -69,7 +68,7 @@ function AddQuestion({
           draggable: true,
         });
       } else {
-        toast.success("Add Question successfully", {
+        toast.success("Thêm câu hỏi mới thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -116,7 +115,7 @@ function AddQuestion({
       toggleModal();
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Chỉnh sửa câu hỏi thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -124,7 +123,7 @@ function AddQuestion({
           draggable: true,
         });
       } else {
-        toast.success("Update Question successfully", {
+        toast.success("Chỉnh sửa câu hỏi thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

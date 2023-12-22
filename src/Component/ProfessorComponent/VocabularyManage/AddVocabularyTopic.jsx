@@ -35,8 +35,7 @@ function AddVocabularyTopic({ toggleModal, modal_on }) {
       setIsLoading(false);
       toggleModal();
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Thêm chủ đề từ vựng thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -44,7 +43,7 @@ function AddVocabularyTopic({ toggleModal, modal_on }) {
           draggable: true,
         });
       } else {
-        toast.success("Add topic successfully", {
+        toast.success("Thêm chủ đề từ vựng thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

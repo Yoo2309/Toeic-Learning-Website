@@ -34,7 +34,7 @@ function AddVipPackage() {
       );
       setIsLoading(false);
       if (response.ok)
-        toast.success("Add vip package successfully", {
+        toast.success("Thêm gói VIP thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -42,7 +42,7 @@ function AddVipPackage() {
           draggable: true,
         });
       else
-        toast.error("Add vip package failded", {
+        toast.error("Thêm gói VIP thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,

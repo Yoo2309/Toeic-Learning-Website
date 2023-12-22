@@ -163,7 +163,7 @@ function UpdateUnit() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Update lesson failded", {
+        toast.error("Chỉnh sửa unit của đề thi thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -171,7 +171,7 @@ function UpdateUnit() {
           draggable: true,
         });
       } else {
-        toast.success("Update lesson successfully", {
+        toast.success("Chỉnh sửa unit của đề thi thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -238,8 +238,7 @@ function UpdateUnit() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Xóa câu hỏi thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -247,7 +246,7 @@ function UpdateUnit() {
           draggable: true,
         });
       } else {
-        toast.success("Delete Question Successfully", {
+        toast.success("Xóa câu hỏi thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

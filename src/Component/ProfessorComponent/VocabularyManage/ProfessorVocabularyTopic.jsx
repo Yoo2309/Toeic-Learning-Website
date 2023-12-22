@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { showDeleteWarning } from "../../Common/Alert/DeleteAlert"
+import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
 import Loader from "../../Common/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import "./ProfessorVocabularyTopic.css";
@@ -10,7 +10,7 @@ import { UserContext } from "../../../Context/UserContext";
 function ProfessorVocabularyTopic() {
   const { user } = useContext(UserContext);
   const [topics, setTopic] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
 
@@ -25,9 +25,11 @@ function ProfessorVocabularyTopic() {
   }
   async function fetchVocabularyTopic() {
     try {
+      setIsLoading(true);
       const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/VocTopic/GetAllVocTopic`
       );
+      setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
         toast.error(`${errorData.message}`, {
@@ -37,10 +39,10 @@ function ProfessorVocabularyTopic() {
           pauseOnHover: true,
           draggable: true,
         });
+      } else {
+        const data = await response.json();
+        setTopic(data);
       }
-      const data = await response.json();
-      setTopic(data);
-      setIsLoading(false);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -54,6 +56,7 @@ function ProfessorVocabularyTopic() {
   }
   async function DeleteVocabularyTopic(voc_topic_id) {
     try {
+      setIsLoading(true);
       const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/VocTopic/DeleteVocTopic/${voc_topic_id}`,
         {
@@ -64,25 +67,25 @@ function ProfessorVocabularyTopic() {
           },
         }
       );
+      setIsLoading(false);
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Xóa chủ đề từ vựng thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
         });
+      } else {
+        fetchVocabularyTopic();
+        toast.success("Xóa chủ đề từ vựng thành công", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 10000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       }
-      setIsLoading(false);
-      fetchVocabularyTopic();
-      toast.success("Delete topic successfully", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 10000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -137,7 +140,11 @@ function ProfessorVocabularyTopic() {
                     <div className="btn-wrapper">
                       <button
                         className="delete-btn"
-                        onClick={() => showDeleteWarning(() => DeleteVocabularyTopic(topic.idVocTopic))}
+                        onClick={() =>
+                          showDeleteWarning(() =>
+                            DeleteVocabularyTopic(topic.idVocTopic)
+                          )
+                        }
                       >
                         Xóa
                       </button>

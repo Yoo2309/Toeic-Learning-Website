@@ -9,14 +9,16 @@ import { toast } from "react-toastify";
 
 function Courses() {
   const [courses, setCourses] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchCourses() {
       try {
+        setIsLoading(true);
         const response = await fetch(
           `${process.env.REACT_APP_API_BASE_URL}/Course/GetAllCourses`
         );
+        setIsLoading(false);
         if (!response.ok) {
           const errorData = await response.json();
           toast.error(`${errorData.message}`, {
@@ -26,10 +28,10 @@ function Courses() {
             pauseOnHover: true,
             draggable: true,
           });
+        } else {
+          const data = await response.json();
+          setCourses(data);
         }
-        const data = await response.json();
-        setCourses(data);
-        setIsLoading(false);
       } catch (error) {
         toast.error(`${error}`, {
           position: toast.POSITION.BOTTOM_RIGHT,

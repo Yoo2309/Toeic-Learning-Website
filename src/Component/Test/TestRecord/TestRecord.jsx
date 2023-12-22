@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function TestRecord() {
   const { user } = useContext(UserContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [records, setRecords] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   async function fetchRecordByUser() {
@@ -34,9 +34,10 @@ function TestRecord() {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.json();
+        setRecords(data);
       }
-      const data = await response.json();
-      setRecords(data);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -53,7 +54,6 @@ function TestRecord() {
     }
   }, [user.idUser]);
 
-  
   // if(!user.auth){
   //   navigate("/login")
   // }

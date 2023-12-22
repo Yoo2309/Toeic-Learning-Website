@@ -62,7 +62,7 @@ function UpdateQuiz() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Update Quiz Failed", {
+        toast.error("Chỉnh sửa Quiz thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -70,7 +70,7 @@ function UpdateQuiz() {
           draggable: true,
         });
       } else {
-        toast.success("Update Quiz Successfully", {
+        toast.success("Chỉnh sửa Quiz thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -163,8 +163,7 @@ function UpdateQuiz() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Xóa câu hỏi thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -172,7 +171,7 @@ function UpdateQuiz() {
           draggable: true,
         });
       } else {
-        toast.success("Delete Question Successfully", {
+        toast.success("Xóa câu hỏi thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

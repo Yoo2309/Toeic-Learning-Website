@@ -72,9 +72,7 @@ function QuizManage({ idLesson }) {
       );
       setIsLoading(false);
       if (!response.ok) {
-        const errorData = await response.json();
-        console.log(response);
-        toast.error(`${errorData.message}`, {
+        toast.error(`Xóa Quiz thât bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -82,7 +80,7 @@ function QuizManage({ idLesson }) {
           draggable: true,
         });
       } else {
-        toast.success("Delete Topic Successfully", {
+        toast.success("Xóa Quiz thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

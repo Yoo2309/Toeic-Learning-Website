@@ -10,7 +10,7 @@ import { UserContext } from "../../Context/UserContext";
 function VipPackageDetail() {
   const { id } = useParams();
   const [vipPackage, setVipPackage] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [payMethod, setPayMethod] = useState("MOMO");
   const [payUrl, setPayUrl] = useState("");
   const { user } = useContext(UserContext);
@@ -22,9 +22,11 @@ function VipPackageDetail() {
   useEffect(() => {
     async function fetchVipPackage() {
       try {
+        setIsLoading(true);
         const response = await fetch(
           `${process.env.REACT_APP_API_BASE_URL}/VipPackage/GetVipPackageById/${id}`
         );
+        setIsLoading(false);
         if (!response.ok) {
           const errorData = await response.json();
           toast.error(`${errorData.message}`, {
@@ -34,10 +36,10 @@ function VipPackageDetail() {
             pauseOnHover: true,
             draggable: true,
           });
+        } else {
+          const data = await response.json();
+          setVipPackage(data);
         }
-        const data = await response.json();
-        setVipPackage(data);
-        setIsLoading(false);
       } catch (error) {
         toast.error(`${error}`, {
           position: toast.POSITION.BOTTOM_RIGHT,

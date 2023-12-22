@@ -74,7 +74,7 @@ function AddUnit({ idTestPart, toggle_modal, fetchUnit }) {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Add lesson failded", {
+        toast.error("Thêm bài học mới thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -82,7 +82,7 @@ function AddUnit({ idTestPart, toggle_modal, fetchUnit }) {
           draggable: true,
         });
       } else {
-        toast.success("Add lesson successfully", {
+        toast.success("Thêm bài học mới thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

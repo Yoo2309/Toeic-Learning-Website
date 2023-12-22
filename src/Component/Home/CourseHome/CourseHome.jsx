@@ -27,9 +27,10 @@ function CourseHome({ subtitle, title }) {
             pauseOnHover: true, // Tạm dừng khi di chuột qua
             draggable: true, // Có thể kéo thông báo
           });
+        } else {
+          const data = await response.json();
+          setCourses(data);
         }
-        const data = await response.json();
-        setCourses(data);
       } catch (error) {
         toast.error(`${error}`, {
           position: toast.POSITION.BOTTOM_RIGHT,

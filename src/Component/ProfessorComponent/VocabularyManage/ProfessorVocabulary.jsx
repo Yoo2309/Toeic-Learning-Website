@@ -136,7 +136,7 @@ function ProfessorVocabulary() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Update Topic Failed", {
+        toast.error("Chỉnh sửa chủ đề từ vựng thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -144,7 +144,7 @@ function ProfessorVocabulary() {
           draggable: true,
         });
       } else {
-        toast.success("Update Topic Successfully", {
+        toast.success("Chỉnh sửa chủ đề từ vựng thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -179,8 +179,7 @@ function ProfessorVocabulary() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Xóa từ vựng thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -188,7 +187,7 @@ function ProfessorVocabulary() {
           draggable: true,
         });
       } else {
-        toast.success("Delete Topic Successfully", {
+        toast.success("Xóa từ vựng thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

@@ -28,7 +28,7 @@ function UserManage() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Reset password failed", {
+        toast.error("Đặt lại password thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -36,7 +36,7 @@ function UserManage() {
           draggable: true,
         });
       } else {
-        toast.success("reset password successfully", {
+        toast.success("Đặt lại password thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -70,16 +70,17 @@ function UserManage() {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`${errorData}`, {
           position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
           autoClose: 5000, // Tự động đóng sau 3 giây
           closeOnClick: true, // Đóng khi click
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.json();
+        setUsers(data);
       }
-      const data = await response.json();
-      setUsers(data);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -107,8 +108,7 @@ function UserManage() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Xóa người dùng thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -116,7 +116,7 @@ function UserManage() {
           draggable: true,
         });
       } else {
-        toast.success("Delete Topic Successfully", {
+        toast.success("Xóa người dùng thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

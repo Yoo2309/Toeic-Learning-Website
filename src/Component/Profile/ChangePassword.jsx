@@ -36,7 +36,7 @@ function ChangePassword() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Change Password failded", {
+        toast.error("Đổi password thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -44,7 +44,7 @@ function ChangePassword() {
           draggable: true,
         });
       } else {
-        toast.success("Change Password successfully", {
+        toast.success("Đổi password thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

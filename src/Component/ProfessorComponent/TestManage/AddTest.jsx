@@ -70,7 +70,7 @@ function AddTest({ toggleModal, modal_on }) {
       setIsLoading(false);
       toggleModal();
       if (!response.ok) {
-        toast.error(`${"Add test failed"}`, {
+        toast.error(`${"Thêm đề thi mới thất bại"}`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -78,7 +78,7 @@ function AddTest({ toggleModal, modal_on }) {
           draggable: true,
         });
       } else {
-        toast.success("Add test successfully", {
+        toast.success("Thêm đề thi mới thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

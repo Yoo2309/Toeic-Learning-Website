@@ -166,7 +166,7 @@ function UpdateTest() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Update Test Failed", {
+        toast.error("Chỉnh sửa đề thi thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -174,7 +174,7 @@ function UpdateTest() {
           draggable: true,
         });
       } else {
-        toast.success("Update Test Successfully", {
+        toast.success("Chỉnh sửa đề thi thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -209,7 +209,7 @@ function UpdateTest() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Delete Test Unit Failed", {
+        toast.error("Chỉnh sửa unit của đề thi thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -217,7 +217,7 @@ function UpdateTest() {
           draggable: true,
         });
       } else {
-        toast.success("Delete Test Unit Successfully", {
+        toast.success("Chỉnh sửa unit của đề thi thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,

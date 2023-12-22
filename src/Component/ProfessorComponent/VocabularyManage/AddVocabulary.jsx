@@ -59,8 +59,7 @@ function AddVocabulary({
       setIsLoading(false);
       toggleModal();
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
+        toast.error(`Thêm từ vựng thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -68,7 +67,7 @@ function AddVocabulary({
           draggable: true,
         });
       } else {
-        toast.success("Add Word successfully", {
+        toast.success("Thêm từ vựng thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -116,7 +115,7 @@ function AddVocabulary({
         setIsLoading(false);
         toggleModal();
         if (!response.ok) {
-          toast.error("Update Word failed", {
+          toast.error("Cập nhật từ vựng thất bại", {
             position: toast.POSITION.BOTTOM_RIGHT,
             autoClose: 5000,
             closeOnClick: true,
@@ -124,7 +123,7 @@ function AddVocabulary({
             draggable: true,
           });
         } else {
-          toast.success("Update Word successfully", {
+          toast.success("Cập nhật từ vựng thành công", {
             position: toast.POSITION.BOTTOM_RIGHT,
             autoClose: 10000,
             closeOnClick: true,

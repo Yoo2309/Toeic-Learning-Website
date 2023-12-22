@@ -8,14 +8,16 @@ import { toast } from "react-toastify";
 
 function TestList({ testType }) {
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [tests, setTest] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   async function fetchTests(id) {
     try {
+      setIsLoading(true);
       const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/Test/GetAllTestByType/${id}`
       );
+      setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
         toast.error(`${errorData.message}`, {
@@ -25,10 +27,10 @@ function TestList({ testType }) {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
+      } else {
+        const data = await response.json();
+        setTest(data);
       }
-      const data = await response.json();
-      setTest(data);
-      setIsLoading(false);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -65,7 +67,10 @@ function TestList({ testType }) {
             {tests &&
               tests.map((test, index) => {
                 return (
-                  <div className="test-item" onClick={()=>navigate(`/test/${test.idTest}`)}>
+                  <div
+                    className="test-item"
+                    onClick={() => navigate(`/test/${test.idTest}`)}
+                  >
                     <img
                       src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/100/external-online-test-online-education-flaticons-lineal-color-flat-icons-2.png"
                       alt=""
