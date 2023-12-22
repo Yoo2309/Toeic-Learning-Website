@@ -9,7 +9,7 @@
 .courses-list-gridview {
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 .courses-list-item {
   font-family: "Poppins", sans-serif;

@@ -10,7 +10,7 @@ import Loader from "../Loader/Loader";
 
 function Header() {
   const [click, setClick] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isVip, setIsVIP] = useState(false);
   const [testType, setTestType] = useState([]);
   const { user, logout } = useContext(UserContext);
@@ -26,6 +26,7 @@ function Header() {
       const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/TestType/GetAllTestTypes`
       );
+      setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
         toast.error(`${errorData.message}`, {
@@ -35,10 +36,10 @@ function Header() {
           pauseOnHover: true,
           draggable: true,
         });
+      } else {
+        const data = await response.json();
+        setTestType(data);
       }
-      const data = await response.json();
-      setTestType(data);
-      setIsLoading(false);
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -95,7 +96,7 @@ function Header() {
                 ĐỀ THI THỬ <i className="fas fa-caret-down"></i>
                 <div className="dropdown-menu">
                   <ul>
-                    {testType &&
+                    {/* {testType &&
                       testType.map((type, index) => {
                         return (
                           <div key={index} className="dropdown-item">
@@ -104,7 +105,13 @@ function Header() {
                             </Link>
                           </div>
                         );
-                      })}
+                      })} */}
+                    <div className="dropdown-item">
+                      <Link to={`/test/type/MiniTest`}>MiniTest</Link>
+                    </div>
+                    <div className="dropdown-item">
+                      <Link to={`/test/type/FullTest`}>FullTest</Link>
+                    </div>
                   </ul>
                 </div>
               </Link>
@@ -112,7 +119,7 @@ function Header() {
             {user.auth && (
               <li
                 style={{
-                  padding: "0 20px 0 20px",
+                  padding: "1rem",
                   display: "flex",
                   alignItems: "center",
                 }}

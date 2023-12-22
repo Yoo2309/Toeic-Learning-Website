@@ -68,12 +68,12 @@ a:-webkit-any-link {
   padding-left: 1rem;
 }
 .user-layout header li {
-  padding: 20px;
+  padding: 16px;
   list-style: none;
   position: relative;
 }
 .user-layout header ul li a {
-  font-size: 1.25rem;
+  font-size: 16px;
   font-weight: 700;
   transition: 0.2s;
   text-decoration: none;
@@ -119,7 +119,7 @@ a:-webkit-any-link {
 
 .start {
   background-color: #003150;
-  padding: 20px 80px;
+  padding: 16px 80px;
   color: #fff;
   clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
 }

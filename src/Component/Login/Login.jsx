@@ -48,7 +48,10 @@ function Login() {
     }
   };
   useEffect(() => {
-    window.scrollTo(0, 210);
+    const loginElement = document.getElementById('login');
+  if (loginElement) {
+    loginElement.scrollIntoView({ behavior: 'smooth' });
+  }
   }, []);
 
   async function handleLogin(login_data) {
@@ -56,13 +59,13 @@ function Login() {
     const response = await userAuthen(login_data.username, login_data.password);
     setIsLoading(false);
     if (!response.ok) {
-      const errorData = await response.json();
-      toast.error(`${errorData.message}`, {
-        position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
-        autoClose: 5000, // Tự động đóng sau 3 giây
-        closeOnClick: true, // Đóng khi click
-        pauseOnHover: true, // Tạm dừng khi di chuột qua
-        draggable: true, // Có thể kéo thông báo
+      // const errorData = await response.json();
+      toast.error("Đăng nhập không thành công", {
+        position: toast.POSITION.BOTTOM_RIGHT, 
+        autoClose: 5000, 
+        closeOnClick: true,
+        pauseOnHover: true, 
+        draggable: true,
       });
     } else {
       const data = await response.json();
@@ -185,8 +188,8 @@ function Login() {
     setSignUpMode(mode);
   }
   return (
-    <div className="login-wrapper" id="login-wrapper">
-      <div className="login">
+    <div className="login-wrapper" >
+      <div className="login" id="login">
         <div className={`container ${signUpMode ? "sign-up-mode" : null}`}>
           <div className="signin-signup">
             {!is2FA ? (

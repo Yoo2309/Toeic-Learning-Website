@@ -16,9 +16,73 @@ function TestMain() {
   const [isLoading, setIsLoading] = useState(true);
   const [current_part, setCurrentPart] = useState(0);
   const [testdata, setTestdata] = useState([]);
+  const [testType, setTestType] = useState("");
   const [answers, setAnswers] = useState([]);
 
   let question_num = 0;
+
+  //time countdown
+  const [time, setTime] = useState({
+    hour: 0,
+    min: 0,
+    sec: 10,
+  });
+  var current_time = null;
+  useEffect(() => {
+    if (time.hour === 0 && time.min === 0 && time.sec === 0) {
+      SubmitTest()
+    } else {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      current_time = setInterval(() => {
+        if (time.sec > 0) {
+          setTime((prev) => ({
+            ...prev,
+            sec: prev.sec - 1,
+          }));
+        } else {
+          if (time.min > 0) {
+            setTime((prev) => ({
+              ...prev,
+              min: prev.min - 1,
+              sec: 59,
+            }));
+          } else {
+            if (time.hour > 0) {
+              setTime((prev) => ({
+                hour: prev.hour - 1,
+                min: 59,
+                sec: 59,
+              }));
+            }
+          }
+        }
+      }, 1000);
+      return () => clearInterval(current_time);
+    }
+  }, [time]);
+  useEffect(() => {
+    console.log(testType)
+    if (testType === "FullTest") {
+      setTime({
+        hour: 2,
+        min: 0,
+        sec: 0,
+      });
+    } else {
+      setTime({
+        hour: 1,
+        min: 0,
+        sec: 0,
+      });
+    }
+  }, [testType]);
+
+  useEffect(() => {
+    fetchTestType();
+    fetchParts();
+    fetchTestData();
+    window.scrollTo(0, 0);
+  }, []);
 
   async function fetchTestData() {
     try {
@@ -77,12 +141,35 @@ function TestMain() {
       });
     }
   }
-  useEffect(() => {
-    fetchParts();
-    fetchTestData();
-    window.scrollTo(0, 0);
-  }, []);
-
+  async function fetchTestType() {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/TestType/GetTypeNameByTest/${id}`
+      );
+      setIsLoading(false);
+      if (!response.ok) {
+        const errorData = await response.json();
+        toast.error(`${errorData.message}`, {
+          position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
+          autoClose: 5000, // Tự động đóng sau 3 giây
+          closeOnClick: true, // Đóng khi click
+          pauseOnHover: true, // Tạm dừng khi di chuột qua
+          draggable: true, // Có thể kéo thông báo
+        });
+      }
+      const data = await response.text();
+      setTestType(data);
+    } catch (error) {
+      toast.error(`${error}`, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 5000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  }
   const handleOptionChange = (questionId, selectedOption) => {
     const existingAnswerIndex = answers.findIndex(
       (answer) => answer.idQuestion === questionId
@@ -156,9 +243,9 @@ function TestMain() {
     }
   }
   if (!user.auth) {
-    navigate("/login"); 
+    navigate("/login");
   } else {
-    if (user.role[1] !== "VipStudent" && user.freeTest===false) {
+    if (user.role[1] !== "VipStudent" && user.freeTest === false) {
       navigate("/vippackage");
     }
   }
@@ -168,6 +255,19 @@ function TestMain() {
 
   return (
     <div className="test-container">
+      <div className="countdown-clock">
+        <div style={{ fontWeight: 500 }}>
+          {time.hour < 10 ? "0" + time.hour : time.hour}:{" "}
+          {time.min < 10 ? "0" + time.min : time.min}:{" "}
+          {time.sec < 10 ? "0" + time.sec : time.sec}
+        </div>
+        <img
+          width="30"
+          height="30"
+          src="https://img.icons8.com/office/30/present.png"
+          alt="present"
+        />
+      </div>
       <div className="tab-header">
         {parts &&
           parts.map((part, index) => {

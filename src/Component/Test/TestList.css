@@ -21,7 +21,7 @@
 }
 .test-list .test-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
 }
 .test-list .test-item {
@@ -46,9 +46,9 @@
 }
 .test-list .test-title {
   width: 100%;
-  white-space: nowrap;
+  /* white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; */
   font-size: large;
   font-weight: 600;
   text-align: center;

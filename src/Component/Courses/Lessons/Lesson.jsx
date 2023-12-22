@@ -107,6 +107,9 @@ function Lesson() {
       } else {
         const data = await response.json();
         setQuizes(data);
+        if (data[0]) {
+          setCurrentQuizID(data[0].idQuiz);
+        }
       }
     } catch (error) {
       toast.error(`${error}`, {
@@ -156,7 +159,6 @@ function Lesson() {
   useEffect(() => {
     fetchOtherLessons();
     fetchQuizes();
-    setCurrentQuizID("3fa85f64-5717-4562-b3fc-2c963f66afa6");
   }, [current_lesson]);
 
   useEffect(() => {
@@ -200,7 +202,7 @@ function Lesson() {
               quizes.map((quiz, index) => {
                 return (
                   <input
-                    className="lesson-quiz-item"
+                    className={`lesson-quiz-item ${quiz.idQuiz===current_quizID? "lesson-quiz-current":""}`}
                     key={index}
                     type="button"
                     value={quiz.title}
@@ -229,7 +231,8 @@ function Lesson() {
               <Quiz
                 quizData={quizData}
                 quizTitle={
-                  quizes[current_quizID - 1] && quizes[current_quizID - 1].title
+                  quizes.find((obj) => obj.idQuiz === current_quizID) &&
+                  quizes.find((obj) => obj.idQuiz === current_quizID).title
                 }
               />
             )}

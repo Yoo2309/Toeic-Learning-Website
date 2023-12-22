@@ -1,7 +1,7 @@
 .lesson-main {
-  margin: 20px;
   display: flex;
   gap: 2rem;
+  margin: 40px;
 }
 
 /* ---------RIGHT---------- */
@@ -149,9 +149,14 @@
   padding: 10px;
   background-color: #fff;
   border-radius: 0.5rem;
+  border: 2px solid #000;
+}
+.lesson-quiz-current{
+  background: #70a2ab;
+  color: #fff;
 }
 .lesson-quiz-item:hover {
   cursor: pointer;
-  transform: translateZ(2px);
-  box-shadow: 0 4px 6px #7f7f7f;
+  border: 2px solid #70a2ab;
+  font-weight: 500;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Loader from "../Common/Loader/Loader";
 import Heading from "../Common/Header/Heading";
 import { useState, useEffect } from "react";
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 
 function TestList({ testType }) {
   const { id } = useParams();
+  const navigate = useNavigate()
   const [tests, setTest] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   async function fetchTests(id) {
@@ -64,29 +65,27 @@ function TestList({ testType }) {
             {tests &&
               tests.map((test, index) => {
                 return (
-                  <Link key={index} to={`/test/${test.idTest}`}>
-                    <div className="test-item">
-                      <img
-                        src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/100/external-online-test-online-education-flaticons-lineal-color-flat-icons-2.png"
-                        alt=""
-                      />
-                      <div className="test-title">{test.name}</div>
-                      <div className="test-info">
-                        <div>
-                          <div className="test-info-title">Thời gian</div>
-                          <div className="test-info-item">{`${
-                            id === "miniTest" ? "60 phút" : "120 phút"
-                          }`}</div>
-                        </div>
-                        <div>
-                          <div className="test-info-title">Số câu hỏi</div>
-                          <div className="test-info-item">
-                            {id === "miniTest" ? "100 câu" : "200 câu"}
-                          </div>
+                  <div className="test-item" onClick={()=>navigate(`/test/${test.idTest}`)}>
+                    <img
+                      src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/100/external-online-test-online-education-flaticons-lineal-color-flat-icons-2.png"
+                      alt=""
+                    />
+                    <div className="test-title">{test.name}</div>
+                    <div className="test-info">
+                      <div>
+                        <div className="test-info-title">Thời gian</div>
+                        <div className="test-info-item">{`${
+                          id === "miniTest" ? "60 phút" : "120 phút"
+                        }`}</div>
+                      </div>
+                      <div>
+                        <div className="test-info-title">Số câu hỏi</div>
+                        <div className="test-info-item">
+                          {id === "miniTest" ? "100 câu" : "200 câu"}
                         </div>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 );
               })}
           </div>

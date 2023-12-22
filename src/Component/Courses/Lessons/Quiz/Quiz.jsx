@@ -106,7 +106,6 @@ function Quiz({ quizData, quizTitle }) {
   }
   return (
     <div className="quiz-wrapper">
-      <p className="heading-txt">{quizTitle}</p>
       <div className="quiz-container">
         {showResult ? (
           <QuizResult
@@ -116,6 +115,7 @@ function Quiz({ quizData, quizTitle }) {
           ></QuizResult>
         ) : (
           <div className="quiz-main">
+            <p className="heading-txt">{quizTitle}</p>
             <div className="question">
               <span className="question-number">{currentQuestion + 1}. </span>
               <span className="question-txt">

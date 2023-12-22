@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { showDeleteWarning } from "../../Common/Alert/DeleteAlert"
 import Loader from "../../Common/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import "./ProfessorVocabularyTopic.css";
@@ -136,7 +137,7 @@ function ProfessorVocabularyTopic() {
                     <div className="btn-wrapper">
                       <button
                         className="delete-btn"
-                        onClick={() => DeleteVocabularyTopic(topic.idVocTopic)}
+                        onClick={() => showDeleteWarning(() => DeleteVocabularyTopic(topic.idVocTopic))}
                       >
                         Xóa
                       </button>

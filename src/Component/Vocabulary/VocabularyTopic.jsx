@@ -57,14 +57,16 @@ function VocabularyTopic() {
             {topics &&
               topics.map((val, index) => {
                 return (
-                  <Link to={`/vocabulary-by-topic/${val.idVocTopic}`}>
-                    <div key={val.index} className="vocabulary-topic-item">
-                      <img
-                        src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-vocabulary-literature-flaticons-lineal-color-flat-icons-2.png"
-                        alt=""
-                      />
-                      <div className="vocabulary-topic-title">{val.name}</div>
-                    </div>
+                  <Link
+                    key={val.index}
+                    className="vocabulary-topic-item"
+                    to={`/vocabulary-by-topic/${val.idVocTopic}`}
+                  >
+                    <img
+                      src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-vocabulary-literature-flaticons-lineal-color-flat-icons-2.png"
+                      alt=""
+                    />
+                    <div className="vocabulary-topic-title">{val.name}</div>
                   </Link>
                 );
               })}

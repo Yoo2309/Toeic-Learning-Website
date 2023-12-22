@@ -135,3 +135,15 @@
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   transition: 0.2s;
 }
+.countdown-clock{
+  position: fixed;
+  left: 0;
+  top: 50%;
+  width: fit-content;
+  padding: 10px 20px;
+  background-color: aquamarine;
+  border-radius: 0 2rem 2rem 0;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
