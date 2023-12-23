@@ -5,6 +5,7 @@ import Loader from "../../Common/Loader/Loader";
 import AddTest from "./AddTest";
 import { UserContext } from "../../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
 
 function ProfessorTestManage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -139,7 +140,11 @@ function ProfessorTestManage() {
                     <div className="btn-wrapper">
                       <button
                         className="delete-btn"
-                        onClick={() => DeleteTest(test.idTest)}
+                        onClick={() =>
+                          showDeleteWarning(() =>
+                          DeleteTest(test.idTest)
+                          )
+                        }
                       >
                         Xóa
                       </button>

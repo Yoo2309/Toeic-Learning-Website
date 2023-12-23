@@ -8,7 +8,7 @@ import ".././CourseManage/Lesson/Quiz/UpdateQuiz.css";
 import Loader from "../../Common/Loader/Loader";
 import AddQuestion from "./AddQuestion";
 import { UserContext } from "../../../Context/UserContext";
-import { useForm } from "react-hook-form";
+import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
 
 function UpdateUnit() {
   const navigate = useNavigate();
@@ -395,7 +395,11 @@ function UpdateUnit() {
                   <div className="btn-wrapper">
                     <button
                       className="delete-btn"
-                      onClick={() => handleDeleteQuestion(question.idQuestion)}
+                      onClick={() =>
+                        showDeleteWarning(() =>
+                          handleDeleteQuestion(question.idQuestion)
+                        )
+                      }
                     >
                       Xóa
                     </button>

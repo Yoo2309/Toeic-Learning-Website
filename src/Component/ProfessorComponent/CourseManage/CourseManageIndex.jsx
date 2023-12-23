@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Loader from "../../Common/Loader/Loader";
 import "./CourseManageIndex.css";
+import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
 import AddCourse from "./AddCourse";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../Context/UserContext";
@@ -143,7 +144,11 @@ function CourseManageIndex() {
                       <div className="btn-wrapper">
                         <button
                           className="delete-btn"
-                          onClick={() => DeleteCourse(course.idCourse)}
+                          onClick={() =>
+                            showDeleteWarning(() =>
+                              DeleteCourse(course.idCourse)
+                            )
+                          }
                         >
                           Xóa
                         </button>

@@ -5,10 +5,16 @@ import { toast } from "react-toastify";
 import Loader from "../../Common/Loader/Loader";
 import "./AddUser.css";
 import { UserContext } from "../../../Context/UserContext";
+import { useForm } from "react-hook-form";
 
 function AddUser() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
+  const {
+    register: userData,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [data, setData] = useState(() => ({
     email: "",
     username: "",
@@ -63,24 +69,6 @@ function AddUser() {
     navigate(`/admin/user`);
   }
 
-  function changeInput(e) {
-    setData({
-      ...data,
-      [e.target.id]: e.target.value,
-    });
-  }
-
-  function validateData(data) {
-    return true;
-  }
-
-  function clickSubmit() {
-    // Validate data
-    if (validateData(data)) {
-      handleAddUser(data);
-    }
-  }
-
   if (isLoading) {
     return <Loader />;
   }
@@ -100,45 +88,67 @@ function AddUser() {
         />
       </div>
       <div className="add-user-form-wrapper">
-        <form>
+        <form onSubmit={handleSubmit(handleAddUser)}>
           <div>
             <h3>Họ và tên</h3>
             <input
-              value={data.fullname}
-              placeholder="Nhập họ và tên"
-              id="fullname"
-              onChange={changeInput}
+              placeholder="Nhập họ tên"
+              {...userData("fullname", { required: true })}
             />
+            <error>
+              {errors.fullname?.type === "required" &&
+                "Không được để trống họ tên"}
+            </error>
           </div>
           <div>
             <h3>Username</h3>
             <input
               placeholder="Nhập username"
-              id="username"
-              onChange={changeInput}
+              {...userData("username", { required: true })}
             />
+            <error>
+              {errors.username?.type === "required" &&
+                "Không được để trống username"}
+            </error>
           </div>
           <div>
             <h3>Email</h3>
-            <input placeholder="Nhập email" id="email" onChange={changeInput} />
+            <input
+              placeholder="Nhập email"
+              {...userData("email", { required: true })}
+            />
+            <error>
+              {errors.email?.type === "required" && "Không được để trống email"}
+            </error>
           </div>
           <div>
             <h3>Password</h3>
             <input
               placeholder="Nhập password"
-              id="password"
-              onChange={changeInput}
+              {...userData("password", { required: true })}
             />
+            <error>
+              {errors.password?.type === "required" &&
+                "Không được để trống password"}
+            </error>
           </div>
-          <div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <h3>Role</h3>
-            <input placeholder="Nhập role" id="role" onChange={changeInput} />
+            <select className="" {...userData("role", { required: true })}>
+              <option value="Professor">Professor</option>
+              <option value="Admin">Admin</option>
+            </select>
           </div>
           <input
-            type="button"
+            type="submit"
             value="Thêm người dùng"
             className="professor-add-lesson-btn"
-            onClick={clickSubmit}
           />
         </form>
       </div>

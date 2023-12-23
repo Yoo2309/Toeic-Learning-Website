@@ -5,6 +5,7 @@ import Loader from "../../Common/Loader/Loader";
 import "./UpdateTest.css";
 import { UserContext } from "../../../Context/UserContext";
 import AddUnit from "./AddUnit";
+import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
 import HTMLReactParser from "html-react-parser";
 
 function UpdateTest() {
@@ -209,7 +210,7 @@ function UpdateTest() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error("Chỉnh sửa unit của đề thi thất bại", {
+        toast.error("Xóa unit của đề thi thất bại", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
           closeOnClick: true,
@@ -217,7 +218,7 @@ function UpdateTest() {
           draggable: true,
         });
       } else {
-        toast.success("Chỉnh sửa unit của đề thi thành công", {
+        toast.success("Xóa unit của đề thi thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -366,7 +367,11 @@ function UpdateTest() {
                   <div className="btn-wrapper">
                     <button
                       className="delete-btn"
-                      onClick={() => handleDeleteUnit(testUnit.idQuestionUnit)}
+                      onClick={() =>
+                        showDeleteWarning(() =>
+                          handleDeleteUnit(testUnit.idQuestionUnit)
+                        )
+                      }
                     >
                       Xóa
                     </button>

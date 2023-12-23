@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { UserContext } from "../../../Context/UserContext";
 import Loader from "../../Common/Loader/Loader";
 import "./UserManage.css";
+import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
 
 function UserManage() {
   const { user } = useContext(UserContext);
@@ -182,7 +183,11 @@ function UserManage() {
                 <div className="btn-wrapper">
                   <button
                     className="delete-btn"
-                    onClick={() => deleteUserById(item.id)}
+                    onClick={() =>
+                      showDeleteWarning(() =>
+                        deleteUserById(item.id)
+                      )
+                    }
                   >
                     Xóa
                   </button>

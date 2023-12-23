@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Loader from "../../../../Common/Loader/Loader";
 import AddQuestion from "./AddQuestion";
 import { UserContext } from "../../../../../Context/UserContext";
+import { showDeleteWarning } from "../../../../Common/Alert/DeleteAlert";
 
 function UpdateQuiz() {
   const navigate = useNavigate();
@@ -151,7 +152,7 @@ function UpdateQuiz() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Question/DeleteCourse/${id}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Question/DeleteQuestion/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -294,7 +295,11 @@ function UpdateQuiz() {
                   <div className="btn-wrapper">
                     <button
                       className="delete-btn"
-                      onClick={() => handleDeleteQuestion(question.idQuestion)}
+                      onClick={() =>
+                        showDeleteWarning(() =>
+                          handleDeleteQuestion(question.idQuestion)
+                        )
+                      }
                     >
                       Xóa
                     </button>

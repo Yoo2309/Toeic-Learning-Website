@@ -1,5 +1,5 @@
-.add-lesson-form-wrapper {
-  margin-top: 1.5rem;
+.add-vip-package-form-wrapper{
+margin-top: 2rem;
 }
 .add-lesson-wrapper form {
   display: flex;
@@ -8,11 +8,10 @@
   background-color: #fff;
   padding: 1rem;
 }
-.add-user-wrapper input {
-  font-size: 1.5rem;
+.add-vip-package-form-wrapper input {
   height: 2.5rem;
   width: 100%;
-  /* text-align: center; */
+  text-align: center;
   font-weight: 700;
 }
 .professor-add-lesson-btn {

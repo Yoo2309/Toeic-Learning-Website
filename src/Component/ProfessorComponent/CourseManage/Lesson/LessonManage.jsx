@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { UserContext } from "../../../../Context/UserContext";
+import { showDeleteWarning } from "../../../Common/Alert/DeleteAlert";
 import Loader from "../../../Common/Loader/Loader";
 
 function LessonManage() {
@@ -113,10 +114,9 @@ function LessonManage() {
           pauseOnHover: true, // Tạm dừng khi di chuột qua
           draggable: true, // Có thể kéo thông báo
         });
-      }
-      else{
+      } else {
         const data = await response.json();
-      setLessons(data);
+        setLessons(data);
       }
     } catch (error) {
       toast.error(`${error}`, {
@@ -152,7 +152,7 @@ function LessonManage() {
           draggable: true,
         });
       } else {
-        toast.success("Xóa khóa học thành công", {
+        toast.success("Xóa bài học thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 10000,
           closeOnClick: true,
@@ -267,7 +267,11 @@ function LessonManage() {
                 <div className="btn-wrapper">
                   <button
                     className="delete-btn"
-                    onClick={() => handleDeleteLesson(lesson.idLesson)}
+                    onClick={() =>
+                      showDeleteWarning(() =>
+                        handleDeleteLesson(lesson.idLesson)
+                      )
+                    }
                   >
                     Xóa
                   </button>

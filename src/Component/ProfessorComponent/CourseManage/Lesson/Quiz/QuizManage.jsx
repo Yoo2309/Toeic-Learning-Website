@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import AddQuiz from "./AddQuiz";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../../../Context/UserContext";
+import { showDeleteWarning } from "../../../../Common/Alert/DeleteAlert";
 
 function QuizManage({ idLesson }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +33,6 @@ function QuizManage({ idLesson }) {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        console.log(response);
         toast.error(`${errorData.message}`, {
           position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
           autoClose: 5000, // Tự động đóng sau 3 giây
@@ -42,7 +42,6 @@ function QuizManage({ idLesson }) {
         });
       } else {
         const data = await response.json();
-        console.log(data);
         setQuizes(data);
       }
     } catch (error) {
@@ -65,7 +64,7 @@ function QuizManage({ idLesson }) {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({}),
         }
@@ -139,7 +138,11 @@ function QuizManage({ idLesson }) {
                 <div className="btn-wrapper">
                   <button
                     className="delete-btn"
-                    onClick={() => handleDeleteQuiz(quiz.idQuiz)}
+                    onClick={() =>
+                      showDeleteWarning(() =>
+                        handleDeleteQuiz(quiz.idQuiz)
+                      )
+                    }
                   >
                     Xóa
                   </button>

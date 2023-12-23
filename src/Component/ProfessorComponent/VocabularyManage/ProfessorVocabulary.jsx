@@ -5,6 +5,7 @@ import Loader from "../../Common/Loader/Loader";
 import { useForm } from "react-hook-form";
 import "./ProfessorVocabulary.css";
 import { UserContext } from "../../../Context/UserContext";
+import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
 import AddVocabulary from "./AddVocabulary";
 
 function ProfessorVocabulary() {
@@ -278,8 +279,11 @@ function ProfessorVocabulary() {
                   <div className="word-meaning">{word.meaning}</div>
                   <div className="btn-wrapper">
                     <button
-                      className="delete-btn"
-                      onClick={() => handleDeleteVocabulary(word.idVoc)}
+                      className="delete-btn"onClick={() =>
+                        showDeleteWarning(() =>
+                        handleDeleteVocabulary(word.idVoc)
+                        )
+                      }
                     >
                       Xóa
                     </button>

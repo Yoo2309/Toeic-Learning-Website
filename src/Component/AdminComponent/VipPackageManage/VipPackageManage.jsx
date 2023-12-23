@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { UserContext } from "../../../Context/UserContext";
 import Loader from "../../Common/Loader/Loader";
 import "./VipPackageManage.css";
+import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
 
 function VipPackageManage() {
   const { user } = useContext(UserContext);
@@ -162,7 +163,11 @@ function VipPackageManage() {
                 <div className="btn-wrapper">
                   <button
                     className="delete-btn"
-                    onClick={() => deleteVipPackageById(item.idPackage)}
+                    onClick={() =>
+                      showDeleteWarning(() =>
+                        deleteVipPackageById(item.idPackage)
+                      )
+                    }
                   >
                     Xóa
                   </button>

@@ -96,7 +96,6 @@ function UserProfile() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        const errorData = await response.json();
         toast.error(`Cập nhật thông tin thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,
