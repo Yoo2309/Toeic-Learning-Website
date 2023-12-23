@@ -249,7 +249,7 @@ function TestMain() {
   if (!user.auth) {
     navigate("/login");
   } else {
-    if (user.role[1] !== "VipStudent" && user.freeTest === false) {
+    if (user.role[1] !== "VipStudent" && user.freeTest !== true) {
       navigate("/vippackage");
     }
   }
