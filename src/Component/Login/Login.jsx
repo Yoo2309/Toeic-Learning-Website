@@ -48,10 +48,10 @@ function Login() {
     }
   };
   useEffect(() => {
-    const loginElement = document.getElementById('login');
-  if (loginElement) {
-    loginElement.scrollIntoView({ behavior: 'smooth' });
-  }
+    const loginElement = document.getElementById("login");
+    if (loginElement) {
+      loginElement.scrollIntoView({ behavior: "smooth" });
+    }
   }, []);
 
   async function handleLogin(login_data) {
@@ -61,16 +61,16 @@ function Login() {
     if (!response.ok) {
       // const errorData = await response.json();
       toast.error("Đăng nhập không thành công", {
-        position: toast.POSITION.BOTTOM_RIGHT, 
-        autoClose: 5000, 
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 5000,
         closeOnClick: true,
-        pauseOnHover: true, 
+        pauseOnHover: true,
         draggable: true,
       });
     } else {
       const data = await response.json();
       if (data.token !== undefined) {
-        loginContext(data.token, data.freeTest);
+        loginContext(data.token);
         navigate("/");
       } else {
         toast.success(`${data.message}`, {
@@ -121,6 +121,7 @@ function Login() {
           pauseOnHover: true,
           draggable: true,
         });
+        SwitchSignUpMode(false)
       }
     } catch (error) {
       toast.error(`${error}`, {
@@ -188,7 +189,7 @@ function Login() {
     setSignUpMode(mode);
   }
   return (
-    <div className="login-wrapper" >
+    <div className="login-wrapper">
       <div className="login" id="login">
         <div className={`container ${signUpMode ? "sign-up-mode" : null}`}>
           <div className="signin-signup">
@@ -254,13 +255,13 @@ function Login() {
                       <i className="fab fa-linkedin-in"></i>
                     </a>
                   </div>
-                  <button
+                  <div
                     className="sign-up-mobile"
                     id="sign-up-mobile"
-                    onClick={() => SwitchSignUpMode(false)}
+                    onClick={() => SwitchSignUpMode(true)}
                   >
                     Đăng kí tài khoản
-                  </button>
+                  </div>
                 </div>
               </form>
             ) : (
@@ -404,13 +405,13 @@ function Login() {
                   <i className="fab fa-linkedin-in"></i>
                 </a>
               </div>
-              <button
+              <div
                 className="sign-in-mobile"
                 id="sign-in-mobile"
                 onClick={() => SwitchSignUpMode(false)}
               >
                 Đăng nhập
-              </button>
+              </div>
             </form>
           </div>
           <div className="panels-container">

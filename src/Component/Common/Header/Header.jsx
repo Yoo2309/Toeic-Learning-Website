@@ -54,6 +54,7 @@ function Header() {
     // fetchTestType();
   }, []);
   useEffect(() => {
+    console.log("role", user.role)
     if (user.role[1] === "VipStudent") {
       setIsVIP(true);
     }

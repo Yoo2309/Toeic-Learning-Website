@@ -8,7 +8,6 @@ const UserContext = createContext({
   auth: false,
   role: "",
   token: "",
-  freeTest: false,
 });
 
 const UserProvider = ({ children }) => {
@@ -19,7 +18,6 @@ const UserProvider = ({ children }) => {
     role: "",
     token: "",
     ava: "https://img.icons8.com/papercut/100/user-female-circle.png",
-    freeTest: false,
   });
   function isTokenExpired(exp) {
     const currentTime = Math.floor(Date.now() / 1000); // Lấy thời gian hiện tại dưới dạng Unix timestamp (số giây)
@@ -37,6 +35,7 @@ const UserProvider = ({ children }) => {
           "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier":
             idUser,
         } = token_decode;
+
         setUser((user) => ({
           username: username,
           role: role,
@@ -63,13 +62,11 @@ const UserProvider = ({ children }) => {
       getAvatar(user.idUser, user.token);
     }
   }, [user.idUser]);
-  useEffect(() => {
-    console.log(user.freeTest);
-  }, [user.freeTest]);
+
   const decodeToken = (token) => {
     return jwtDecode(token);
   };
-  const loginContext = (token, freeTest) => {
+  const loginContext = (token) => {
     const token_decode = decodeToken(token);
     const {
       "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": username,
@@ -83,7 +80,6 @@ const UserProvider = ({ children }) => {
       auth: true,
       idUser: idUser,
       token: token,
-      freeTest: freeTest,
     }));
     localStorage.setItem("token", token);
   };
@@ -162,7 +158,6 @@ const UserProvider = ({ children }) => {
       token: "",
       idUser: "",
       ava: "https://img.icons8.com/papercut/100/user-female-circle.png",
-      freeTest: true,
     }));
   };
 

@@ -70,7 +70,6 @@ function VipPackage() {
           draggable: true,
         });
       } else {
-        console.log(response);
         const data = await response.json();
         setVipExpire(data.vipExpire);
       }

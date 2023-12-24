@@ -18,6 +18,7 @@ function TestMain() {
   const [testdata, setTestdata] = useState([]);
   const [testType, setTestType] = useState("");
   const [answers, setAnswers] = useState([]);
+  const [freeTest, setFreeTest] = useState(true);
 
   let question_num = 0;
 
@@ -83,7 +84,16 @@ function TestMain() {
     fetchTestData();
     window.scrollTo(0, 0);
   }, []);
-
+  useEffect(() => {
+    if (user.idUser) {
+      fetchFreeTest();
+    }
+  }, [user]);
+  useEffect(() => {
+    if (!freeTest && user.role[1] !== "VipStudent") {
+      navigate("/vippackage");
+    }
+  }, [freeTest]);
   async function fetchTestData() {
     try {
       setIsLoading(true);
@@ -174,6 +184,48 @@ function TestMain() {
       });
     }
   }
+  async function fetchFreeTest() {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/Student/CheckFreeTest/${user.idUser}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setIsLoading(false);
+      if (!response.ok) {
+        const errorData = await response.json();
+        toast.error(`${errorData.message}`, {
+          position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
+          autoClose: 5000, // Tự động đóng sau 3 giây
+          closeOnClick: true, // Đóng khi click
+          pauseOnHover: true, // Tạm dừng khi di chuột qua
+          draggable: true, // Có thể kéo thông báo
+        });
+      } else {
+        const data = await response.text();
+        console.log(data);
+        if (data === "true") {
+          setFreeTest(true);
+        } else {
+          setFreeTest(false);
+        }
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 5000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  }
   const handleOptionChange = (questionId, selectedOption) => {
     const existingAnswerIndex = answers.findIndex(
       (answer) => answer.idQuestion === questionId
@@ -218,10 +270,6 @@ function TestMain() {
         });
       } else {
         const data = await response.json();
-        setUser((prevState) => ({
-          ...prevState,
-          freeTest: false,
-        }));
         navigate(`/test/result/${data.idRecord}`);
       }
     } catch (error) {
@@ -248,10 +296,6 @@ function TestMain() {
   }
   if (!user.auth) {
     navigate("/login");
-  } else {
-    if (user.role[1] !== "VipStudent" && user.freeTest !== true) {
-      navigate("/vippackage");
-    }
   }
   if (isLoading) {
     return <Loader />;
