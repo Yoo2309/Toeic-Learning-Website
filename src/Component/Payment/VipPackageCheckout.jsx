@@ -64,7 +64,7 @@ export default function VipPackageCheckout() {
   }, [user]);
 
   useEffect(() => {
-    if (state) {
+    if (state==="true") {
       setUser((prevState) => ({
         ...prevState,
         role: ["Student", "VipStudent"],
