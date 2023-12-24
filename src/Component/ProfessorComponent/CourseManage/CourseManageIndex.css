@@ -3,7 +3,7 @@
 }
 .professor-course-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 .professor-courses-list-item {
