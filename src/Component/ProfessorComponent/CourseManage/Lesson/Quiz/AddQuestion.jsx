@@ -92,7 +92,7 @@ function AddQuestion({
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Question/UpdateCourse/${current_question.idQuestion}&&${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL}/Question/UpdateQuestion/${current_question.idQuestion}&&${user.idUser}`,
         {
           method: "PUT",
           headers: {
@@ -114,7 +114,6 @@ function AddQuestion({
       setIsLoading(false);
       toggleModal();
       if (!response.ok) {
-        const errorData = await response.json();
         toast.error(`Chỉnh sửa câu hỏi thất bại`, {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 5000,

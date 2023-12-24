@@ -283,12 +283,12 @@ function UpdateQuiz() {
                     </div>
                     <div>{`=> ${
                       question.answer === "1"
-                        ? question.choice_1
+                        ? `A + ${question.choice_1}`
                         : question.answer === "2"
-                        ? question.choice_2
+                        ? `B + ${question.choice_2}`
                         : question.answer === "3"
-                        ? question.choice_3
-                        : question.choice_4
+                        ? `C + ${question.choice_3}`
+                        : `D + ${question.choice_4}`
                     }`}</div>
                     <div>{question.explaination}</div>
                   </div>
