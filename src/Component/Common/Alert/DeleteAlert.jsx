@@ -17,3 +17,18 @@ export const showDeleteWarning = (onDeleteCallback) => {
     }
   });
 };
+export const showSubmitWarning = (onSubmitCallback) => {
+  Swal.fire({
+    title: 'Bạn chắc chắn muốn nộp bài?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    cancelButtonText: 'Làm tiếp',
+    confirmButtonText: 'Nộp bài',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      onSubmitCallback(); 
+    }
+  });
+};

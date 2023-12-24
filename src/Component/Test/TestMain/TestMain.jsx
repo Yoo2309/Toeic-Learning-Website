@@ -5,6 +5,7 @@ import Loader from "../../Common/Loader/Loader.jsx";
 import HTMLReactParser from "html-react-parser";
 import { UserContext } from "../../../Context/UserContext.jsx";
 import { toast } from "react-toastify";
+import { showSubmitWarning } from "../../Common/Alert/DeleteAlert.jsx";
 
 function TestMain() {
   const { id } = useParams();
@@ -26,11 +27,18 @@ function TestMain() {
   const [time, setTime] = useState({
     hour: 0,
     min: 0,
-    sec: 10,
+    sec: 15,
   });
   var current_time = null;
   useEffect(() => {
     if (time.hour === 0 && time.min === 0 && time.sec === 0) {
+      toast.warning(`Hết thời gian`, {
+        position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
+        autoClose: 5000, // Tự động đóng sau 3 giây
+        closeOnClick: true, // Đóng khi click
+        pauseOnHover: true, // Tạm dừng khi di chuột qua
+        draggable: true, // Có thể kéo thông báo
+      });
       SubmitTest();
     } else {
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -286,7 +294,7 @@ function TestMain() {
     if (current_part < 6) {
       setCurrentPart(current_part + 1);
     } else if (current_part === 6) {
-      SubmitTest();
+      showSubmitWarning(()=>SubmitTest());
     }
   }
   function previousPart() {
