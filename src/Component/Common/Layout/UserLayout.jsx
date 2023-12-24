@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../../Context/UserContext";
 import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 function UserLayout({ children }) {
   const { user } = useContext(UserContext);
@@ -13,6 +14,7 @@ function UserLayout({ children }) {
       <div className="user-layout">
         <Header />
         {children}
+        <Footer />
       </div>
     );
   }

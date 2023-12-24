@@ -99,7 +99,6 @@ function App() {
               element={<VipPackageCheckout />}
             />
           </Routes>
-          <Footer />
         </UserLayout>
         <ProfessorLayout>
           <Routes>

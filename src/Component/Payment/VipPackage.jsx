@@ -19,7 +19,6 @@ function VipPackage() {
 
   async function fetchVipPackage() {
     try {
-      const token = localStorage.getItem("token");
       setIsLoading(true);
       const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/VipPackage/GetAllVipPackages`

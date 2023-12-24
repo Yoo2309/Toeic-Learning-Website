@@ -229,7 +229,6 @@ function UserProfile() {
           <div className="italic">Giới tính</div>
           <select
             className="p-1 border rounded-md w-full"
-            onChange={()=>console.log(getValues("gender"))}
             {...userData("gender", { required: true })}
           >
             <option value={false}>Nam</option>

@@ -25,7 +25,6 @@ const UserProvider = ({ children }) => {
   }
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("get token from storage")
     if (token) {
       const token_decode = decodeToken(token);
       if (!isTokenExpired(token_decode.exp)) {
