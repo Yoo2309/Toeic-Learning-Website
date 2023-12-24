@@ -9,7 +9,7 @@ import { showSubmitWarning } from "../../Common/Alert/DeleteAlert.jsx";
 
 function TestMain() {
   const { id } = useParams();
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [parts, setParts] = useState([]);
@@ -27,7 +27,7 @@ function TestMain() {
   const [time, setTime] = useState({
     hour: 0,
     min: 0,
-    sec: 15,
+    sec: 0,
   });
   var current_time = null;
   useEffect(() => {

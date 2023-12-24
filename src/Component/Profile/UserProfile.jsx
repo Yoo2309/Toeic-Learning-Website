@@ -116,7 +116,7 @@ function UserProfile() {
         draggable: true,
       });
       getUser();
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       toast.error(`${error}`, {
         position: toast.POSITION.BOTTOM_RIGHT,
