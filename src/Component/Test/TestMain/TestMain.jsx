@@ -27,7 +27,7 @@ function TestMain() {
   const [time, setTime] = useState({
     hour: 0,
     min: 0,
-    sec: 0,
+    sec: 10,
   });
   var current_time = null;
   useEffect(() => {
