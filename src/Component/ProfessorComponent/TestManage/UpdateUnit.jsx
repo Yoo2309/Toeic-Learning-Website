@@ -57,6 +57,22 @@ function UpdateUnit() {
   } else {
     document.body.classList.remove("active-modal");
   }
+
+  const handleDeleteImage = () => {
+    var image_upload = document.getElementById("unit_image");
+    image_upload.value = "";
+    // Đặt lại trạng thái của input type file để cho phép chọn lại file
+    image_upload.type = "file";
+    setImage("");
+  };
+  const handleDeleteAudio = () => {
+    var audio_upload = document.getElementById("unit_audio");
+    audio_upload.value = "";
+    // Đặt lại trạng thái của input type file để cho phép chọn lại file
+    audio_upload.type = "file";
+    setAudio("");
+  };
+
   useEffect(() => {
     let objectURL;
     if (image instanceof File || image instanceof Blob) {
@@ -135,16 +151,16 @@ function UpdateUnit() {
       formData.append("paragraph", paragraph);
     }
     if (audio) {
-      if (audio[0] instanceof File || audio[0] instanceof Blob) {
-        formData.append("newAudio", audio[0]);
-      } else if (typeof audio[0] === "string" && audio[0].trim() !== "") {
+      if (audio instanceof File || audio instanceof Blob) {
+        formData.append("newAudio", audio);
+      } else if (typeof audio === "string" && audio.trim() !== "") {
         formData.append("oldAudio", audio);
       }
     }
-    if (audio) {
-      if (image[0] instanceof File || image[0] instanceof Blob) {
-        formData.append("newImage", image[0]);
-      } else if (typeof image[0] === "string" && image[0].trim() !== "") {
+    if (image) {
+      if (image instanceof File || image instanceof Blob) {
+        formData.append("newImage", image);
+      } else if (typeof image === "string" && image.trim() !== "") {
         formData.append("oldImage", image);
       }
     }
@@ -297,6 +313,7 @@ function UpdateUnit() {
             <h3>Upload Image</h3>
             <input
               type="file"
+              id="unit_image"
               onChange={(e) => setImage(e.target.files[0])}
             ></input>
             {imagePreview && (
@@ -306,14 +323,45 @@ function UpdateUnit() {
                 style={{ maxWidth: "100%" }}
               />
             )}
+            <div>
+              <button
+                style={{
+                  fontSize: 16,
+                  padding: "3px 8px",
+                  border: "1px solid #000",
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setImage("");
+                }}
+              >
+                Xóa ảnh
+              </button>
+            </div>
           </div>
           <div className="upload-audio">
             <h3>Upload Audio</h3>
             <input
               type="file"
+              id="unit_audio"
               onChange={(e) => setAudio(e.target.files[0])}
             ></input>
             {audio && <audio src={audioPreview} controls></audio>}
+            <div>
+              <button
+                style={{
+                  fontSize: 16,
+                  padding: "3px 8px",
+                  border: "1px solid #000",
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setAudio("");
+                }}
+              >
+                Xóa Audio
+              </button>
+            </div>
           </div>
           <h3>Nội dung đoạn văn</h3>
           <JoditEditor
@@ -361,7 +409,7 @@ function UpdateUnit() {
           <div className="professor-managment-title">
             <h3 style={{ marginLeft: "1rem" }}>QUẢN LÝ CÂU HỎI ĐỀ THI</h3>
           </div>
-          <div className="professor-add-button" onClick={toggleModal}>
+          <div className="professor-add-button" onClick={AddToggle}>
             <img
               width="34"
               height="34"

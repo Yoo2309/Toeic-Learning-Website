@@ -30,25 +30,42 @@ function AddUnit({ idTestPart, toggle_modal, fetchUnit }) {
   );
   useEffect(() => {
     let objectURL;
-    if (image) {
+    if (image instanceof File || image instanceof Blob) {
       objectURL = URL.createObjectURL(image);
       setImagePreview(objectURL);
       return () => {
         URL.revokeObjectURL(objectURL);
       };
+    } else {
+      setImagePreview(image);
     }
   }, [image]);
   useEffect(() => {
     let objectURL;
-    if (audio) {
+    if (audio instanceof File || audio instanceof Blob) {
       objectURL = URL.createObjectURL(audio);
       setAudioPreview(objectURL);
       return () => {
         URL.revokeObjectURL(objectURL);
       };
+    } else {
+      setAudioPreview(audio);
     }
   }, [audio]);
-
+  const handleDeleteImage = () => {
+    var image_upload = document.getElementById("unit_image");
+    image_upload.value = "";
+    // Đặt lại trạng thái của input type file để cho phép chọn lại file
+    image_upload.type = "file";
+    setImage("");
+  };
+  const handleDeleteAudio = () => {
+    var audio_upload = document.getElementById("unit_audio");
+    audio_upload.value = "";
+    // Đặt lại trạng thái của input type file để cho phép chọn lại file
+    audio_upload.type = "file";
+    setAudio("");
+  };
   async function handleAddUnit() {
     const formData = new FormData();
     formData.append("idTest", id);
@@ -126,23 +143,55 @@ function AddUnit({ idTestPart, toggle_modal, fetchUnit }) {
             <h3>Upload Image</h3>
             <input
               type="file"
+              id="unit_image"
               onChange={(e) => setImage(e.target.files[0])}
             ></input>
-            {image && (
+            {imagePreview && (
               <img
                 src={imagePreview}
                 alt="Uploaded"
                 style={{ maxWidth: "100%" }}
               />
             )}
+            <div>
+              <button
+                style={{
+                  fontSize: 16,
+                  padding: "3px 8px",
+                  border: "1px solid #000",
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleDeleteImage();
+                }}
+              >
+                Xóa Ảnh
+              </button>
+            </div>
           </div>
           <div className="upload-audio">
             <h3>Upload Audio</h3>
             <input
               type="file"
+              id="unit_audio"
               onChange={(e) => setAudio(e.target.files[0])}
             ></input>
-            {audio && <audio src={audioPreview} controls></audio>}
+            {audioPreview && <audio src={audioPreview} controls></audio>}
+            <div>
+              <button
+                style={{
+                  fontSize: 16,
+                  padding: "3px 8px",
+                  border: "1px solid #000",
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleDeleteAudio();
+                }}
+              >
+                Xóa Audio
+              </button>
+            </div>
           </div>
           <h3>Nội dung đoạn văn</h3>
           <JoditEditor
