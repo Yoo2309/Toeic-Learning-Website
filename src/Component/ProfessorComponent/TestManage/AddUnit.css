@@ -29,34 +29,3 @@
 .professor-add-lesson-btn:hover {
   cursor: pointer;
 }
-/* ----------------Quiz Session----------- */
-.quiz-question-list-wrapper{
-  position: relative;
-}
-.quiz-question-list-wrapper .btn-wrapper{
-  position: absolute;
-  top: 1rem;
-  right: 0.5rem;
-  width: 30%;
-  display: flex;
-  gap: 1rem;
-}
-.quiz-question-list-wrapper .delete-btn,
-.quiz-question-list-wrapper .update-btn {
-  width: 100%;
-  height: 30px;
-  border: none;
-  border-radius: 50px;
-  color: #fff;
-  font-weight: 600;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.add-lesson-wrapper {}
-.professor-lesson-list .delete-btn:hover{
-  width: 130%;
-}
-.professor-lesson-list .update-btn:hover{
-  width: 130%;
-}

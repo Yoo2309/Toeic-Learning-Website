@@ -31,7 +31,6 @@ const UserProvider = ({ children }) => {
     const token = localStorage.getItem("token");
     if (token) {
       const token_decode = decodeToken(token);
-      console.log(token_decode);
       if (token_decode && !isTokenExpired(token_decode.exp)) {
         const {
           "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name":

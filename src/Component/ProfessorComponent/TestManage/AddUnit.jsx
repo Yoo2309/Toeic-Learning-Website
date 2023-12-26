@@ -53,11 +53,21 @@ function AddUnit({ idTestPart, toggle_modal, fetchUnit }) {
     const formData = new FormData();
     formData.append("idTest", id);
     formData.append("idTestPart", idTestPart);
-    formData.append("paragraph", paragraph);
-    formData.append("audio", audio);
-    formData.append("image", image);
-    formData.append("script", script);
-    formData.append("translation", translation);
+    if (paragraph) {
+      formData.append("paragraph", paragraph);
+    }
+    if (audio) {
+      formData.append("audio", audio);
+    }
+    if (image) {
+      formData.append("image", image);
+    }
+    if (script) {
+      formData.append("script", script);
+    }
+    if (translation) {
+      formData.append("translation", translation);
+    }
 
     setIsLoading(true);
     try {

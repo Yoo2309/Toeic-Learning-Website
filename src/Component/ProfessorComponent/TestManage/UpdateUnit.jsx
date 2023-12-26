@@ -131,23 +131,29 @@ function UpdateUnit() {
     const formData = new FormData();
     formData.append("idTest", idTest);
     formData.append("idTestPart", idTestPart);
-    formData.append("paragraph", paragraph);
-    if (audio instanceof File || audio instanceof Blob) {
-      formData.append("newAudio", audio);
-      formData.append("oldAudio", "");
-    } else {
-      formData.append("newAudio", "");
-      formData.append("oldAudio", audio);
+    if (paragraph) {
+      formData.append("paragraph", paragraph);
     }
-    if (image instanceof File || image instanceof Blob) {
-      formData.append("newImage", image);
-      formData.append("oldImage", "");
-    } else {
-      formData.append("newImage", "");
-      formData.append("oldImage", image);
+    if (audio) {
+      if (audio[0] instanceof File || audio[0] instanceof Blob) {
+        formData.append("newAudio", audio[0]);
+      } else if (typeof audio[0] === "string" && audio[0].trim() !== "") {
+        formData.append("oldAudio", audio);
+      }
     }
-    formData.append("script", transcript);
-    formData.append("translation", translation);
+    if (audio) {
+      if (image[0] instanceof File || image[0] instanceof Blob) {
+        formData.append("newImage", image[0]);
+      } else if (typeof image[0] === "string" && image[0].trim() !== "") {
+        formData.append("oldImage", image);
+      }
+    }
+    if (transcript) {
+      formData.append("script", transcript);
+    }
+    if (translation) {
+      formData.append("translation", translation);
+    }
 
     setIsLoading(true);
     try {
@@ -275,7 +281,7 @@ function UpdateUnit() {
         <div className="professor-managment-title">
           <h3 style={{ marginLeft: "1rem" }}>QUẢN LÝ UNIT</h3>
         </div>
-        <div onClick={toggleModal}>
+        <div>
           <img
             onClick={() => navigate(`/professor/test/${idTest}`)}
             width="50"
@@ -293,7 +299,7 @@ function UpdateUnit() {
               type="file"
               onChange={(e) => setImage(e.target.files[0])}
             ></input>
-            {image && (
+            {imagePreview && (
               <img
                 src={imagePreview}
                 alt="Uploaded"
@@ -350,9 +356,12 @@ function UpdateUnit() {
           idUnit={id}
         />
       )}
-      <div className="quiz-question-list-wrapper">
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <div className="professor-add-button" onClick={AddToggle}>
+      <div className="professor-quiz-wrapper">
+        <div className="professor-board-header">
+          <div className="professor-managment-title">
+            <h3 style={{ marginLeft: "1rem" }}>QUẢN LÝ CÂU HỎI ĐỀ THI</h3>
+          </div>
+          <div className="professor-add-button" onClick={toggleModal}>
             <img
               width="34"
               height="34"
@@ -362,11 +371,11 @@ function UpdateUnit() {
             <h3>THÊM CÂU HỎI MỚI</h3>
           </div>
         </div>
-        <div quiz-question-list-wrapper>
+        <div className="quiz-question-list-wrapper">
           {questions &&
             questions.map((question, index) => {
               return (
-                <div key={index} className="quiz-question-list-wrapper">
+                <div key={index} className="question-list-item">
                   <div className="qquestion-list-item">
                     <div>{question.content}</div>
                     <div className="question-choice">

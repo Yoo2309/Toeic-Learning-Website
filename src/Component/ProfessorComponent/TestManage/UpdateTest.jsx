@@ -391,16 +391,15 @@ function UpdateTest() {
                     <audio src={testUnit.audio} controls></audio>
                   )}
                   {testUnit.paragraph &&
-                    testUnit.paragraph !== "null" &&
                     HTMLReactParser(String(testUnit.paragraph))}
 
-                  {testUnit.script && testUnit.script !== "null" && (
+                  {testUnit.script && (
                     <>
                       <h4>Transcript</h4>
                       <div>{testUnit.script}</div>
                     </>
                   )}
-                  {testUnit.translation && testUnit.translation !== "null" && (
+                  {testUnit.translation && (
                     <>
                       <h4>Bản dịch</h4>
                       <div>{testUnit.translation}</div>

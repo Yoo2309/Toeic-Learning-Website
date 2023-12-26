@@ -116,9 +116,7 @@ function UserAnswerDetail({ toggleModal, userAnswer, index }) {
               <img style={{ width: "40%" }} src={unit.image} alt="" />
             )}
             {unit.audio && <audio src={unit.audio} controls></audio>}
-            {unit.paragraph &&
-              unit.paragraph !== "null" &&
-              HTMLReactParser(String(unit.paragraph))}
+            {unit.paragraph && HTMLReactParser(String(unit.paragraph))}
             <div
               className="answer-detail-transcript"
               onClick={handleShowScript}
@@ -131,12 +129,10 @@ function UserAnswerDetail({ toggleModal, userAnswer, index }) {
             </div>
             {showScript ? (
               <div>
-                {unit.script && unit.script !== "null" && (
+                {unit.script && (
                   <div>{unit.script}</div>
                 )}
-                {unit.translation && unit.translation !== "null" && (
-                  <div>{unit.translation}</div>
-                )}
+                {unit.translation && <div>{unit.translation}</div>}
               </div>
             ) : (
               <></>

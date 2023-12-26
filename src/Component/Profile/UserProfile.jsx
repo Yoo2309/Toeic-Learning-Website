@@ -25,7 +25,7 @@ function UserProfile() {
     register: userData,
     handleSubmit,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm();
 
   const getUser = async () => {
@@ -71,16 +71,18 @@ function UserProfile() {
       formData.append("FullName", data.fullname);
       formData.append("dateOfBirth", data.dateOfBirth);
       formData.append("Gender", Boolean(data.gender));
-      console.log(Boolean(data.gender))
+      console.log(Boolean(data.gender));
       formData.append("PhoneNumber", data.phonenumber);
-      if (!data.imageURL) {
-      } else {
+      if (data.imageURL) {
         if (
           data.imageURL[0] instanceof File ||
           data.imageURL[0] instanceof Blob
         ) {
           formData.append("NewImage", data.imageURL[0]);
-        } else {
+        } else if (
+          typeof data.imageURL[0] === "string" &&
+          data.imageURL[0].trim() !== ""
+        ) {
           formData.append("OldImage", data.imageURL);
         }
       }
@@ -89,7 +91,7 @@ function UserProfile() {
       const response = await fetch(
         `${process.env.REACT_APP_API_BASE_URL}/Authen/Update-Profile`,
         {
-          method: "PUT",    
+          method: "PUT",
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -177,7 +179,7 @@ function UserProfile() {
                 </span>
               )}
             </error> */}
-          {avaPreview && avaPreview!=="null"&& (
+          {avaPreview && (
             <div className="flex flex-col items-center">
               <img src={avaPreview} alt="" className="w-64 h-64" />
             </div>

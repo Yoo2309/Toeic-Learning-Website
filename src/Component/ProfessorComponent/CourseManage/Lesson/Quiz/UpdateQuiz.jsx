@@ -216,7 +216,7 @@ function UpdateQuiz() {
         <div className="professor-board-header">
           <div className="professor-managment-sub-title">
             <h3 style={{ marginLeft: "1rem", paddingRight: "1rem" }}>
-              QUẢN LÝ QUIZ
+              QUẢN LÝ CÂU HỎI CỦA QUIZ
             </h3>
           </div>
           <img

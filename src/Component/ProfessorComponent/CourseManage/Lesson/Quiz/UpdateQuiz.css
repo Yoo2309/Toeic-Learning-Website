@@ -49,9 +49,9 @@
   width: 30%;
 }
 .quiz-question-list-wrapper {
-  margin: 2rem;
+  margin-top: 1.5rem;
 }
-.professor-update-quiz .question-list-item {
+.question-list-item {
   font-size: 18px;
   color: #535353;
   padding: 1rem;
@@ -65,13 +65,13 @@
   transform: translateZ(1px);
   box-shadow: 0 6px 6px #e8eaf1;
 }
-.professor-update-quiz .btn-wrapper {
+.question-list-item .btn-wrapper {
   width: 100%;
   display: flex;
   gap: 1rem;
 }
-.professor-update-quiz .delete-btn,
-.professor-update-quiz .update-btn {
+.question-list-item .delete-btn,
+.question-list-item .update-btn {
   width: 100%;
   height: 30px;
   border: none;
@@ -81,12 +81,12 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.professor-update-quiz .delete-btn:hover {
+.question-list-item .delete-btn:hover {
   width: 130%;
 }
-.professor-update-quiz .update-btn:hover {
+.question-list-item .update-btn:hover {
   width: 130%;
 }
-.professor-update-quiz .question-choice {
+.question-list-item .question-choice {
   padding-left: 1rem;
 }
