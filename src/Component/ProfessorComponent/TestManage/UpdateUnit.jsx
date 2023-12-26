@@ -332,7 +332,7 @@ function UpdateUnit() {
                 }}
                 onClick={(e) => {
                   e.preventDefault();
-                  setImage("");
+                  handleDeleteImage();
                 }}
               >
                 Xóa ảnh
@@ -356,7 +356,7 @@ function UpdateUnit() {
                 }}
                 onClick={(e) => {
                   e.preventDefault();
-                  setAudio("");
+                  handleDeleteAudio();
                 }}
               >
                 Xóa Audio

@@ -145,6 +145,9 @@ function UserProfile() {
         URL.revokeObjectURL(objectURL);
       };
     }
+    else{
+      setAvaPreview(e.target.files[0])
+    }
   };
   useEffect(() => {
     if (Object.keys(userResponse).length) {
