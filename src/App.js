@@ -42,6 +42,7 @@ import ChangePassword from "./Component/Profile/ChangePassword";
 import TestRecord from "./Component/Test/TestRecord/TestRecord";
 import RecordByTest from "./Component/Test/TestRecord/RecordByTest";
 import TestResult from "./Component/Test/TestMain/TestResult";
+import UserPrivate from "./Component/Common/Layout/UserPrivate";
 
 function App() {
   return (
@@ -52,13 +53,6 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
-            <Route exact path="/forgot-password" element={<ForgotPassword />} />
-            <Route exact path="/user/profile/:id" element={<UserProfile />} />
-            <Route
-              exact
-              path="/user/changePassword"
-              element={<ChangePassword />}
-            />
             <Route
               exact
               path="/practice-vocabulary"
@@ -75,29 +69,43 @@ function App() {
               path="/course-lessons/:id"
               element={<CourseLessons />}
             />
-            <Route exact path="/lesson/:id" element={<Lesson />} />
             <Route exact path="/test" element={<TestIndex />} />
             <Route exact path="/test/type/:id" element={<TestList />} />
-            <Route exact path="/test/record" element={<TestRecord />} />
-            <Route exact path="/test/result/:id" element={<TestResult />} />
-            <Route exact path="/test/:id" element={<RecordByTest />} />
-            <Route exact path="/do-test/:id" element={<TestMain />} />
-            <Route exact path="/vippackage" element={<VipPackage />} />
-            <Route
-              exact
-              path="/vippackage-detail/:id"
-              element={<VipPackageDetail />}
-            />
-            <Route
-              exact
-              path="/vippackage-checkout/:state"
-              element={<VipPackageCheckout />}
-            />
-            <Route
-              exact
-              path="/payment-history"
-              element={<VipPackageCheckout />}
-            />
+
+            <Route element={<UserPrivate />}>
+              <Route
+                exact
+                path="/forgot-password"
+                element={<ForgotPassword />}
+              />
+              <Route exact path="/user/profile/:id" element={<UserProfile />} />
+              <Route
+                exact
+                path="/user/changePassword"
+                element={<ChangePassword />}
+              />
+              <Route exact path="/lesson/:id" element={<Lesson />} />
+              <Route exact path="/test/record" element={<TestRecord />} />
+              <Route exact path="/test/result/:id" element={<TestResult />} />
+              <Route exact path="/test/:id" element={<RecordByTest />} />
+              <Route exact path="/do-test/:id" element={<TestMain />} />
+              <Route exact path="/vippackage" element={<VipPackage />} />
+              <Route
+                exact
+                path="/vippackage-detail/:id"
+                element={<VipPackageDetail />}
+              />
+              <Route
+                exact
+                path="/vippackage-checkout/:state"
+                element={<VipPackageCheckout />}
+              />
+              <Route
+                exact
+                path="/payment-history"
+                element={<VipPackageCheckout />}
+              />
+            </Route>
           </Routes>
         </UserLayout>
         <ProfessorLayout>

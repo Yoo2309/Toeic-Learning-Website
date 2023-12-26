@@ -168,10 +168,6 @@ function Lesson() {
     fetchQuestionByQuiz();
   }, [current_quizID]);
 
-  if (!user.auth) {
-    navigate("/login");
-  }
-
   if (isLoading) {
     return <Loader />;
   }

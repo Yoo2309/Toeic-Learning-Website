@@ -10,7 +10,6 @@ function UserProfile() {
   const { id } = useParams();
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
   const [isloading, setIsLoading] = useState(false);
   const [userResponse, setUserResponse] = useState({
     username: "john_doe",
@@ -26,8 +25,7 @@ function UserProfile() {
     register: userData,
     handleSubmit,
     formState: { errors },
-    setValue,
-    getValues
+    setValue
   } = useForm();
 
   const getUser = async () => {
@@ -39,7 +37,7 @@ function UserProfile() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
         }
       );
@@ -93,7 +91,7 @@ function UserProfile() {
         {
           method: "PUT",    
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: formData,
         }
@@ -129,10 +127,10 @@ function UserProfile() {
   }
 
   useEffect(() => {
-    if (token) {
+    if (user.idUser) {
       getUser();
     }
-  }, []);
+  }, [user.idUser]);
   const OnchangeAva = (e) => {
     let objectURL;
     if (

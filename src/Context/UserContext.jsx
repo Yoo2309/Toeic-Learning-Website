@@ -20,20 +20,26 @@ const UserProvider = ({ children }) => {
     ava: "https://img.icons8.com/papercut/100/user-female-circle.png",
   });
   function isTokenExpired(exp) {
-    const currentTime = Math.floor(Date.now() / 1000); // Lấy thời gian hiện tại dưới dạng Unix timestamp (số giây)
-    return currentTime > exp;
+    if (exp) {
+      const currentTime = Math.floor(Date.now() / 1000);
+      return currentTime > exp;
+    } else {
+      return false;
+    }
   }
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       const token_decode = decodeToken(token);
-      if (!isTokenExpired(token_decode.exp)) {
+      console.log(token_decode);
+      if (token_decode && !isTokenExpired(token_decode.exp)) {
         const {
           "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name":
-            username,
-          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": role,
+            username = "",
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role":
+            role = "",
           "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier":
-            idUser,
+            idUser = "",
         } = token_decode;
 
         setUser((user) => ({
@@ -63,8 +69,19 @@ const UserProvider = ({ children }) => {
     }
   }, [user.idUser]);
 
+  const isValidJWT = (token) => {
+    const parts = token.split(".");
+    return Array.isArray(parts) && parts.length === 3;
+  };
+
   const decodeToken = (token) => {
-    return jwtDecode(token);
+    try {
+      if (isValidJWT(token)) {
+        return jwtDecode(token);
+      }
+    } catch {
+      return false;
+    }
   };
   const loginContext = (token) => {
     const token_decode = decodeToken(token);
@@ -163,7 +180,7 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, logout, userAuthen, loginContext, setUser }}
+      value={{ user, logout, userAuthen, loginContext, decodeToken, setUser }}
     >
       {children}
     </UserContext.Provider>
