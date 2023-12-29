@@ -71,7 +71,15 @@ function Login() {
       const data = await response.json();
       if (data.token !== undefined) {
         loginContext(data.token);
-        navigate("/");
+        const returnPath = localStorage.getItem("returnPath");
+        if (returnPath) {
+          // Chuyển hướng người dùng về trang trước khi đăng nhập
+          navigate(returnPath);
+          localStorage.removeItem("returnPath"); // Xóa đường dẫn sau khi đã sử dụng
+        } else {
+          // Nếu không có đường dẫn trước đó, chuyển hướng về trang chủ
+          navigate("/");
+        }
       } else {
         toast.success(`${data.message}`, {
           position: toast.POSITION.BOTTOM_RIGHT,
@@ -121,7 +129,7 @@ function Login() {
           pauseOnHover: true,
           draggable: true,
         });
-        SwitchSignUpMode(false)
+        SwitchSignUpMode(false);
       }
     } catch (error) {
       toast.error(`${error}`, {
