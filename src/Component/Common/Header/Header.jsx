@@ -17,6 +17,7 @@ function Header() {
   const navigate = useNavigate();
   function handleLogout() {
     logout();
+    navigate("/")
     window.location.reload();
   }
   async function fetchTestType() {
