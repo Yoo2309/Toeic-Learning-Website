@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import Heading from "../Common/Header/Heading";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import Loader from "../Common/Loader/Loader";
 import { toast } from "react-toastify";
 import "./VipPackageCheckout.css";
@@ -10,10 +9,9 @@ import { UserContext } from "../../Context/UserContext";
 
 export default function VipPackageCheckout() {
   const { state } = useParams();
-  const { user, setUser } = useContext(UserContext);
+  const { user, loginContext } = useContext(UserContext);
   const [payments, setPayments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [payMethod, setPayMethod] = useState("MOMO");
   const formatter = new Intl.NumberFormat("vi", {
     style: "currency",
     currency: "VND",
@@ -63,12 +61,49 @@ export default function VipPackageCheckout() {
     }
   }, [user]);
 
+  async function RenewVIPToken() {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/Authen/RenewToken`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        toast.error(`${errorData}`, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 5000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else {
+        const data = await response.json();
+        loginContext(data.token);
+      }
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(`${error}`, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 5000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  }
+  
   useEffect(() => {
-    if (state==="success") {
-      setUser((prevState) => ({
-        ...prevState,
-        role: ["Student", "VipStudent"],
-      }));
+    if (state === "success") {
+      RenewVIPToken()
     }
   }, [state]);
   if (isLoading) {
