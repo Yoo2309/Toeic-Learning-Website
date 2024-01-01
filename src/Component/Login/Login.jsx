@@ -59,14 +59,24 @@ function Login() {
     const response = await userAuthen(login_data.username, login_data.password);
     setIsLoading(false);
     if (!response.ok) {
-      // const errorData = await response.json();
-      toast.error("Đăng nhập không thành công", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      if (response.status === 404) {
+        const errorData = await response.json();
+        toast.warning(`${errorData.message}`, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 5000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else {
+        toast.error("Đăng nhập không thành công", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 5000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
     } else {
       const data = await response.json();
       if (data.token !== undefined) {
