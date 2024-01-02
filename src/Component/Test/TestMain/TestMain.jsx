@@ -309,17 +309,17 @@ function TestMain() {
     <div className="test-container">
       {time && (
         <div className="countdown-clock">
-          <div style={{ fontWeight: 500 }}>
-            {time.hour < 10 ? "0" + time.hour : time.hour}:{" "}
-            {time.min < 10 ? "0" + time.min : time.min}:{" "}
-            {time.sec < 10 ? "0" + time.sec : time.sec}
-          </div>
           <img
             width="30"
             height="30"
             src="https://img.icons8.com/office/30/present.png"
             alt="present"
           />
+          <div style={{ fontWeight: 500 }}>
+            {time.hour < 10 ? "0" + time.hour : time.hour}:{" "}
+            {time.min < 10 ? "0" + time.min : time.min}:{" "}
+            {time.sec < 10 ? "0" + time.sec : time.sec}
+          </div>
         </div>
       )}
       <div className="tab-header">
