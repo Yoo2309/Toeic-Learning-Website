@@ -71,7 +71,7 @@ function Login() {
       } else {
         toast.error("Đăng nhập không thành công", {
           position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
+          autoClose: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
@@ -224,6 +224,7 @@ function Login() {
                     <input
                       type="text"
                       placeholder="Tên đăng nhập"
+                      id="login-username"
                       {...loginData("username", { required: true })}
                     />
                   </div>
@@ -236,6 +237,7 @@ function Login() {
                     <input
                       type={showPassword ? "text" : "password"}
                       placeholder="Mật khẩu"
+                      id="login-password"
                       {...loginData("password", { required: true })}
                     />
                     {!showPassword ? (
@@ -257,7 +259,7 @@ function Login() {
                   <a className="forgot-password">
                     <Link to="/forgot-password">Quên mật khẩu</Link>
                   </a>
-                  <input type="submit" value="Đăng nhập" className="btn" />
+                  <input type="submit" value="Đăng nhập" className="btn" id="login-btn"/>
                   <p className="social-text">Đăng nhập bằng tài khoản khác</p>
                   <div className="social-media">
                     <a href="#" className="social-icon">
@@ -353,6 +355,7 @@ function Login() {
                 <input
                   type="text"
                   placeholder="Tên đăng nhập"
+                  id="signup-username"
                   {...SignUpData("username", { required: true })}
                 />
               </div>
@@ -365,6 +368,7 @@ function Login() {
                 <input
                   type="text"
                   placeholder="Email"
+                  id="signup-email"
                   {...SignUpData("email", {
                     required: true,
                     pattern:
@@ -383,6 +387,7 @@ function Login() {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Mật khẩu"
+                  id="signup-password"
                   {...SignUpData("password", {
                     required: true,
                     pattern:
@@ -407,7 +412,7 @@ function Login() {
                 {error_signup.password?.type === "pattern" &&
                   "Phải có ít nhất 6 ký tự, một chữ hoa, một chữ thường, một chữ số, một ký tự đặc biệt"}
               </error>
-              <input type="submit" value="Đăng ký" className="btn" />
+              <input type="submit" value="Đăng ký" className="btn" id="signup-btn"/>
               <p className="social-text">Đăng nhập bằng tài khoản khác</p>
               <div className="social-media">
                 <a href="#" className="social-icon">
@@ -439,7 +444,7 @@ function Login() {
                 <p>Đăng nhập để trải nghiệm trang web ngay!!!</p>
                 <button
                   className="btn"
-                  id="sign-in-btn"
+                  id="switch-sign-in-btn"
                   onClick={() => SwitchSignUpMode(false)}
                 >
                   Đăng nhập
@@ -455,7 +460,7 @@ function Login() {
                 </p>
                 <button
                   className="btn"
-                  id="sign-up-btn"
+                  id="switch-sign-up-btn"
                   onClick={() => SwitchSignUpMode(true)}
                 >
                   Đăng ký

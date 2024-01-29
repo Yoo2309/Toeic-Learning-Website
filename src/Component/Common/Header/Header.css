@@ -59,7 +59,7 @@ a:-webkit-any-link {
 .user-layout header {
   background-color: #70a2ab;
 }
-.button {
+.user-layout .login-button {
   font-size: 1.25rem;
   font-weight: 700;
 }

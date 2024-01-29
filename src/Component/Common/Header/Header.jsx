@@ -134,7 +134,7 @@ function Header() {
           </ul>
           {!user.auth ? (
             <div className="start">
-              <div className="button">
+              <div className="login-button">
                 <Link to="/login">LOGIN</Link>
               </div>
             </div>
