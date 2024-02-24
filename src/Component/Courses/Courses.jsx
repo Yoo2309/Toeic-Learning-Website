@@ -45,13 +45,12 @@ function Courses() {
     fetchCourses();
     window.scrollTo(0, 0);
   }, []);
-  if (isLoading) {
-    return <Loader />;
-  }
+
   return (
     <div className="courses-list-wrapper">
       <div className="container courses-list">
         <Heading subtitle="VictoryU" title="Các khóa học của VictoryU" />
+        {isLoading ? <Loader /> : <></>}
         <div className="courses-list-grid-wrapper">
           <div className="courses-list-gridview">
             {courses &&

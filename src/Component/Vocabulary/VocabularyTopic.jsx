@@ -42,9 +42,7 @@ function VocabularyTopic() {
     fetchVocabularyTopic();
     window.scrollTo(0, 0);
   }, []);
-  if (isLoading) {
-    return <Loader />;
-  }
+
   return (
     <div className="vocabulary-topic-wrapper">
       <div className="container vocabulary-topic">
@@ -52,6 +50,7 @@ function VocabularyTopic() {
           subtitle="VictoryU"
           title="Các Topic từ vựng thường gặp trong TOEIC"
         />
+        {isLoading ? <Loader /> : <></>}
         <div className="vocabulary-topic-grid-wrapper">
           <div className="vocabulary-topic-gridview">
             {topics &&

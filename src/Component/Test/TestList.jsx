@@ -50,10 +50,6 @@ function TestList({ testType }) {
     window.scrollTo(0, 0);
   }, [id]);
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   return (
     <div className="test-wrapper">
       <div className="container test-list">
@@ -62,6 +58,7 @@ function TestList({ testType }) {
           title={`
             Kiểm tra ${testType || id} TOEIC`}
         />
+        {isLoading ? <Loader /> : <></>}
         <div className="test-grid-wrapper">
           <div className="test-grid">
             {tests &&
