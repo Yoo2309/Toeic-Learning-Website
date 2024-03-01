@@ -32,7 +32,9 @@ function UserProfile() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Authen/GetProfile?id=${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Authen/GetProfile?id=${id}`,
         {
           method: "GET",
           headers: {
@@ -89,7 +91,7 @@ function UserProfile() {
       formData.append("Enable2FA", false);
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Authen/Update-Profile`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Authen/Update-Profile`,
         {
           method: "PUT",
           headers: {
@@ -144,9 +146,8 @@ function UserProfile() {
       return () => {
         URL.revokeObjectURL(objectURL);
       };
-    }
-    else{
-      setAvaPreview(e.target.files[0])
+    } else {
+      setAvaPreview(e.target.files[0]);
     }
   };
   useEffect(() => {

@@ -29,7 +29,9 @@ function Lesson() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Lesson/GetLessonById/${id}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Lesson/GetLessonById/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -62,7 +64,9 @@ function Lesson() {
       if (courseid) {
         setIsLoading(true);
         const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}/Lesson/GetAllLessonByCourse/${courseid}`
+          `${
+            process.env.REACT_APP_API_BASE_URL ?? "/api"
+          }/Lesson/GetAllLessonByCourse/${courseid}`
         );
         setIsLoading(false);
         if (!response.ok) {
@@ -94,7 +98,9 @@ function Lesson() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Quiz/GetAllQuizByLesson/${id}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Quiz/GetAllQuizByLesson/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -128,7 +134,9 @@ function Lesson() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Question/GetAllQuestionByQuiz/${current_quizID}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Question/GetAllQuestionByQuiz/${current_quizID}`
       );
       setIsLoading(false);
       if (!response.ok) {

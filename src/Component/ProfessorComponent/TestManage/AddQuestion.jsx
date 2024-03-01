@@ -39,7 +39,9 @@ function AddQuestion({
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Question/AddQuestion/${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Question/AddQuestion/${
+          user.idUser
+        }`,
         {
           method: "POST",
           headers: {
@@ -94,7 +96,11 @@ function AddQuestion({
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Question/UpdateQuestion/${current_question.idQuestion}&&${user.idUser}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Question/UpdateQuestion/${current_question.idQuestion}&&${
+          user.idUser
+        }`,
         {
           method: "PUT",
           headers: {

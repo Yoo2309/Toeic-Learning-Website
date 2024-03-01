@@ -14,7 +14,9 @@ function VocabularyTopic() {
     async function fetchVocabularyTopic() {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}/VocTopic/GetAllVocTopic`
+          `${
+            process.env.REACT_APP_API_BASE_URL ?? "/api"
+          }/VocTopic/GetAllVocTopic`
         );
         setIsLoading(false);
         if (!response.ok) {

@@ -16,7 +16,9 @@ function RecordByTest() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Record/GetRecordByUserTest/${user.idUser}&&${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Record/GetRecordByUserTest/${user.idUser}&&${id}`,
         {
           method: "GET",
           headers: {

@@ -16,7 +16,9 @@ function UserAnswerDetail({ toggleModal, userAnswer, index }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/TestQuestionUnit/GetTestQuestionUnitById/${idUnit}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/TestQuestionUnit/GetTestQuestionUnitById/${idUnit}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -46,7 +48,9 @@ function UserAnswerDetail({ toggleModal, userAnswer, index }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Question/GetQuestionByID/${idQuestion}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Question/GetQuestionByID/${idQuestion}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -129,9 +133,7 @@ function UserAnswerDetail({ toggleModal, userAnswer, index }) {
             </div>
             {showScript ? (
               <div>
-                {unit.script && (
-                  <div>{unit.script}</div>
-                )}
+                {unit.script && <div>{unit.script}</div>}
                 {unit.translation && <div>{unit.translation}</div>}
               </div>
             ) : (

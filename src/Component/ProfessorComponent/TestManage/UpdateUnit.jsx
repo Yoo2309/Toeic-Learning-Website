@@ -101,7 +101,9 @@ function UpdateUnit() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/TestQuestionUnit/GetTestQuestionUnitById/${id}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/TestQuestionUnit/GetTestQuestionUnitById/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -174,7 +176,9 @@ function UpdateUnit() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/TestQuestionUnit/UpdateTestQuestionUnit/${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/TestQuestionUnit/UpdateTestQuestionUnit/${id}`,
         {
           method: "PUT",
           headers: {
@@ -218,7 +222,9 @@ function UpdateUnit() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Question/GetAllQuestionByUnit/${id}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Question/GetAllQuestionByUnit/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -248,7 +254,9 @@ function UpdateUnit() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Question/DeleteQuestion/${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Question/DeleteQuestion/${id}`,
         {
           method: "DELETE",
           headers: {

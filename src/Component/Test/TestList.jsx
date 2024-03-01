@@ -15,7 +15,9 @@ function TestList({ testType }) {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Test/GetAllTestByType/${id}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Test/GetAllTestByType/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {

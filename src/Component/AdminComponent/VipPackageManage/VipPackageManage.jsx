@@ -17,7 +17,9 @@ function VipPackageManage() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Admin/GetAllVipPackages`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Admin/GetAllVipPackages`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -54,7 +56,9 @@ function VipPackageManage() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Admin/DeleteVipPackage/${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Admin/DeleteVipPackage/${id}`,
         {
           method: "DELETE",
           headers: {
