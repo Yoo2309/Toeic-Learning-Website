@@ -38,7 +38,9 @@ function TestResult() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Record/GetRecordByID/${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Record/GetRecordByID/${id}`,
         {
           method: "GET",
           headers: {
@@ -69,7 +71,9 @@ function TestResult() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/UserAnswer/GetUserAnswerByRecord/${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/UserAnswer/GetUserAnswerByRecord/${id}`,
         {
           method: "GET",
           headers: {

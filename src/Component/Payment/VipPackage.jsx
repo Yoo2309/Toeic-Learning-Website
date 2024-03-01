@@ -21,7 +21,9 @@ function VipPackage() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/VipPackage/GetAllVipPackages`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/VipPackage/GetAllVipPackages`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -51,7 +53,9 @@ function VipPackage() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Payment/GetExpireTimeVipStudent/${user.idUser}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Payment/GetExpireTimeVipStudent/${user.idUser}`,
         {
           method: "GET",
           headers: {

@@ -51,7 +51,9 @@ function ProfessorVocabulary() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Vocabulary/GetVocabularyByTopic/${id}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Vocabulary/GetVocabularyByTopic/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -80,7 +82,9 @@ function ProfessorVocabulary() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/VocTopic/GetVocTopicById/${id}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/VocTopic/GetVocTopicById/${id}`
       );
       if (!response.ok) {
         const errorData = await response.json();
@@ -118,12 +122,14 @@ function ProfessorVocabulary() {
     }
     window.scrollTo(0, 0);
   }, [modal]);
-  
+
   const handleUpdateVocabularyTopic = async (register) => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/VocTopic/UpdateVocTopic/${id}&&${user.idUser}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/VocTopic/UpdateVocTopic/${id}&&${user.idUser}`,
         {
           method: "PUT",
           headers: {
@@ -168,7 +174,9 @@ function ProfessorVocabulary() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Vocabulary/DeleteVocabulary/${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Vocabulary/DeleteVocabulary/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -279,9 +287,10 @@ function ProfessorVocabulary() {
                   <div className="word-meaning">{word.meaning}</div>
                   <div className="btn-wrapper">
                     <button
-                      className="delete-btn"onClick={() =>
+                      className="delete-btn"
+                      onClick={() =>
                         showDeleteWarning(() =>
-                        handleDeleteVocabulary(word.idVoc)
+                          handleDeleteVocabulary(word.idVoc)
                         )
                       }
                     >

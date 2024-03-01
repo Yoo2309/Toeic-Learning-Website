@@ -19,7 +19,7 @@ function AddQuiz({ toggleModal, modal_on, idLesson }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Quiz/AddQuiz`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Quiz/AddQuiz`,
         {
           method: "POST",
           headers: {

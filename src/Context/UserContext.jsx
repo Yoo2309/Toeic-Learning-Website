@@ -102,7 +102,7 @@ const UserProvider = ({ children }) => {
   const userAuthen = async (username, pwd) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Authen/Login`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Authen/Login`,
         {
           method: "POST",
           headers: {
@@ -129,7 +129,9 @@ const UserProvider = ({ children }) => {
   const getAvatar = async (idUser, token) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Authen/GetProfile?id=${idUser}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Authen/GetProfile?id=${idUser}`,
         {
           method: "GET",
           headers: {

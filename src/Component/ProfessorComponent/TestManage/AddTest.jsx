@@ -21,7 +21,9 @@ function AddTest({ toggleModal, modal_on }) {
   async function fetchTestType() {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/TestType/GetAllTestTypes`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/TestType/GetAllTestTypes`
       );
       if (!response.ok) {
         const errorData = await response.json();
@@ -54,7 +56,9 @@ function AddTest({ toggleModal, modal_on }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Test/AddTest?userId=${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Test/AddTest?userId=${
+          user.idUser
+        }`,
         {
           method: "POST",
           headers: {

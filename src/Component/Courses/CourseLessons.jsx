@@ -19,7 +19,9 @@ function CourseLessons() {
       try {
         setIsLoading(true);
         const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}/Lesson/GetAllLessonByCourse/${id}`
+          `${
+            process.env.REACT_APP_API_BASE_URL ?? "/api"
+          }/Lesson/GetAllLessonByCourse/${id}`
         );
         setIsLoading(false);
         if (!response.ok) {
@@ -49,7 +51,7 @@ function CourseLessons() {
       try {
         setIsLoading(true);
         const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}/Course/GetAllCourses`
+          `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Course/GetAllCourses`
         );
         setIsLoading(false);
         if (!response.ok) {

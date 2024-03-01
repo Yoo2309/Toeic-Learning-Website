@@ -19,7 +19,7 @@ function AddCourse({ toggleModal, modal_on }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Course/AddCourse`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Course/AddCourse`,
         {
           method: "POST",
           headers: {

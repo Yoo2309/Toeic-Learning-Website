@@ -19,7 +19,7 @@ function ChangePassword() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Authen/ChangePassword`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Authen/ChangePassword`,
         {
           method: "PUT",
           headers: {

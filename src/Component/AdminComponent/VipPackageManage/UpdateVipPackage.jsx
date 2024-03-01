@@ -23,7 +23,9 @@ function UpdateVipPackage() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Admin/GetVipPackageById/${idPackage}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Admin/GetVipPackageById/${idPackage}`,
         {
           method: "GET",
           headers: {
@@ -63,7 +65,9 @@ function UpdateVipPackage() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Admin/UpdateVipPackage/${idPackage}&&${user.idUser}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Admin/UpdateVipPackage/${idPackage}&&${user.idUser}`,
         {
           method: "PUT",
           headers: {

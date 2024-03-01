@@ -107,7 +107,7 @@ function Login() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Authen/Register`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Authen/Register`,
         {
           method: "POST",
           headers: {
@@ -157,7 +157,7 @@ function Login() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Authen/Login-2FA`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Authen/Login-2FA`,
         {
           method: "POST",
           headers: {
@@ -259,7 +259,12 @@ function Login() {
                   <a className="forgot-password">
                     <Link to="/forgot-password">Quên mật khẩu</Link>
                   </a>
-                  <input type="submit" value="Đăng nhập" className="btn" id="login-btn"/>
+                  <input
+                    type="submit"
+                    value="Đăng nhập"
+                    className="btn"
+                    id="login-btn"
+                  />
                   <p className="social-text">Đăng nhập bằng tài khoản khác</p>
                   <div className="social-media">
                     <a href="#" className="social-icon">
@@ -412,7 +417,12 @@ function Login() {
                 {error_signup.password?.type === "pattern" &&
                   "Phải có ít nhất 6 ký tự, một chữ hoa, một chữ thường, một chữ số, một ký tự đặc biệt"}
               </error>
-              <input type="submit" value="Đăng ký" className="btn" id="signup-btn"/>
+              <input
+                type="submit"
+                value="Đăng ký"
+                className="btn"
+                id="signup-btn"
+              />
               <p className="social-text">Đăng nhập bằng tài khoản khác</p>
               <div className="social-media">
                 <a href="#" className="social-icon">

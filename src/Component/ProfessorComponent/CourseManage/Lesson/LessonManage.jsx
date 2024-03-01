@@ -27,7 +27,9 @@ function LessonManage() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Course/GetCourseById/${id}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Course/GetCourseById/${id}`
       );
       if (!response.ok) {
         const errorData = await response.json();
@@ -56,7 +58,9 @@ function LessonManage() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Course/UpdateCourse/${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Course/UpdateCourse/${id}`,
         {
           method: "PUT",
           headers: {
@@ -102,7 +106,9 @@ function LessonManage() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Lesson/GetAllLessonByCourse/${id}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Lesson/GetAllLessonByCourse/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -132,7 +138,9 @@ function LessonManage() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Lesson/DeleteLesson/${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Lesson/DeleteLesson/${id}`,
         {
           method: "DELETE",
           headers: {

@@ -19,7 +19,9 @@ function AddVocabularyTopic({ toggleModal, modal_on }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/VocTopic/AddVocTopic?userId=${user.idUser}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/VocTopic/AddVocTopic?userId=${user.idUser}`,
         {
           method: "POST",
           headers: {
