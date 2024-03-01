@@ -1,10 +1,19 @@
-FROM node:13.12.0-alpine
+# build ra production
+FROM node:18-alpine as build-env
+
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
-COPY package.json ./
-COPY package-lock.json ./ 
-RUN npm install --silent
-RUN npm install react-scripts@4.0.3 -g --silent
-COPY . ./
-CMD ["npm", "start"]
-EXPOSE 3000
+
+COPY . .
+
+RUN yarn install --no-frozen-lockfile && yarn build
+
+# serve CDN o day
+FROM nginx:1.18-alpine as deploy-env
+
+WORKDIR /deploy
+
+COPY ./nginx.conf /etc/nginx/nginx.conf
+
+COPY --from=build-env /app/build/ .
+
+EXPOSE 80
