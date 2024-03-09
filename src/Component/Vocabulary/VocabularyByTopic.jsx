@@ -37,13 +37,7 @@ function VocabularyByTopic() {
           setWords(data);
         }
       } catch (error) {
-        toast.error(`${error}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        console.log(error);
       }
     }
     async function fetchVocabularyTopic() {
@@ -68,13 +62,7 @@ function VocabularyByTopic() {
         const data = await response.json();
         setTopicName(data.name);
       } catch (error) {
-        toast.error(`${error}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        console.log(error);
       }
     }
     fetchVocabulary();

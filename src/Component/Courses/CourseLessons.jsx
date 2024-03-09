@@ -38,16 +38,10 @@ function CourseLessons() {
           setLessons(data);
         }
       } catch (error) {
-        toast.error(`${error}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        console.log(error);
       }
     }
-    async function fetchOtherLessons() {
+    async function fetchOtherCourses() {
       try {
         setIsLoading(true);
         const response = await fetch(
@@ -69,58 +63,52 @@ function CourseLessons() {
           setOtherCourses(data.filter((course) => course.idCourse !== id));
         }
       } catch (error) {
-        toast.error(`${error}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        console.log(error);
       }
     }
     fetchLessons();
-    fetchOtherLessons();
+    fetchOtherCourses();
   }, [id]);
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   return (
     <div>
       <div className="course-lesson-wrapper">
-        <div className="container course-lesson-card">
-          <Heading subtitle={current_course.name} />
-          <div className="list-lesson-wrapper">
-            <div className="list-lesson">
-              {lessons &&
-                lessons.map((lesson, index) => {
-                  return (
-                    <div key={index} className="list-lesson-item">
-                      <Link to={`/lesson/${lesson.idLesson}`}>
-                        <div className="list-lesson-name">{lesson.title}</div>
-                      </Link>
-                    </div>
-                  );
-                })}
-            </div>
-            <div className="other-course-wrapper">
-              <div className="title">Các khóa học khác</div>
-              <div className="other-course-list">
-                {other_courses &&
-                  other_courses.map((other_course, index) => {
+        <Heading subtitle={current_course.name} />
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className="container course-lesson-card">
+            <div className="list-lesson-wrapper">
+              <div className="list-lesson">
+                {lessons &&
+                  lessons.map((lesson, index) => {
                     return (
-                      <div key={index} className="course-item">
-                        <Link to={`/course-lessons/${other_course.idCourse}`}>
-                          {other_course.name}
+                      <div key={index} className="list-lesson-item">
+                        <Link to={`/lesson/${lesson.idLesson}`}>
+                          <div className="list-lesson-name">{lesson.title}</div>
                         </Link>
                       </div>
                     );
                   })}
               </div>
+              <div className="other-course-wrapper">
+                <div className="title">Các khóa học khác</div>
+                <div className="other-course-list">
+                  {other_courses &&
+                    other_courses.map((other_course, index) => {
+                      return (
+                        <div key={index} className="course-item">
+                          <Link to={`/course-lessons/${other_course.idCourse}`}>
+                            {other_course.name}
+                          </Link>
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
