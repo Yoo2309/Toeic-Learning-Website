@@ -71,13 +71,10 @@ function App() {
             />
             <Route exact path="/test" element={<TestIndex />} />
             <Route exact path="/test/type/:id" element={<TestList />} />
+            <Route exact path="/test/result/:id" element={<TestResult />} />
+            <Route exact path="/forgot-password" element={<ForgotPassword />} />
 
             <Route element={<UserPrivate />}>
-              <Route
-                exact
-                path="/forgot-password"
-                element={<ForgotPassword />}
-              />
               <Route exact path="/user/profile/:id" element={<UserProfile />} />
               <Route
                 exact
@@ -86,7 +83,6 @@ function App() {
               />
               <Route exact path="/lesson/:id" element={<Lesson />} />
               <Route exact path="/test/record" element={<TestRecord />} />
-              <Route exact path="/test/result/:id" element={<TestResult />} />
               <Route exact path="/test/:id" element={<RecordByTest />} />
               <Route exact path="/do-test/:id" element={<TestMain />} />
               <Route exact path="/vippackage" element={<VipPackage />} />
