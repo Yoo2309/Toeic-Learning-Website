@@ -26,7 +26,7 @@ function CourseManageIndex() {
   async function fetchCourses() {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Course/GetAllCourses`
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Course/GetAllCourses`
       );
       if (!response.ok) {
         const errorData = await response.json();
@@ -55,7 +55,9 @@ function CourseManageIndex() {
   async function DeleteCourse(courseId) {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Course/DeleteCourse/${courseId}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Course/DeleteCourse/${courseId}`,
         {
           method: "DELETE",
           headers: {

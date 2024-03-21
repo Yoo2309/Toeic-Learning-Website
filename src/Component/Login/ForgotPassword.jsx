@@ -22,7 +22,9 @@ function ForgotPassword() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Authen/SendForgotPasswordCode?email=${email}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Authen/SendForgotPasswordCode?email=${email}`,
         {
           method: "POST",
           headers: {
@@ -53,8 +55,8 @@ function ForgotPassword() {
       }
     } catch (error) {
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -66,7 +68,7 @@ function ForgotPassword() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Authen/ForgotPassword`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Authen/ForgotPassword`,
         {
           method: "POST",
           headers: {
@@ -100,8 +102,8 @@ function ForgotPassword() {
       }
     } catch (error) {
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

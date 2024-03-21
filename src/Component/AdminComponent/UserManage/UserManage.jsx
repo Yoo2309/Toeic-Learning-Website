@@ -17,7 +17,9 @@ function UserManage() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Admin/ResetPassword/${email}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Admin/ResetPassword/${email}`,
         {
           method: "PUT",
           headers: {
@@ -60,7 +62,7 @@ function UserManage() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Admin/GetAllUsers`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Admin/GetAllUsers`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -97,7 +99,9 @@ function UserManage() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Admin/DeleteUser/${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Admin/DeleteUser/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -128,8 +132,8 @@ function UserManage() {
       }
     } catch (error) {
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -184,9 +188,7 @@ function UserManage() {
                   <button
                     className="delete-btn"
                     onClick={() =>
-                      showDeleteWarning(() =>
-                        deleteUserById(item.id)
-                      )
+                      showDeleteWarning(() => deleteUserById(item.id))
                     }
                   >
                     Xóa

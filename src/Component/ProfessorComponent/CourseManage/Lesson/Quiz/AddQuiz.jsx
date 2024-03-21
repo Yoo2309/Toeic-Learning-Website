@@ -19,7 +19,7 @@ function AddQuiz({ toggleModal, modal_on, idLesson }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Quiz/AddQuiz`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Quiz/AddQuiz`,
         {
           method: "POST",
           headers: {
@@ -55,8 +55,8 @@ function AddQuiz({ toggleModal, modal_on, idLesson }) {
     } catch (error) {
       console.log(error);
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

@@ -21,7 +21,9 @@ export default function VipPackageCheckout() {
       const token = localStorage.getItem("token");
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Payment/GetAllPaymentsByUserIdOrderByDate/${user.idUser}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Payment/GetAllPaymentsByUserIdOrderByDate/${user.idUser}`,
         {
           method: "GET",
           headers: {
@@ -65,7 +67,7 @@ export default function VipPackageCheckout() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Authen/RenewToken`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Authen/RenewToken`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -100,10 +102,10 @@ export default function VipPackageCheckout() {
       });
     }
   }
-  
+
   useEffect(() => {
     if (state === "success") {
-      RenewVIPToken()
+      RenewVIPToken();
     }
   }, [state]);
   if (isLoading) {

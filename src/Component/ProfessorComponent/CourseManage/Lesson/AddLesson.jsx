@@ -29,7 +29,7 @@ function AddLesson() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Lesson/AddLesson`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Lesson/AddLesson`,
         {
           method: "POST",
           headers: {
@@ -63,8 +63,8 @@ function AddLesson() {
       }
     } catch (error) {
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

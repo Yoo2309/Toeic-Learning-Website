@@ -28,7 +28,9 @@ function ProfessorTestManage() {
   async function fetchTests() {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Test/GetAllTestByProfessor/${user.idUser}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Test/GetAllTestByProfessor/${user.idUser}`
       );
       if (!response.ok) {
         const errorData = await response.json();
@@ -66,7 +68,9 @@ function ProfessorTestManage() {
   async function DeleteTest(testId) {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Test/DeleteTest/${testId}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Test/DeleteTest/${testId}`,
         {
           method: "DELETE",
           headers: {
@@ -141,9 +145,7 @@ function ProfessorTestManage() {
                       <button
                         className="delete-btn"
                         onClick={() =>
-                          showDeleteWarning(() =>
-                          DeleteTest(test.idTest)
-                          )
+                          showDeleteWarning(() => DeleteTest(test.idTest))
                         }
                       >
                         Xóa

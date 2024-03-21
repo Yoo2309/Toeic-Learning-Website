@@ -22,7 +22,9 @@ function AddVipPackage() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Admin/AddVipPackage?userId=${user.idUser}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Admin/AddVipPackage?userId=${user.idUser}`,
         {
           method: "POST",
           headers: {
@@ -52,8 +54,8 @@ function AddVipPackage() {
     } catch (error) {
       console.log(error);
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

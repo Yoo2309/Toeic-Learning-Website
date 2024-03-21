@@ -27,7 +27,9 @@ function ProfessorVocabularyTopic() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/VocTopic/GetAllVocTopic`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/VocTopic/GetAllVocTopic`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -45,8 +47,8 @@ function ProfessorVocabularyTopic() {
       }
     } catch (error) {
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -58,7 +60,9 @@ function ProfessorVocabularyTopic() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/VocTopic/DeleteVocTopic/${voc_topic_id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/VocTopic/DeleteVocTopic/${voc_topic_id}`,
         {
           method: "DELETE",
           headers: {

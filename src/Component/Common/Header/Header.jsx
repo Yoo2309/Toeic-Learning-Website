@@ -17,14 +17,16 @@ function Header() {
   const navigate = useNavigate();
   function handleLogout() {
     logout();
-    navigate("/")
+    navigate("/");
     window.location.reload();
   }
   async function fetchTestType() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/TestType/GetAllTestTypes`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/TestType/GetAllTestTypes`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -41,8 +43,8 @@ function Header() {
       }
     } catch (error) {
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

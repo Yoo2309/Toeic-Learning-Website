@@ -28,7 +28,9 @@ function QuizManage({ idLesson }) {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Quiz/GetAllQuizByLesson/${idLesson}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Quiz/GetAllQuizByLesson/${idLesson}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -59,7 +61,7 @@ function QuizManage({ idLesson }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Quiz/DeleteQuiz/${id}`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Quiz/DeleteQuiz/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -90,8 +92,8 @@ function QuizManage({ idLesson }) {
       }
     } catch (error) {
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -139,9 +141,7 @@ function QuizManage({ idLesson }) {
                   <button
                     className="delete-btn"
                     onClick={() =>
-                      showDeleteWarning(() =>
-                        handleDeleteQuiz(quiz.idQuiz)
-                      )
+                      showDeleteWarning(() => handleDeleteQuiz(quiz.idQuiz))
                     }
                   >
                     Xóa

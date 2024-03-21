@@ -12,6 +12,7 @@ function TestResult() {
   const navigate = useNavigate();
   const [record, setRecord] = useState({});
   const [userAnswers, setUserAnswers] = useState([]);
+  const [record_user, setrecord_user] = useState({});
   const [curent_userAnswer, setCurentAnswer] = useState({});
   const [question_num, setQuestion_num] = useState({});
 
@@ -32,18 +33,20 @@ function TestResult() {
       document.body.classList.remove("active-modal");
     };
   }, [modal]);
-
+  console.log("render");
   //fetch
   async function fetchRecordById() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Record/GetRecordByID/${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Record/GetRecordByID/${id}`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            // Authorization: `Bearer ${user.token}`,
           },
         }
       );
@@ -69,7 +72,9 @@ function TestResult() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/UserAnswer/GetUserAnswerByRecord/${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/UserAnswer/GetUserAnswerByRecord/${id}`,
         {
           method: "GET",
           headers: {
@@ -95,14 +100,52 @@ function TestResult() {
       console.log(error);
     }
   }
+  async function GetUserInfo(id) {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        `${
+          process.env.REACT_APP_API_BASE_URL
+        }/Authen/GetUserInfo?id=${"d8e8141d-844e-4000-ba4a-b94caeae66ee"}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setIsLoading(false);
+      if (!response.ok) {
+        const errorData = await response.json();
+        toast.error(`${errorData.message}`, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 5000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+      const data = await response.json();
+      setrecord_user(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   //effect
   useEffect(() => {
     if (user.idUser) {
-      fetchRecordById();
       GetUserAnswersByRecord();
     }
   }, [user.idUser]);
+  useEffect(() => {
+    fetchRecordById();
+  }, []);
+  useEffect(() => {
+    if (record.idStudent && record.idUser !== user.idUser) {
+      GetUserInfo(record.idStudent);
+    }
+  }, [record, user.idUser]);
 
   if (isLoading) {
     return <Loader />;

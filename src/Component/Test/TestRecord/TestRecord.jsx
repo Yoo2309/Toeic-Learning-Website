@@ -15,7 +15,9 @@ function TestRecord() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Record/GetRecordByUser/${user.idUser}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Record/GetRecordByUser/${user.idUser}`,
         {
           method: "GET",
           headers: {
@@ -53,10 +55,6 @@ function TestRecord() {
       fetchRecordByUser();
     }
   }, [user.idUser]);
-
-  // if(!user.auth){
-  //   navigate("/login")
-  // }
 
   if (isLoading) {
     return <Loader />;

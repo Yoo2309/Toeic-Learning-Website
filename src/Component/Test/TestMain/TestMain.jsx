@@ -103,7 +103,9 @@ function TestMain() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Question/GetDoTest/${id}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Question/GetDoTest/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -133,7 +135,9 @@ function TestMain() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/TestPart/GetAllTestParts`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/TestPart/GetAllTestParts`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -163,7 +167,9 @@ function TestMain() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/TestType/GetTypeNameByTest/${id}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/TestType/GetTypeNameByTest/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -193,7 +199,9 @@ function TestMain() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Student/CheckFreeTest/${user.idUser}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Student/CheckFreeTest/${user.idUser}`,
         {
           method: "GET",
           headers: {
@@ -252,7 +260,9 @@ function TestMain() {
   async function SubmitTest() {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/UserAnswer/AddListUserAnswers/${user.idUser}&&${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/UserAnswer/AddListUserAnswers/${user.idUser}&&${id}`,
         {
           method: "POST",
           headers: {

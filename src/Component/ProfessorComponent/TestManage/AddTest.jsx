@@ -21,7 +21,9 @@ function AddTest({ toggleModal, modal_on }) {
   async function fetchTestType() {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/TestType/GetAllTestTypes`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/TestType/GetAllTestTypes`
       );
       if (!response.ok) {
         const errorData = await response.json();
@@ -38,8 +40,8 @@ function AddTest({ toggleModal, modal_on }) {
       setIsLoading(false);
     } catch (error) {
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -54,7 +56,9 @@ function AddTest({ toggleModal, modal_on }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Test/AddTest?userId=${user.idUser}`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Test/AddTest?userId=${
+          user.idUser
+        }`,
         {
           method: "POST",
           headers: {
@@ -90,8 +94,8 @@ function AddTest({ toggleModal, modal_on }) {
     } catch (error) {
       console.log(error);
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

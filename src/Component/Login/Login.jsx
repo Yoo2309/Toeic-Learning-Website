@@ -56,50 +56,57 @@ function Login() {
 
   async function handleLogin(login_data) {
     setIsLoading(true);
-    const response = await userAuthen(login_data.username, login_data.password);
-    setIsLoading(false);
-    if (!response.ok) {
-      if (response.status === 404) {
-        const errorData = await response.json();
-        toast.warning(`${errorData.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
-      } else {
-        toast.error("Đăng nhập không thành công", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
-      }
-    } else {
-      const data = await response.json();
-      if (data.token !== undefined) {
-        loginContext(data.token);
-        const returnPath = localStorage.getItem("returnPath");
-        if (returnPath) {
-          // Chuyển hướng người dùng về trang trước khi đăng nhập
-          navigate(returnPath);
-          localStorage.removeItem("returnPath"); // Xóa đường dẫn sau khi đã sử dụng
+    try {
+      const response = await userAuthen(
+        login_data.username,
+        login_data.password
+      );
+      setIsLoading(false);
+      if (!response.ok) {
+        if (response.status === 404) {
+          const errorData = await response.json();
+          toast.warning(`${errorData.message}`, {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: 5000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
         } else {
-          // Nếu không có đường dẫn trước đó, chuyển hướng về trang chủ
-          navigate("/");
+          toast.error("Đăng nhập không thành công", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
         }
       } else {
-        toast.success(`${data.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 10000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
-        // setIs2FA(true);
+        const data = await response.json();
+        if (data.token !== undefined) {
+          loginContext(data.token);
+          const returnPath = localStorage.getItem("returnPath");
+          if (returnPath) {
+            // Chuyển hướng người dùng về trang trước khi đăng nhập
+            navigate(returnPath);
+            localStorage.removeItem("returnPath"); // Xóa đường dẫn sau khi đã sử dụng
+          } else {
+            // Nếu không có đường dẫn trước đó, chuyển hướng về trang chủ
+            navigate("/");
+          }
+        } else {
+          toast.success(`${data.message}`, {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: 10000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+          // setIs2FA(true);
+        }
       }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -107,7 +114,7 @@ function Login() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Authen/Register`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Authen/Register`,
         {
           method: "POST",
           headers: {
@@ -143,8 +150,8 @@ function Login() {
       }
     } catch (error) {
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -157,7 +164,7 @@ function Login() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Authen/Login-2FA`,
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Authen/Login-2FA`,
         {
           method: "POST",
           headers: {
@@ -191,8 +198,8 @@ function Login() {
       }
     } catch (error) {
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -259,7 +266,12 @@ function Login() {
                   <a className="forgot-password">
                     <Link to="/forgot-password">Quên mật khẩu</Link>
                   </a>
-                  <input type="submit" value="Đăng nhập" className="btn" id="login-btn"/>
+                  <input
+                    type="submit"
+                    value="Đăng nhập"
+                    className="btn"
+                    id="login-btn"
+                  />
                   <p className="social-text">Đăng nhập bằng tài khoản khác</p>
                   <div className="social-media">
                     <a href="#" className="social-icon">
@@ -412,7 +424,12 @@ function Login() {
                 {error_signup.password?.type === "pattern" &&
                   "Phải có ít nhất 6 ký tự, một chữ hoa, một chữ thường, một chữ số, một ký tự đặc biệt"}
               </error>
-              <input type="submit" value="Đăng ký" className="btn" id="signup-btn"/>
+              <input
+                type="submit"
+                value="Đăng ký"
+                className="btn"
+                id="signup-btn"
+              />
               <p className="social-text">Đăng nhập bằng tài khoản khác</p>
               <div className="social-media">
                 <a href="#" className="social-icon">

@@ -43,6 +43,7 @@ import TestRecord from "./Component/Test/TestRecord/TestRecord";
 import RecordByTest from "./Component/Test/TestRecord/RecordByTest";
 import TestResult from "./Component/Test/TestMain/TestResult";
 import UserPrivate from "./Component/Common/Layout/UserPrivate";
+import EmailVerify from "./Component/Login/EmailVerify";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
+            <Route exact path="/login/success" element={<EmailVerify />} />
             <Route
               exact
               path="/practice-vocabulary"
@@ -71,13 +73,10 @@ function App() {
             />
             <Route exact path="/test" element={<TestIndex />} />
             <Route exact path="/test/type/:id" element={<TestList />} />
+            <Route exact path="/test/result/:id" element={<TestResult />} />
+            <Route exact path="/forgot-password" element={<ForgotPassword />} />
 
             <Route element={<UserPrivate />}>
-              <Route
-                exact
-                path="/forgot-password"
-                element={<ForgotPassword />}
-              />
               <Route exact path="/user/profile/:id" element={<UserProfile />} />
               <Route
                 exact
@@ -86,7 +85,6 @@ function App() {
               />
               <Route exact path="/lesson/:id" element={<Lesson />} />
               <Route exact path="/test/record" element={<TestRecord />} />
-              <Route exact path="/test/result/:id" element={<TestResult />} />
               <Route exact path="/test/:id" element={<RecordByTest />} />
               <Route exact path="/do-test/:id" element={<TestMain />} />
               <Route exact path="/vippackage" element={<VipPackage />} />

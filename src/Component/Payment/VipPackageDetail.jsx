@@ -24,7 +24,9 @@ function VipPackageDetail() {
       try {
         setIsLoading(true);
         const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}/VipPackage/GetVipPackageById/${id}`
+          `${
+            process.env.REACT_APP_API_BASE_URL ?? "/api"
+          }/VipPackage/GetVipPackageById/${id}`
         );
         setIsLoading(false);
         if (!response.ok) {
@@ -59,7 +61,9 @@ function VipPackageDetail() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Payment/CreateMoMoPayment`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Payment/CreateMoMoPayment`,
         {
           method: "POST",
           headers: {
@@ -98,7 +102,9 @@ function VipPackageDetail() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Payment/CreateVNPayPayment`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Payment/CreateVNPayPayment`,
         {
           method: "POST",
           headers: {

@@ -31,7 +31,9 @@ function UpdateLesson() {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Lesson/GetLessonById/${id}`
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Lesson/GetLessonById/${id}`
       );
       setIsLoading(false);
       if (!response.ok) {
@@ -64,7 +66,9 @@ function UpdateLesson() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Lesson/UpdateLesson/${id}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Lesson/UpdateLesson/${id}`,
         {
           method: "PUT",
           headers: {
@@ -98,8 +102,8 @@ function UpdateLesson() {
       }
     } catch (error) {
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

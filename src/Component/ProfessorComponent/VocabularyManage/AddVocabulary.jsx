@@ -41,7 +41,9 @@ function AddVocabulary({
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Vocabulary/AddVocabulary?userId=${user.idUser}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Vocabulary/AddVocabulary?userId=${user.idUser}`,
         {
           method: "POST",
           headers: {
@@ -79,8 +81,8 @@ function AddVocabulary({
     } catch (error) {
       console.log(error);
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -97,7 +99,9 @@ function AddVocabulary({
       setIsLoading(true);
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}/Vocabulary/UpdateVocabulary/${current_word.idVoc}&&${user.idUser}`,
+          `${
+            process.env.REACT_APP_API_BASE_URL ?? "/api"
+          }/Vocabulary/UpdateVocabulary/${current_word.idVoc}&&${user.idUser}`,
           {
             method: "PUT",
             headers: {

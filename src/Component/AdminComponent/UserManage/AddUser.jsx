@@ -28,7 +28,9 @@ function AddUser() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/Admin/Register-Professor-Admin?role=${data?.role}`,
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/Admin/Register-Professor-Admin?role=${data?.role}`,
         {
           method: "POST",
           headers: {
@@ -58,8 +60,8 @@ function AddUser() {
       }
     } catch (error) {
       toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
