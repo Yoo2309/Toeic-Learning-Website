@@ -8,7 +8,6 @@
   align-items: center;
   justify-content: center;
   transition: opacity 0.75s, visibility 0.75s;
-  background-color: #fff;
   z-index: 5;
 }
 
