@@ -43,6 +43,7 @@ import TestRecord from "./Component/Test/TestRecord/TestRecord";
 import RecordByTest from "./Component/Test/TestRecord/RecordByTest";
 import TestResult from "./Component/Test/TestMain/TestResult";
 import UserPrivate from "./Component/Common/Layout/UserPrivate";
+import EmailVerify from "./Component/Login/EmailVerify";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
+            <Route exact path="/login/success" element={<EmailVerify />} />
             <Route
               exact
               path="/practice-vocabulary"

@@ -5,12 +5,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 .login .container {
   position: relative;
   width: 70vw;
-  height: 100vh;
+  height: 32rem;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
@@ -294,7 +294,6 @@ a {
 @media (max-width: 900px) {
   .login .container {
     width: 100vw;
-    height: 100vh;
   }
 }
 @media (max-width: 689px) {
@@ -312,6 +311,9 @@ a {
   }
   .login .panels-container {
     display: none;
+  }
+  .login .input-field {
+    width: 95%;
   }
   .login .account-text {
     display: initial;

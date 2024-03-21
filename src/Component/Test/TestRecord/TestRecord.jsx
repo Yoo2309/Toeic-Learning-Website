@@ -56,10 +56,6 @@ function TestRecord() {
     }
   }, [user.idUser]);
 
-  // if(!user.auth){
-  //   navigate("/login")
-  // }
-
   if (isLoading) {
     return <Loader />;
   }

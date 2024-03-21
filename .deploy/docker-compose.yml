@@ -1,13 +1,16 @@
-version: '3.7'
+<<<<<<< HEAD
+version: "3.7"
+<<<<<<< Updated upstream
+=======
 
 services:
   backend:
-    image: 'vidao1233/toeic-web:v1'
+    image: "vidao1233/toeic-web:v1"
     networks:
       - toeic
 
   frontend:
-    image: 'tranngobichdu/toeic-learning-website:v1'
+    image: "tranngobichdu/toeic-learning-website:v1"
     networks:
       - toeic
 
@@ -21,4 +24,45 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
 
 networks:
+  toeic: {}
+
+version: '3.7'
+>>>>>>> Stashed changes
+
+services:
+  backend:
+    image: "vidao1233/toeic-web:v1"
+=======
+version: '3.7'
+
+services:
+  backend:
+    image: 'vidao1233/toeic-web:v1'
+>>>>>>> 49891b01c20e2297f86d6e3c9fdb119469badc5a
+    networks:
+      - toeic
+
+  frontend:
+<<<<<<< HEAD
+    image: "tranngobichdu/toeic-learning-website:v1"
+=======
+    image: 'tranngobichdu/toeic-learning-website:v1'
+>>>>>>> 49891b01c20e2297f86d6e3c9fdb119469badc5a
+    networks:
+      - toeic
+
+  api-gateway:
+    image: nginx:1.18
+    networks:
+      - toeic
+    ports:
+      - "10074:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
+networks:
+<<<<<<< HEAD
+  toeic: {}
+=======
   toeic: { }
+>>>>>>> 49891b01c20e2297f86d6e3c9fdb119469badc5a
