@@ -1,4 +1,32 @@
 version: "3.7"
+<<<<<<< Updated upstream
+=======
+
+services:
+  backend:
+    image: "vidao1233/toeic-web:v1"
+    networks:
+      - toeic
+
+  frontend:
+    image: "tranngobichdu/toeic-learning-website:v1"
+    networks:
+      - toeic
+
+  api-gateway:
+    image: nginx:1.18
+    networks:
+      - toeic
+    ports:
+      - "10074:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
+networks:
+  toeic: {}
+
+version: '3.7'
+>>>>>>> Stashed changes
 
 services:
   backend:

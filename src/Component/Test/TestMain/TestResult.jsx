@@ -105,7 +105,7 @@ function TestResult() {
       setIsLoading(true);
       const response = await fetch(
         `${
-          process.env.REACT_APP_API_BASE_URL
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
         }/Authen/GetUserInfo?id=${"d8e8141d-844e-4000-ba4a-b94caeae66ee"}`,
         {
           method: "GET",
@@ -138,6 +138,9 @@ function TestResult() {
       GetUserAnswersByRecord();
     }
   }, [user.idUser]);
+  useEffect(() => {
+    fetchRecordById();
+  }, []);
   useEffect(() => {
     fetchRecordById();
   }, []);
