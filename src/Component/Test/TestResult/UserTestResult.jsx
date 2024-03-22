@@ -9,7 +9,7 @@ function UserTestResult() {
   const { id } = useParams();
 
   return <div>
-    <TestResult id={id}/>
+    <TestResult id={id} isShare={true}/>
     {user.idUser && id ? <UserAnswer id={id} /> : <></>}</div>;
 }
 
