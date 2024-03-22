@@ -3,7 +3,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Component/Home/Home";
-import Footer from "./Component/Common/Footer/Footer";
 import Login from "./Component/Login/Login";
 import VocabularyTopic from "./Component/Vocabulary/VocabularyTopic";
 import VocabularyByTopic from "./Component/Vocabulary/VocabularyByTopic";
@@ -41,9 +40,10 @@ import UpdateVipPackage from "./Component/AdminComponent/VipPackageManage/Update
 import ChangePassword from "./Component/Profile/ChangePassword";
 import TestRecord from "./Component/Test/TestRecord/TestRecord";
 import RecordByTest from "./Component/Test/TestRecord/RecordByTest";
-import TestResult from "./Component/Test/TestMain/TestResult";
 import UserPrivate from "./Component/Common/Layout/UserPrivate";
 import EmailVerify from "./Component/Login/EmailVerify";
+import UserTestResult from "./Component/Test/TestResult/UserTestResult";
+import GuestTestResult from "./Component/Test/TestResult/GuestTestResult";
 
 function App() {
   return (
@@ -73,7 +73,11 @@ function App() {
             />
             <Route exact path="/test" element={<TestIndex />} />
             <Route exact path="/test/type/:id" element={<TestList />} />
-            <Route exact path="/test/result/:id" element={<TestResult />} />
+            <Route
+              exact
+              path="/test-share/result/:id"
+              element={<GuestTestResult />}
+            />
             <Route exact path="/forgot-password" element={<ForgotPassword />} />
 
             <Route element={<UserPrivate />}>
@@ -87,6 +91,11 @@ function App() {
               <Route exact path="/test/record" element={<TestRecord />} />
               <Route exact path="/test/:id" element={<RecordByTest />} />
               <Route exact path="/do-test/:id" element={<TestMain />} />
+              <Route
+                exact
+                path="/test/result/:id"
+                element={<UserTestResult />}
+              />
               <Route exact path="/vippackage" element={<VipPackage />} />
               <Route
                 exact
