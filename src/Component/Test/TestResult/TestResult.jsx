@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   FacebookShareButton,
@@ -12,36 +12,14 @@ import {
 import { UserContext } from "../../../Context/UserContext";
 import "./TestResult.css";
 import Loader from "../../Common/Loader/Loader";
-import UserAnswerDetail from "./UserAnswerDetail";
 
-function TestResult() {
-  const { user } = useContext(UserContext);
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [record, setRecord] = useState({});
-  const [userAnswers, setUserAnswers] = useState([]);
-  const [record_user, setrecord_user] = useState({});
-  const [curent_userAnswer, setCurentAnswer] = useState({});
-  const [question_num, setQuestion_num] = useState({});
-
+function TestResult({ id }) {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+  const [record, setRecord] = useState({});
+  const [record_user, setrecord_user] = useState({});
 
-  //modal
-  const [modal, setModal] = useState(false);
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-  useEffect(() => {
-    if (modal) {
-      document.body.classList.add("active-modal");
-    } else {
-      document.body.classList.remove("active-modal");
-    }
-    return () => {
-      document.body.classList.remove("active-modal");
-    };
-  }, [modal]);
-  console.log("render");
   //fetch
   async function fetchRecordById() {
     try {
@@ -76,45 +54,13 @@ function TestResult() {
       console.log(error);
     }
   }
-  async function GetUserAnswersByRecord() {
-    try {
-      setIsLoading(true);
-      const response = await fetch(
-        `${
-          process.env.REACT_APP_API_BASE_URL ?? "/api"
-        }/UserAnswer/GetUserAnswerByRecord/${id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
-      setIsLoading(false);
-      if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
-      }
-      const data = await response.json();
-      setUserAnswers(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
   async function GetUserInfo(id) {
     try {
       setIsLoading(true);
       const response = await fetch(
         `${
           process.env.REACT_APP_API_BASE_URL ?? "/api"
-        }/Authen/GetUserInfo?id=${"d8e8141d-844e-4000-ba4a-b94caeae66ee"}`,
+        }/Authen/GetUserInfo?id=${id}`,
         {
           method: "GET",
           headers: {
@@ -141,11 +87,6 @@ function TestResult() {
   }
 
   //effect
-  useEffect(() => {
-    if (user.idUser) {
-      GetUserAnswersByRecord();
-    }
-  }, [user.idUser]);
   useEffect(() => {
     fetchRecordById();
   }, []);
@@ -285,8 +226,13 @@ function TestResult() {
                   justifyContent: "space-evenly",
                 }}
               >
-                <button className="test-backtohome" onClick={record.tryAgain}>
-                  <Link to="/test">Quay về trang đề thi</Link>
+                <button
+                  className="test-backtohome"
+                  onClick={() => {
+                    navigate(`/test/${record.idTest}`);
+                  }}
+                >
+                  Quay về trang đề thi
                 </button>
                 <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                   <svg
@@ -299,13 +245,13 @@ function TestResult() {
                   >
                     <path d="M 9 9 L 9 14 L 9 54 L 51 54 L 56 54 L 55 42 L 51 42 L 51 49.095703 L 13 50 L 13.900391 14 L 21 14 L 21 10 L 9 9 z M 44 9 L 44 17.072266 C 29.919275 17.731863 19 23.439669 19 44 L 23 44 C 23 32.732824 29.174448 25.875825 44 25.080078 L 44 33 L 56 20.5 L 44 9 z"></path>
                   </svg>
-                  <FacebookShareButton url={window.location.href}>
+                  <FacebookShareButton url={`${window.location.origin}/test-share/result/${id}`}>
                     <FacebookIcon size={36} round />
                   </FacebookShareButton>
-                  <TwitterShareButton url={window.location.href}>
+                  <TwitterShareButton url={`${window.location.origin}/test-share/result/${id}`}>
                     <TwitterIcon size={36} round />
                   </TwitterShareButton>
-                  <LinkedinShareButton url={window.location.href}>
+                  <LinkedinShareButton url={`${window.location.origin}/test-share/result/${id}`}>
                     <LinkedinIcon size={36} round />
                   </LinkedinShareButton>
                 </div>
@@ -315,74 +261,24 @@ function TestResult() {
               <div className="test-result-ava">
                 <img
                   style={{ width: "90%" }}
-                  src={
-                    user.ava ||
-                    "https://img.icons8.com/papercut/100/user-female-circle.png"
-                  }
+                  src={record_user.imageURL ? record_user.imageURL : user.ava}
                   alt=""
                 ></img>
               </div>
-              <div style={{ fontSize: "18px" }}>{user.username}</div>
+              <div style={{ fontSize: "18px" }}>
+                {record_user.fullname ? record_user.fullname : user.username}
+              </div>
               <button
                 onClick={() => {
                   navigate("/test/record");
                 }}
                 className="test-history"
               >
-                Lịch sử làm bài <i class="fa-solid fa-clock-rotate-left"></i>
+                Lịch sử làm bài{" "}
+                <i className="fa-solid fa-clock-rotate-left"></i>
               </button>
             </div>
           </div>
-          {user.idUser ? (
-            <div className="user-answer-list-wrapper">
-              {userAnswers &&
-                userAnswers.map((userAnswer, index) => {
-                  return (
-                    <div className="user-answer-item">
-                      <div className="test-question-number">{index + 1}</div>
-                      {userAnswer.userChoice === "1"
-                        ? "A"
-                        : userAnswer.userChoice === "2"
-                        ? "B"
-                        : userAnswer.userChoice === "3"
-                        ? "C"
-                        : "D"}
-                      {userAnswer.state ? (
-                        <i
-                          class="fa-solid fa-check"
-                          style={{ color: "#0cb300" }}
-                        ></i>
-                      ) : (
-                        <i
-                          class="fa-solid fa-x"
-                          style={{ color: "#ff0000" }}
-                        ></i>
-                      )}
-                      <div
-                        onClick={() => {
-                          setQuestion_num(index + 1);
-                          setCurentAnswer(userAnswer);
-                          toggleModal();
-                        }}
-                      >
-                        Xem chi tiết
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
-          ) : (
-            <></>
-          )}
-          {modal ? (
-            <UserAnswerDetail
-              toggleModal={toggleModal}
-              userAnswer={curent_userAnswer}
-              index={question_num}
-            />
-          ) : (
-            <></>
-          )}
         </>
       )}
     </>
