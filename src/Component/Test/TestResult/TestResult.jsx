@@ -13,12 +13,13 @@ import { UserContext } from "../../../Context/UserContext";
 import "./TestResult.css";
 import Loader from "../../Common/Loader/Loader";
 
-function TestResult({ id }) {
+function TestResult({ id, isShare }) {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [record, setRecord] = useState({});
   const [record_user, setrecord_user] = useState({});
+  const [test, setTest] = useState({});
 
   //fetch
   async function fetchRecordById() {
@@ -85,11 +86,44 @@ function TestResult({ id }) {
       console.log(error);
     }
   }
-
+  async function fetchTest(id) {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Test/GetTestById/${id}`
+      );
+      setIsLoading(false);
+      if (!response.ok) {
+        const errorData = await response.json();
+        toast.error(`${errorData.message}`, {
+          position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
+          autoClose: 5000, // Tự động đóng sau 3 giây
+          closeOnClick: true, // Đóng khi click
+          pauseOnHover: true, // Tạm dừng khi di chuột qua
+          draggable: true, // Có thể kéo thông báo
+        });
+      }
+      const data = await response.json();
+      setTest(data);
+    } catch (error) {
+      toast.error(`${error}`, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 5000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  }
   //effect
   useEffect(() => {
     fetchRecordById();
   }, []);
+  useEffect(() => {
+    if (record.idTest) {
+      fetchTest(record.idTest);
+    }
+  }, [record.idTest]);
   useEffect(() => {
     if (record.idStudent && record.idUser !== user.idUser) {
       GetUserInfo(record.idStudent);
@@ -104,11 +138,12 @@ function TestResult({ id }) {
         <>
           <div className="test-result-wrapper">
             <div className="test-result">
+              <h2>{test.name ? test.name : ""}</h2>
               <div className="show-score">
                 <div className="test-result-info">
                   <img
-                    width="100"
-                    height="100"
+                    width="64"
+                    height="64"
                     src="https://img.icons8.com/external-smashingstocks-detailed-outline-smashing-stocks/66/external-Listening-overclocking-smashingstocks-detailed-outline-smashing-stocks.png"
                     alt="external-Listening-overclocking-smashingstocks-detailed-outline-smashing-stocks"
                   />
@@ -118,8 +153,8 @@ function TestResult({ id }) {
                 </div>
                 <div className="test-result-info">
                   <img
-                    width="100"
-                    height="100"
+                    width="64"
+                    height="64"
                     src="https://img.icons8.com/external-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto/100/external-reading-activity-and-hobbies-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto.png"
                     alt="external-reading-activity-and-hobbies-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto"
                   />
@@ -223,38 +258,63 @@ function TestResult({ id }) {
                 style={{
                   width: "100%",
                   display: "flex",
-                  justifyContent: "space-evenly",
+                  justifyContent: "space-between",
                 }}
               >
-                <button
-                  className="test-backtohome"
-                  onClick={() => {
-                    navigate(`/test/${record.idTest}`);
+                <div
+                  style={{
+                    width: "50%",
+                    display: "flex",
+                    justifyContent: "center",
                   }}
                 >
-                  Quay về trang đề thi
-                </button>
-                <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    x="0px"
-                    y="0px"
-                    width="5rem"
-                    height="5rem"
-                    viewBox="0 0 64 64"
+                  <button
+                    className="test-backtohome"
+                    onClick={() => {
+                      navigate(`/test/${record.idTest}`);
+                    }}
                   >
-                    <path d="M 9 9 L 9 14 L 9 54 L 51 54 L 56 54 L 55 42 L 51 42 L 51 49.095703 L 13 50 L 13.900391 14 L 21 14 L 21 10 L 9 9 z M 44 9 L 44 17.072266 C 29.919275 17.731863 19 23.439669 19 44 L 23 44 C 23 32.732824 29.174448 25.875825 44 25.080078 L 44 33 L 56 20.5 L 44 9 z"></path>
-                  </svg>
-                  <FacebookShareButton url={`${window.location.origin}/test-share/result/${id}`}>
-                    <FacebookIcon size={36} round />
-                  </FacebookShareButton>
-                  <TwitterShareButton url={`${window.location.origin}/test-share/result/${id}`}>
-                    <TwitterIcon size={36} round />
-                  </TwitterShareButton>
-                  <LinkedinShareButton url={`${window.location.origin}/test-share/result/${id}`}>
-                    <LinkedinIcon size={36} round />
-                  </LinkedinShareButton>
+                    Quay về trang đề thi
+                  </button>
                 </div>
+                {isShare ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: 10,
+                      alignItems: "center",
+                      padding: "0 1rem",
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      x="0px"
+                      y="0px"
+                      width="5rem"
+                      height="5rem"
+                      viewBox="0 0 64 64"
+                    >
+                      <path d="M 9 9 L 9 14 L 9 54 L 51 54 L 56 54 L 55 42 L 51 42 L 51 49.095703 L 13 50 L 13.900391 14 L 21 14 L 21 10 L 9 9 z M 44 9 L 44 17.072266 C 29.919275 17.731863 19 23.439669 19 44 L 23 44 C 23 32.732824 29.174448 25.875825 44 25.080078 L 44 33 L 56 20.5 L 44 9 z"></path>
+                    </svg>
+                    <FacebookShareButton
+                      url={`${window.location.origin}/test-share/result/${id}`}
+                    >
+                      <FacebookIcon size={36} round />
+                    </FacebookShareButton>
+                    <TwitterShareButton
+                      url={`${window.location.origin}/test-share/result/${id}`}
+                    >
+                      <TwitterIcon size={36} round />
+                    </TwitterShareButton>
+                    <LinkedinShareButton
+                      url={`${window.location.origin}/test-share/result/${id}`}
+                    >
+                      <LinkedinIcon size={36} round />
+                    </LinkedinShareButton>
+                  </div>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div style={{ width: "30%" }} className="test-result">
@@ -268,15 +328,19 @@ function TestResult({ id }) {
               <div style={{ fontSize: "18px" }}>
                 {record_user.fullname ? record_user.fullname : user.username}
               </div>
-              <button
-                onClick={() => {
-                  navigate("/test/record");
-                }}
-                className="test-history"
-              >
-                Lịch sử làm bài{" "}
-                <i className="fa-solid fa-clock-rotate-left"></i>
-              </button>
+              {isShare ? (
+                <button
+                  onClick={() => {
+                    navigate("/test/record");
+                  }}
+                  className="test-history"
+                >
+                  Lịch sử làm bài{" "}
+                  <i className="fa-solid fa-clock-rotate-left"></i>
+                </button>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </>
