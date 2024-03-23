@@ -8,6 +8,7 @@ const UserContext = createContext({
   auth: false,
   role: "",
   token: "",
+  ava: "",
 });
 
 const UserProvider = ({ children }) => {
@@ -17,7 +18,7 @@ const UserProvider = ({ children }) => {
     auth: false,
     role: "",
     token: "",
-    ava: "https://img.icons8.com/papercut/100/user-female-circle.png",
+    ava: "https://img.icons8.com/ios/100/user-male-circle--v1.png",
   });
   function isTokenExpired(exp) {
     if (exp) {
@@ -56,7 +57,7 @@ const UserProvider = ({ children }) => {
           role: "",
           auth: false,
           token: "",
-          ava: "https://img.icons8.com/papercut/100/user-female-circle.png",
+          ava: "https://img.icons8.com/ios/100/user-male-circle--v1.png",
         }));
       }
     }
@@ -175,7 +176,7 @@ const UserProvider = ({ children }) => {
       auth: false,
       token: "",
       idUser: "",
-      ava: "https://img.icons8.com/papercut/100/user-female-circle.png",
+      ava: "https://img.icons8.com/ios/100/user-male-circle--v1.png",
     }));
   };
 

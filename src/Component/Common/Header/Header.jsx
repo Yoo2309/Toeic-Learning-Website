@@ -157,7 +157,7 @@ function Header() {
                   <img
                     src={
                       user.ava ||
-                      "https://img.icons8.com/papercut/100/user-female-circle.png"
+                      "https://img.icons8.com/ios/100/user-male-circle--v1.png"
                     }
                     alt=""
                   />
