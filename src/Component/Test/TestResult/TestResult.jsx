@@ -321,12 +321,18 @@ function TestResult({ id, isShare }) {
               <div className="test-result-ava">
                 <img
                   style={{ width: "90%" }}
-                  src={record_user.imageURL ? record_user.imageURL : user.ava}
+                  src={
+                    isShare
+                      ? record_user.imageURL
+                        ? record_user.imageURL
+                        : "https://img.icons8.com/ios/100/user-male-circle--v1.png"
+                      : user.imageURL
+                  }
                   alt=""
                 ></img>
               </div>
               <div style={{ fontSize: "18px" }}>
-                {record_user.fullname ? record_user.fullname : user.username}
+                {isShare ? record_user.fullname : user.fullname}
               </div>
               {isShare ? (
                 <button
