@@ -118,20 +118,17 @@ function Header() {
               </Link>
             </li>
             {user.auth && (
-              <li
-                style={{
-                  padding: "1rem",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  onClick={() => navigate("/vippackage")}
-                  style={{ height: "26px" }}
-                  src="https://estudyme.com/images/get-pro/btn-get-pro.png"
-                  alt=""
-                ></img>
-              </li>
+              <>
+                <li style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                  <Link to="/vippackage">GET PRO</Link>
+                  <img
+                    width="32"
+                    height="32"
+                    src="https://img.icons8.com/fluency/48/crown.png"
+                    alt="crown"
+                  />
+                </li>
+              </>
             )}
           </ul>
           {!user.auth ? (
