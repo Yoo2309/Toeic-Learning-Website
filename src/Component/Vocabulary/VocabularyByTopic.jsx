@@ -6,8 +6,10 @@ import "./VocabularyByTopic.css";
 import Heading from "../Common/Header/Heading";
 import Loader from "../Common/Loader/Loader";
 import { toast } from "react-toastify";
+import { useSpeechSynthesis } from "react-speech-kit";
 
 function VocabularyByTopic() {
+  const { speak } = useSpeechSynthesis();
   const [words, setWords] = useState([]);
   const [topicName, setTopicName] = useState("");
   const { id } = useParams();
@@ -108,15 +110,49 @@ function VocabularyByTopic() {
                         <div className="eng-word">{word.engWord}</div>
                         <div>
                           <hr />
-                          <p className="flip">Click to flip</p>
+                          <p className="flip">Click để lật</p>
                         </div>
                       </div>
                       <div className="back">
-                        <div className="word-type">{word.wordType}</div>
+                        <div
+                          style={{ fontWeight: "bold", fontStyle: "italic" }}
+                        >
+                          {word.engWord}
+                        </div>
                         <hr />
-                        <div className="meaning">{word.meaning}</div>
+                        <div>
+                          <div className="back-item">{`(${word.wordType})`}</div>
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              gap: "5px",
+                            }}
+                          >
+                            <div
+                              className="back-item"
+                              style={{ fontStyle: "italic" }}
+                            >
+                              {`/${word.pronunciation ?? "pronunciation"}/`}
+                            </div>
+                            <img
+                              width="24"
+                              height="24"
+                              src="https://img.icons8.com/material-sharp/24/speaker.png"
+                              alt="speaker"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                speak({
+                                  text: word.pronunciation ?? "pronunciation",
+                                });
+                              }}
+                            />
+                          </div>
+                          <div className="back-item">{word.meaning}</div>
+                        </div>
                         <hr />
-                        <p className="flip">Click to flip</p>
+                        <p className="flip">Click để lật</p>
                       </div>
                     </div>
                   </label>

@@ -7,7 +7,7 @@ function GuestTestResult() {
 
   return (
     <div>
-      <TestResult id={id} isShare={false}/>
+      <TestResult id={id} isShare={true}/>
     </div>
   );
 }

@@ -277,7 +277,7 @@ function TestResult({ id, isShare }) {
                     Quay về trang đề thi
                   </button>
                 </div>
-                {isShare ? (
+                {!isShare ? (
                   <div
                     style={{
                       display: "flex",
@@ -326,15 +326,19 @@ function TestResult({ id, isShare }) {
                       ? record_user.imageURL
                         ? record_user.imageURL
                         : "https://img.icons8.com/ios/100/user-male-circle--v1.png"
-                      : user.imageURL
+                      : user.ava
                   }
                   alt=""
                 ></img>
               </div>
               <div style={{ fontSize: "18px" }}>
-                {isShare ? record_user.fullname : user.fullname}
+                {isShare
+                  ? record_user.fullname
+                    ? record_user.fullname
+                    : ""
+                  : user.username}
               </div>
-              {isShare ? (
+              {!isShare ? (
                 <button
                   onClick={() => {
                     navigate("/test/record");
