@@ -46,13 +46,7 @@ function UserAnswer({ id }) {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`${errorData.message}`, {});
       }
       const data = await response.json();
       setUserAnswers(data);

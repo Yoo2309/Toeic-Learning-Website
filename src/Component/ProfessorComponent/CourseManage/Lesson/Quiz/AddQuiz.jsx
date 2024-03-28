@@ -35,33 +35,14 @@ function AddQuiz({ toggleModal, modal_on, idLesson }) {
       setIsLoading(false);
       toggleModal();
       if (!response.ok) {
-        toast.error("Thêm Quiz mới thất bại", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error("Thêm Quiz mới thất bại", {});
       } else {
-        toast.success("Thêm Quiz mới thành công", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 10000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.success("Thêm Quiz mới thành công");
         reset();
       }
     } catch (error) {
       console.log(error);
-      toast.error(`${error}`, {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
   if (isloading) {

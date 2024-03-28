@@ -34,26 +34,13 @@ function ProfessorVocabularyTopic() {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`${errorData.message}`, {});
       } else {
         const data = await response.json();
         setTopic(data);
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
   async function DeleteVocabularyTopic(voc_topic_id) {
@@ -73,31 +60,13 @@ function ProfessorVocabularyTopic() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error(`Xóa chủ đề từ vựng thất bại`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`Xóa chủ đề từ vựng thất bại`, {});
       } else {
         fetchVocabularyTopic();
-        toast.success("Xóa chủ đề từ vựng thành công", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 10000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.success("Xóa chủ đề từ vựng thành công");
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
   useEffect(() => {

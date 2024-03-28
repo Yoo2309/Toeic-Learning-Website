@@ -27,26 +27,13 @@ function AddTest({ toggleModal, modal_on }) {
       );
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`${errorData.message}`, {});
       }
       const data = await response.json();
       setTestType(data);
       setIsLoading(false);
     } catch (error) {
-      toast.error(`${error}`, {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
   useEffect(() => {
@@ -74,33 +61,14 @@ function AddTest({ toggleModal, modal_on }) {
       setIsLoading(false);
       toggleModal();
       if (!response.ok) {
-        toast.error(`${"Thêm đề thi mới thất bại"}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`${"Thêm đề thi mới thất bại"}`, {});
       } else {
-        toast.success("Thêm đề thi mới thành công", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 10000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.success("Thêm đề thi mới thành công");
         reset();
       }
     } catch (error) {
       console.log(error);
-      toast.error(`${error}`, {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
 

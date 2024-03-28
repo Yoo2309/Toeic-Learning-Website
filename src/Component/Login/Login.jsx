@@ -65,20 +65,10 @@ function Login() {
       if (!response.ok) {
         if (response.status === 404) {
           const errorData = await response.json();
-          toast.warning(`${errorData.message}`, {
-            position: toast.POSITION.BOTTOM_RIGHT,
-            autoClose: 5000,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
+          toast.warning(`${errorData.message}`);
         } else {
           toast.error("Đăng nhập không thành công", {
-            position: toast.POSITION.BOTTOM_RIGHT,
             autoClose: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
           });
         }
       } else {
@@ -95,13 +85,7 @@ function Login() {
             navigate("/");
           }
         } else {
-          toast.success(`${data.message}`, {
-            position: toast.POSITION.BOTTOM_RIGHT,
-            autoClose: 10000,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
+          toast.success(`${data.message}`);
           // setIs2FA(true);
         }
       }
@@ -130,33 +114,14 @@ function Login() {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`${errorData.message}`, {});
       } else {
         const data = await response.json();
-        toast.success(`${data.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 10000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.success(`${data.message}`);
         SwitchSignUpMode(false);
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
   const handleSubmitOTP = async (e) => {
@@ -179,32 +144,13 @@ function Login() {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`${errorData.message}`);
       } else {
         const data = await response.json();
-        toast.success(`${data.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 10000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.success(`${data.message}`);
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   };
   if (isloading) {

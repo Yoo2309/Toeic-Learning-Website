@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import Loader from "../Common/Loader/Loader";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext";
-import { get } from "lodash";
 
 function UserProfile() {
   const { id } = useParams();
@@ -46,25 +45,13 @@ function UserProfile() {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`${errorData}`, {});
       } else {
         const data = await response.json();
         setUserResponse(data);
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   };
   async function handleUpdateUser(data) {
@@ -102,13 +89,7 @@ function UserProfile() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error(`Cập nhật thông tin thất bại`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`Cập nhật thông tin thất bại`, {});
       }
       toast.success("Cập nhật thông tin thành công", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -120,13 +101,7 @@ function UserProfile() {
       getUser();
       window.location.reload();
     } catch (error) {
-      toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
 

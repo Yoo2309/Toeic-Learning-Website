@@ -117,14 +117,7 @@ const UserProvider = ({ children }) => {
       );
       return response;
     } catch (error) {
-      toast.error(`${error}`, {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${"Đăng nhập không thành công"}`);
     }
   };
   const getAvatar = async (idUser, token) => {
@@ -142,13 +135,7 @@ const UserProvider = ({ children }) => {
         }
       );
       if (!response.ok) {
-        toast.error(`Get User Profile failed`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`Get User Profile failed`, {});
       } else {
         const data = await response.json();
         if (data.imageURL) {
@@ -159,13 +146,7 @@ const UserProvider = ({ children }) => {
         }
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   };
   const logout = () => {
