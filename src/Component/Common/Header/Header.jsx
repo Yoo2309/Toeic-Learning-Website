@@ -30,26 +30,13 @@ function Header() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error(`Lấy dữ liệu TestType thất bại`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`Lấy dữ liệu TestType thất bại`, {});
       } else {
         const data = await response.json();
         setTestType(data);
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
   useEffect(() => {

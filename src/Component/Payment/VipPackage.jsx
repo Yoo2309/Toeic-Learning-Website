@@ -27,26 +27,14 @@ function VipPackage() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error(`Fetch API Failed`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`Fetch API Failed`, {});
       } else {
         const data = await response.json();
         setVipPackages(data);
       }
     } catch (error) {
       console.log(error);
-      toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
   async function fetchVipExpireTime() {
@@ -65,13 +53,7 @@ function VipPackage() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error(`Fetch Failed`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`Fetch Failed`, {});
       } else {
         const data = await response.json();
         setVipExpire(data.vipExpire);

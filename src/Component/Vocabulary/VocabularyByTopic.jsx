@@ -7,6 +7,7 @@ import Heading from "../Common/Header/Heading";
 import Loader from "../Common/Loader/Loader";
 import { toast } from "react-toastify";
 import { useSpeechSynthesis } from "react-speech-kit";
+import { useQuery } from "react-query";
 import speaker_gif from "../../assets/icons8-speaker.gif";
 
 function VocabularyByTopic() {
@@ -32,13 +33,7 @@ function VocabularyByTopic() {
         setIsLoading(false);
         if (!response.ok) {
           const errorData = await response.json();
-          toast.error(`${errorData.message}`, {
-            position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
-            autoClose: 5000, // Tự động đóng sau 3 giây
-            closeOnClick: true, // Đóng khi click
-            pauseOnHover: true, // Tạm dừng khi di chuột qua
-            draggable: true, // Có thể kéo thông báo
-          });
+          toast.error(`${errorData.message}`);
         } else {
           const data = await response.json();
           setWords(data);
@@ -58,13 +53,7 @@ function VocabularyByTopic() {
         setIsLoading(false);
         if (!response.ok) {
           const errorData = await response.json();
-          toast.error(`${errorData.message}`, {
-            position: toast.POSITION.BOTTOM_RIGHT,
-            autoClose: 5000,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
+          toast.error(`${errorData.message}`);
         }
         const data = await response.json();
         setTopicName(data.name);
@@ -154,7 +143,7 @@ function VocabularyByTopic() {
                                 e.preventDefault();
                                 setPlay_pronun(true);
                                 speak({
-                                  text: word.pronunciation ?? "pronunciation",
+                                  text: word.engWord ?? "pronunciation",
                                 });
                               }}
                             />

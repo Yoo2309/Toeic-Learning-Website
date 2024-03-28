@@ -38,26 +38,14 @@ function UpdateVipPackage() {
       const dataVipPack = await response;
       setVipPackage(dataVipPack);
       if (!response.ok) {
-        toast.error(`Get gói VIP thất bại`, {
-          position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
-          autoClose: 5000, // Tự động đóng sau 3 giây
-          closeOnClick: true, // Đóng khi click
-          pauseOnHover: true, // Tạm dừng khi di chuột qua
-          draggable: true, // Có thể kéo thông báo
-        });
+        toast.error(`Get gói VIP thất bại`);
       } else {
         const data = await response.json();
         setVipPackage(data);
         setData(data);
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
   async function handleUpdateVipPackage(data) {
@@ -78,32 +66,12 @@ function UpdateVipPackage() {
         }
       );
       setIsLoading(false);
-      if (response.ok)
-        toast.success("Cập nhất gói VIP thành công", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 10000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+      if (response.ok) toast.success("Cập nhất gói VIP thành công");
       else {
-        toast.error("Cập nhất gói VIP thất bại", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error("Cập nhất gói VIP thất bại", {});
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
     navigate(`/admin/vip-package`);
   }

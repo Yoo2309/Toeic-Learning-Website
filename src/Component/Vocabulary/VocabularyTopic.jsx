@@ -21,13 +21,7 @@ function VocabularyTopic() {
         setIsLoading(false);
         if (!response.ok) {
           const errorData = await response.json();
-          toast.error(`${errorData.message}`, {
-            position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
-            autoClose: 5000, // Tự động đóng sau 3 giây
-            closeOnClick: true, // Đóng khi click
-            pauseOnHover: true, // Tạm dừng khi di chuột qua
-            draggable: true, // Có thể kéo thông báo
-          });
+          toast.error(`${errorData.message}`);
         }
         const data = await response.json();
         setTopic(data);

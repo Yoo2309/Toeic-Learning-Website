@@ -35,25 +35,13 @@ function QuizManage({ idLesson }) {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
-          autoClose: 5000, // Tự động đóng sau 3 giây
-          closeOnClick: true, // Đóng khi click
-          pauseOnHover: true, // Tạm dừng khi di chuột qua
-          draggable: true, // Có thể kéo thông báo
-        });
+        toast.error(`${errorData.message}`);
       } else {
         const data = await response.json();
         setQuizes(data);
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
 
@@ -73,32 +61,13 @@ function QuizManage({ idLesson }) {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error(`Xóa Quiz thât bại`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`Xóa Quiz thât bại`, {});
       } else {
-        toast.success("Xóa Quiz thành công", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 10000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.success("Xóa Quiz thành công");
         fetchQuizes();
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   };
   useEffect(() => {

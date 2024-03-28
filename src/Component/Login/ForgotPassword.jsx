@@ -35,33 +35,14 @@ function ForgotPassword() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error(`Gửi OTP không thành công`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`Gửi OTP không thành công`, {});
       } else {
         const data = await response.json();
-        toast.success(`${data.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 10000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.success(`${data.message}`);
         setEmailClick(true);
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   };
   const ResetPassword = async () => {
@@ -83,32 +64,13 @@ function ForgotPassword() {
       );
       setIsLoading(false);
       if (!response.ok) {
-        toast.error(`Đặt lại password không thành công`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`Đặt lại password không thành công`, {});
       } else {
-        toast.success(`Đặt lại password thành công`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 10000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.success(`Đặt lại password thành công`);
         setEmailClick(true);
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   };
 

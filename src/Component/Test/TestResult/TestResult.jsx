@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   FacebookShareButton,
@@ -12,8 +12,11 @@ import {
 import { UserContext } from "../../../Context/UserContext";
 import "./TestResult.css";
 import Loader from "../../Common/Loader/Loader";
+import UserAnswer from "./UserAnswer";
 
-function TestResult({ id, isShare }) {
+function TestResult() {
+  const [isShare, set_isShare] = useState(false);
+  const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
@@ -40,16 +43,12 @@ function TestResult({ id, isShare }) {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
-          autoClose: 5000, // Tự động đóng sau 3 giây
-          closeOnClick: true, // Đóng khi click
-          pauseOnHover: true, // Tạm dừng khi di chuột qua
-          draggable: true, // Có thể kéo thông báo
-        });
+        toast.error(`${errorData.message}`);
       } else {
         const data = await response.json();
-        setRecord(data);
+        let idUser = data.idUser;
+        setRecord(data.record);
+        setrecord_user((prevUser) => ({ ...prevUser, idUser }));
       }
     } catch (error) {
       console.log(error);
@@ -72,13 +71,7 @@ function TestResult({ id, isShare }) {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`${errorData.message}`, {});
       }
       const data = await response.json();
       setrecord_user(data);
@@ -95,24 +88,12 @@ function TestResult({ id, isShare }) {
       setIsLoading(false);
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT, // Vị trí hiển thị
-          autoClose: 5000, // Tự động đóng sau 3 giây
-          closeOnClick: true, // Đóng khi click
-          pauseOnHover: true, // Tạm dừng khi di chuột qua
-          draggable: true, // Có thể kéo thông báo
-        });
+        toast.error(`${errorData.message}`);
       }
       const data = await response.json();
       setTest(data);
     } catch (error) {
-      toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
   //effect
@@ -125,10 +106,11 @@ function TestResult({ id, isShare }) {
     }
   }, [record.idTest]);
   useEffect(() => {
-    if (record.idStudent && record.idUser !== user.idUser) {
-      GetUserInfo(record.idStudent);
+    if (record_user.idUser && record_user.idUser !== user.idUser) {
+      set_isShare(true);
+      GetUserInfo(record_user.idUser);
     }
-  }, [record, user.idUser]);
+  }, [record_user, user.idUser]);
 
   return (
     <>
@@ -297,17 +279,17 @@ function TestResult({ id, isShare }) {
                       <path d="M 9 9 L 9 14 L 9 54 L 51 54 L 56 54 L 55 42 L 51 42 L 51 49.095703 L 13 50 L 13.900391 14 L 21 14 L 21 10 L 9 9 z M 44 9 L 44 17.072266 C 29.919275 17.731863 19 23.439669 19 44 L 23 44 C 23 32.732824 29.174448 25.875825 44 25.080078 L 44 33 L 56 20.5 L 44 9 z"></path>
                     </svg>
                     <FacebookShareButton
-                      url={`${window.location.origin}/test-share/result/${id}`}
+                      url={`${window.location.origin}/test/result/${id}`}
                     >
                       <FacebookIcon size={36} round />
                     </FacebookShareButton>
                     <TwitterShareButton
-                      url={`${window.location.origin}/test-share/result/${id}`}
+                      url={`${window.location.origin}/test/result/${id}`}
                     >
                       <TwitterIcon size={36} round />
                     </TwitterShareButton>
                     <LinkedinShareButton
-                      url={`${window.location.origin}/test-share/result/${id}`}
+                      url={`${window.location.origin}/test/result/${id}`}
                     >
                       <LinkedinIcon size={36} round />
                     </LinkedinShareButton>
@@ -353,7 +335,12 @@ function TestResult({ id, isShare }) {
               )}
             </div>
           </div>
-        </>
+          {!isShare && id ? (
+            <UserAnswer id={id} />
+          ) : (
+            <></>
+          )}
+        </> 
       )}
     </>
   );

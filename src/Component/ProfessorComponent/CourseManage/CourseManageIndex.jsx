@@ -30,25 +30,13 @@ function CourseManageIndex() {
       );
       if (!response.ok) {
         const errorData = await response.json();
-        toast.error(`${errorData.message}`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error(`${errorData.message}`, {});
       }
       const data = await response.json();
       setCourses(data);
       setIsLoading(false);
     } catch (error) {
-      toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
 
@@ -67,32 +55,14 @@ function CourseManageIndex() {
         }
       );
       if (!response.ok) {
-        toast.error("Xóa khóa học thất bại", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.error("Xóa khóa học thất bại", {});
       } else {
         setIsLoading(false);
         fetchCourses();
-        toast.success("Xóa khóa học thành công", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 10000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        toast.success("Xóa khóa học thành công");
       }
     } catch (error) {
-      toast.error(`${error}`, {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      toast.error(`${error}`);
     }
   }
 
