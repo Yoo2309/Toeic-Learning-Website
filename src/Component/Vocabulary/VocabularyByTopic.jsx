@@ -128,7 +128,7 @@ function VocabularyByTopic() {
                               className="back-item"
                               style={{ fontStyle: "italic" }}
                             >
-                              {`/${word.pronunciation ?? "pronunciation"}/`}
+                              {word.pronunciation ?? "pronunciation"}
                             </div>
                             <img
                               width="24"
