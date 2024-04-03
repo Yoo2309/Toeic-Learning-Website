@@ -124,6 +124,7 @@ function Login() {
       toast.error(`${error}`);
     }
   }
+
   const handleSubmitOTP = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -153,6 +154,21 @@ function Login() {
       toast.error(`${error}`);
     }
   };
+
+  const LoginGoogle = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Authen/GoogleLogin`,
+        {
+          method: "GET",
+        }
+      );
+      console.log(response);
+    } catch (e) {
+      toast.info("Đăng nhập với tài khoản Google bị lỗi");
+    }
+  };
+
   if (isloading) {
     return <Loader />;
   }
@@ -226,9 +242,14 @@ function Login() {
                     <a href="" className="social-icon">
                       <i className="fab fa-twitter"></i>
                     </a>
-                    <a href="" className="social-icon">
-                      <i className="fab fa-google"></i>
-                    </a>
+                    <div href="" className="social-icon">
+                      <i
+                        onClick={(e) => {
+                          LoginGoogle();
+                        }}
+                        className="fab fa-google"
+                      ></i>
+                    </div>
                     <a href="" className="social-icon">
                       <i className="fab fa-linkedin-in"></i>
                     </a>
@@ -384,7 +405,12 @@ function Login() {
                 <a href="" className="social-icon">
                   <i className="fab fa-twitter"></i>
                 </a>
-                <a href="" className="social-icon">
+                <a
+                  href={`${
+                    process.env.REACT_APP_API_BASE_URL ?? "/api"
+                  }/Authen/GoogleLogin`}
+                  className="social-icon"
+                >
                   <i className="fab fa-google"></i>
                 </a>
                 <a href="" className="social-icon">
