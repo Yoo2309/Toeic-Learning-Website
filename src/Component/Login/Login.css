@@ -141,15 +141,26 @@
   justify-content: center;
   color: #003150;
   border: 1px solid #003150;
-  border-radius: 50px;
+  border-radius: 50%;
   margin: 0 5px;
+}
+.login .customLoginGoogle {
+  border: 1px solid #003150 !important;
+  border-radius: 50% !important;
+}
+.login .customLoginGoogle div {
+  background: none !important;
+  margin: 0 !important;
+}
+.login .customLoginGoogle span {
+  display: none;
 }
 a {
   text-decoration: none;
 }
 .login .social-icon:hover {
   color: #fff;
-  background-color: #003150;
+  background-color: #003150 !important;
 }
 .login .panels-container {
   position: absolute;

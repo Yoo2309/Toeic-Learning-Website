@@ -7,12 +7,14 @@ import { useState } from "react";
 import { UserContext } from "../../../Context/UserContext";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
+import { GoogleLogout } from "react-google-login";
+import { loadGapiInsideDOM } from "gapi-script";
 
 function Header() {
   const [click, setClick] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isVip, setIsVIP] = useState(false);
-  const [testType, setTestType] = useState([]);
+  // const [testType, setTestType] = useState([]);
   const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
   function handleLogout() {
@@ -33,14 +35,16 @@ function Header() {
         toast.error(`Lấy dữ liệu TestType thất bại`, {});
       } else {
         const data = await response.json();
-        setTestType(data);
+        // setTestType(data);
       }
     } catch (error) {
       toast.error(`${error}`);
     }
   }
   useEffect(() => {
-    // fetchTestType();
+    (async () => {
+      await loadGapiInsideDOM();
+    })();
   }, []);
   useEffect(() => {
     if (user.role[1] === "VipStudent") {
@@ -104,6 +108,15 @@ function Header() {
                 </div>
               </Link>
             </li>
+            <GoogleLogout
+              clientId="1047820244524-i4q01pgchejg1cvdfne578ag4sj44elo.apps.googleusercontent.com"
+              buttonText="Logout"
+              onLogoutSuccess={() => {
+                console.log("Logout success.");
+              }}
+              icon={false}
+              className="customButtonLogout"
+            />
             {user.auth && (
               <>
                 <li style={{ display: "flex", alignItems: "center", gap: 5 }}>

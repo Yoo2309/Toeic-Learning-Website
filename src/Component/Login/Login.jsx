@@ -10,6 +10,8 @@ import { UserContext } from "../../Context/UserContext";
 import Loader from "../Common/Loader/Loader";
 import { toast } from "react-toastify";
 
+import { GoogleLogin } from "react-google-login";
+
 function Login() {
   const navigate = useNavigate();
   const [signUpMode, setSignUpMode] = useState(false);
@@ -84,8 +86,8 @@ function Login() {
             // Nếu không có đường dẫn trước đó, chuyển hướng về trang chủ
             navigate("/");
           }
-        } else {
           toast.success(`${data.message}`);
+        } else {
           // setIs2FA(true);
         }
       }
@@ -155,18 +157,39 @@ function Login() {
     }
   };
 
-  const LoginGoogle = async () => {
+  const LoginGoogle = async (resp) => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL ?? "/api"}/Authen/GoogleLogin`,
+      const response = fetch(
+        `${
+          process.env.REACT_APP_API_BASE_URL ?? "/api"
+        }/authen/LoginGoogleResponse`,
         {
-          method: "GET",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(resp),
         }
       );
-      console.log(response);
-    } catch (e) {
-      toast.info("Đăng nhập với tài khoản Google bị lỗi");
-    }
+      if (!response.ok) {
+        toast.error("Đăng nhập không thành công");
+      } else {
+        const data = await response.json();
+        if (data.token !== undefined) {
+          loginContext(data.token);
+          const returnPath = localStorage.getItem("returnPath");
+          if (returnPath) {
+            navigate(returnPath);
+            localStorage.removeItem("returnPath");
+          } else {
+            navigate("/");
+          }
+          toast.success(`${data.message}`);
+        } 
+      }
+    } catch (e) {}
+    console.log("Login success");
+    console.log(resp.profileObj);
   };
 
   if (isloading) {
@@ -242,14 +265,19 @@ function Login() {
                     <a href="" className="social-icon">
                       <i className="fab fa-twitter"></i>
                     </a>
-                    <div href="" className="social-icon">
-                      <i
-                        onClick={(e) => {
-                          LoginGoogle();
-                        }}
-                        className="fab fa-google"
-                      ></i>
-                    </div>
+                    <GoogleLogin
+                      clientId="1047820244524-i4q01pgchejg1cvdfne578ag4sj44elo.apps.googleusercontent.com"
+                      buttonText=""
+                      onSuccess={(response) => {
+                        LoginGoogle(response);
+                      }}
+                      onFailure={(e) => {
+                        toast.error("Đăng nhập bằng google thất bại");
+                      }}
+                      cookiePolicy={"single_host_origin"}
+                      isSignedIn={true}
+                      className="social-icon customLoginGoogle"
+                    />
                     <a href="" className="social-icon">
                       <i className="fab fa-linkedin-in"></i>
                     </a>
