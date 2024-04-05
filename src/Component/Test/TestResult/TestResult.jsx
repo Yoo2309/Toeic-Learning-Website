@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -116,6 +117,9 @@ function TestResult() {
 
   return (
     <>
+      <Helmet>
+        <meta property="og:url" content={`${window.location.origin}/test/result/${id}`} />
+      </Helmet>
       {isLoading ? (
         <Loader />
       ) : (
