@@ -189,7 +189,7 @@ function Login() {
       }
     } catch (e) {}
     console.log("Login success");
-    console.log(resp.profileObj);
+    console.log(resp);
   };
 
   if (isloading) {
@@ -269,7 +269,7 @@ function Login() {
                       clientId="1047820244524-i4q01pgchejg1cvdfne578ag4sj44elo.apps.googleusercontent.com"
                       buttonText=""
                       onSuccess={(response) => {
-                        LoginGoogle(response);
+                        LoginGoogle(response.profileObj);
                       }}
                       onFailure={(e) => {
                         toast.error("Đăng nhập bằng google thất bại");
