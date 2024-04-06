@@ -86,7 +86,6 @@ function Login() {
             // Nếu không có đường dẫn trước đó, chuyển hướng về trang chủ
             navigate("/");
           }
-          toast.success(`${data.message}`);
         } else {
           // setIs2FA(true);
         }
@@ -159,7 +158,8 @@ function Login() {
 
   const LoginGoogle = async (resp) => {
     try {
-      const response = fetch(
+      setIsLoading(true);
+      const response = await fetch(
         `${
           process.env.REACT_APP_API_BASE_URL ?? "/api"
         }/authen/LoginGoogleResponse`,
@@ -171,9 +171,8 @@ function Login() {
           body: JSON.stringify(resp),
         }
       );
-      if (!response.ok) {
-        toast.error("Đăng nhập không thành công");
-      } else {
+      setIsLoading(false);
+      if (response.ok) {
         const data = await response.json();
         if (data.token !== undefined) {
           loginContext(data.token);
@@ -184,12 +183,11 @@ function Login() {
           } else {
             navigate("/");
           }
-          toast.success(`${data.message}`);
-        } 
+        }
+      } else {
+        toast.error("Đăng nhập không thành công");
       }
     } catch (e) {}
-    console.log("Login success");
-    console.log(resp);
   };
 
   if (isloading) {

@@ -108,15 +108,6 @@ function Header() {
                 </div>
               </Link>
             </li>
-            <GoogleLogout
-              clientId="1047820244524-i4q01pgchejg1cvdfne578ag4sj44elo.apps.googleusercontent.com"
-              buttonText="Logout"
-              onLogoutSuccess={() => {
-                console.log("Logout success.");
-              }}
-              icon={false}
-              className="customButtonLogout"
-            />
             {user.auth && (
               <>
                 <li style={{ display: "flex", alignItems: "center", gap: 5 }}>
@@ -179,7 +170,15 @@ function Header() {
                     <Link to="/test/record">Lịch sử làm bài</Link>
                   </div>
                   <div className="dropdown-item" onClick={handleLogout}>
-                    Đăng xuất
+                    <GoogleLogout
+                      clientId="1047820244524-i4q01pgchejg1cvdfne578ag4sj44elo.apps.googleusercontent.com"
+                      buttonText="Đăng xuất"
+                      onLogoutSuccess={() => {
+                        console.log("Logout success.");
+                      }}
+                      icon={false}
+                      className="customButtonLogout "
+                    />
                   </div>
                 </ul>
               </div>
