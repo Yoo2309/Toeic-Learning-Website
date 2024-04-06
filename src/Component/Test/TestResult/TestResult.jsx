@@ -118,7 +118,16 @@ function TestResult() {
   return (
     <>
       <Helmet>
-        <meta property="og:url" content={`${window.location.origin}/test/result/${id}`} />
+        <meta
+          property="og:url"
+          content={`${window.location.origin}/test/result/${id}`}
+        />
+        <meta
+          property="og:description"
+          content={`🏆Chúc mừng ${
+            record_user.fullname ?? ""
+          } đã đạt được điểm số ${record.totalScore ?? ""}`}
+        />
       </Helmet>
       {isLoading ? (
         <Loader />
