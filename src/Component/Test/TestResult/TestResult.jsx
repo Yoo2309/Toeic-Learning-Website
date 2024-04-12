@@ -128,6 +128,7 @@ function TestResult() {
             record_user.fullname ?? ""
           } đã đạt được điểm số ${record.totalScore ?? ""}`}
         />
+        <meta property="og:image" content="https://i.imgur.com/OxfKelV.png" />
       </Helmet>
       {isLoading ? (
         <Loader />
