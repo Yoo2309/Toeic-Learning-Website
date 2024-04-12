@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./TestMain.css";
+import css from "./test-main.module.scss";
 import Loader from "../../Common/Loader/Loader.jsx";
 import HTMLReactParser from "html-react-parser";
 import { UserContext } from "../../../Context/UserContext.jsx";
@@ -16,12 +17,15 @@ function TestMain() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [current_part, setCurrentPart] = useState(0);
+  const [current_question, setCurrentQuestion] = useState(0);
+
   const [testdata, setTestdata] = useState([]);
   const [testType, setTestType] = useState("");
   const [answers, setAnswers] = useState([]);
   const [freeTest, setFreeTest] = useState(true);
 
   let question_num = 0;
+  let navigate_num = 0;
 
   //time countdown
   const [time, setTime] = useState();
@@ -93,6 +97,17 @@ function TestMain() {
       navigate("/vippackage");
     }
   }, [freeTest]);
+  useEffect(() => {
+    if (current_question !== 0) {
+      const element = document.getElementById(`question_${current_question}`);
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }
+  }, [current_question]);
   async function fetchTestData() {
     try {
       setIsLoading(true);
@@ -250,163 +265,221 @@ function TestMain() {
   }
 
   return (
-    <div className="test-container">
-      {time && (
-        <div className="countdown-clock">
-          <img
-            width="30"
-            height="30"
-            src="https://img.icons8.com/office/30/present.png"
-            alt="present"
-          />
-          <div style={{ fontWeight: 500 }}>
-            {time.hour < 10 ? "0" + time.hour : time.hour}:{" "}
-            {time.min < 10 ? "0" + time.min : time.min}:{" "}
-            {time.sec < 10 ? "0" + time.sec : time.sec}
+    <div className={css["test-wrapper"]}>
+      <div className={css["test-container"]}>
+        {time && (
+          <div className={css["countdown-clock"]}>
+            <img
+              width="30"
+              height="30"
+              src="https://img.icons8.com/office/30/present.png"
+              alt="present"
+            />
+            <div style={{ fontWeight: 500 }}>
+              {time.hour < 10 ? "0" + time.hour : time.hour}:{" "}
+              {time.min < 10 ? "0" + time.min : time.min}:{" "}
+              {time.sec < 10 ? "0" + time.sec : time.sec}
+            </div>
           </div>
+        )}
+        <div className={css["tab-header"]}>
+          {parts &&
+            parts.map((part, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`tab-item ${
+                    current_part === index ? "tab-index-active" : null
+                  }`}
+                  onClick={() => setCurrentPart(index)}
+                >
+                  {part.partName}
+                </div>
+              );
+            })}
         </div>
-      )}
-      <div className="tab-header">
-        {parts &&
-          parts.map((part, index) => {
-            return (
-              <div
-                key={index}
-                className={`tab-item ${
-                  current_part === index ? "tab-index-active" : null
-                }`}
-                onClick={() => setCurrentPart(index)}
-              >
-                {part.partName}
-              </div>
-            );
-          })}
-      </div>
-      <div className="tab-content">
-        {testdata &&
-          testdata.map((testpart, index) => {
-            return (
-              <div
-                key={index}
-                className={
-                  current_part === index ? "tab-pane-active" : "tab-pane"
-                }
-              >
-                {testpart &&
-                  testpart.units.map((unit, index) => {
-                    return (
-                      <div key={index} className="test-unit-wrapper">
-                        {unit.paragraph || unit.image ? (
-                          <div className="test-unit-left">
-                            <div className="test-img">
-                              {unit.image && (
-                                <img src={unit.image} alt={unit.image} />
+        <div className={css["tab-content"]}>
+          {testdata &&
+            testdata.map((testpart, index) => {
+              return (
+                <div
+                  key={index}
+                  className={
+                    current_part === index
+                      ? css["tab-pane-active"]
+                      : css["tab-pane"]
+                  }
+                >
+                  {testpart &&
+                    testpart.units.map((unit, index) => {
+                      return (
+                        <div key={index} className={css["test-unit-wrapper"]}>
+                          {unit.paragraph || unit.image ? (
+                            <div className={css["test-unit-left"]}>
+                              <div className={css["test-img"]}>
+                                {unit.image && (
+                                  <img src={unit.image} alt={unit.image} />
+                                )}
+                              </div>
+                              <div className={css["test-paragraph"]}>
+                                {unit.paragraph &&
+                                  HTMLReactParser(String(unit.paragraph))}
+                              </div>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                          <div className={css["test-unit-right"]}>
+                            <div className={css["test-unit-audio"]}>
+                              {unit.audio && (
+                                <audio src={unit.audio} controls></audio>
                               )}
                             </div>
-                            <div className="test-paragraph">
-                              {unit.paragraph &&
-                                HTMLReactParser(String(unit.paragraph))}
-                            </div>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                        <div className="test-unit-right">
-                          <div className="test-unit-audio">
-                            {unit.audio && (
-                              <audio src={unit.audio} controls></audio>
-                            )}
-                          </div>
-                          {unit &&
-                            unit.questions.map((question_item, index) => {
-                              question_num++;
-                              return (
-                                <div key={index} className="test-question">
-                                  <div className="test-question-number">
-                                    {question_num}
-                                  </div>
-                                  <div className="test-question-content">
-                                    {question_item.content}
+                            {unit &&
+                              unit.questions.map((question_item, index) => {
+                                question_num++;
+                                return (
+                                  <div
+                                    key={index}
+                                    id={`question_${question_num}`}
+                                    className={css["test-question"]}
+                                  >
+                                    <div
+                                      className={css["test-question-number"]}
+                                    >
+                                      {question_num}
+                                    </div>
+                                    <div
+                                      className={css["test-question-content"]}
+                                    >
+                                      {question_item.content}
 
-                                    <div className="test-choice-wrapper">
-                                      <div className="test-choice-option">
-                                        <input
-                                          type="radio"
-                                          name={`question_${question_item.idQuestion}`}
-                                          onChange={() =>
-                                            handleOptionChange(
-                                              question_item.idQuestion,
-                                              1
-                                            )
-                                          }
-                                        />
-                                        A. {question_item.choice_1}
-                                      </div>
-                                      <div className="test-choice-option">
-                                        <input
-                                          type="radio"
-                                          name={`question_${question_item.idQuestion}`}
-                                          onChange={() =>
-                                            handleOptionChange(
-                                              question_item.idQuestion,
-                                              2
-                                            )
-                                          }
-                                        />
-                                        B. {question_item.choice_2}
-                                      </div>
-                                      <div className="test-choice-option">
-                                        <input
-                                          type="radio"
-                                          name={`question_${question_item.idQuestion}`}
-                                          onChange={() =>
-                                            handleOptionChange(
-                                              question_item.idQuestion,
-                                              3
-                                            )
-                                          }
-                                        />
-                                        C. {question_item.choice_3}
-                                      </div>
-                                      <div className="test-choice-option">
-                                        <input
-                                          type="radio"
-                                          name={`question_${question_item.idQuestion}`}
-                                          onChange={() =>
-                                            handleOptionChange(
-                                              question_item.idQuestion,
-                                              4
-                                            )
-                                          }
-                                        />
-                                        D. {question_item.choice_4}
+                                      <div
+                                        className={css["test-choice-wrapper"]}
+                                      >
+                                        <div
+                                          className={css["test-choice-option"]}
+                                        >
+                                          <input
+                                            type="radio"
+                                            name={`question_${question_item.idQuestion}`}
+                                            onChange={() =>
+                                              handleOptionChange(
+                                                question_item.idQuestion,
+                                                1
+                                              )
+                                            }
+                                          />
+                                          A. {question_item.choice_1}
+                                        </div>
+                                        <div
+                                          className={css["test-choice-option"]}
+                                        >
+                                          <input
+                                            type="radio"
+                                            name={`question_${question_item.idQuestion}`}
+                                            onChange={() =>
+                                              handleOptionChange(
+                                                question_item.idQuestion,
+                                                2
+                                              )
+                                            }
+                                          />
+                                          B. {question_item.choice_2}
+                                        </div>
+                                        <div
+                                          className={css["test-choice-option"]}
+                                        >
+                                          <input
+                                            type="radio"
+                                            name={`question_${question_item.idQuestion}`}
+                                            onChange={() =>
+                                              handleOptionChange(
+                                                question_item.idQuestion,
+                                                3
+                                              )
+                                            }
+                                          />
+                                          C. {question_item.choice_3}
+                                        </div>
+                                        <div
+                                          className={css["test-choice-option"]}
+                                        >
+                                          <input
+                                            type="radio"
+                                            name={`question_${question_item.idQuestion}`}
+                                            onChange={() =>
+                                              handleOptionChange(
+                                                question_item.idQuestion,
+                                                4
+                                              )
+                                            }
+                                          />
+                                          D. {question_item.choice_4}
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              );
-                            })}
+                                );
+                              })}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
-              </div>
-            );
-          })}
-        <div className="question-button">
+                      );
+                    })}
+                </div>
+              );
+            })}
+        </div>
+        <div className={css["question-button"]}>
           <input
             type="button"
             value="Previous"
-            className="previous-button"
+            className={css["previous-button"]}
             onClick={previousPart}
           />
           <input
             type="button"
             value={current_part === 6 ? "Submit" : "Next"}
-            className="next-button"
+            className={css["next-button"]}
             onClick={nextPart}
           />
         </div>
+      </div>
+      <div className={css["test-navigate-pane"]}>
+        {testdata &&
+          testdata.map((testpart, index_part) => {
+            let totalQuestions = 0;
+
+            testpart.units.forEach((unit) => {
+              totalQuestions += unit.questions.length;
+            });
+            return (
+              <div>
+                <div style={{fontWeight: "500"}}>{`Part ${index_part + 1}`}</div>
+                <div className={css["test-navigate-wrapper"]}>
+                  {Array.from(
+                    { length: totalQuestions },
+                    (_, index_question) => {
+                      navigate_num++;
+                      return (
+                        <div
+                          className={`${css["test-navigate-item"]} ${current_question == navigate_num? css["test-navigate-active"]: ""}`}
+                          key={navigate_num}
+                          id={navigate_num}
+                          onClick={(e) => {
+                            setCurrentPart(index_part);
+                            setCurrentQuestion(e.target.id);
+                          }}
+                        >
+                          {navigate_num}
+                        </div>
+                      );
+                    }
+                  )}
+                </div>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
