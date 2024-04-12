@@ -8183,6 +8183,11 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
+react-beforeunload@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/react-beforeunload/-/react-beforeunload-2.6.0.tgz#e7ead8dc39009a205b4249619050772595bfeefd"
+  integrity sha512-aKrGaRNc7fZQlDnmSYrXu4cbz9QEPhScA4A2mLxhjcULDy4VILLyLhSEjg2goIw3o5LQ1zss44kmQh5LXWYGCw==
+
 react-countup@^6.4.2:
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/react-countup/-/react-countup-6.5.0.tgz#2671035ec5012ed8db097a79d08fa6f193e139d3"
