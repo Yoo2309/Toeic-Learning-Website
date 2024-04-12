@@ -9,6 +9,7 @@
   justify-content: center;
   transition: opacity 0.75s, visibility 0.75s;
   z-index: 5;
+  padding: 1rem;
 }
 
 .loader--hidden {
