@@ -7,6 +7,7 @@ import HTMLReactParser from "html-react-parser";
 import { UserContext } from "../../../Context/UserContext.jsx";
 import { toast } from "react-toastify";
 import { showSubmitWarning } from "../../Common/Alert/DeleteAlert.jsx";
+import { useBeforeunload } from "react-beforeunload";
 
 function TestMain() {
   const { id } = useParams();
@@ -81,6 +82,10 @@ function TestMain() {
     }
   }, [testType]);
 
+  useBeforeunload((event) => {
+    event.preventDefault();
+    console.log("beforeunload happened!");
+  });
   useEffect(() => {
     fetchParts();
     fetchTestData();
@@ -455,7 +460,9 @@ function TestMain() {
             });
             return (
               <div>
-                <div style={{fontWeight: "500"}}>{`Part ${index_part + 1}`}</div>
+                <div style={{ fontWeight: "500" }}>{`Part ${
+                  index_part + 1
+                }`}</div>
                 <div className={css["test-navigate-wrapper"]}>
                   {Array.from(
                     { length: totalQuestions },
@@ -463,7 +470,11 @@ function TestMain() {
                       navigate_num++;
                       return (
                         <div
-                          className={`${css["test-navigate-item"]} ${current_question == navigate_num? css["test-navigate-active"]: ""}`}
+                          className={`${css["test-navigate-item"]} ${
+                            current_question == navigate_num
+                              ? css["test-navigate-active"]
+                              : ""
+                          }`}
                           key={navigate_num}
                           id={navigate_num}
                           onClick={(e) => {
