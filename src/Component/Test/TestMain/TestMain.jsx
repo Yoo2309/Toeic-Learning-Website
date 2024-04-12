@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "./TestMain.css";
 import css from "./test-main.module.scss";
 import Loader from "../../Common/Loader/Loader.jsx";
 import HTMLReactParser from "html-react-parser";
@@ -293,8 +292,8 @@ function TestMain() {
               return (
                 <div
                   key={index}
-                  className={`tab-item ${
-                    current_part === index ? "tab-index-active" : null
+                  className={`${css["tab-item"]} ${
+                    current_part === index ? css["tab-index-active"] : null
                   }`}
                   onClick={() => setCurrentPart(index)}
                 >
@@ -438,19 +437,27 @@ function TestMain() {
         <div className={css["question-button"]}>
           <input
             type="button"
-            value="Previous"
-            className={css["previous-button"]}
+            value="Trước đó"
+            className={css["test-button"]}
             onClick={previousPart}
           />
           <input
             type="button"
-            value={current_part === 6 ? "Submit" : "Next"}
-            className={css["next-button"]}
+            value={current_part === 6 ? "Nộp bài" : "Tiếp theo"}
+            className={css["test-button"]}
             onClick={nextPart}
           />
         </div>
       </div>
       <div className={css["test-navigate-pane"]}>
+        <button
+          className={css["test-button"]}
+          onClick={() => {
+            showSubmitWarning(() => SubmitTest());
+          }}
+        >
+          Nộp bài
+        </button>
         {testdata &&
           testdata.map((testpart, index_part) => {
             let totalQuestions = 0;
