@@ -7,6 +7,7 @@ import { UserContext } from "../../../Context/UserContext.jsx";
 import { toast } from "react-toastify";
 import { showSubmitWarning } from "../../Common/Alert/DeleteAlert.jsx";
 import { useBeforeunload } from "react-beforeunload";
+import Cookies from "js-cookie";
 
 function TestMain() {
   const { id } = useParams();
@@ -83,24 +84,27 @@ function TestMain() {
 
   useBeforeunload((event) => {
     event.preventDefault();
-    console.log("beforeunload happened!");
   });
+
   useEffect(() => {
     fetchParts();
     fetchTestData();
     fetchTestType();
     window.scrollTo(0, 0);
   }, []);
+
   useEffect(() => {
     if (user.idUser) {
       fetchFreeTest();
     }
   }, [user]);
+
   useEffect(() => {
     if (!freeTest && user.role[1] !== "VipStudent") {
       navigate("/vippackage");
     }
   }, [freeTest]);
+
   useEffect(() => {
     if (current_question !== 0) {
       const element = document.getElementById(`question_${current_question}`);
@@ -112,6 +116,32 @@ function TestMain() {
       }
     }
   }, [current_question]);
+
+  useEffect(() => {
+    if (user?.idUser && answers?.length > 0) {
+      let inFifteenMinutes;
+      if (testType === "FullTest") {
+        inFifteenMinutes = new Date(new Date().getTime() + 120 * 60 * 1000);
+      } else {
+        inFifteenMinutes = new Date(new Date().getTime() + 60 * 60 * 1000);
+      }
+      Cookies.set(`test_answer_${user.idUser}`, JSON.stringify(answers), {
+        expires: inFifteenMinutes,
+      });
+    }
+  }, [answers, user, testType]);
+  useEffect(() => {
+    if (Cookies.get(`test_answer_${user.idUser}`)) {
+      const stored_answer = Cookies.get(`test_answer_${user.idUser}`);
+      setAnswers(JSON.parse(stored_answer));
+    } else {
+      if (answers?.length <= 0 && testdata?.length !== 0) {
+        setAnswers(initialAnswerList());
+      }
+    }
+  }, [user, testdata]);
+
+  //fetch func
   async function fetchTestData() {
     try {
       setIsLoading(true);
@@ -203,25 +233,6 @@ function TestMain() {
       toast.error(`${error}`);
     }
   }
-  const handleOptionChange = (questionId, selectedOption) => {
-    const existingAnswerIndex = answers.findIndex(
-      (answer) => answer.idQuestion === questionId
-    );
-
-    if (existingAnswerIndex !== -1) {
-      setAnswers((prevAnswers) => {
-        const updatedAnswers = [...prevAnswers];
-        updatedAnswers[existingAnswerIndex].userChoice = String(selectedOption);
-        return updatedAnswers;
-      });
-    } else {
-      const newAnswer = {
-        idQuestion: questionId,
-        userChoice: String(selectedOption),
-      };
-      setAnswers((prevAnswers) => [...prevAnswers, newAnswer]);
-    }
-  };
   async function SubmitTest() {
     try {
       const response = await fetch(
@@ -242,6 +253,7 @@ function TestMain() {
         const errorData = await response.json();
         toast.error(`${errorData.message}`, {});
       } else {
+        localStorage.removeItem("test_answer");
         const data = await response.json();
         navigate(`/test/result/${data.idRecord}`);
       }
@@ -249,6 +261,38 @@ function TestMain() {
       toast.error(`${error}`);
     }
   }
+
+  //helper func
+  const initialAnswerList = () => {
+    let initalArr = [];
+    testdata.forEach((part) => {
+      part.units.forEach((unit) => {
+        unit.questions.forEach((question) => {
+          initalArr.push({ idQuestion: question.idQuestion, userChoice: "-1" });
+        });
+      });
+    });
+    return initalArr;
+  };
+  const handleOptionChange = (questionId, selectedOption) => {
+    const existingAnswerIndex = answers.findIndex(
+      (answer) => answer.idQuestion === questionId
+    );
+
+    if (existingAnswerIndex !== -1) {
+      setAnswers((prevAnswers) => {
+        const updatedAnswers = [...prevAnswers];
+        updatedAnswers[existingAnswerIndex].userChoice = String(selectedOption);
+        return updatedAnswers;
+      });
+    } else {
+      const newAnswer = {
+        idQuestion: questionId,
+        userChoice: String(selectedOption),
+      };
+      setAnswers((prevAnswers) => [...prevAnswers, newAnswer]);
+    }
+  };
   function nextPart() {
     if (current_part < 6) {
       setCurrentPart(current_part + 1);
@@ -367,6 +411,12 @@ function TestMain() {
                                           <input
                                             type="radio"
                                             name={`question_${question_item.idQuestion}`}
+                                            checked={answers.some(
+                                              (answer) =>
+                                                answer.idQuestion ===
+                                                  question_item.idQuestion &&
+                                                answer.userChoice === "1"
+                                            )}
                                             onChange={() =>
                                               handleOptionChange(
                                                 question_item.idQuestion,
@@ -388,6 +438,12 @@ function TestMain() {
                                                 2
                                               )
                                             }
+                                            checked={answers.some(
+                                              (answer) =>
+                                                answer.idQuestion ===
+                                                  question_item.idQuestion &&
+                                                answer.userChoice === "2"
+                                            )}
                                           />
                                           B. {question_item.choice_2}
                                         </div>
@@ -403,6 +459,12 @@ function TestMain() {
                                                 3
                                               )
                                             }
+                                            checked={answers.some(
+                                              (answer) =>
+                                                answer.idQuestion ===
+                                                  question_item.idQuestion &&
+                                                answer.userChoice === "3"
+                                            )}
                                           />
                                           C. {question_item.choice_3}
                                         </div>
@@ -418,6 +480,12 @@ function TestMain() {
                                                 4
                                               )
                                             }
+                                            checked={answers.some(
+                                              (answer) =>
+                                                answer.idQuestion ===
+                                                  question_item.idQuestion &&
+                                                answer.userChoice === "4"
+                                            )}
                                           />
                                           D. {question_item.choice_4}
                                         </div>
@@ -466,7 +534,7 @@ function TestMain() {
               totalQuestions += unit.questions.length;
             });
             return (
-              <div>
+              <div key={index_part}>
                 <div style={{ fontWeight: "500" }}>{`Part ${
                   index_part + 1
                 }`}</div>

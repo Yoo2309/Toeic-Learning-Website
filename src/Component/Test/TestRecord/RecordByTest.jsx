@@ -103,7 +103,7 @@ function RecordByTest() {
               navigate("/test/record");
             }}
           >
-            Lịch sử làm bài <i class="fa-solid fa-clock-rotate-left"></i>
+            Lịch sử làm bài <i className="fa-solid fa-clock-rotate-left"></i>
           </button>
         </div>
       </div>

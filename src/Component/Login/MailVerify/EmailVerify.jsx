@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import css from "./email-verify.module.scss";
 import { toast } from "react-toastify";
+import { UserContext } from "../../../Context/UserContext";
 
 function EmailVerify() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const { loginContext } = useContext(UserContext);
 
   useEffect(() => {
     const showToast = (seconds) => {
@@ -38,10 +41,22 @@ function EmailVerify() {
     };
 
     showToast(5).then(() => {
-      navigate("/login");
+      if (id !== undefined) {
+        loginContext(id);
+        const returnPath = localStorage.getItem("returnPath");
+        if (returnPath) {
+          // Chuyển hướng người dùng về trang trước khi đăng nhập
+          navigate(returnPath);
+          localStorage.removeItem("returnPath"); // Xóa đường dẫn sau khi đã sử dụng
+        } else {
+          // Nếu không có đường dẫn trước đó, chuyển hướng về trang chủ
+          navigate("/");
+        }
+      }
     });
   }, []);
-  console.log("render");
+
+  console.log(id);
 
   return (
     <div className={css["login-success-wrapper"]}>
