@@ -56,9 +56,9 @@ function ChangePassword() {
         className="bg-white px-10 pb-10 pt-2 rounded-md w-[500px] flex flex-col items-center"
       >
         <h1>Đổi mật khẩu</h1>
-        <div class="w-full h-12 bg-gray-100 my-2 border-2 border-blue-900 rounded-full flex items-center">
+        <div className="w-full h-12 bg-gray-100 my-2 border-2 border-blue-900 rounded-full flex items-center">
           <input
-            class="flex-1 bg-transparent border-none outline-none w-full text-lg font-semibold text-black px-4"
+            className="flex-1 bg-transparent border-none outline-none w-full text-lg font-semibold text-black px-4"
             type="text"
             placeholder="Nhập mật khẩu cũ"
             {...changePassData("password", { required: true })}
@@ -67,10 +67,10 @@ function ChangePassword() {
         <error>
           {errors.password?.type === "required" && "OTP is required"}
         </error>
-        <div class="w-full h-12 bg-gray-100 my-2 border-2 border-blue-900 rounded-full flex items-center">
+        <div className="w-full h-12 bg-gray-100 my-2 border-2 border-blue-900 rounded-full flex items-center">
           <input
             type="text"
-            class="flex-1 bg-transparent border-none outline-none w-full text-lg font-semibold text-black px-4"
+            className="flex-1 bg-transparent border-none outline-none w-full text-lg font-semibold text-black px-4"
             placeholder="Nhập mật khẩu mới"
             {...changePassData("new_password", {
               required: true,
@@ -84,10 +84,10 @@ function ChangePassword() {
           {errors.new_password?.type === "pattern" &&
             "Phải có ít nhất 6 ký tự, một chữ hoa, một chữ thường, một chữ số, một ký tự đặc biệt"}
         </error>
-        <div class="w-full h-12 bg-gray-100 my-2 border-2 border-blue-900 rounded-full flex items-center">
+        <div className="w-full h-12 bg-gray-100 my-2 border-2 border-blue-900 rounded-full flex items-center">
           <input
             type={"text"}
-            class="flex-1 bg-transparent border-none outline-none w-full text-lg font-semibold text-black px-4"
+            className="flex-1 bg-transparent border-none outline-none w-full text-lg font-semibold text-black px-4"
             placeholder="Xác nhận mật khẩu"
             {...changePassData("confirm_password", {
               required: true,

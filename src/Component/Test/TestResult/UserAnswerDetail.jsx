@@ -104,7 +104,7 @@ function UserAnswerDetail({ toggleModal, userAnswer, index }) {
               Hiển thị Transcript
               <i
                 style={{ marginLeft: ".5rem" }}
-                class="fa-solid fa-caret-down"
+                className="fa-solid fa-caret-down"
               ></i>
             </div>
             {showScript ? (

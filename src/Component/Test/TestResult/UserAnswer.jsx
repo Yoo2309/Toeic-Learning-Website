@@ -80,9 +80,12 @@ function UserAnswer({ id }) {
                   ? "C"
                   : "D"}
                 {userAnswer.state ? (
-                  <i class="fa-solid fa-check" style={{ color: "#0cb300" }}></i>
+                  <i
+                    className="fa-solid fa-check"
+                    style={{ color: "#0cb300" }}
+                  ></i>
                 ) : (
-                  <i class="fa-solid fa-x" style={{ color: "#ff0000" }}></i>
+                  <i className="fa-solid fa-x" style={{ color: "#ff0000" }}></i>
                 )}
                 <div
                   onClick={() => {
