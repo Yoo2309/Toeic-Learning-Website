@@ -48,11 +48,9 @@ function EmailVerify() {
           // Chuyển hướng người dùng về trang trước khi đăng nhập
           navigate(returnPath);
           localStorage.removeItem("returnPath"); // Xóa đường dẫn sau khi đã sử dụng
-        } else {
-          // Nếu không có đường dẫn trước đó, chuyển hướng về trang chủ
-          navigate("/");
         }
       }
+      navigate("/login");
     });
   }, []);
 
