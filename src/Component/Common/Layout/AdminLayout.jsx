@@ -12,7 +12,7 @@ function AdminLayout({ children }) {
   if (user.role === "Admin") {
     return (
       <div className="professor-layout">
-        <div className="grid-container">
+        <div className={`${openSidebarToggle ? "grid-container" : ""}`}>
           <AdminHeader OpenSidebar={OpenSidebar} />
           <AdminSidebar
             openSidebarToggle={openSidebarToggle}
