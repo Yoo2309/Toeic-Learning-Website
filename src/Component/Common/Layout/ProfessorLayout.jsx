@@ -12,7 +12,7 @@ function ProfessorLayout({ children }) {
   if (user.role === "Professor") {
     return (
       <div className="professor-layout">
-        <div className="grid-container">
+        <div className={`${openSidebarToggle ? "grid-container" : ""}`}>
           <ProfessorHeader OpenSidebar={OpenSidebar} />
           <ProfessorSidebar
             openSidebarToggle={openSidebarToggle}

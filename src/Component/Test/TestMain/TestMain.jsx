@@ -253,7 +253,7 @@ function TestMain() {
         const errorData = await response.json();
         toast.error(`${errorData.message}`, {});
       } else {
-        localStorage.removeItem("test_answer");
+        localStorage.removeItem(`test_answer_${user.idUser}`);
         const data = await response.json();
         navigate(`/test/result/${data.idRecord}`);
       }

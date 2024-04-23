@@ -15,6 +15,7 @@ body.active-modal {
     "sidebar header header header"
     "sidebar main main main";
   height: 100vh;
+  transition: ease;
 }
 
 /* Header  */
@@ -29,7 +30,7 @@ body.active-modal {
 }
 
 .professor-layout .menu-icon {
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 /* End Header  */
 
@@ -78,10 +79,8 @@ body.active-modal {
   text-decoration: none;
 }
 
-.professor-layout .sidebar-responsive {
-  display: inline !important;
-  position: absolute;
-  z-index: 12 !important;
+.professor-layout .sidebar-hidden {
+  display: none;
 }
 
 /* End Sidebar  */
@@ -113,11 +112,11 @@ body.active-modal {
   display: flex;
   align-items: center;
 }
-.professor-board-header{
+.professor-board-header {
   display: flex;
   justify-content: space-between;
 }
-.professor-add-button{
+.professor-add-button {
   padding: 10px 20px;
   background-color: #2d9358;
   color: #fff;
@@ -126,7 +125,7 @@ body.active-modal {
   align-items: center;
   gap: 8px;
 }
-.professor-add-button:hover{
+.professor-add-button:hover {
   cursor: pointer;
 }
 /* End Main  */

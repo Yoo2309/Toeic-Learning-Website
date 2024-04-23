@@ -7,7 +7,7 @@ function ProfessorSidebar({ openSidebarToggle, OpenSidebar }) {
   return (
     <aside
       id="sidebar"
-      className={openSidebarToggle ? "sidebar-responsive" : ""}
+      className={!openSidebarToggle ? "sidebar-hidden" : ""}
     >
       <div className="sidebar-title">
         <div className="sidebar-brand">
