@@ -5,7 +5,7 @@ import Loader from "../../Common/Loader/Loader";
 import { useForm } from "react-hook-form";
 import "./ProfessorVocabulary.css";
 import { UserContext } from "../../../Context/UserContext";
-import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
+import { showDeleteWarning } from "../../Common/Alert/Alert";
 import AddVocabulary from "./AddVocabulary";
 
 function ProfessorVocabulary() {

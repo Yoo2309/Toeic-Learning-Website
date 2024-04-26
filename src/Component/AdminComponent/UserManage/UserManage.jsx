@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { UserContext } from "../../../Context/UserContext";
 import Loader from "../../Common/Loader/Loader";
 import "./UserManage.css";
-import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
+import { showDeleteWarning } from "../../Common/Alert/Alert";
 
 function UserManage() {
   const { user } = useContext(UserContext);

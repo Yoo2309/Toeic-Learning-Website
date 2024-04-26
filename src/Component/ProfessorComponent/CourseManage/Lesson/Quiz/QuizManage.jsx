@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import AddQuiz from "./AddQuiz";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../../../Context/UserContext";
-import { showDeleteWarning } from "../../../../Common/Alert/DeleteAlert";
+import { showDeleteWarning } from "../../../../Common/Alert/Alert";
 
 function QuizManage({ idLesson }) {
   const [isLoading, setIsLoading] = useState(true);

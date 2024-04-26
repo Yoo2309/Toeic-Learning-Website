@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { UserContext } from "../../../Context/UserContext";
 import Loader from "../../Common/Loader/Loader";
 import "./VipPackageManage.css";
-import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
+import { showDeleteWarning } from "../../Common/Alert/Alert";
 
 function VipPackageManage() {
   const { user } = useContext(UserContext);

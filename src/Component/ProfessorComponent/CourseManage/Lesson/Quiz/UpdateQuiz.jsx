@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Loader from "../../../../Common/Loader/Loader";
 import AddQuestion from "./AddQuestion";
 import { UserContext } from "../../../../../Context/UserContext";
-import { showDeleteWarning } from "../../../../Common/Alert/DeleteAlert";
+import { showDeleteWarning } from "../../../../Common/Alert/Alert";
 
 function UpdateQuiz() {
   const navigate = useNavigate();
