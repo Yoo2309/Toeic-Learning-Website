@@ -45,7 +45,7 @@ function AdminHome() {
   };
 
   if (isloading) {
-    <Loader />;
+    <Loader fullLoad={true}/>;
   }
 
   return (

@@ -1,11 +1,10 @@
 import React from "react";
 import "./Loader.css";
 
-function Loader() {
-
+function Loader({ fullLoad }) {
   return (
     <div className="loader-wrapper">
-      <div className="loader"></div>
+      <div className={`loader ${fullLoad ? "full-loader" : ""}`}></div>
     </div>
   );
 }

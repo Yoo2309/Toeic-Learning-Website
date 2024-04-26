@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Loader from "../../Common/Loader/Loader";
 import "./CourseManageIndex.css";
-import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
+import { showDeleteWarning } from "../../Common/Alert/Alert";
 import AddCourse from "./AddCourse";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../Context/UserContext";

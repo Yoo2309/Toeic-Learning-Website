@@ -78,7 +78,9 @@ function UserAnswer({ id }) {
                   ? "B"
                   : userAnswer.userChoice === "3"
                   ? "C"
-                  : "D"}
+                  : userAnswer.userChoice === "4"
+                  ? "D"
+                  : "X"}
                 {userAnswer.state ? (
                   <i
                     className="fa-solid fa-check"

@@ -5,7 +5,7 @@ import Loader from "../../Common/Loader/Loader";
 import AddTest from "./AddTest";
 import { UserContext } from "../../../Context/UserContext";
 import { useNavigate } from "react-router-dom";
-import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
+import { showDeleteWarning } from "../../Common/Alert/Alert";
 
 function ProfessorTestManage() {
   const [isLoading, setIsLoading] = useState(true);

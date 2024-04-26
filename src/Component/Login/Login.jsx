@@ -191,7 +191,7 @@ function Login() {
   };
 
   if (isloading) {
-    return <Loader />;
+    return <Loader fullLoad={true} />;
   }
   function SwitchSignUpMode(mode) {
     setSignUpMode(mode);

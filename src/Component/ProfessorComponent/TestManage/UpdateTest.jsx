@@ -5,7 +5,7 @@ import Loader from "../../Common/Loader/Loader";
 import "./UpdateTest.css";
 import { UserContext } from "../../../Context/UserContext";
 import AddUnit from "./AddUnit";
-import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
+import { showDeleteWarning } from "../../Common/Alert/Alert";
 import HTMLReactParser from "html-react-parser";
 
 function UpdateTest() {

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { showDeleteWarning } from "../../Common/Alert/DeleteAlert";
+import { showDeleteWarning } from "../../Common/Alert/Alert";
 import Loader from "../../Common/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import "./ProfessorVocabularyTopic.css";

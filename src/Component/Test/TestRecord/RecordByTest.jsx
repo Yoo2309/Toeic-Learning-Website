@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Loader from "../../Common/Loader/Loader";
 import { useNavigate, useParams } from "react-router-dom";
 import Heading from "../../Common/Header/Heading";
+import { ChooseTestMode } from "../../Common/Alert/Alert";
 
 function RecordByTest() {
   const { id } = useParams();
@@ -64,7 +65,15 @@ function RecordByTest() {
             <button
               className="do-test"
               onClick={() => {
-                navigate(`/do-test/${id}`);
+                ChooseTestMode(
+                  () => {
+                    navigate(`/do-test/${id}`);
+                  },
+                  () => {
+                    navigate(`/do-simulate-test/${id}`);
+                  },
+                  records[0] && records[0].testName
+                );
               }}
             >
               Làm bài thi ngay

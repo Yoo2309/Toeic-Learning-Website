@@ -22,25 +22,6 @@ function Header() {
     navigate("/");
     window.location.reload();
   }
-  async function fetchTestType() {
-    try {
-      setIsLoading(true);
-      const response = await fetch(
-        `${
-          process.env.REACT_APP_API_BASE_URL ?? "/api"
-        }/TestType/GetAllTestTypes`
-      );
-      setIsLoading(false);
-      if (!response.ok) {
-        toast.error(`Lấy dữ liệu TestType thất bại`, {});
-      } else {
-        const data = await response.json();
-        // setTestType(data);
-      }
-    } catch (error) {
-      toast.error(`${error}`);
-    }
-  }
   useEffect(() => {
     (async () => {
       await loadGapiInsideDOM();
@@ -51,6 +32,7 @@ function Header() {
       setIsVIP(true);
     }
   }, [user.role]);
+  
   if (isLoading) {
     return <Loader />;
   }

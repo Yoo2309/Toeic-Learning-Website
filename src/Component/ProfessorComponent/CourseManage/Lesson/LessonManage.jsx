@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { UserContext } from "../../../../Context/UserContext";
-import { showDeleteWarning } from "../../../Common/Alert/DeleteAlert";
+import { showDeleteWarning } from "../../../Common/Alert/Alert";
 import Loader from "../../../Common/Loader/Loader";
 
 function LessonManage() {

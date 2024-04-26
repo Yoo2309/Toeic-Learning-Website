@@ -6,9 +6,8 @@ import HTMLReactParser from "html-react-parser";
 import { UserContext } from "../../../Context/UserContext.jsx";
 import { toast } from "react-toastify";
 import { showSubmitWarning } from "../../Common/Alert/Alert.jsx";
-import { useBeforeunload } from "react-beforeunload";
 
-function TestMain() {
+function TestSimulate() {
   const { id } = useParams();
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
@@ -33,8 +32,8 @@ function TestMain() {
   useEffect(() => {
     if (time) {
       if (time.hour === 0 && time.min === 0 && time.sec === 0) {
-        toast.warning(`Hết thời gian`, {});
         SubmitTest();
+        toast.warning(`Hết thời gian`, {});
       } else {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         current_time = setInterval(() => {
@@ -65,31 +64,39 @@ function TestMain() {
       }
     }
   }, [time]);
+
   useEffect(() => {
-    if (testType === "FullTest") {
-      setTime({
-        hour: 2,
-        min: 0,
-        sec: 0,
-      });
-    } else if (testType === "MiniTest") {
-      setTime({
-        hour: 1,
-        min: 0,
-        sec: 0,
-      });
+    if (testType && !time) {
+      if (testType === "FullTest") {
+        saveExpireTimeToLocalStorage(2);
+        setTime({
+          hour: 2,
+          min: 0,
+          sec: 0,
+        });
+      } else if (testType === "MiniTest") {
+        saveExpireTimeToLocalStorage(1);
+        setTime({
+          hour: 1,
+          min: 0,
+          sec: 0,
+        });
+      }
     }
   }, [testType]);
-
-  useBeforeunload((event) => {
-    event.preventDefault();
-  });
 
   useEffect(() => {
     fetchParts();
     fetchTestData();
-    fetchTestType();
     window.scrollTo(0, 0);
+
+    const storedTime = localStorage.getItem(`expirationTime_${id}`);
+    if (storedTime) {
+      console.log(storedTime);
+      setTime(calculateRemainingTime(storedTime));
+    } else {
+      fetchTestType();
+    }
   }, []);
 
   useEffect(() => {
@@ -118,17 +125,20 @@ function TestMain() {
 
   useEffect(() => {
     if (user?.idUser && answers?.length > 0) {
-      let inFifteenMinutes;
-      if (testType === "FullTest") {
-        inFifteenMinutes = new Date(new Date().getTime() + 120 * 60 * 1000);
-      } else {
-        inFifteenMinutes = new Date(new Date().getTime() + 60 * 60 * 1000);
-      }
+      localStorage.setItem(
+        `test_answer_${user.idUser}`,
+        JSON.stringify(answers)
+      );
     }
   }, [answers, user, testType]);
   useEffect(() => {
-    if (answers?.length <= 0 && testdata?.length !== 0) {
-      setAnswers(initialAnswerList());
+    if (localStorage.getItem(`test_answer_${user.idUser}`)) {
+      const stored_answer = localStorage.getItem(`test_answer_${user.idUser}`);
+      setAnswers(JSON.parse(stored_answer));
+    } else {
+      if (answers?.length <= 0 && testdata?.length !== 0) {
+        setAnswers(initialAnswerList());
+      }
     }
   }, [user, testdata]);
 
@@ -225,6 +235,9 @@ function TestMain() {
     }
   }
   async function SubmitTest() {
+    setIsLoading(true);
+    localStorage.removeItem(`expirationTime_${id}`);
+    localStorage.removeItem(`test_answer_${id}`);
     try {
       const response = await fetch(
         `${
@@ -250,10 +263,53 @@ function TestMain() {
       }
     } catch (error) {
       toast.error(`${error}`);
+    } finally {
+      setIsLoading(false);
     }
   }
 
   //helper func
+  function saveExpireTimeToLocalStorage(hour) {
+    const today = new Date(); // Lấy thời gian hiện tại
+
+    const timeToCompleteTask = { hour: 0, min: 2, sec: 0 }; // Thời gian làm bài
+
+    const expirationTime = new Date(
+      today.getTime() +
+        timeToCompleteTask.hour * 60 * 60 * 1000 +
+        timeToCompleteTask.min * 60 * 1000 +
+        timeToCompleteTask.sec * 1000
+    ); // Thời gian hết hạn
+
+    localStorage.setItem(`expirationTime_${id}`, expirationTime.getTime()); // Lưu thời gian hết hạn dưới dạng timestamp
+  }
+  function calculateRemainingTime(expirationTime) {
+    const currentTime = new Date().getTime(); // Thời gian hiện tại
+
+    const timeRemaining = expirationTime - currentTime; // Thời gian còn lại tính bằng milliseconds
+
+    if (timeRemaining >= 0) {
+      // Chuyển đổi thời gian còn lại thành giờ, phút, giây
+      const remainingHours = Math.floor(timeRemaining / (1000 * 60 * 60));
+      const remainingMinutes = Math.floor(
+        (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const remainingSeconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+      return {
+        hour: remainingHours,
+        min: remainingMinutes,
+        sec: remainingSeconds,
+      };
+    } else {
+      return {
+        hour: 0,
+        min: 0,
+        sec: 0,
+      };
+    }
+  }
+
   const initialAnswerList = () => {
     let initalArr = [];
     testdata.forEach((part) => {
@@ -300,7 +356,7 @@ function TestMain() {
     navigate("/login");
   }
   if (isLoading) {
-    return <Loader />;
+    return <Loader fullLoad={true} />;
   }
 
   return (
@@ -371,11 +427,7 @@ function TestMain() {
                           <div className={css["test-unit-right"]}>
                             <div className={css["test-unit-audio"]}>
                               {unit.audio && (
-                                <audio
-                                  src={unit.audio}
-                                  controls
-                                  controlsList="nodownload noremoteplayback"
-                                ></audio>
+                                <audio src={unit.audio} controls></audio>
                               )}
                             </div>
                             {unit &&
@@ -566,4 +618,4 @@ function TestMain() {
   );
 }
 
-export default TestMain;
+export default TestSimulate;
