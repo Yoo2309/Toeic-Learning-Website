@@ -48,3 +48,18 @@ export const ChooseTestMode = (testCallback, simulateCallback, testname) => {
     }
   });
 };
+export const TestCancel = (onDeleteCallback) => {
+  Swal.fire({
+    title: "Bạn chắc chắn rời khỏi bài thi?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    cancelButtonText: "Quay lại",
+    confirmButtonText: "Rời khởi",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      onDeleteCallback();
+    }
+  });
+};
