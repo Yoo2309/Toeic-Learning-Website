@@ -5,7 +5,8 @@ import Loader from "../../Common/Loader/Loader.jsx";
 import HTMLReactParser from "html-react-parser";
 import { UserContext } from "../../../Context/UserContext.jsx";
 import { toast } from "react-toastify";
-import { showSubmitWarning } from "../../Common/Alert/Alert.jsx";
+import { TestCancel, showSubmitWarning } from "../../Common/Alert/Alert.jsx";
+import { red } from "@mui/material/colors";
 
 function TestSimulate() {
   const { id } = useParams();
@@ -272,7 +273,7 @@ function TestSimulate() {
   function saveExpireTimeToLocalStorage(hour) {
     const today = new Date(); // Lấy thời gian hiện tại
 
-    const timeToCompleteTask = { hour: 0, min: 2, sec: 0 }; // Thời gian làm bài
+    const timeToCompleteTask = { hour: 2, min: 0, sec: 0 }; // Thời gian làm bài
 
     const expirationTime = new Date(
       today.getTime() +
@@ -572,6 +573,19 @@ function TestSimulate() {
           }}
         >
           Nộp bài
+        </button>
+        <button
+          className={css["test-button"]}
+          style={{backgroundColor: "#c62828"}}
+          onClick={() => {
+            TestCancel(()=>{
+              localStorage.removeItem(`expirationTime_${id}`);
+              localStorage.removeItem(`test_answer_${id}`);
+              navigate(`/test/${id}`)
+            })
+          }}
+        >
+          Hủy
         </button>
         {testdata &&
           testdata.map((testpart, index_part) => {
