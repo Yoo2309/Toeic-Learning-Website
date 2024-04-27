@@ -80,7 +80,7 @@ function UserAnswer({ id }) {
                   ? "C"
                   : userAnswer.userChoice === "4"
                   ? "D"
-                  : "X"}
+                  : "Chưa trả lời"}
                 {userAnswer.state ? (
                   <i
                     className="fa-solid fa-check"
@@ -89,15 +89,17 @@ function UserAnswer({ id }) {
                 ) : (
                   <i className="fa-solid fa-x" style={{ color: "#ff0000" }}></i>
                 )}
-                <div
-                  onClick={() => {
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault()
                     setQuestion_num(index + 1);
                     setCurentAnswer(userAnswer);
                     toggleModal();
                   }}
                 >
                   Xem chi tiết
-                </div>
+                </a>
               </div>
             );
           })}

@@ -1,12 +1,24 @@
 .answer-detail-modal {
-  width: 100vw;
-  height: 100vh;
+  width: auto;
+  height: auto;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   position: fixed;
   overflow-y: auto;
+}
+.answer-detail-modal .test-question-number {
+  margin-right: 0.5rem;
+  max-width: 35px;
+  min-width: 35px;
+  width: 35px;
+  height: 35px;
+  background-color: rgba(0, 49, 80, 0.3);
+  border-radius: 50%;
+  line-height: 35px;
+  text-align: center;
+  font-weight: 500;
 }
 .answer-detail-content {
   position: absolute;

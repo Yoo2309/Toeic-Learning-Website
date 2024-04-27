@@ -17,6 +17,7 @@ function AddVocabulary({
   const [vocabulary, setVocabulary] = useState({
     engWord: current_word.engWord,
     wordType: current_word.wordType,
+    pronunciation: current_word.pronunciation,
     meaning: current_word.meaning,
   });
   const {
@@ -32,6 +33,7 @@ function AddVocabulary({
       engWord: current_word.engWord,
       wordType: current_word.wordType,
       meaning: current_word.meaning,
+      pronunciation: current_word.pronunciation,
     });
   }, [current_word]);
   useEffect(() => {
@@ -55,6 +57,7 @@ function AddVocabulary({
             engWord: getValues("engWord"),
             wordType: getValues("wordType"),
             meaning: getValues("meaning"),
+            pronunciation: getValues("pronunciation"),
           }),
         }
       );
@@ -73,9 +76,10 @@ function AddVocabulary({
   }
   async function handleUpdateVocabulary() {
     if (
-      vocabulary.engWord !== "" &&
-      vocabulary.wordType !== "" &&
-      vocabulary.meaning !== ""
+      vocabulary.engWord &&
+      vocabulary.wordType &&
+      vocabulary.meaning &&
+      vocabulary.pronunciation
     ) {
       setIsLoading(true);
       try {
@@ -94,6 +98,7 @@ function AddVocabulary({
               engWord: vocabulary.engWord,
               wordType: vocabulary.wordType,
               meaning: vocabulary.meaning,
+              pronunciation: vocabulary.pronunciation,
             }),
           }
         );
@@ -176,6 +181,17 @@ function AddVocabulary({
                   <div className="input-field">
                     <input
                       type="text"
+                      placeholder="Nhập phiên âm"
+                      {...word("pronunciation", { required: true })}
+                    />
+                  </div>
+                  <error>
+                    {error_add.wordType?.type === "required" &&
+                      "Không được để trống từ loại"}
+                  </error>
+                  <div className="input-field">
+                    <input
+                      type="text"
                       placeholder="Nhập nghĩa của từ"
                       {...word("meaning", { required: true })}
                     />
@@ -225,7 +241,24 @@ function AddVocabulary({
                     />
                   </div>
                   {vocabulary.wordType === "" ? (
-                    <error>Không được để từ loại</error>
+                    <error>Không được để trống từ loại</error>
+                  ) : (
+                    <></>
+                  )}
+                  <div className="input-field">
+                    <input
+                      value={vocabulary.pronunciation}
+                      onChange={(e) =>
+                        setVocabulary({
+                          ...vocabulary,
+                          pronunciation: e.target.value,
+                        })
+                      }
+                      type="text"
+                    />
+                  </div>
+                  {vocabulary.pronunciation === "" ? (
+                    <error>Không được để trống phiên âm</error>
                   ) : (
                     <></>
                   )}

@@ -161,27 +161,17 @@ function VocabularyByTopic() {
         </div>
         <div className="vocabulary-list-wrapper">
           <div className="vocabulary-list">
-            <table>
-              <thead>
-                <tr>
-                  <td className="col1">Từ vựng </td>
-                  <td className="col2">Từ loại</td>
-                  <td className="col3">Nghĩa</td>
-                </tr>
-              </thead>
-              <tbody>
-                {words &&
-                  words.map((word, key) => {
-                    return (
-                      <tr>
-                        <td className="col1">{word.engWord}</td>
-                        <td className="col2">{word.wordType}</td>
-                        <td className="col3">{word.meaning}</td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
+            {words &&
+              words.map((word, key) => {
+                return (
+                  <div className="vocabulary-list-item">
+                    <div className="">{word.engWord}</div>
+                    <div className="">{word.wordType}</div>
+                    <div className="">{word.pronunciation}</div>
+                    <div className="">{word.meaning}</div>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>

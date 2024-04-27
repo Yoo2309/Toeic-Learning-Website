@@ -29,7 +29,6 @@
 @media screen and (min-width: 600px) {
 }
 
-
 @keyframes slide-up {
   0% {
     visibility: visible;
@@ -176,27 +175,22 @@ label:hover :checked + .flip-card {
 .vocabulary-list-wrapper {
   padding-top: 20px;
 }
-
-.vocabulary-card table {
+.vocabulary-list {
   width: 100%;
+  padding-bottom: 6px;
+  flex: 70%;
+  overflow: hidden;
+  border-radius: 2rem;
 }
-.vocabulary-card thead {
-  display: table-header-group;
-  vertical-align: middle;
-  border-color: inherit;
+.vocabulary-list-item {
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #e8eaf1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-.vocabulary-card table,
-.vocabulary-card th,
-.vocabulary-card td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-.vocabulary-card thead td {
-  font-weight: bold;
-}
-.vocabulary-card td {
-  padding: 0.5rem;
-}
-.vocabulary-card tr {
-  line-height: 3;
+.vocabulary-list-item:hover {
+  cursor: pointer;
+  transform: translateZ(1px);
+  box-shadow: 0 6px 6px #e8eaf1;
 }

@@ -176,6 +176,7 @@ function UserAnswerDetail({ toggleModal, userAnswer, index }) {
                     D. {question.choice_4}
                   </div>
                 </div>
+                <div>{userAnswer.userChoice === "-1"? "Không chọn đáp án":""}</div>
               </div>
             </div>
             <div>{question.explaination && `=> ${question.explaination}`}</div>

@@ -223,6 +223,7 @@ function ProfessorVocabulary() {
                   <div className="eng-word">{word.engWord}</div>
                   <div className="word-type">{word.wordType}</div>
                   <div className="word-meaning">{word.meaning}</div>
+                  <div className="word-meaning">{word.pronunciation}</div>
                   <div className="btn-wrapper">
                     <button
                       className="delete-btn"
