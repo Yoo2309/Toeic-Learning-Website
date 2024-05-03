@@ -44,10 +44,10 @@ function CommentItem({
         element.focus();
       }
     }
-  }, [expand]);
+  }, [expand, comment.id]);
 
   return (
-    <div className="w-full mt-10 flex items-start gap-3">
+    <div className="w-full mt-5 flex items-start gap-3">
       <div className="h-14 w-14 rounded-full overflow-hidden m-1">
         <img
           className="h-14 w-14"
@@ -60,12 +60,16 @@ function CommentItem({
         />
       </div>
       <div className="w-full">
+        <div className="w-full flex gap-5">
+          <div>{comment.username}</div>
+          <div className="text-sm italic">{comment.createDate}</div>
+        </div>
         <div
           className={
             "w-full bg-gray-100 flex flex-col px-2 py-1 w-72 cursor-pointer rounded-md"
           }
         >
-          <div className="flex flex-col gap-3 justify-center leading-8">
+          <div className="flex flex-col gap-2 justify-center leading-8">
             <input
               className="p-2 border-none bg-gray-100 border-transparent focus:outline-none focus:ring-0"
               style={{ wordWrap: "break-word" }}
@@ -75,7 +79,6 @@ function CommentItem({
               }}
               id={`content_${comment.id}`}
             ></input>
-
             <div className="flex">
               {editMode ? (
                 <>
