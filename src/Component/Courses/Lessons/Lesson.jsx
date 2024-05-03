@@ -117,6 +117,7 @@ function Lesson() {
     fetchLessons();
     window.scrollTo(0, 0);
   }, [id]);
+
   useEffect(() => {
     fetchOtherLessons();
     fetchQuizes();
