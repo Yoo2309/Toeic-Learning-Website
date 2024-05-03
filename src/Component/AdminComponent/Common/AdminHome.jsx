@@ -13,8 +13,9 @@ function AdminHome() {
       const response = await fetch(
         `${
           process.env.REACT_APP_API_BASE_URL ?? "/api"
-        }/SQLScriptGenerator/generate`,{
-          method: "POST"
+        }/SQLScriptGenerator/generate`,
+        {
+          method: "POST",
         }
       );
       setIsLoading(false);
@@ -45,7 +46,7 @@ function AdminHome() {
   };
 
   if (isloading) {
-    <Loader fullLoad={true}/>;
+    <Loader fullLoad={true} />;
   }
 
   return (

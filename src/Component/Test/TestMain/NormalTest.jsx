@@ -5,11 +5,10 @@ import Loader from "../../Common/Loader/Loader.jsx";
 import HTMLReactParser from "html-react-parser";
 import { UserContext } from "../../../Context/UserContext.jsx";
 import { toast } from "react-toastify";
-import { TestCancel, showSubmitWarning } from "../../Common/Alert/Alert.jsx";
-import { red } from "@mui/material/colors";
+import { showSubmitWarning } from "../../Common/Alert/Alert.jsx";
+import { useBeforeunload } from "react-beforeunload";
 
-function TestSimulate() {
-  const { id } = useParams();
+function NormalTest({id}) {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -22,7 +21,6 @@ function TestSimulate() {
   const [testdata, setTestdata] = useState([]);
   const [testType, setTestType] = useState("");
   const [answers, setAnswers] = useState([]);
-  const [freeTest, setFreeTest] = useState(true);
 
   let question_num = 0;
   let navigate_num = 0;
@@ -33,8 +31,8 @@ function TestSimulate() {
   useEffect(() => {
     if (time) {
       if (time.hour === 0 && time.min === 0 && time.sec === 0) {
-        SubmitTest();
         toast.warning(`Hết thời gian`, {});
+        SubmitTest();
       } else {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         current_time = setInterval(() => {
@@ -65,52 +63,32 @@ function TestSimulate() {
       }
     }
   }, [time]);
-
   useEffect(() => {
-    if (testType && !time) {
-      if (testType === "FullTest") {
-        saveExpireTimeToLocalStorage(2);
-        setTime({
-          hour: 2,
-          min: 0,
-          sec: 0,
-        });
-      } else if (testType === "MiniTest") {
-        saveExpireTimeToLocalStorage(1);
-        setTime({
-          hour: 1,
-          min: 0,
-          sec: 0,
-        });
-      }
+    if (testType === "FullTest") {
+      setTime({
+        hour: 2,
+        min: 0,
+        sec: 0,
+      });
+    } else if (testType === "MiniTest") {
+      setTime({
+        hour: 1,
+        min: 0,
+        sec: 0,
+      });
     }
   }, [testType]);
+
+  useBeforeunload((event) => {
+    event.preventDefault();
+  });
 
   useEffect(() => {
     fetchParts();
     fetchTestData();
+    fetchTestType();
     window.scrollTo(0, 0);
-
-    const storedTime = localStorage.getItem(`expirationTime_${id}`);
-    if (storedTime) {
-      console.log(storedTime);
-      setTime(calculateRemainingTime(storedTime));
-    } else {
-      fetchTestType();
-    }
   }, []);
-
-  useEffect(() => {
-    if (user.idUser) {
-      fetchFreeTest();
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (!freeTest && user.role[1] !== "VipStudent") {
-      navigate("/vippackage");
-    }
-  }, [freeTest]);
 
   useEffect(() => {
     if (current_question !== 0) {
@@ -126,20 +104,17 @@ function TestSimulate() {
 
   useEffect(() => {
     if (user?.idUser && answers?.length > 0) {
-      localStorage.setItem(
-        `test_answer_${user.idUser}`,
-        JSON.stringify(answers)
-      );
+      let time;
+      if (testType === "FullTest") {
+        time = new Date(new Date().getTime() + 120 * 60 * 1000);
+      } else {
+        time = new Date(new Date().getTime() + 60 * 60 * 1000);
+      }
     }
   }, [answers, user, testType]);
   useEffect(() => {
-    if (localStorage.getItem(`test_answer_${user.idUser}`)) {
-      const stored_answer = localStorage.getItem(`test_answer_${user.idUser}`);
-      setAnswers(JSON.parse(stored_answer));
-    } else {
-      if (answers?.length <= 0 && testdata?.length !== 0) {
-        setAnswers(initialAnswerList());
-      }
+    if (answers?.length <= 0 && testdata?.length !== 0) {
+      setAnswers(initialAnswerList());
     }
   }, [user, testdata]);
 
@@ -204,41 +179,8 @@ function TestSimulate() {
       toast.error(`${error}`);
     }
   }
-  async function fetchFreeTest() {
-    setIsLoading(true);
-    try {
-      const response = await fetch(
-        `${
-          process.env.REACT_APP_API_BASE_URL ?? "/api"
-        }/Student/CheckFreeTest/${user.idUser}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
-      setIsLoading(false);
-      if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(`${errorData.message}`);
-      } else {
-        const data = await response.text();
-        if (data === "true") {
-          setFreeTest(true);
-        } else {
-          setFreeTest(false);
-        }
-      }
-    } catch (error) {
-      toast.error(`${error}`);
-    }
-  }
+
   async function SubmitTest() {
-    setIsLoading(true);
-    localStorage.removeItem(`expirationTime_${id}`);
-    localStorage.removeItem(`test_answer_${id}`);
     try {
       const response = await fetch(
         `${
@@ -264,53 +206,10 @@ function TestSimulate() {
       }
     } catch (error) {
       toast.error(`${error}`);
-    } finally {
-      setIsLoading(false);
     }
   }
 
   //helper func
-  function saveExpireTimeToLocalStorage(hour) {
-    const today = new Date(); // Lấy thời gian hiện tại
-
-    const timeToCompleteTask = { hour: 2, min: 0, sec: 0 }; // Thời gian làm bài
-
-    const expirationTime = new Date(
-      today.getTime() +
-        timeToCompleteTask.hour * 60 * 60 * 1000 +
-        timeToCompleteTask.min * 60 * 1000 +
-        timeToCompleteTask.sec * 1000
-    ); // Thời gian hết hạn
-
-    localStorage.setItem(`expirationTime_${id}`, expirationTime.getTime()); // Lưu thời gian hết hạn dưới dạng timestamp
-  }
-  function calculateRemainingTime(expirationTime) {
-    const currentTime = new Date().getTime(); // Thời gian hiện tại
-
-    const timeRemaining = expirationTime - currentTime; // Thời gian còn lại tính bằng milliseconds
-
-    if (timeRemaining >= 0) {
-      // Chuyển đổi thời gian còn lại thành giờ, phút, giây
-      const remainingHours = Math.floor(timeRemaining / (1000 * 60 * 60));
-      const remainingMinutes = Math.floor(
-        (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      const remainingSeconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-      return {
-        hour: remainingHours,
-        min: remainingMinutes,
-        sec: remainingSeconds,
-      };
-    } else {
-      return {
-        hour: 0,
-        min: 0,
-        sec: 0,
-      };
-    }
-  }
-
   const initialAnswerList = () => {
     let initalArr = [];
     testdata.forEach((part) => {
@@ -357,7 +256,7 @@ function TestSimulate() {
     navigate("/login");
   }
   if (isLoading) {
-    return <Loader fullLoad={true} />;
+    return <Loader />;
   }
 
   return (
@@ -428,7 +327,11 @@ function TestSimulate() {
                           <div className={css["test-unit-right"]}>
                             <div className={css["test-unit-audio"]}>
                               {unit.audio && (
-                                <audio src={unit.audio} controls></audio>
+                                <audio
+                                  src={unit.audio}
+                                  controls
+                                  controlsList="nodownload noremoteplayback"
+                                ></audio>
                               )}
                             </div>
                             {unit &&
@@ -574,19 +477,6 @@ function TestSimulate() {
         >
           Nộp bài
         </button>
-        <button
-          className={css["test-button"]}
-          style={{backgroundColor: "#c62828"}}
-          onClick={() => {
-            TestCancel(()=>{
-              localStorage.removeItem(`expirationTime_${id}`);
-              localStorage.removeItem(`test_answer_${id}`);
-              navigate(`/test/${id}`)
-            })
-          }}
-        >
-          Hủy
-        </button>
         {testdata &&
           testdata.map((testpart, index_part) => {
             let totalQuestions = 0;
@@ -632,4 +522,4 @@ function TestSimulate() {
   );
 }
 
-export default TestSimulate;
+export default NormalTest;

@@ -30,24 +30,7 @@ export const showSubmitWarning = (onSubmitCallback) => {
       onSubmitCallback();
     }
   });
-};
-export const ChooseTestMode = (testCallback, simulateCallback, testname) => {
-  Swal.fire({
-    title: `Làm bài thi ${testname}`,
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#3085d6",
-    cancelButtonText: "Thi thử",
-    confirmButtonText: "Thi giả lập",
-    showCloseButton: true,
-  }).then((result) => {
-    if (result.isConfirmed) {
-      simulateCallback();
-    } else if (result.dismiss === Swal.DismissReason.cancel) {
-      testCallback();
-    }
-  });
-};
+};  
 export const TestCancel = (onDeleteCallback) => {
   Swal.fire({
     title: "Bạn chắc chắn rời khỏi bài thi?",
