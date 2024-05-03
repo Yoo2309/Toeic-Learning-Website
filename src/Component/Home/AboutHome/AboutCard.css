@@ -27,7 +27,7 @@
   align-items: center;
 }
 .aboutHome .item img {
-  width: 70px;
+  max-width: 70px;
   height: 70px;
   margin: 0 10px 0 0;
 }

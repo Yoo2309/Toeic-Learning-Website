@@ -44,7 +44,6 @@ import RecordByTest from "./Component/Test/TestRecord/RecordByTest";
 import UserPrivate from "./Component/Common/Layout/UserPrivate";
 import EmailVerify from "./Component/Login/MailVerify/EmailVerify";
 import TestResult from "./Component/Test/TestResult/TestResult";
-import TestSimulate from "./Component/Test/TestMain/TestSimulate";
 
 function App() {
   return (
@@ -98,7 +97,6 @@ function App() {
               <Route exact path="/test/record" element={<TestRecord />} />
               <Route exact path="/test/:id" element={<RecordByTest />} />
               <Route exact path="/do-test/:id" element={<TestMain />} />
-              <Route exact path="/do-simulate-test/:id" element={<TestSimulate />} />
               <Route exact path="/vippackage" element={<VipPackage />} />
               <Route
                 exact
