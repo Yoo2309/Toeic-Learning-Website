@@ -7,14 +7,12 @@ import Heading from "../../Common/Header/Heading";
 import "./Lesson.css";
 import Quiz from "../Lessons/Quiz/Quiz";
 import Loader from "../../Common/Loader/Loader";
-import { UserContext } from "../../../Context/UserContext";
 import { toast } from "react-toastify";
 import HTMLReactParser from "html-react-parser";
+import Comment from "./Comment/Comment";
 
 function Lesson() {
   const { id } = useParams();
-  const { user } = useContext(UserContext);
-  const navigate = useNavigate();
 
   const [other_lessons, setOtherLesson] = useState([]);
   const [current_lesson, setCurrentLesson] = useState({});
@@ -200,6 +198,7 @@ function Lesson() {
               />
             )}
           </div>
+          <Comment />
         </div>
       </div>
     </div>
