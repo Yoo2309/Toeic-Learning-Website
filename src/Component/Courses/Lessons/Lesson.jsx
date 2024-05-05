@@ -199,7 +199,7 @@ function Lesson() {
               />
             )}
           </div>
-          <Comment />
+          <Comment id={id}/>
         </div>
       </div>
     </div>
