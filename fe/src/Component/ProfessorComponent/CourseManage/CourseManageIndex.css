@@ -1,0 +1,45 @@
+.professor-course-grid-wrapper {
+  padding: 20px 0;
+}
+.professor-course-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.professor-courses-list-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 1rem;
+}
+.professor-course-grid-wrapper .vocabulary-item:hover {
+  cursor: pointer;
+  background-color: #aae6edad;
+}
+.professor-course-grid-wrapper h2 {
+  text-align: center;
+  font-size: large;
+}
+.professor-course-grid-wrapper .btn-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+.professor-course-grid-wrapper .delete-btn,
+.professor-course-grid-wrapper .update-btn {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+}

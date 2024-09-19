@@ -1,0 +1,84 @@
+.courses-list-wrapper {
+  height: auto;
+  padding-top: 20px;
+}
+
+.courses-list-grid-wrapper {
+  padding: 2rem;
+}
+.courses-list-gridview {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.courses-list-item {
+  font-family: "Poppins", sans-serif;
+  padding: 10px 20px;
+  border-radius: 2rem;
+  background: #fff;
+  scroll-snap-align: start;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+  border: 1px solid #d7d7d7;
+}
+
+.courses-list .course-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.courses-list .courses-list-item:hover {
+  background-color: #aae3ed;
+}
+.courses-list-item .image {
+  height: 96px;
+  width: 96px;
+  padding: 4px;
+}
+.courses-list-item .image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.courses-list-item h2 {
+  margin: 10px;
+  color: #333;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+}
+.courses-list-item p {
+  font-weight: 400;
+  color: #333;
+  text-align: justify;
+}
+
+@media (max-width: 750px) {
+  .test-index-wrapper {
+    background-color: #fff;
+    margin: 1rem;
+  }
+  .courses-list-grid-wrapper {
+    padding: 1rem;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  .courses-list-gridview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .test-index-wrapper {
+    background-color: #fff;
+    margin: 0.5rem;
+  }
+  .courses-list-grid-wrapper {
+    padding: 1rem;
+    max-height: 45vh;
+    overflow-y: auto;
+  }
+  .courses-list-gridview {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}

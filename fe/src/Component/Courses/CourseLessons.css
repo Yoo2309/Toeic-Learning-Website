@@ -1,0 +1,85 @@
+.course-lesson-wrapper {
+  height: auto;
+  padding: 0 40px 40px 40px;
+}
+.course-lesson-card {
+}
+.list-lesson-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  flex: 1;
+}
+
+.list-lesson {
+  padding-bottom: 6px;
+  flex: 70%;
+  overflow: hidden;
+  border-radius: 2rem;
+}
+.list-lesson-item {
+  position: relative;
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #e8eaf1;
+  display: flex;
+  align-items: center;
+}
+.list-lesson-item .list-lesson-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #535353;
+}
+.list-lesson-item:hover {
+  cursor: pointer;
+  transform: translateZ(1px);
+  box-shadow: 0 6px 6px #e8eaf1;
+}
+.other-course-wrapper {
+  flex: 30%;
+}
+.other-course-wrapper .title {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem;
+}
+.other-course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.other-course-list .course-item {
+  padding: 0 1rem;
+  background-color: #e8eaf1;
+  border-radius: 1rem;
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.other-course-list .course-item:hover {
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 800px) {
+  .course-lesson-wrapper {
+    padding: 0 1rem 1rem 1rem;
+  }
+  .list-lesson-wrapper {
+    gap: 1.5rem;
+    padding: 0;
+  }
+}
+@media (max-width: 480px) {
+  .other-course-wrapper {
+    display: none;
+  }
+  .list-lesson-wrapper {
+    gap: 0.5rem;
+  }
+}

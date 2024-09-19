@@ -1,0 +1,86 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+.payment-card-wrapper {
+  margin: 40px;
+}
+.payment-card {
+  background-color: #fff;
+  border-radius: 60px;
+  padding-bottom: 20px;
+}
+.info-payment-callback {
+  background-color: #fff;
+  border-radius: 60px;
+  border: #70a2ab solid;
+  padding: 20px;
+  text-align: center;
+  margin: 0 5rem;
+}
+.payment-wrapper-container {
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.payment-card .card {
+  font-family: "Poppins", sans-serif;
+  height: fit-content;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 2rem;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  align-items: center;
+}
+.payment-card .card-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.payment-card .card-content .image {
+  height: 96px;
+  width: 96px;
+  padding: 4px;
+}
+.payment-card .card-content .detail-payment {
+  margin-left: 20px;
+}
+.payment-card .image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.payment-card .card h2 {
+  margin: (0 0 0 0) px;
+  color: #333;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: start;
+}
+.payment-card .card p {
+  font-weight: 400;
+  color: #333;
+  text-align: justify;
+}
+
+@media screen and (max-width: 768px) {
+  .payment-card .card-wrapper-container {
+    margin: 15px;
+  }
+  .payment-card .card-wrapper {
+    display: block;
+    padding: 5px;
+    box-shadow: none;
+    overflow-x: unset;
+  }
+  .payment-card .card {
+    margin: 10px;
+  }
+  .payment-card .card-content {
+    flex-direction: column;
+    font-size: 14px;
+    text-align: left;
+  }
+}

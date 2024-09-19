@@ -1,0 +1,200 @@
+.vocabulary-topic-wrapper {
+  height: auto;
+  padding-top: 20px;
+}
+.vocabulary-topic {
+  background-color: #fff;
+  border-radius: 4rem;
+}
+.wrapper {
+  padding: 2rem;
+}
+.gridview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3rem;
+}
+.item {
+  /* display: flex; */
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+  border: 1px solid #d7d7d7;
+  padding: 20px;
+  border-radius: 1rem;
+}
+.title {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: large;
+  font-weight: 600;
+}
+.item:hover {
+  cursor: pointer;
+  background-color: #aae6edad;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 100%;
+}
+
+.description {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.author,
+.quantity,
+.createdate,
+.label {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  gap: 5px;
+}
+.ispublic {
+  margin-right: 0.5rem;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.error {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: red;
+  gap: 5px;
+}
+.btn-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+  margin-top: 0.5rem;
+}
+
+.delete-btn,
+.update-btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn {
+  background: rgba(255, 0, 0, 0.7);
+}
+
+.update-btn {
+  background: rgba(0, 164, 255, 0.7);
+}
+
+.delete-btn:hover {
+  background: rgba(255, 0, 0, 0.9);
+}
+
+.update-btn:hover {
+  background: rgba(0, 164, 255, 0.9);
+}
+
+.input {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+}
+
+/* -------------Modal------------ */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-form div {
+  margin-bottom: 15px;
+}
+
+.modal-form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.modal-form input[type="text"],
+.modal-form input[type="checkbox"] {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal-form input[type="checkbox"] {
+  width: auto;
+}
+
+.modal-form button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-form button:hover {
+  background-color: #0056b3;
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 1001;
+}
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 4rem; /* Thêm khoảng cách giữa các nút, bạn có thể thay đổi giá trị này */
+}
+@media (max-width: 750px) {
+  .gridview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .gridview {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}

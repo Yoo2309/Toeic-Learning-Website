@@ -1,0 +1,105 @@
+.test-result-wrapper {
+  margin: 40px;
+  display: flex;
+  gap: 2rem;
+  align-items: start;
+}
+.test-result {
+  background-color: #fff;
+  height: fit-content;
+  width: 100%;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.test-result-ava {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.test-result .show-score {
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  color: #003150;
+}
+.test-result .test-result-info {
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  border: 1px solid #d7d7d7;
+  border-radius: 1rem;
+}
+.test-backtohome {
+  width: 16rem;
+  height: 3rem;
+  margin: 1rem;
+  border-radius: 50px;
+  box-shadow: rgb(197, 200, 205) 0px 6px 9px 0px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(
+    rgb(44, 225, 193) 0%,
+    rgb(35, 202, 239) 100%
+  ) !important;
+}
+.test-history {
+  width: 13rem;
+  height: 3rem;
+  margin: 1rem;
+  border-radius: 50px;
+  box-shadow: rgb(197, 200, 205) 0px 6px 9px 0px;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: #e8f2ff;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.test-history:hover {
+  cursor: pointer;
+  background-color: #003150;
+  color: #fff;
+}
+.user-answer-list-wrapper {
+  margin: 40px;
+  padding: 20px;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.user-answer-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.user-answer-list-wrapper a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.user-answer-list-wrapper .test-question-number {
+  margin-right: 0.5rem;
+  max-width: 35px;
+  min-width: 35px;
+  width: 35px;
+  height: 35px;
+  background-color: rgba(0, 49, 80, 0.3);
+  border-radius: 50%;
+  line-height: 35px;
+  text-align: center;
+  font-weight: 500;
+}

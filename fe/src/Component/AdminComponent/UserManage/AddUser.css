@@ -1,0 +1,19 @@
+.add-user-form-wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+}
+.add-user-form-wrapper {
+  margin-top: 2rem;
+  background-color: #fff;
+}
+.add-user-form-wrapper error {
+  color: red;
+}
+.add-user-form-wrapper select, .add-user-form-wrapper option {
+  font-size: 1rem;
+  height: 2.5rem;
+  width: 50%;
+}
+/* ----------------Quiz Session----------- */

@@ -1,0 +1,62 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "LocalConnection": "",
+    "CustomConnection": "",
+    "AzureConnection": ""
+  },
+  "CloudinarySettings": {
+    "CloudName": "dru8wcmtb",
+    "ApiKey": "",
+    "ApiSecret": ""
+  },
+  "JWT": {
+    "ValidAudience": "https://localhost:1433",
+    "ValidIssuer": "https://localhost:1433",
+    "Secret": ""
+  },
+
+  "Google": {
+    "ClientId": "",
+    "ClientSecret": ""
+  },
+
+  "EmailConfiguration": {
+    "From": "",
+    "SmtpServer": "smtp.gmail.com",
+    "Port": 465,
+    "Username": "",
+    "Password": ""
+  },
+  "MomoAPI": {
+    "MomoApiUrl": "https://test-payment.momo.vn/gw_payment/transactionProcessor",
+    "SecretKey": "",
+    "AccessKey": "",
+    "ReturnUrl": "https://toeic.workon.space/api/Payment/MomoPaymentCallBack",
+    "NotifyUrl": "https://toeic.workon.space/api/Payment/PaymentNotify",
+    "PartnerCode": "MOMO",
+    "RequestType": "captureMoMoWallet"
+  },
+  "Vnpay": {
+    "Config": {
+      "TmnCode": "",
+      "HashSecret": "",
+      "BaseUrl": "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html",
+      "Command": "pay",
+      "CurrCode": "VND",
+      "Version": "2.1.0",
+      "Locale": "vn"
+    },
+    "PaymentCallBack": {
+      "ReturnUrl": "https://toeic.workon.space/api/Payment/VNPayPaymentCallBack"
+    }
+  },
+  "TimeZoneId": "SE Asia Standard Time",
+  "AllowedHosts": "*"
+
+}

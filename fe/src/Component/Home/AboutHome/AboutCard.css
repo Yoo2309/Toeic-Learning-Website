@@ -1,0 +1,58 @@
+.aboutHome {
+  height: auto;
+}
+.about-card-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.aboutHome .left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.aboutHome .right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.aboutHome .item {
+  padding: 20px;
+  transition: 0.5s;
+  background-color: #f9f9f9;
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+.aboutHome .item img {
+  max-width: 70px;
+  height: 70px;
+  margin: 0 10px 0 0;
+}
+.aboutHome .item h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+.aboutHome .item:hover {
+  background-color: #70a2ab;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 5px 25px -2px rgb(0 0 0 / 6%);
+}
+.aboutHome .item:hover p {
+  color: #fff;
+}
+@media screen and (max-width: 1100px) {
+  .about-card-wrapper {
+    flex-direction: column;
+  }
+  .left {
+    display: flex;
+    justify-content: center;
+  }
+  .aboutHome .left img {
+    width: 70%;
+  }
+}

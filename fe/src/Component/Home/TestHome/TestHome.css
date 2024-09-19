@@ -1,0 +1,55 @@
+.testHome {
+  height: auto;
+}
+.testHome .test-item-wrapper {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-evenly;
+}
+.testHome .test-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: #f1eeee;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+}
+.testHome .test-item-panel h1 {
+  font-size: 30px;
+  font-weight: 700;
+}
+.testHome .test-item-button {
+  display: flex;
+  justify-content: flex-end;
+}
+.testHome .test-item-button button {
+  background-color: #003150;
+  color: #f4f4f4;
+  font-size: x-large;
+  font-weight: bolder;
+  padding: 1rem 2rem;
+  border-radius: 1.5rem;
+}
+.testHome .test-item-button button:hover {
+  cursor: pointer;
+  background-color: #fff;
+  color: #003150;
+}
+@media screen and (max-width: 768px) {
+  .test-item-panel {
+    width: 100%;
+  }
+  .testHome .test-item-wrapper {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  .testHome .test-item {
+    flex-direction: column;
+  }
+  .testHome .test-item-button button {
+    font-size: 12px;
+  }
+}

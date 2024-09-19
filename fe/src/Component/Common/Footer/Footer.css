@@ -1,0 +1,59 @@
+.footer {
+  height: auto;
+  margin: 40px 40px 0 40px;
+  padding: 30px;
+  background-color: #70a2ab;
+  color: #fff;
+}
+.footer-above {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  gap: 3.5rem;
+}
+.footer .logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer span {
+  text-align: center;
+}
+.footer .icon {
+  margin-right: 10px;
+  border: 2px solid #003150;
+  background-color: #f8f8f8;
+}
+.footer .icon:hover {
+  cursor: pointer;
+  background-color: #003150;
+  color: #fff;
+}
+.footer-content {
+  color: #003150;
+}
+.footer-content li {
+  color: #000;
+  list-style: none;
+  word-wrap: break-word;
+}
+.footer-content li:hover {
+  text-decoration: underline;
+}
+.footer a:visited {
+  color: inherit;
+}
+.footer-below {
+  padding: 20px 0 0 0;
+  text-align: center;
+}
+.footer-below p {
+  color: #003150;
+  font-weight: 600;
+  font-style: italic;
+  text-decoration: underline;
+}
+@media screen and (max-width: 830px) {
+  .footer{
+    margin: 0 !important;
+  }
+}

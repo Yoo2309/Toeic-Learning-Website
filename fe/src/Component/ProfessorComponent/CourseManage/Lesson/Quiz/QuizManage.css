@@ -1,0 +1,46 @@
+.professor-quiz-wrapper {
+  margin-top: 2rem;
+}
+.professor-quiz-list {
+  width: 100%;
+  height: auto;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.professor-quiz-list .professor-quiz-item {
+  font-size: 18px;
+  color: #535353;
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #e8eaf1;
+  display: grid;
+  grid-template-columns: auto 180px;
+}
+.professor-quiz-list .professor-quiz-item:hover {
+  transform: translateZ(1px);
+  box-shadow: 0 6px 6px #e8eaf1;
+}
+.professor-quiz-list .btn-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+.professor-quiz-list .delete-btn,
+.professor-quiz-list .update-btn {
+  width: 100%;
+  height: 30px;
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.professor-quiz-list .delete-btn:hover {
+  width: 130%;
+}
+.professor-quiz-list .update-btn:hover {
+  width: 130%;
+}

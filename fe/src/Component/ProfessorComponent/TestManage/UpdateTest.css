@@ -1,0 +1,119 @@
+.update-test {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 3rem;
+  justify-content: center;
+}
+.update-test .input-field {
+  height: 50px;
+  width: 100%;
+  background: #f4f4f4;
+  border: 2px solid #003150;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+.update-test .update-voc-topic {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 3rem;
+  justify-content: center;
+}
+.update-test input {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: #000;
+  transition: all ease 0.5s;
+}
+.update-test .test-submit {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 50px;
+  background: #003150;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.update-test error {
+  color: red;
+}
+.update-test .test-type {
+  background-color: #f4f4f4;
+  width: 100%;
+  height: 50px;
+  width: 100%;
+  background: #f4f4f4;
+  border: 2px solid #003150;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.update-test option {
+  padding: 5px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.professor-update-test .professor-test-unit-wrapper{
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.professor-update-test .test-unit-item-wrapper{
+  background-color: #fff;
+  border-radius: 2rem;
+}
+.professor-update-test .test-unit-item{
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  position: relative;
+}
+.professor-update-test .test-unit-item img{
+  max-width: 300px;
+  max-height: 300px;
+  object-fit: contain;
+}
+.professor-update-test .btn-wrapper {
+  position: absolute;
+  width: 30%;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  top: 0;
+  right: 0;
+}
+.professor-update-test .delete-btn,
+.professor-update-test .update-btn {
+  width: 100%;
+  height: 30px;
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.professor-update-test .delete-btn:hover {
+  width: 130%;
+}
+.professor-update-test .update-btn:hover {
+  width: 130%;
+}

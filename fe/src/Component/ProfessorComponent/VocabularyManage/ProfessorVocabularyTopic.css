@@ -1,0 +1,78 @@
+/* -----------vocabulary Index------- */
+
+.professor-vocabulary-wrapper {
+  height: auto;
+}
+.professor-vocabulary-wrapper .vocabulary-grid-wrapper {
+  padding-top: 20px;
+}
+.professor-vocabulary-wrapper .vocabulary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.professor-vocabulary-wrapper .vocabulary-item {
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 1rem;
+}
+.professor-vocabulary-wrapper .vocabulary-item:hover {
+  cursor: pointer;
+  background-color: #aae6edad;
+}
+.professor-vocabulary-wrapper .btn-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+.professor-vocabulary-wrapper .delete-btn,
+.professor-vocabulary-wrapper .update-btn {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.delete-btn {
+  background: rgba(255, 0, 0, 0.7);
+}
+.update-btn {
+  background: rgba(0, 164, 255, 0.7);
+}
+
+.professor-vocabulary-wrapper .vocabulary-title {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.vocabulary-title-detail {
+  width: 100%;
+  font-size: medium;
+  font-weight: 400;
+  text-align: justify;
+}
+.vocabulary-title-detail-description {
+  width: 100%;
+  font-weight: 400;
+  text-align: center;
+  font-size: 13px;
+  font-style: italic;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 3em; /* 1.5em per line x 2 lines */
+  line-height: 1.5em;
+}

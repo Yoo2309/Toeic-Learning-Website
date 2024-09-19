@@ -1,0 +1,95 @@
+.add-quiz-modal {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+.add-quiz-modal {
+  z-index: 5;
+}
+.add-quiz-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  background: #f1f1f1;
+  padding: 1rem;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 450px;
+  border-radius: 1rem;
+}
+
+.add-quiz-close-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+.add-vocabulary-topic-title {
+  display: flex;
+  justify-content: center;
+}
+.add-quiz-modal form {
+  padding: 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: #f4f4f4;
+}
+.add-quiz-modal .input-field {
+  height: 50px;
+  width: 100%;
+  background: #f4f4f4;
+  border: 2px solid #003150;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+.add-quiz-modal input {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  text-align: center;
+}
+.add-quiz-modal .vocabulary-submit {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 50px;
+  background: #003150;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.add-quiz-modal error {
+  font-size: 12px;
+  font-style: italic;
+  color: red;
+  text-align: center;
+}
+
+.add-quiz-modal textarea {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  text-align: center;
+}
+

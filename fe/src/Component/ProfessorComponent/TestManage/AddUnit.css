@@ -1,0 +1,36 @@
+.add-lesson-form-wrapper {
+  margin-top: 1.5rem;
+}
+.quiz-question-list-wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #fff;
+  padding: 1rem;
+}
+.quiz-question-list-wrapper input,
+.upload-image .upload-audio {
+  font-size: 1rem;
+  height: 2.5rem;
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+}
+.add-lesson-wrapper textarea {
+  font-size: 1rem;
+  height: 4rem;
+  width: 100%;
+  text-align: justify;
+  font-weight: 700;
+}
+.professor-add-lesson-btn {
+  background-color: #41a86c;
+  border-radius: 2rem;
+  font-size: 1rem;
+  height: 3rem;
+  width: 300px;
+  font-weight: 700;
+}
+.professor-add-lesson-btn:hover {
+  cursor: pointer;
+}

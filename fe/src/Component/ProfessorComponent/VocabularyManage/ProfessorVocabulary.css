@@ -1,0 +1,100 @@
+.professor-vocabulary {
+  width: 100%;
+  height: auto;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.professor-vocabulary .professor-add-button-wrapper {
+  justify-content: space-between;
+  align-items: center;
+}
+.professor-vocabulary .topic-title {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 3rem;
+  justify-content: center;
+  text-transform: uppercase;
+}
+.professor-vocabulary input {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: #000;
+}
+.professor-vocabulary .vocabulary-submit {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 50px;
+  background: #003150;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.professor-vocabulary error {
+  font-size: 14px;
+  font-style: italic;
+  color: red;
+  text-align: center;
+}
+.professor-add-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.wordList-wrapper {
+  margin: 2rem 0;
+}
+.wordList-item-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #e8eaf1;
+  padding: 0.5rem 1rem;
+}
+.wordList-item-wrapper:hover {
+  transform: translateZ(1px);
+  box-shadow: 0 6px 6px #e8eaf1;
+}
+.wordList-item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.word-item-field {
+  font-size: 14px;
+  color: #535353;
+}
+.professor-vocabulary .btn-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+.professor-vocabulary .delete-btn,
+.professor-vocabulary .update-btn {
+  width: 100%;
+  height: 30px;
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.professor-vocabulary .delete-btn:hover {
+  width: 130%;
+}
+.professor-vocabulary .update-btn:hover {
+  width: 130%;
+}

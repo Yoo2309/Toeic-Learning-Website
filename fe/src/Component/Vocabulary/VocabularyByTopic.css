@@ -1,0 +1,228 @@
+.vocabulary-wrapper {
+  height: auto;
+  padding-top: 30px;
+}
+.vocabulary-card {
+  background-color: #fff;
+  padding: 2rem;
+}
+
+/* ------------Slider----------- */
+
+.slider {
+  height: 50vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; 
+  transition: all 0.5s ease;
+}
+
+.next-slide {
+  transform: translateX(-90%);
+}
+.pre-slide {
+  transform: translateX(90%);
+}
+
+@media screen and (min-width: 600px) {
+}
+
+@keyframes slide-up {
+  0% {
+    visibility: visible;
+    top: 23rem;
+  }
+  100% {
+    visibility: visible;
+    top: 17rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+}
+
+.content > * {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.current {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.current .content {
+  opacity: 1;
+}
+.arrow {
+  border: 2px solid #003150;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.arrow:hover {
+  background: #003150;
+  color: #fff;
+}
+
+.next {
+  right: 1.5rem;
+  color: #003150;
+}
+.prev {
+  left: 1.5rem;
+  color: #003150;
+}
+
+.slide hr {
+  height: 2px;
+  background: #fff;
+}
+
+/* ----------------Flip Card--------------- */
+
+label {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 35rem;
+  height: 20rem;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.flip-card {
+  background: #aae6edad;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease-in-out;
+  z-index: 1;
+  border-radius: 1.5rem;
+}
+
+.flip-card .front,
+.flip-card .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.flip-card .back {
+  transform: rotateX(180deg);
+  color: #000;
+}
+
+label:hover .flip-card {
+  transform: rotateX(5deg);
+  box-shadow: 0 20px 20px rgba(50, 60, 60, 0.2);
+}
+
+.vocabulary-card input {
+  display: none;
+}
+
+:checked + .flip-card {
+  transform: rotateX(180deg);
+}
+label:hover :checked + .flip-card {
+  transform: rotateX(175deg);
+  box-shadow: 0 20px 20px rgba(255, 255, 255, 0.2);
+}
+
+.flip-card .front {
+  align-items: center;
+}
+.flip-card .front .eng-word {
+  font-size: xx-large;
+  padding: 2rem;
+}
+
+.flip-card hr {
+  width: 20rem;
+  margin: 15px auto 10px auto;
+}
+
+.flip-card .back .back-item {
+  color: #000;
+  padding: 0.5rem;
+  word-wrap: break-word;
+  overflow: auto;
+}
+
+/* --------Table----------- */
+
+.vocabulary-list-wrapper {
+  /* padding-top: 20px; */
+}
+.vocabulary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.vocabulary__item {
+  padding: 2rem;
+  background-color: #fff;
+  border: 1px solid #e8eaf1;
+  display: flex;
+  align-items: flex-start;
+  border-radius: 20px;
+  justify-content: space-between;
+}
+
+.vocabulary__item:hover {
+  transition: all;
+  box-shadow: 0 6px 6px #e8eaf1;
+}
+
+.vocabulary__item-content {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.vocabulary__item-button {
+  white-space: nowrap;
+  border-radius: 5px;
+  padding: 4px 10px;
+  background: #f2f2f2;
+}
+
+.list__info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.list__info-title {
+  font-size: 22px;
+  font-weight: 600;
+}
