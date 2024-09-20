@@ -1,8 +1,6 @@
 /* Import Google font - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
-.lr-card-wrapper {
-}
 .lr-card {
   background-color: #fff;
   border-radius: 60px;
@@ -77,9 +75,6 @@
   text-align: justify;
 }
 @media screen and (max-width: 768px) {
-  .card-wrapper-container {
-    margin: 15px;
-  }
   .card-wrapper {
     padding: 0;
     gap: 0;

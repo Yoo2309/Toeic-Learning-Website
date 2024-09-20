@@ -11,6 +11,7 @@
   position: relative;
   width: 70vw;
   height: 32rem;
+  margin: 0;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
@@ -302,9 +303,13 @@ a {
 }
 
 /*Responsive*/
-@media (max-width: 900px) {
+@media (max-width: 830px) {
+  .login-wrapper {
+    padding-top: 0;
+  }
   .login .container {
     width: 100vw;
+    margin: 1rem;
   }
 }
 @media (max-width: 689px) {
