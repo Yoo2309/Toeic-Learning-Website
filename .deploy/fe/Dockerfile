@@ -22,7 +22,7 @@ FROM nginx:1.18-alpine as deploy-env
 
 WORKDIR /deploy
 
-COPY .build/fe/nginx.conf /etc/nginx/nginx.conf
+COPY .deploy/fe/nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=build-env /app/build/ .
 

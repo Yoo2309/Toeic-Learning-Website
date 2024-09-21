@@ -10,13 +10,10 @@ import { IoAddOutline } from "react-icons/io5";
 function AddVocabularyTopic({ toggleModal, modal_on, wordId }) {
   const { user } = useContext(UserContext);
   const [userList, setUserList] = useState([]);
-  const [voc, setVoc] = useState("");
   const [isloading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const {
-    register: vocabulary_topic,
     handleSubmit,
-    formState: { errors },
     reset,
   } = useForm();
 

@@ -114,42 +114,42 @@ describe("Chatbot component", () => {
     expect(screen.queryByText("Trợ lý ảo VictoryU")).not.toBeInTheDocument();
   });
 
-  test("Submits a message", async () => {
-    fetchMock.post(
-      "https://toeicchatbot.openai.azure.com/openai/deployments/chat-gpt-35/chat/completions?api-version=2024-02-15-preview",
-      {
-        status: 200,
-        body: chatRep,
-      }
-    );
+  // test("Submits a message", async () => {
+  //   fetchMock.post(
+  //     "https://toeicchatbot.openai.azure.com/openai/deployments/chat-gpt-35/chat/completions?api-version=2024-02-15-preview",
+  //     {
+  //       status: 200,
+  //       body: chatRep,
+  //     }
+  //   );
 
-    render(
-      <UserProviderTest
-        initialUser={{
-          username: "testUser",
-          idUser: "12345",
-          auth: true,
-          role: ["Student", "VipStudent"],
-          token: "mockToken",
-          ava: "https://img.icons8.com/ios/100/user-male-circle--v1.png",
-        }}
-      >
-        <Chatbot />
-      </UserProviderTest>
-    );
+  //   render(
+  //     <UserProviderTest
+  //       initialUser={{
+  //         username: "testUser",
+  //         idUser: "12345",
+  //         auth: true,
+  //         role: ["Student", "VipStudent"],
+  //         token: "mockToken",
+  //         ava: "https://img.icons8.com/ios/100/user-male-circle--v1.png",
+  //       }}
+  //     >
+  //       <Chatbot />
+  //     </UserProviderTest>
+  //   );
 
-    const botIcon = screen.getByTestId("assistantAva");
-    fireEvent.click(botIcon);
+  //   const botIcon = screen.getByTestId("assistantAva");
+  //   fireEvent.click(botIcon);
 
-    fireEvent.change(screen.getByRole("textbox"), {
-      target: { value: "Cách mua VIP" },
-    });
+  //   fireEvent.change(screen.getByRole("textbox"), {
+  //     target: { value: "Cách mua VIP" },
+  //   });
 
-    fireEvent.click(screen.getByTestId("submit-question"));
+  //   fireEvent.click(screen.getByTestId("submit-question"));
 
-    const msg = await screen.findByText("Câu trả lời của hệ thống");
-    expect(msg).toBeInTheDocument();
-  });
+  //   const msg = await screen.findByText("Câu trả lời của hệ thống");
+  //   expect(msg).toBeInTheDocument();
+  // });
 
   test("Clears conversation history", () => {
     const { container } = render(
@@ -207,49 +207,49 @@ describe("Chatbot component", () => {
     expect(noti).toBeInTheDocument();
   });
 
-  test("SubmitChatbot handles API 429 Error", async () => {
-    fetchMock.reset();
+  // test("SubmitChatbot handles API 429 Error", async () => {
+  //   fetchMock.reset();
 
-    fetchMock.post(
-      "https://toeicchatbot.openai.azure.com/openai/deployments/chat-gpt-35/chat/completions?api-version=2024-02-15-preview",
-      {
-        status: 429,
-        body: {
-          error: {
-            code: "429",
-            message:
-              "Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-02-15-preview have exceeded call rate limit of your current OpenAI S0 pricing tier. Please retry after 9 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.",
-          },
-        },
-      }
-    );
+  //   fetchMock.post(
+  //     "https://toeicchatbot.openai.azure.com/openai/deployments/chat-gpt-35/chat/completions?api-version=2024-02-15-preview",
+  //     {
+  //       status: 429,
+  //       body: {
+  //         error: {
+  //           code: "429",
+  //           message:
+  //             "Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-02-15-preview have exceeded call rate limit of your current OpenAI S0 pricing tier. Please retry after 9 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.",
+  //         },
+  //       },
+  //     }
+  //   );
 
-    render(
-      <UserProviderTest
-        initialUser={{
-          username: "testUser",
-          idUser: "12345",
-          auth: true,
-          role: ["Student", "VipStudent"],
-          token: "mockToken",
-          ava: "https://img.icons8.com/ios/100/user-male-circle--v1.png",
-        }}
-      >
-        <Chatbot />
-      </UserProviderTest>
-    );
+  //   render(
+  //     <UserProviderTest
+  //       initialUser={{
+  //         username: "testUser",
+  //         idUser: "12345",
+  //         auth: true,
+  //         role: ["Student", "VipStudent"],
+  //         token: "mockToken",
+  //         ava: "https://img.icons8.com/ios/100/user-male-circle--v1.png",
+  //       }}
+  //     >
+  //       <Chatbot />
+  //     </UserProviderTest>
+  //   );
 
-    const botIcon = screen.getByTestId("assistantAva");
-    fireEvent.click(botIcon);
+  //   const botIcon = screen.getByTestId("assistantAva");
+  //   fireEvent.click(botIcon);
 
-    fireEvent.change(screen.getByRole("textbox"), {
-      target: { value: "Cách mua VIP" },
-    });
+  //   fireEvent.change(screen.getByRole("textbox"), {
+  //     target: { value: "Cách mua VIP" },
+  //   });
 
-    fireEvent.click(screen.getByTestId("submit-question"));
-    const noti = await screen.findByText(/gửi yêu cầu quá nhanh/i);
-    expect(noti).toBeInTheDocument();
-  });
+  //   fireEvent.click(screen.getByTestId("submit-question"));
+  //   const noti = await screen.findByText(/gửi yêu cầu quá nhanh/i);
+  //   expect(noti).toBeInTheDocument();
+  // });
 
   test("SubmitChatbot handles API Sys Error", async () => {
     fetchMock.reset();

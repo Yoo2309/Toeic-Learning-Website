@@ -1,6 +1,5 @@
 .courses-list-wrapper {
   height: auto;
-  padding-top: 20px;
 }
 
 .courses-list-grid-wrapper {
@@ -55,10 +54,6 @@
 }
 
 @media (max-width: 750px) {
-  .test-index-wrapper {
-    background-color: #fff;
-    margin: 1rem;
-  }
   .courses-list-grid-wrapper {
     padding: 1rem;
     max-height: 60vh;
@@ -69,10 +64,6 @@
   }
 }
 @media (max-width: 480px) {
-  .test-index-wrapper {
-    background-color: #fff;
-    margin: 0.5rem;
-  }
   .courses-list-grid-wrapper {
     padding: 1rem;
     max-height: 45vh;

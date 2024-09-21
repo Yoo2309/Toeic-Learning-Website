@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'fe/**'
-  
+
 permissions: write-all
 
 jobs: 
@@ -18,17 +18,20 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install Node.js
-        uses: actions/setup-node@v2
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18.x'
+
+      - name: Install Yarn
+        run: npm install -g yarn
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install --frozen-lockfile
         working-directory: ./fe
 
       - name: Run frontend tests
-        run: npm test -- --watchAll=false
+        run: yarn test --watchAll=false
         working-directory: ./fe
 
       - name: Set up Docker Buildx
@@ -36,4 +39,3 @@ jobs:
 
       - name: Build FE Docker Image
         run: docker build -t tranngobichdu/toeic-learning-website:v1 -f .deploy/fe/Dockerfile .
-

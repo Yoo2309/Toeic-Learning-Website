@@ -43,7 +43,7 @@ namespace toeic_web
             {
                 options.UseMySql(
                     builder.Configuration.GetConnectionString("CustomConnection"),
-                    new MySqlServerVersion(new Version(8, 0, 0)) // Cập nhật phiên bản MySQL ở đây
+                    new MySqlServerVersion(new Version(8, 0, 0))
                 );
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
