@@ -3,6 +3,12 @@
 ## Introduction
 
 The Toeic Learning Website is a web application designed to help learners improve their TOEIC skills through course lessons, practice exercises, vocabulary building, and practice tests.
+- Number of members: 2
+- My responsibilities:
+  - Frontend Development
+  - Deployment
+  - Testing
+  - Documentation
 
 ## Technologies Used
 
