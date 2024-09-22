@@ -10,8 +10,8 @@ on:
 permissions: write-all
 
 jobs:
-  test-and-setup:
-    name: Test and Setup
+  setup-and-test:
+    name: Setup and Test
     runs-on: ubuntu-latest
 
     steps:
