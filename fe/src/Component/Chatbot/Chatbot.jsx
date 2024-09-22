@@ -4,6 +4,7 @@ import ChatMessage from "./ChatMessage";
 import {
   AZURE_SEARCH_ENDPOINT,
   AZURE_SEARCH_INDEX,
+  AZURE_SEARCH_KEY,
   OPENAI_API_KEY,
   OPENAI_DEPLOYMENT,
   OPENAI_ENDPOINT,
@@ -31,7 +32,7 @@ function Chatbot() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "api-key": "D0xRUU6jt2lhscpxMPthgxHK3YGyKLeXyCkvFXn42IAzSeDbiqOI",
+            "api-key": AZURE_SEARCH_KEY,
           },
           body: JSON.stringify({
             search: input,
