@@ -470,30 +470,38 @@ function VocabularyByTopic() {
         )}
         <div className="vocabulary-list-wrapper">
           {user.auth && user.idUser == listInfo.idUser ? (
-            <button
+            <div
               style={{
-                padding: "10px 20px",
-                border: "none",
-                borderRadius: "5px",
-                backgroundColor: "#007BFF",
-                color: "#fff",
-                fontWeight: "bold",
-                fontSize: "16px",
-                cursor: "pointer",
-                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-                transition: "background-color 0.3s",
-                marginLeft: "90%",
-                marginBottom: "1rem",
+                width: "100%",
                 display: "flex",
-                whiteSpace: "nowrap",
+                justifyContent: "flex-end",
               }}
-              onClick={handleOpenUpdateModal}
             >
-              <IoAddOutline style={{ fontSize: "1.5rem" }} />
-              Thêm từ mới
-            </button>
+              <button
+                style={{
+                  display: "flex",
+                  gap: 8,
+                  padding: "10px 20px",
+                  border: "none",
+                  borderRadius: "8px",
+                  backgroundColor: "#007BFF",
+                  color: "#fff",
+                  fontWeight: "bold",
+                  fontSize: "16px",
+                  cursor: "pointer",
+                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                  transition: "background-color 0.3s",
+                  marginRight: 16,
+                  marginBottom: 20,
+                }}
+                onClick={handleOpenUpdateModal}
+              >
+                <IoAddOutline style={{ fontSize: "1.5rem" }} />
+                Thêm từ mới
+              </button>
+            </div>
           ) : (
-            <div />
+            <></>
           )}
           <div className="vocabulary-list">
             {words &&

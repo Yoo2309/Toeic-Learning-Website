@@ -78,6 +78,11 @@ a:-webkit-any-link {
   text-decoration: none;
   color: #000;
 }
+.header-logo {
+  padding: 0 20px 0 20px !important;
+  display: flex;
+  align-items: center;
+}
 .user-layout header ul li a {
 }
 .user-layout .dropdown-menu a {
@@ -185,6 +190,19 @@ a:-webkit-any-link {
   font-weight: 900;
 }
 
+@media screen and (max-width: 970px) {
+  .navbar-user-name {
+    display: none;
+  }
+}
+@media screen and (max-width: 900px) {
+  .getpro-img {
+    display: none;
+  }
+  .header-logo {
+    display: none;
+  }
+}
 @media screen and (max-width: 900px) and (min-width: 775px) {
   .start {
     padding: 16px 32px 16px 72px;
@@ -223,9 +241,6 @@ a:-webkit-any-link {
   header ul li {
     margin-bottom: 20px;
   }
-  .fa-caret-down {
-    display: none;
-  }
   .toggle {
     display: flex;
     align-items: center;
@@ -256,6 +271,18 @@ a:-webkit-any-link {
   }
   #heading h3 {
     font-size: 1.25rem !important;
+  }
+  .navbar-user {
+    margin-left: 2rem;
+  }
+  .navbar-user .dropdown-menu {
+    left: 0;
+  }
+  .navbar-user .navbar-user-name {
+    display: block;
+  }
+  .header-logo {
+    display: flex;
   }
 }
 

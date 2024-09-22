@@ -37,13 +37,7 @@ function Header() {
             className={click ? "mobile-nav" : "flexSB "}
             onClick={() => setClick(false)}
           >
-            <li
-              style={{
-                padding: "0 20px 0 20px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
+            <li className="header-logo">
               <img
                 onClick={() => navigate("/")}
                 style={{ width: "78px" }}
@@ -97,6 +91,7 @@ function Header() {
               <li style={{ display: "flex", alignItems: "center", gap: 5 }}>
                 <Link to="/vippackage">GET PRO</Link>
                 <img
+                  className="getpro-img"
                   width="32"
                   height="32"
                   src="https://img.icons8.com/fluency/48/crown.png"
