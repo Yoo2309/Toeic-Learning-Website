@@ -31,7 +31,7 @@ jobs:
         working-directory: ./fe
 
       - name: Run frontend tests
-        run: yarn test --watchAll=false
+        run: yarn test --watchAll=false --reporters=jest-junit
         working-directory: ./fe
 
   build-docker-image:
