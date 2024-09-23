@@ -73,7 +73,6 @@ function AddQuestion({
     }
   }
   async function handleUpdateQuestion() {
-    const token = localStorage.getItem("token");
     setIsLoading(true);
     try {
       const response = await fetch(

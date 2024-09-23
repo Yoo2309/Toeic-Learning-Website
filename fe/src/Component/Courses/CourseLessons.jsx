@@ -3,7 +3,6 @@ import "./CourseLessons.css";
 import Heading from "../Common/Header/Heading";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import Loader from "../Common/Loader/Loader";
 import { toast } from "react-toastify";
 import { UserContext } from "../../Context/UserContext";

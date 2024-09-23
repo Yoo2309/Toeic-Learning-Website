@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useMemo, useRef, useState } from "react";
 import JoditEditor from "jodit-react";
 import "./AddLesson.css";
 import { useNavigate, useParams } from "react-router-dom";

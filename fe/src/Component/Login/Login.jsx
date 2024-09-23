@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useContext, useRef } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import "./Login.css";
 import { useEffect, useState } from "react";
@@ -279,10 +278,10 @@ function Login() {
                 />
                 <p className="social-text">Đăng nhập bằng tài khoản khác</p>
                 <div className="social-media">
-                  <a href="#" className="social-icon">
+                  <a href="/login" className="social-icon">
                     <i className="fab fa-facebook"></i>
                   </a>
-                  <a href="" className="social-icon">
+                  <a href="/login" className="social-icon">
                     <i className="fab fa-twitter"></i>
                   </a>
                   <GoogleLogin
@@ -298,7 +297,7 @@ function Login() {
                     isSignedIn={true}
                     className="social-icon customLoginGoogle"
                   />
-                  <a href="" className="social-icon">
+                  <a href="/login" className="social-icon">
                     <i className="fab fa-linkedin-in"></i>
                   </a>
                 </div>
@@ -386,10 +385,10 @@ function Login() {
               />
               <p className="social-text">Đăng nhập bằng tài khoản khác</p>
               <div className="social-media">
-                <a href="#" className="social-icon">
+                <a href="/login" className="social-icon">
                   <i className="fab fa-facebook"></i>
                 </a>
-                <a href="" className="social-icon">
+                <a href="/login" className="social-icon">
                   <i className="fab fa-twitter"></i>
                 </a>
                 <a
@@ -400,7 +399,7 @@ function Login() {
                 >
                   <i className="fab fa-google"></i>
                 </a>
-                <a href="" className="social-icon">
+                <a href="/login" className="social-icon">
                   <i className="fab fa-linkedin-in"></i>
                 </a>
               </div>

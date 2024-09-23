@@ -12,7 +12,6 @@ function VipPackageDetail() {
   const [vipPackage, setVipPackage] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [payMethod, setPayMethod] = useState("MOMO");
-  const [payUrl, setPayUrl] = useState("");
   const { user } = useContext(UserContext);
 
   const formatter = new Intl.NumberFormat("vi", {

@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import { BsJustify } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../Context/UserContext";
-import { toast } from "react-toastify";
-import Loader from "../../Common/Loader/Loader";
 
 function ProfessorHeader({ OpenSidebar }) {
   const { user, logout } = useContext(UserContext);
