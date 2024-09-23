@@ -1,5 +1,3 @@
-import React from "react";
-
 export const base64ToBlob = (base64, mime) => {
   const byteCharacters = atob(base64);
   const byteNumbers = new Array(byteCharacters.length);

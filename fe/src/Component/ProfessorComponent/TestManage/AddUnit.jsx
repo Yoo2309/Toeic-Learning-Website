@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import JoditEditor from "jodit-react";
 import "./AddUnit.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../.././Common/Loader/Loader";
 import HTMLReactParser from "html-react-parser";

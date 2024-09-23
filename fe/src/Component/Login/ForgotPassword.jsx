@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "./ForgotPassword.css";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";

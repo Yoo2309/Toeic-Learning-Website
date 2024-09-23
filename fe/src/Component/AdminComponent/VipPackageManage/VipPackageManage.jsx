@@ -1,13 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { UserContext } from "../../../Context/UserContext";
 import Loader from "../../Common/Loader/Loader";
 import "./VipPackageManage.css";
 import { showDeleteWarning } from "../../Common/Alert/Alert";
 
 function VipPackageManage() {
-  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);

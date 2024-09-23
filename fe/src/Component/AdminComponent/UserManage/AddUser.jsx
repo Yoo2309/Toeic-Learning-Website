@@ -1,6 +1,5 @@
-import _ from "lodash";
 import React, { useContext, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../Common/Loader/Loader";
 import "./AddUser.css";
@@ -15,13 +14,6 @@ function AddUser() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [data, setData] = useState(() => ({
-    email: "",
-    username: "",
-    fullname: "",
-    password: "",
-    role: "",
-  }));
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleAddUser(data) {

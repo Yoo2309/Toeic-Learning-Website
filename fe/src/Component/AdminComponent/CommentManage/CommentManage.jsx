@@ -45,31 +45,6 @@ function CommentManage() {
       toast.error(`${error}`);
     }
   }
-  async function fetchFaliedReports() {
-    try {
-      setIsLoading(true);
-      const response = await fetch(
-        `${
-          process.env.REACT_APP_API_BASE_URL ?? "/api"
-        }/Report/GetAllFalseReports/false`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      setIsLoading(false);
-      if (!response.ok) {
-        const errorData = await response?.json();
-        toast.error(`${errorData}`);
-      } else {
-        const data = await response?.json();
-        setReports(data);
-      }
-    } catch (error) {
-      toast.error(`${error}`);
-    }
-  }
   async function fetchDeleteReports(id) {
     try {
       setIsLoading(true);
