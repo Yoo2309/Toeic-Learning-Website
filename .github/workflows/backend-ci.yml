@@ -48,7 +48,7 @@ jobs:
   build-docker-image:
     name: Build Docker Image Backend
     runs-on: ubuntu-latest
-    needs: build-and-test
+    needs: setup-and-test
     timeout-minutes: 90
 
     steps:

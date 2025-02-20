@@ -49,9 +49,4 @@ jobs:
       uses: docker/setup-buildx-action@v1
 
     - name: Build FE Docker Image
-      run: |
-        docker build \
-          --build-arg REACT_APP_OPENAI_API_KEY=${{ secrets.REACT_APP_OPENAI_API_KEY }} \
-          --build-arg REACT_APP_AZURE_SEARCH_KEY=${{ secrets.REACT_APP_AZURE_SEARCH_KEY }} \
-          -t tranngobichdu/toeic-learning-website-fe:v1 \
-          -f .deploy/fe/Dockerfile .
+      run: docker build -t tranngobichdu/toeic-learning-website-fe:v1 -f .deploy/fe/Dockerfile .
