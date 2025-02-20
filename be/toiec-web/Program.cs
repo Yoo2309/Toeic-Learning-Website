@@ -42,7 +42,7 @@ namespace toeic_web
             builder.Services.AddDbContext<ToeicDbContext>(options =>
             {
                 options.UseMySql(
-                    builder.Configuration.GetConnectionString("CustomConnection"),
+                    builder.Configuration.GetConnectionString("LocalConnection"),
                     new MySqlServerVersion(new Version(8, 0, 0))
                 );
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
@@ -62,13 +62,7 @@ namespace toeic_web
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 
             })
-            //Add google
-            .AddGoogle(options =>
-            {
-                options.ClientId = builder.Configuration["Google:ClientId"];
-                options.ClientSecret = builder.Configuration["Google:ClientSecret"];
-                options.SignInScheme = IdentityConstants.ExternalScheme;
-            })
+
             //Add Jwt Bearer
             .AddJwtBearer(options =>
             {

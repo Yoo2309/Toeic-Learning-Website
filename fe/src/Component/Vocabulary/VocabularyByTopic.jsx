@@ -1,16 +1,10 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { useParams } from "react-router-dom";
-import {
-  AiOutlineArrowLeft,
-  AiOutlineArrowRight,
-  AiOutlineUser,
-} from "react-icons/ai";
+import { AiOutlineUser } from "react-icons/ai";
 import "./VocabularyByTopic.css";
 import Heading from "../Common/Header/Heading";
 import Loader from "../Common/Loader/Loader";
 import { toast } from "react-toastify";
-import { useSpeechSynthesis } from "react-speech-kit";
-import speaker_gif from "../../assets/icons8-speaker.gif";
 import AddVocabularyTopic from "./AddVocabularyTopic";
 import { UserContext } from "../../Context/UserContext";
 import { MdOutlineFlipToFront } from "react-icons/md";
@@ -26,6 +20,7 @@ import { base64ToFile } from "../../constant/convertBase64";
 import { getImageFileFromUrl } from "../ProfessorComponent/VocabularyManage/AddVocabulary";
 import Autocomplete from "react-autocomplete";
 import { VocabularyContext } from "../../Context/VocabularyContext";
+import VocabularySlider from "./VocabularySlider";
 
 const cx = classNames.bind(styles);
 
@@ -35,11 +30,6 @@ function VocabularyByTopic() {
   const [listInfo, setListInfo] = useState("");
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
-  const [play_pronun, setPlay_pronun] = useState(false);
-  const onEnd = () => {
-    setPlay_pronun(false);
-  };
-  const { speak } = useSpeechSynthesis({ onEnd });
   const [openAddModal, setOpenAddModal] = useState(false);
   const { user } = useContext(UserContext);
   const [wordId, setWordId] = useState("");
@@ -343,20 +333,6 @@ function VocabularyByTopic() {
     }
   }
 
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const slideLength = words.length;
-
-  const nextSlide = () => {
-    setCurrentSlide(currentSlide === slideLength - 1 ? 0 : currentSlide + 1);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide(currentSlide === 0 ? slideLength - 1 : currentSlide - 1);
-  };
-
-  useEffect(() => {
-    setCurrentSlide(0);
-  }, []);
   if (isLoading) {
     return <Loader />;
   }
@@ -386,90 +362,9 @@ function VocabularyByTopic() {
             {listInfo.createDate}
           </p>
         </div>
-        {words?.length > 0 && (
-          <div className="slider">
-            <AiOutlineArrowLeft className="arrow prev" onClick={prevSlide} />
-            <AiOutlineArrowRight className="arrow next" onClick={nextSlide} />
-            {words.map((word, index) => {
-              return (
-                <div
-                  key={word.idVoc}
-                  className={`slide ${
-                    index === currentSlide
-                      ? "current"
-                      : index === currentSlide - 1
-                      ? "pre-slide"
-                      : "next-slide"
-                  }`}
-                >
-                  <label>
-                    <input type="checkbox" />
-                    <div className="flip-card">
-                      <div className="front">
-                        <div className="eng-word">{word.engWord}</div>
-                        <div className="back-item">{`(${word.wordType})`}</div>
-                        <div>
-                          <hr />
-                          <p className="flip">Click để lật</p>
-                        </div>
-                      </div>
-                      <div className="back">
-                        <div
-                          style={{ fontWeight: "bold", fontStyle: "italic" }}
-                        >
-                          {word.engWord}
-                        </div>
-                        <hr />
-                        <div>
-                          <div
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              gap: "5px",
-                            }}
-                          >
-                            <div
-                              className="back-item"
-                              style={{ fontStyle: "italic" }}
-                            >
-                              {word.pronunciation ?? "pronunciation"}
-                            </div>
-                            <img
-                              width="24"
-                              height="24"
-                              src={
-                                play_pronun
-                                  ? speaker_gif
-                                  : "https://img.icons8.com/material-sharp/24/speaker.png"
-                              }
-                              alt="speaker"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setPlay_pronun(true);
-                                speak({
-                                  text: word.engWord ?? "pronunciation",
-                                });
-                              }}
-                            />
-                          </div>
-                          <div className="back-item">
-                            Ý nghĩa: {word.meaning}
-                          </div>
-                          <div className="back-item">{word.example}</div>
-                        </div>
-                        <hr />
-                        <p className="flip">Click để lật</p>
-                      </div>
-                    </div>
-                  </label>
-                </div>
-              );
-            })}
-          </div>
-        )}
+        {words?.length > 0 && <VocabularySlider words={words}/>}
         <div className="vocabulary-list-wrapper">
-          {user.auth && user.idUser == listInfo.idUser ? (
+          {user.auth && user.idUser === listInfo.idUser ? (
             <div
               style={{
                 width: "100%",
@@ -586,11 +481,13 @@ function VocabularyByTopic() {
           </div>
         </div>
       </div>
-      <AddVocabularyTopic
-        modal_on={openAddModal}
-        toggleModal={setOpenAddModal}
-        wordId={wordId}
-      />
+      {user.idUser && (
+        <AddVocabularyTopic
+          modal_on={openAddModal}
+          toggleModal={setOpenAddModal}
+          wordId={wordId}
+        />
+      )}
       <Modal isOpen={isModalAddVocOpen} contentLabel={"Nhập Thông Tin Từ Vựng"}>
         <form className={cx("modal-form")} onSubmit={handleSubmit}>
           <div>

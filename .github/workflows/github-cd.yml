@@ -34,7 +34,6 @@ jobs:
           --build-arg REACT_APP_AZURE_SEARCH_KEY=${{ secrets.REACT_APP_AZURE_SEARCH_KEY }} \
           -t tranngobichdu/toeic-learning-website-fe:v1 \
           -f .deploy/fe/Dockerfile .
-
     - name: Log in to Docker Hub
       uses: docker/login-action@v1
       with:
