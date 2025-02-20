@@ -3,22 +3,19 @@ import { UserContext } from "../../../../Context/UserContext";
 import CommentItem from "./CommentItem";
 import { toast } from "react-toastify";
 import Loader from "../../../Common/Loader/Loader";
-import { OPENAI_DEPLOYMENT, openAIClient } from "../../../../constant/chatbot";
+// import { OPENAI_DEPLOYMENT, openAIClient } from "../../../../constant/chatbot";
 
 // Hàm tạo chuỗi định dạng ngày tháng từ đối tượng Date
 export function formatDateTime() {
-  // Tạo một đối tượng Date đại diện cho thời gian hiện tại
   const currentDate = new Date();
 
-  // Lấy thông tin về năm, tháng, ngày, giờ, phút và giây
   const year = currentDate.getFullYear();
-  const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Tháng bắt đầu từ 0, nên cần cộng thêm 1
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0"); 
   const day = String(currentDate.getDate()).padStart(2, "0");
   const hours = String(currentDate.getHours()).padStart(2, "0");
   const minutes = String(currentDate.getMinutes()).padStart(2, "0");
   const seconds = String(currentDate.getSeconds()).padStart(2, "0");
 
-  // Tạo chuỗi định dạng "YYYY-MM-DDTHH:mm:ss"
   const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
   return formattedDateTime;
 }
@@ -29,37 +26,38 @@ function Comment({ id }) {
   const { user } = useContext(UserContext);
   const [input, setInput] = useState("");
 
-  const checkValidateComment = async (content) => {
-    let result = true;
-    setIsLoading(true);
+  // const checkValidateComment = async (content) => {
+  //   let result = true;
+  //   setIsLoading(true);
 
-    try {
-      const response = await openAIClient.getCompletions(
-        OPENAI_DEPLOYMENT,
-        [content],
-        {
-          maxTokens: 500,
-          temperature: 0.7,
-          topP: 0.95,
-          presencePenalty: 0,
-          frequencyPenalty: 0,
-        }
-      );
-    } catch (error) {
-      if (error?.status === 400) {
-        toast.warning("Bình luận của bạn chứa các nội dung không phù hợp!!");
-        result = false;
-      } else {
-        result = true;
-      }
-    } finally {
-      setIsLoading(false);
-    }
-    return result;
-  };
+  //   try {
+  //     const response = await openAIClient.getCompletions(
+  //       OPENAI_DEPLOYMENT,
+  //       [content],
+  //       {
+  //         maxTokens: 500,
+  //         temperature: 0.7,
+  //         topP: 0.95,
+  //         presencePenalty: 0,
+  //         frequencyPenalty: 0,
+  //       }
+  //     );
+  //   } catch (error) {
+  //     if (error?.status === 400) {
+  //       toast.warning("Bình luận của bạn chứa các nội dung không phù hợp!!");
+  //       result = false;
+  //     } else {
+  //       result = true;
+  //     }
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  //   return result;
+  // };
 
   const handleInsertNode = async (inserted_node) => {
-    const checked = await checkValidateComment(inserted_node.content);
+    // const checked = await checkValidateComment(inserted_node.content);
+    const checked = true;
     if (checked)
       try {
         setIsLoading(true);
@@ -94,7 +92,8 @@ function Comment({ id }) {
   };
 
   const handleEditNode = async (edited_comment) => {
-    const checked = await checkValidateComment(edited_comment.content);
+    // const checked = await checkValidateComment(edited_comment.content);
+    const checked = true;
     if (checked)
       try {
         setIsLoading(true);

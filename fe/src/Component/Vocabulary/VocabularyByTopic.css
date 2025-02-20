@@ -9,7 +9,7 @@
 /* ------------Slider----------- */
 
 .slider {
-  height: 50vh;
+  min-height: 400px;
   position: relative;
   overflow: hidden;
 }
