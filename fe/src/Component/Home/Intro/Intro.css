@@ -2,7 +2,7 @@
   height: auto;
 }
 .cutoff-text {
-  --max-lines: 17;
+  --max-lines: 18;
   --line-height: 1;
   max-height: calc(var(--max-lines) * 1em * var(--line-height));
   line-height: var(--line-height);
@@ -54,7 +54,7 @@
   margin: 1rem;
 }
 .intro-card table {
-  margin: 1rem;
+  width: 100%;
 }
 .intro-card thead {
   display: table-header-group;
@@ -66,7 +66,7 @@
 .intro-card td {
   border: 1px solid black;
   border-collapse: collapse;
-  padding-left: 5px;
+  padding-left: 12px;
 }
 
 .intro-card tr {

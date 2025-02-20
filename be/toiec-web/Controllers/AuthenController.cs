@@ -428,7 +428,6 @@ namespace toeic_web.Controllers
                 //Đảm bảo rằng bạn đã cấu hình EmailService để chấp nhận nội dung HTML
                 _emailService.SendEmail(message);
 
-                //when success
                 return StatusCode(StatusCodes.Status200OK,
                     new Response { Status = "Success", Message = $"We have sent EmailConfirm to {userExist.Email}. Verified your email to Login!" });
 
