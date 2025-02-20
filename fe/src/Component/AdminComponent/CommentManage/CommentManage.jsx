@@ -92,7 +92,6 @@ function CommentManage() {
         setDisplayReports(reports);
         break;
       case "InCompleted":
-        // fetchFaliedReports();
         setDisplayReports(reports.filter((report) => !report.isCheck));
         break;
       case "Done":

@@ -99,7 +99,6 @@ namespace toeic_web
                 .Get<EmailConfiguration>();
             builder.Services.AddSingleton(emailConfig);
 
-            //Add Config for Required Email
             builder.Services.Configure<IdentityOptions>(opts => opts.SignIn.RequireConfirmedEmail = false);
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
