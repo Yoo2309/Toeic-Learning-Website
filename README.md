@@ -1,6 +1,6 @@
 # Toeic Learning Website
 
-![image](https://github.com/user-attachments/assets/afacaa71-8450-4f76-8fe2-7bffb274629e)
+![image](fe/src/assets//homepage.png)
 
 ## Introduction
 
