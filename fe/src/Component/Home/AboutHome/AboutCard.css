@@ -5,11 +5,14 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+  align-items: stretch;
+  max-height: 550px;
 }
 .aboutHome .left img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
 }
 .aboutHome .right {
   display: flex;
@@ -47,6 +50,7 @@
 @media screen and (max-width: 1100px) {
   .about-card-wrapper {
     flex-direction: column;
+    max-height: unset;
   }
   .left {
     display: flex;
