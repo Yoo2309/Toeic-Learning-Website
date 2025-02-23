@@ -285,7 +285,7 @@ function Login() {
                     <i className="fab fa-twitter"></i>
                   </a>
                   <GoogleLogin
-                    clientId="1047820244524-i4q01pgchejg1cvdfne578ag4sj44elo.apps.googleusercontent.com"
+                    clientId="661333061315-hs398i950931ta2859hol8udsfo14haq.apps.googleusercontent.com"
                     buttonText=""
                     onSuccess={(response) => {
                       LoginGoogle(response.profileObj);
